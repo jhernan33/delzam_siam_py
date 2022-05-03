@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Tclientesclass TclientesSerializer(serializers.ModelSerializer):    class Meta:        model = Tclientes        fields = ('id','desc_ticl',)        read_only_fields = ('id', )

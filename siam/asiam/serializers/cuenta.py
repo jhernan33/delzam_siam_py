@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Cuentaclass CuentaSerializer(serializers.ModelSerializer):    class Meta:        model = Cuenta        fields = ('id','ncta_cuen','fape_cuen','tipo_cuen','codi_banc_id',)        read_only_fields = ('id','codi_banc_id',)

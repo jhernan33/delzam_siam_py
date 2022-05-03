@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Fpagoclass FpagoSerializer(serializers.ModelSerializer):    class Meta:        model = Fpago        fields = ('id','desc_fopa',)        read_only_fields = ('id', )

@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Articuloclass ArticuloSerializer(serializers.ModelSerializer):    class Meta:        model = Articulo        fields = ('id','desc_arti','arse_arti',)        read_only_fields = ('id', )

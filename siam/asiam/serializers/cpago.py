@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Cpagoclass CpagoSerializer(serializers.ModelSerializer):    class Meta:        model = Cpago        fields = ('id','desc_copa',)        read_only_fields = ('id', )

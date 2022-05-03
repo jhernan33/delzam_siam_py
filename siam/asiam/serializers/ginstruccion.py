@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Ginstruccionclass GinstruccionSerializer(serializers.ModelSerializer):    class Meta:        model = Ginstruccion        fields = ('id','desc_grin',)        read_only_fields = ('id', )

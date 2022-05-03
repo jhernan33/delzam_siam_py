@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Bancoclass BancoSerializer(serializers.ModelSerializer):    class Meta:        model = Banco        fields = ('id','desc_banc',)        read_only_fields = ('id', )

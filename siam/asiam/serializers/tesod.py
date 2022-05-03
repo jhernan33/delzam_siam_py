@@ -1,0 +1,1 @@
+from rest_framework import serializersfrom asiam.models import Tesodclass TesodSerializer(serializers.ModelSerializer):    class Meta:        model = Tesod        #fields = ('id','fech_tesd','puve_tesd','tran_tesd','depo_tesd','efec_tesd',)        fields = "__all__"                read_only_fields = ('id', )
