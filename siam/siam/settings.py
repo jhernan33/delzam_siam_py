@@ -133,7 +133,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },    
 }
