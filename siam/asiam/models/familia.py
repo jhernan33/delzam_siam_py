@@ -3,7 +3,7 @@ from django.db import models
 
 class Familia(Base):
     desc_fami=models.CharField ('desc_fami',   max_length=200, null=False, blank=False, default='', unique=True)
-    abae_fami=models.CharField ('abae_fami',   max_length=3, null=True, blank=True, default='', unique=False)
+    abae_fami=models.CharField ('abae_fami',   max_length=3, null=True, blank=True, default='')
     agru_fami=models.CharField ('agru_fami',   max_length=1, null=True, blank=True, default='')
 
     class Meta:
