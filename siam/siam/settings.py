@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.164.61',
         'PORT': '5432',
     },
     'comun': {
@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.164.61',
         'PORT': '5432',
     },
     'p2021': {
@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.164.61',
         'PORT': '5432',
     },
     'p2022': {
@@ -122,7 +122,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.164.61',
         'PORT': '5432',
     },
     'empr': {
@@ -133,7 +133,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': '159.223.164.61',
         'PORT': '5432',
     },    
 }
