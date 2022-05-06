@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.164.61',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },
     'comun': {
@@ -100,7 +100,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.164.61',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },
     'p2021': {
@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.164.61',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },
     'p2022': {
@@ -122,7 +122,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.164.61',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },
     'empr': {
@@ -133,7 +133,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.164.61',
+        'HOST': '159.223.168.118',
         'PORT': '5432',
     },    
 }
@@ -201,7 +201,7 @@ CORS_ALLOW_CREDENTIALS = False
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://159.223.164.61:8082"
+    "http://159.223.168.118:8082"
 ]
 
 CORS_ORIGIN_WHITELIST = [] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
