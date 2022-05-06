@@ -201,7 +201,7 @@ CORS_ALLOW_CREDENTIALS = False
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://192.168.0.101:8082"
+    "http://159.223.164.61:8082"
 ]
 
 CORS_ORIGIN_WHITELIST = [] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
