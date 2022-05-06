@@ -1,7 +1,7 @@
 [
   {
     "pk": 1,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "AL1",
       "desc_fami": "PRODUCTOS DE ALUMINIO",
@@ -12,7 +12,7 @@
   },
   {
     "pk": 2,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "AN1",
       "desc_fami": "ANIMES",
@@ -23,7 +23,7 @@
   },
   {
     "pk": 3,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "BC1",
       "desc_fami": "BOMBAS",
@@ -34,7 +34,7 @@
   },
   {
     "pk": 4,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "BO1",
       "desc_fami": "BOLSAS",
@@ -45,7 +45,7 @@
   },
   {
     "pk": 5,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "BT1",
       "desc_fami": "BOTAS",
@@ -56,7 +56,7 @@
   },
   {
     "pk": 6,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CB1",
       "desc_fami": "CEPILLOS BUCAL",
@@ -67,7 +67,7 @@
   },
   {
     "pk": 7,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CD1",
       "desc_fami": "CREMA DENTAL",
@@ -78,7 +78,7 @@
   },
   {
     "pk": 8,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CE1",
       "desc_fami": "CERAS",
@@ -89,7 +89,7 @@
   },
   {
     "pk": 9,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CP1",
       "desc_fami": "CEPILLOS",
@@ -100,7 +100,7 @@
   },
   {
     "pk": 10,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CH1",
       "desc_fami": "CHAMPU",
@@ -111,7 +111,7 @@
   },
   {
     "pk": 11,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CL1",
       "desc_fami": "CLOROS",
@@ -122,7 +122,7 @@
   },
   {
     "pk": 12,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "CR1",
       "desc_fami": "CREMAS",
@@ -133,7 +133,7 @@
   },
   {
     "pk": 13,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "DE1",
       "desc_fami": "DESODORANTES",
@@ -144,7 +144,7 @@
   },
   {
     "pk": 14,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "DS1",
       "desc_fami": "DESINFECTANTES",
@@ -155,7 +155,7 @@
   },
   {
     "pk": 15,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "JP1",
       "desc_fami": "DETERGENTES",
@@ -166,7 +166,7 @@
   },
   {
     "pk": 16,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "EL1",
       "desc_fami": "ELECTRODOMESTICOS",
@@ -177,7 +177,7 @@
   },
   {
     "pk": 17,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "T",
       "desc_fami": "TAPA AMARILLA ",
@@ -188,7 +188,7 @@
   },
   {
     "pk": 18,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "FA1",
       "desc_fami": "FARMACIA",
@@ -199,7 +199,7 @@
   },
   {
     "pk": 19,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "FE1",
       "desc_fami": "FERRETERIA",
@@ -210,7 +210,7 @@
   },
   {
     "pk": 20,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "GO1",
       "desc_fami": "GORRAS",
@@ -221,7 +221,7 @@
   },
   {
     "pk": 21,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "IN1",
       "desc_fami": "INSECTICIDAS",
@@ -232,7 +232,7 @@
   },
   {
     "pk": 22,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "JB1",
       "desc_fami": "JABONES DE BAÑO",
@@ -243,7 +243,7 @@
   },
   {
     "pk": 23,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "JU1",
       "desc_fami": "JUGUETES",
@@ -254,7 +254,7 @@
   },
   {
     "pk": 24,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "LO1",
       "desc_fami": "LOZA",
@@ -265,7 +265,7 @@
   },
   {
     "pk": 25,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "LP1",
       "desc_fami": "LAVAPLATOS",
@@ -276,7 +276,7 @@
   },
   {
     "pk": 26,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "ME1",
       "desc_fami": "MERCERIA",
@@ -287,7 +287,7 @@
   },
   {
     "pk": 27,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PA1",
       "desc_fami": "PANTUNFLAS",
@@ -298,7 +298,7 @@
   },
   {
     "pk": 28,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PD1",
       "desc_fami": "PRODUCTOS DESECHABLES",
@@ -309,7 +309,7 @@
   },
   {
     "pk": 29,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PE1",
       "desc_fami": "PERFUMERIA",
@@ -320,7 +320,7 @@
   },
   {
     "pk": 30,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PI1",
       "desc_fami": "PINTURA AL FRIO",
@@ -331,7 +331,7 @@
   },
   {
     "pk": 31,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PL1",
       "desc_fami": "PELTRE",
@@ -342,7 +342,7 @@
   },
   {
     "pk": 32,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PN1",
       "desc_fami": "PAÑALES",
@@ -353,7 +353,7 @@
   },
   {
     "pk": 33,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "PL1",
       "desc_fami": "PLASTICOS",
@@ -364,7 +364,7 @@
   },
   {
     "pk": 34,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "RB1",
       "desc_fami": "REPUESTOS DE BICICLETA",
@@ -375,7 +375,7 @@
   },
   {
     "pk": 35,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "SU1",
       "desc_fami": "SUAVIZANTE",
@@ -386,7 +386,7 @@
   },
   {
     "pk": 36,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "TA1",
       "desc_fami": "TALCOS",
@@ -397,7 +397,7 @@
   },
   {
     "pk": 37,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "TR1",
       "desc_fami": "TRENZA",
@@ -408,7 +408,7 @@
   },
   {
     "pk": 38,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "TS1",
       "desc_fami": "TOALLAS SANITARIAS",
@@ -419,7 +419,7 @@
   },
   {
     "pk": 39,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "UB1",
       "desc_fami": "UTENSILIOS DE BEBE",
@@ -430,7 +430,7 @@
   },
   {
     "pk": 40,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "UE1",
       "desc_fami": "UTILES ESCOLARES",
@@ -441,7 +441,7 @@
   },
   {
     "pk": 41,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "UH1",
       "desc_fami": "UTILES DEL HOGAR",
@@ -452,7 +452,7 @@
   },
   {
     "pk": 42,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "UL1",
       "desc_fami": "UTILES DE LIMPIEZA",
@@ -463,7 +463,7 @@
   },
   {
     "pk": 43,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "VE1",
       "desc_fami": "VELAS CUMPLEAÑO",
@@ -474,7 +474,7 @@
   },
   {
     "pk": 44,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "VI1",
       "desc_fami": "VIVERES",
@@ -485,7 +485,7 @@
   },
   {
     "pk": 45,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "VL1",
       "desc_fami": "VELAS Y VELONES",
@@ -496,7 +496,7 @@
   },
   {
     "pk": 46,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "NA1",
       "desc_fami": "NAVIDAD ",
@@ -507,7 +507,7 @@
   },
   {
     "pk": 47,
-    "model": "familia",
+    "model": "asiam.familia",
     "fields": {
       "abae_fami": "NA1",
       "desc_fami": "NAVIDAD _1",
