@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   {
     "pk": 1,
     "model": "asiam.pais",
@@ -11,6 +12,8 @@
     }
   },
 
+=======
+>>>>>>> Dev
   "countries": [
     {
       "name_en": "Afghanistan",

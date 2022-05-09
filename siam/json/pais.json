@@ -1,0 +1,2664 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "AFGHANISTAN",
+      "name_pais": "AFGANISTÁN",
+      "dial_pais": "+93",
+      "code_pais": "AF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ALBANIA",
+      "name_pais": "ALBANIA",
+      "dial_pais": "+355",
+      "code_pais": "AL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ALGERIA",
+      "name_pais": "ARGELIA",
+      "dial_pais": "+213",
+      "code_pais": "DZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "AMERICANSAMOA",
+      "name_pais": "SAMOA AMERICANA",
+      "dial_pais": "+1684",
+      "code_pais": "AS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ANDORRA",
+      "name_pais": "ANDORRA",
+      "dial_pais": "+376",
+      "code_pais": "AD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ANGOLA",
+      "name_pais": "ANGOLA",
+      "dial_pais": "+244",
+      "code_pais": "AO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ANGUILLA",
+      "name_pais": "ANGUILLA",
+      "dial_pais": "+1264",
+      "code_pais": "AI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ANTARCTICA",
+      "name_pais": "ANTÁRTIDA",
+      "dial_pais": "+672",
+      "code_pais": "AQ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ANTIGUA AND BARBUDA",
+      "name_pais": "ANTIGUA Y BARBUDA",
+      "dial_pais": "+1268",
+      "code_pais": "AG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ARGENTINA",
+      "name_pais": "ARGENTINA",
+      "dial_pais": "+54",
+      "code_pais": "AR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ARMENIA",
+      "name_pais": "ARMENIA",
+      "dial_pais": "+374",
+      "code_pais": "AM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ARUBA",
+      "name_pais": "ARUBA",
+      "dial_pais": "+297",
+      "code_pais": "AW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "AUSTRALIA",
+      "name_pais": "AUSTRALIA",
+      "dial_pais": "+61",
+      "code_pais": "AU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "AUSTRIA",
+      "name_pais": "AUSTRIA",
+      "dial_pais": "+43",
+      "code_pais": "AT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "AZERBAIJAN",
+      "name_pais": "AZERBAIYÁN",
+      "dial_pais": "+994",
+      "code_pais": "AZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BAHAMAS",
+      "name_pais": "BAHAMAS",
+      "dial_pais": "+1242",
+      "code_pais": "BS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BAHRAIN",
+      "name_pais": "BARÉIN",
+      "dial_pais": "+973",
+      "code_pais": "BH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BANGLADESH",
+      "name_pais": "BANGLADES",
+      "dial_pais": "+880",
+      "code_pais": "BD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BARBADOS",
+      "name_pais": "BARBADOS",
+      "dial_pais": "+1246",
+      "code_pais": "BB",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BELARUS",
+      "name_pais": "BIELORRUSIA",
+      "dial_pais": "+375",
+      "code_pais": "BY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BELGIUM",
+      "name_pais": "BÉLGICA",
+      "dial_pais": "+32",
+      "code_pais": "BE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BELIZE",
+      "name_pais": "BELICE",
+      "dial_pais": "+501",
+      "code_pais": "BZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BENIN",
+      "name_pais": "BENIN",
+      "dial_pais": "+229",
+      "code_pais": "BJ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BERMUDA",
+      "name_pais": "BERMUDAS",
+      "dial_pais": "+1441",
+      "code_pais": "BM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BHUTAN",
+      "name_pais": "BUTAN",
+      "dial_pais": "+975",
+      "code_pais": "BT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BOLIVIA",
+      "name_pais": "BOLIVIA",
+      "dial_pais": "+591",
+      "code_pais": "BO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BOSNIA AND HERZEGOVINA",
+      "name_pais": "BOSNIA-HERZEGOVINA",
+      "dial_pais": "+387",
+      "code_pais": "BA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BOTSWANA",
+      "name_pais": "BOTSUANA",
+      "dial_pais": "+267",
+      "code_pais": "BW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BRAZIL",
+      "name_pais": "BRASIL",
+      "dial_pais": "+55",
+      "code_pais": "BR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BRITISH INDIAN OCEAN TERRITORY",
+      "name_pais": "TERRITORIO BRITÁNICO DEL OCÉANO ÍNDICO",
+      "dial_pais": "+246",
+      "code_pais": "IO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BRUNEI DARUSSALAM",
+      "name_pais": "BRUNEI",
+      "dial_pais": "+673",
+      "code_pais": "BN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BULGARIA",
+      "name_pais": "BULGARIA",
+      "dial_pais": "+359",
+      "code_pais": "BG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BURKINA FASO",
+      "name_pais": "BURKINA FASO",
+      "dial_pais": "+226",
+      "code_pais": "BF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "BURUNDI",
+      "name_pais": "BURUNDI",
+      "dial_pais": "+257",
+      "code_pais": "BI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CAMBODIA",
+      "name_pais": "CAMBOYA",
+      "dial_pais": "+855",
+      "code_pais": "KH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CAMEROON",
+      "name_pais": "CAMERÚN",
+      "dial_pais": "+237",
+      "code_pais": "CM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CANADA",
+      "name_pais": "CANADÁ",
+      "dial_pais": "+1",
+      "code_pais": "CA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CAPE VERDE",
+      "name_pais": "CABO VERDE",
+      "dial_pais": "+238",
+      "code_pais": "CV",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CAYMAN ISLANDS",
+      "name_pais": "ISLAS CAIMÁN",
+      "dial_pais": "+ 345",
+      "code_pais": "KY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CENTRAL AFRICAN REPUBLIC",
+      "name_pais": "REPÚBLICA CENTROAFRICANA",
+      "dial_pais": "+236",
+      "code_pais": "CF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CHAD",
+      "name_pais": "CHAD",
+      "dial_pais": "+235",
+      "code_pais": "TD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CHILE",
+      "name_pais": "CHILE",
+      "dial_pais": "+56",
+      "code_pais": "CL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CHINA",
+      "name_pais": "CHINA",
+      "dial_pais": "+86",
+      "code_pais": "CN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CHRISTMAS ISLAND",
+      "name_pais": "ISLA DE NAVIDAD",
+      "dial_pais": "+61",
+      "code_pais": "CX",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COCOS (KEELING) ISLANDS",
+      "name_pais": "ISLAS COCOS",
+      "dial_pais": "+61",
+      "code_pais": "CC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COLOMBIA",
+      "name_pais": "COLOMBIA",
+      "dial_pais": "+57",
+      "code_pais": "CO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COMOROS",
+      "name_pais": "COMORAS",
+      "dial_pais": "+269",
+      "code_pais": "KM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CONGO",
+      "name_pais": "CONGO",
+      "dial_pais": "+242",
+      "code_pais": "CG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CONGO, THE DEMOCRATIC REPUBLIC OF THE",
+      "name_pais": "REPÚBLICA DEMOCRÁTICA DEL CONGO",
+      "dial_pais": "+243",
+      "code_pais": "CD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COOK ISLANDS",
+      "name_pais": "ISLAS COOK",
+      "dial_pais": "+682",
+      "code_pais": "CK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COSTA RICA",
+      "name_pais": "COSTA RICA",
+      "dial_pais": "+506",
+      "code_pais": "CR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "COTE D'IVOIRE",
+      "name_pais": "COSTA DE MARFIL",
+      "dial_pais": "+225",
+      "code_pais": "CI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CROATIA",
+      "name_pais": "CROACIA",
+      "dial_pais": "+385",
+      "code_pais": "HR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CUBA",
+      "name_pais": "CUBA",
+      "dial_pais": "+53",
+      "code_pais": "CU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CYPRUS",
+      "name_pais": "CHIPRE",
+      "dial_pais": "+537",
+      "code_pais": "CY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "CZECHIA",
+      "name_pais": "CHEQUIA",
+      "dial_pais": "+420",
+      "code_pais": "CZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "DENMARK",
+      "name_pais": "DINAMARCA",
+      "dial_pais": "+45",
+      "code_pais": "DK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "DJIBOUTI",
+      "name_pais": "YIBUTI",
+      "dial_pais": "+253",
+      "code_pais": "DJ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "DOMINICA",
+      "name_pais": "DOMINICA",
+      "dial_pais": "+1767",
+      "code_pais": "DM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "DOMINICAN REPUBLIC",
+      "name_pais": "REPÚBLICA DOMINICANA",
+      "dial_pais": "+1849",
+      "code_pais": "DO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 61,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ECUADOR",
+      "name_pais": "ECUADOR",
+      "dial_pais": "+593",
+      "code_pais": "EC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "EGYPT",
+      "name_pais": "EGIPTO",
+      "dial_pais": "+20",
+      "code_pais": "EG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "EL SALVADOR",
+      "name_pais": "EL SALVADOR",
+      "dial_pais": "+503",
+      "code_pais": "SV",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "EQUATORIAL GUINEA",
+      "name_pais": "GUINEA ECUATORIAL",
+      "dial_pais": "+240",
+      "code_pais": "GQ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 65,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ERITREA",
+      "name_pais": "ERITREA",
+      "dial_pais": "+291",
+      "code_pais": "ER",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ESTONIA",
+      "name_pais": "ESTONIA",
+      "dial_pais": "+372",
+      "code_pais": "EE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ETHIOPIA",
+      "name_pais": "ETIOPÍA",
+      "dial_pais": "+251",
+      "code_pais": "ET",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FALKLAND ISLANDS (MALVINAS)",
+      "name_pais": "ISLAS MALVINAS",
+      "dial_pais": "+500",
+      "code_pais": "FK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FAROE ISLANDS",
+      "name_pais": "ISLAS FEROE",
+      "dial_pais": "+298",
+      "code_pais": "FO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FIJI",
+      "name_pais": "FIYI",
+      "dial_pais": "+679",
+      "code_pais": "FJ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FINLAND",
+      "name_pais": "FINLANDIA",
+      "dial_pais": "+358",
+      "code_pais": "FI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FRANCE",
+      "name_pais": "FRANCIA",
+      "dial_pais": "+33",
+      "code_pais": "FR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FRENCH GUIANA",
+      "name_pais": "GUAYANA FRANCESA",
+      "dial_pais": "+594",
+      "code_pais": "GF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "FRENCH POLYNESIA",
+      "name_pais": "POLINESIA FRANCESA",
+      "dial_pais": "+689",
+      "code_pais": "PF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GABON",
+      "name_pais": "GABÓN",
+      "dial_pais": "+241",
+      "code_pais": "GA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GAMBIA",
+      "name_pais": "GAMBIA",
+      "dial_pais": "+220",
+      "code_pais": "GM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GEORGIA",
+      "name_pais": "GEORGIA",
+      "dial_pais": "+995",
+      "code_pais": "GE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GERMANY",
+      "name_pais": "ALEMANIA",
+      "dial_pais": "+49",
+      "code_pais": "DE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 79,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GHANA",
+      "name_pais": "GHANA",
+      "dial_pais": "+233",
+      "code_pais": "GH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 80,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GIBRALTAR",
+      "name_pais": "GIBRALTAR",
+      "dial_pais": "+350",
+      "code_pais": "GI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 81,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GREECE",
+      "name_pais": "GRECIA",
+      "dial_pais": "+30",
+      "code_pais": "GR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GREENLAND",
+      "name_pais": "GROENLANDIA",
+      "dial_pais": "+299",
+      "code_pais": "GL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GRENADA",
+      "name_pais": "GRANADA",
+      "dial_pais": "+1473",
+      "code_pais": "GD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 84,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUADELOUPE",
+      "name_pais": "GUADALUPE",
+      "dial_pais": "+590",
+      "code_pais": "GP",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 85,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUAM",
+      "name_pais": "GUAM",
+      "dial_pais": "+1671",
+      "code_pais": "GU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 86,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUATEMALA",
+      "name_pais": "GUATEMALA",
+      "dial_pais": "+502",
+      "code_pais": "GT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 87,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUERNSEY",
+      "name_pais": "GUERNSEY",
+      "dial_pais": "+44",
+      "code_pais": "GG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 88,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUINEA",
+      "name_pais": "GUINEA",
+      "dial_pais": "+224",
+      "code_pais": "GN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 89,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUINEA-BISSAU",
+      "name_pais": "GUINEA-BISAU",
+      "dial_pais": "+245",
+      "code_pais": "GW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 90,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "GUYANA",
+      "name_pais": "GUYANA",
+      "dial_pais": "+595",
+      "code_pais": "GY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 91,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "HAITI",
+      "name_pais": "HAITÍ",
+      "dial_pais": "+509",
+      "code_pais": "HT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 92,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "HOLY SEE (VATICAN CITY STATE)",
+      "name_pais": "CIUDAD DEL VATICANO",
+      "dial_pais": "+379",
+      "code_pais": "VA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 93,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "HONDURAS",
+      "name_pais": "HONDURAS",
+      "dial_pais": "+504",
+      "code_pais": "HN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 94,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "HONG KONG",
+      "name_pais": "HONG KONG",
+      "dial_pais": "+852",
+      "code_pais": "HK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "HUNGARY",
+      "name_pais": "HUNGRÍA",
+      "dial_pais": "+36",
+      "code_pais": "HU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ICELAND",
+      "name_pais": "ISLANDIA",
+      "dial_pais": "+354",
+      "code_pais": "IS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "INDIA",
+      "name_pais": "INDIA",
+      "dial_pais": "+91",
+      "code_pais": "IN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "INDONESIA",
+      "name_pais": "INDONESIA",
+      "dial_pais": "+62",
+      "code_pais": "ID",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "IRAN, ISLAMIC REPUBLIC OF",
+      "name_pais": "IRÁN",
+      "dial_pais": "+98",
+      "code_pais": "IR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 100,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "IRAQ",
+      "name_pais": "IRAQ",
+      "dial_pais": "+964",
+      "code_pais": "IQ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 101,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "IRELAND",
+      "name_pais": "IRLANDA",
+      "dial_pais": "+353",
+      "code_pais": "IE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 102,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ISLE OF MAN",
+      "name_pais": "ISLA DE MAN",
+      "dial_pais": "+44",
+      "code_pais": "IM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 103,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ISRAEL",
+      "name_pais": "ISRAEL",
+      "dial_pais": "+972",
+      "code_pais": "IL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 104,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ITALY",
+      "name_pais": "ITALIA",
+      "dial_pais": "+39",
+      "code_pais": "IT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 105,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "JAMAICA",
+      "name_pais": "JAMAICA",
+      "dial_pais": "+1876",
+      "code_pais": "JM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 106,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "JAPAN",
+      "name_pais": "JAPÓN",
+      "dial_pais": "+81",
+      "code_pais": "JP",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 107,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "JERSEY",
+      "name_pais": "JERSEY",
+      "dial_pais": "+44",
+      "code_pais": "JE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 108,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "JORDAN",
+      "name_pais": "JORDANIA",
+      "dial_pais": "+962",
+      "code_pais": "JO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 109,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KAZAKHSTAN",
+      "name_pais": "KAZAJISTÁN",
+      "dial_pais": "+7",
+      "code_pais": "KZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 110,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KENYA",
+      "name_pais": "KENIA",
+      "dial_pais": "+254",
+      "code_pais": "KE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 111,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KIRIBATI",
+      "name_pais": "KIRIBATI",
+      "dial_pais": "+686",
+      "code_pais": "KI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 112,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF",
+      "name_pais": "COREA DEL NORTE",
+      "dial_pais": "+850",
+      "code_pais": "KP",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 113,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KOREA, REPUBLIC OF",
+      "name_pais": "COREA DEL SUR",
+      "dial_pais": "+82",
+      "code_pais": "KR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 114,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KOSOVO",
+      "name_pais": "KOSOVO",
+      "dial_pais": "+383",
+      "code_pais": "XK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 115,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KUWAIT",
+      "name_pais": "KUWAIT",
+      "dial_pais": "+965",
+      "code_pais": "KW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 116,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "KYRGYZSTAN",
+      "name_pais": "KIRGUISTÁN",
+      "dial_pais": "+996",
+      "code_pais": "KG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 117,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+      "name_pais": "LAOS",
+      "dial_pais": "+856",
+      "code_pais": "LA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 118,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LATVIA",
+      "name_pais": "LETONIA",
+      "dial_pais": "+371",
+      "code_pais": "LV",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 119,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LEBANON",
+      "name_pais": "LÍBANO",
+      "dial_pais": "+961",
+      "code_pais": "LB",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 120,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LESOTHO",
+      "name_pais": "LESOTO",
+      "dial_pais": "+266",
+      "code_pais": "LS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 121,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LIBERIA",
+      "name_pais": "LIBERIA",
+      "dial_pais": "+231",
+      "code_pais": "LR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 122,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LIBYAN ARAB JAMAHIRIYA",
+      "name_pais": "LIBIA",
+      "dial_pais": "+218",
+      "code_pais": "LY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 123,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LIECHTENSTEIN",
+      "name_pais": "LIECHTENSTEIN",
+      "dial_pais": "+423",
+      "code_pais": "LI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 124,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LITHUANIA",
+      "name_pais": "LITUANIA",
+      "dial_pais": "+370",
+      "code_pais": "LT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 125,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "LUXEMBOURG",
+      "name_pais": "LUXEMBURGO",
+      "dial_pais": "+352",
+      "code_pais": "LU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 126,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MACAO",
+      "name_pais": "MACAO",
+      "dial_pais": "+853",
+      "code_pais": "MO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 127,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF",
+      "name_pais": "REPÚBLICA DE MACEDONIA",
+      "dial_pais": "+389",
+      "code_pais": "MK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 128,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MADAGASCAR",
+      "name_pais": "MADAGASCAR",
+      "dial_pais": "+261",
+      "code_pais": "MG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 129,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MALAWI",
+      "name_pais": "MALAUI",
+      "dial_pais": "+265",
+      "code_pais": "MW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 130,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MALAYSIA",
+      "name_pais": "MALASIA",
+      "dial_pais": "+60",
+      "code_pais": "MY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 131,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MALDIVES",
+      "name_pais": "MALDIVAS",
+      "dial_pais": "+960",
+      "code_pais": "MV",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 132,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MALI",
+      "name_pais": "MALÍ",
+      "dial_pais": "+223",
+      "code_pais": "ML",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 133,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MALTA",
+      "name_pais": "MALTA",
+      "dial_pais": "+356",
+      "code_pais": "MT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 134,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MARSHALL ISLANDS",
+      "name_pais": "ISLAS MARSHALL",
+      "dial_pais": "+692",
+      "code_pais": "MH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 135,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MARTINIQUE",
+      "name_pais": "MARTINICA",
+      "dial_pais": "+596",
+      "code_pais": "MQ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 136,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MAURITANIA",
+      "name_pais": "MAURITANIA",
+      "dial_pais": "+222",
+      "code_pais": "MR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 137,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MAURITIUS",
+      "name_pais": "MAURICIO",
+      "dial_pais": "+230",
+      "code_pais": "MU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 138,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MAYOTTE",
+      "name_pais": "MAYOTTE",
+      "dial_pais": "+262",
+      "code_pais": "YT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 139,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MEXICO",
+      "name_pais": "MÉXICO",
+      "dial_pais": "+52",
+      "code_pais": "MX",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 140,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MICRONESIA, FEDERATED STATES OF",
+      "name_pais": "ESTADOS FEDERADOS DE MICRONESIA",
+      "dial_pais": "+691",
+      "code_pais": "FM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 141,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MOLDOVA, REPUBLIC OF",
+      "name_pais": "MOLDAVIA",
+      "dial_pais": "+373",
+      "code_pais": "MD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 142,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MONACO",
+      "name_pais": "MONACO",
+      "dial_pais": "+377",
+      "code_pais": "MC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 143,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MONGOLIA",
+      "name_pais": "MONGOLIA",
+      "dial_pais": "+976",
+      "code_pais": "MN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 144,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MONTENEGRO",
+      "name_pais": "MONTENEGRO",
+      "dial_pais": "+382",
+      "code_pais": "ME",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 145,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MONTSERRAT",
+      "name_pais": "MONTSERRAT",
+      "dial_pais": "+1664",
+      "code_pais": "MS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 146,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MOROCCO",
+      "name_pais": "MARRUECOS",
+      "dial_pais": "+212",
+      "code_pais": "MA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 147,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MOZAMBIQUE",
+      "name_pais": "MOZAMBIQUE",
+      "dial_pais": "+258",
+      "code_pais": "MZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 148,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "MYANMAR",
+      "name_pais": "BIRMANIA",
+      "dial_pais": "+95",
+      "code_pais": "MM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 149,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NAMIBIA",
+      "name_pais": "NAMIBIA",
+      "dial_pais": "+264",
+      "code_pais": "NA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 150,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NAURU",
+      "name_pais": "NAURU",
+      "dial_pais": "+674",
+      "code_pais": "NR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 151,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NEPAL",
+      "name_pais": "NEPAL",
+      "dial_pais": "+977",
+      "code_pais": "NP",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 152,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NETHERLANDS",
+      "name_pais": "HOLANDA",
+      "dial_pais": "+31",
+      "code_pais": "NL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 153,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NETHERLANDS ANTILLES",
+      "name_pais": "ANTILLAS HOLANDESAS",
+      "dial_pais": "+599",
+      "code_pais": "AN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 154,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NEW CALEDONIA",
+      "name_pais": "NUEVA CALEDONIA",
+      "dial_pais": "+687",
+      "code_pais": "NC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 155,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NEW ZEALAND",
+      "name_pais": "NUEVA ZELANDA",
+      "dial_pais": "+64",
+      "code_pais": "NZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 156,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NICARAGUA",
+      "name_pais": "NICARAGUA",
+      "dial_pais": "+505",
+      "code_pais": "NI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 157,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NIGER",
+      "name_pais": "NIGER",
+      "dial_pais": "+227",
+      "code_pais": "NE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 158,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NIGERIA",
+      "name_pais": "NIGERIA",
+      "dial_pais": "+234",
+      "code_pais": "NG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 159,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NIUE",
+      "name_pais": "NIUE",
+      "dial_pais": "+683",
+      "code_pais": "NU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 160,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NORFOLKISLAND",
+      "name_pais": "ISLANORFOLK",
+      "dial_pais": "+672",
+      "code_pais": "NF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 161,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NORTHERNMARIANAISLANDS",
+      "name_pais": "ISLASMARIANASDELNORTE",
+      "dial_pais": "+1670",
+      "code_pais": "MP",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 162,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "NORWAY",
+      "name_pais": "NORUEGA",
+      "dial_pais": "+47",
+      "code_pais": "NO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 163,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "OMAN",
+      "name_pais": "OMÁN",
+      "dial_pais": "+968",
+      "code_pais": "OM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 164,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PAKISTAN",
+      "name_pais": "PAKISTÁN",
+      "dial_pais": "+92",
+      "code_pais": "PK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 165,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PALAU",
+      "name_pais": "PALAOS",
+      "dial_pais": "+680",
+      "code_pais": "PW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 166,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PANAMA",
+      "name_pais": "PANAMÁ",
+      "dial_pais": "+507",
+      "code_pais": "PA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 167,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PAPUA NEW GUINEA",
+      "name_pais": "PAPÚA NUEVA GUINEA",
+      "dial_pais": "+675",
+      "code_pais": "PG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 168,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PARAGUAY",
+      "name_pais": "PARAGUAY",
+      "dial_pais": "+595",
+      "code_pais": "PY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 169,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PERU",
+      "name_pais": "PERÚ",
+      "dial_pais": "+51",
+      "code_pais": "PE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 170,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PHILIPPINES",
+      "name_pais": "FILIPINAS",
+      "dial_pais": "+63",
+      "code_pais": "PH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 171,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PITCAIRN",
+      "name_pais": "ISLAS PITCAIRN",
+      "dial_pais": "+872",
+      "code_pais": "PN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 172,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "POLAND",
+      "name_pais": "POLONIA",
+      "dial_pais": "+48",
+      "code_pais": "PL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 173,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PORTUGAL",
+      "name_pais": "PORTUGAL",
+      "dial_pais": "+351",
+      "code_pais": "PT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 174,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "PUERTO RICO",
+      "name_pais": "PUERTO RICO",
+      "dial_pais": "+1939",
+      "code_pais": "PR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 175,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "QATAR",
+      "name_pais": "QATAR",
+      "dial_pais": "+974",
+      "code_pais": "QA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 176,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ROMANIA",
+      "name_pais": "RUMANIA",
+      "dial_pais": "+40",
+      "code_pais": "RO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 177,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "RUSSIA",
+      "name_pais": "RUSIA",
+      "dial_pais": "+7",
+      "code_pais": "RU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 178,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "RWANDA",
+      "name_pais": "RUANDA",
+      "dial_pais": "+250",
+      "code_pais": "RW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 179,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "RÉUNION",
+      "name_pais": "REUNION",
+      "dial_pais": "+262",
+      "code_pais": "RE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 180,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT BARTHÉLEMY",
+      "name_pais": "SAN BARTOLOME",
+      "dial_pais": "+590",
+      "code_pais": "BL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 181,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA",
+      "name_pais": "SANTA ELENA, ASCENSIÓN Y TRISTÁN DE ACUÑA",
+      "dial_pais": "+290",
+      "code_pais": "SH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 182,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT KITTS AND NEVIS",
+      "name_pais": "SAN CRISTÓBAL Y NIEVES",
+      "dial_pais": "+1869",
+      "code_pais": "KN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 183,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT LUCIA",
+      "name_pais": "SANTA LUCÍA",
+      "dial_pais": "+1758",
+      "code_pais": "LC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 184,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT MARTIN",
+      "name_pais": "ISLA DE SAN MARTÍN",
+      "dial_pais": "+590",
+      "code_pais": "MF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 185,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT PIERRE AND MIQUELON",
+      "name_pais": "SAN PEDRO Y MIQUELON",
+      "dial_pais": "+508",
+      "code_pais": "PM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 186,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAINT VINCENT AND THE GRENADINES",
+      "name_pais": "SAN VICENTE Y LAS GRANADINAS",
+      "dial_pais": "+1784",
+      "code_pais": "VC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 187,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAMOA",
+      "name_pais": "SAMOA",
+      "dial_pais": "+685",
+      "code_pais": "WS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 188,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAN MARINO",
+      "name_pais": "SAN MARINO",
+      "dial_pais": "+378",
+      "code_pais": "SM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 189,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAO TOME AND PRINCIPE",
+      "name_pais": " SANTO TOMÉ Y PRÍNCIPE",
+      "dial_pais": "+239",
+      "code_pais": "ST",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 190,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SAUDI ARABIA",
+      "name_pais": "ARABIA SAUDITA",
+      "dial_pais": "+966",
+      "code_pais": "SA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 191,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SENEGAL",
+      "name_pais": "SENEGAL",
+      "dial_pais": "+221",
+      "code_pais": "SN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 192,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SERBIA",
+      "name_pais": "SERBIA",
+      "dial_pais": "+381",
+      "code_pais": "RS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 193,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SEYCHELLES",
+      "name_pais": "SEYCHELLES",
+      "dial_pais": "+248",
+      "code_pais": "SC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 194,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SIERRA LEONE",
+      "name_pais": "SIERRA LEONA",
+      "dial_pais": "+232",
+      "code_pais": "SL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 195,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SINGAPORE",
+      "name_pais": "SINGAPUR",
+      "dial_pais": "+65",
+      "code_pais": "SG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 196,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SLOVAKIA",
+      "name_pais": "ESLOVAQUIA",
+      "dial_pais": "+421",
+      "code_pais": "SK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 197,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SLOVENIA",
+      "name_pais": "ESLOVENIA",
+      "dial_pais": "+386",
+      "code_pais": "SI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 198,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SOLOMON ISLANDS",
+      "name_pais": "ISLAS SALOMÓN",
+      "dial_pais": "+677",
+      "code_pais": "SB",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 199,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SOMALIA",
+      "name_pais": "SOMALIA",
+      "dial_pais": "+252",
+      "code_pais": "SO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 200,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SOUTH AFRICA",
+      "name_pais": "SUDÁFRICA",
+      "dial_pais": "+27",
+      "code_pais": "ZA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 201,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SOUTH SUDAN",
+      "name_pais": "SUDÁN DEL SUR",
+      "dial_pais": "+211",
+      "code_pais": "SS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 202,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SPAIN",
+      "name_pais": "ESPAÑA",
+      "dial_pais": "+34",
+      "code_pais": "ES",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 203,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SRI LANKA",
+      "name_pais": "SRI LANKA",
+      "dial_pais": "+94",
+      "code_pais": "LK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 204,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "STATE OF PALESTINE",
+      "name_pais": "ESTADO DE PALESTINA",
+      "dial_pais": "+970",
+      "code_pais": "PS",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 205,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SUDAN",
+      "name_pais": "SUDÁN",
+      "dial_pais": "+249",
+      "code_pais": "SD",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 206,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SURINAME",
+      "name_pais": "SURINAM",
+      "dial_pais": "+597",
+      "code_pais": "SR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 207,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SVALBARD AND JAN MAYEN",
+      "name_pais": "SVALBARD Y JAN MAYEN",
+      "dial_pais": "+47",
+      "code_pais": "SJ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 208,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SWAZILAND",
+      "name_pais": "SUAZILANDIA",
+      "dial_pais": "+268",
+      "code_pais": "SZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 209,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SWEDEN",
+      "name_pais": "SUECIA",
+      "dial_pais": "+46",
+      "code_pais": "SE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 210,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SWITZERLAND",
+      "name_pais": "SUIZA",
+      "dial_pais": "+41",
+      "code_pais": "CH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 211,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "SYRIAN ARAB REPUBLIC",
+      "name_pais": "SIRIA",
+      "dial_pais": "+963",
+      "code_pais": "SY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 212,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TAIWAN, PROVINCE OF CHINA",
+      "name_pais": "TAIWÁN",
+      "dial_pais": "+886",
+      "code_pais": "TW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 213,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TAYIKISTAN",
+      "name_pais": "TAYIKISTÁN",
+      "dial_pais": "+992",
+      "code_pais": "TJ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 214,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TANZANIA, UNITED REPUBLIC OF",
+      "name_pais": "TANZANIA",
+      "dial_pais": "+255",
+      "code_pais": "TZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 215,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "THAILAND",
+      "name_pais": "TAILANDIA",
+      "dial_pais": "+66",
+      "code_pais": "TH",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 216,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TIMOR-LESTE",
+      "name_pais": "TIMOR ORIENTAL",
+      "dial_pais": "+670",
+      "code_pais": "TL",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 217,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TOGO",
+      "name_pais": "TOGO",
+      "dial_pais": "+228",
+      "code_pais": "TG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 218,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TOKELAU",
+      "name_pais": "TOKELAU",
+      "dial_pais": "+690",
+      "code_pais": "TK",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 219,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TONGA",
+      "name_pais": "TONGA",
+      "dial_pais": "+676",
+      "code_pais": "TO",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 220,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TRINIDAD AND TOBAGO",
+      "name_pais": "TRINIDAD Y TOBAGO",
+      "dial_pais": "+1868",
+      "code_pais": "TT",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 221,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TUNISIA",
+      "name_pais": "TÚNEZ",
+      "dial_pais": "+216",
+      "code_pais": "TN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 222,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TURKEY",
+      "name_pais": "TURQUÍA",
+      "dial_pais": "+90",
+      "code_pais": "TR",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 223,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TURKMENISTAN",
+      "name_pais": "TURKMENISTÁN",
+      "dial_pais": "+993",
+      "code_pais": "TM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 224,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TURKS AND CAICOS ISLANDS",
+      "name_pais": "ISLAS TURCAS Y CAICOS",
+      "dial_pais": "+1649",
+      "code_pais": "TC",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 225,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "TUVALU",
+      "name_pais": "TUVALU",
+      "dial_pais": "+688",
+      "code_pais": "TV",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 226,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UGANDA",
+      "name_pais": "UGANDA",
+      "dial_pais": "+256",
+      "code_pais": "UG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 227,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UKRAINE",
+      "name_pais": "UCRANIA",
+      "dial_pais": "+380",
+      "code_pais": "UA",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 228,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UNITED ARAB EMIRATES",
+      "name_pais": "EMIRATOS ÁRABES UNIDOS",
+      "dial_pais": "+971",
+      "code_pais": "AE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 229,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UNITED KINGDOM",
+      "name_pais": "REINO UNIDO",
+      "dial_pais": "+44",
+      "code_pais": "GB",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 230,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UNITED STATES",
+      "name_pais": "ESTADOS UNIDOS",
+      "dial_pais": "+1",
+      "code_pais": "US",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 231,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "URUGUAY",
+      "name_pais": "URUGUAY",
+      "dial_pais": "+598",
+      "code_pais": "UY",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 232,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "UZBEKISTAN",
+      "name_pais": "UZBEKISTÁN",
+      "dial_pais": "+998",
+      "code_pais": "UZ",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 233,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "VANUATU",
+      "name_pais": "VANUATU",
+      "dial_pais": "+678",
+      "code_pais": "VU",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 234,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "VENEZUELA, BOLIVARIAN REPUBLIC OF",
+      "name_pais": "VENEZUELA",
+      "dial_pais": "+58",
+      "code_pais": "VE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 235,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "VIETNAM",
+      "name_pais": "VIETNAM",
+      "dial_pais": "+84",
+      "code_pais": "VN",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 236,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "VIRGIN ISLANDS, BRITISH",
+      "name_pais": "ISLAS VÍRGENES BRITÁNICAS",
+      "dial_pais": "+1284",
+      "code_pais": "VG",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 237,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "VIRGIN ISLANDS, U.S.",
+      "name_pais": "ISLAS VÍRGENES DE LOS ESTADOS UNIDOS",
+      "dial_pais": "+1340",
+      "code_pais": "VI",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 238,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "WALLIS AND FUTUNA",
+      "name_pais": "WALLIS Y FUTUNA",
+      "dial_pais": "+681",
+      "code_pais": "WF",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 239,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "YEMEN",
+      "name_pais": "YEMEN",
+      "dial_pais": "+967",
+      "code_pais": "YE",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 240,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ZAMBIA",
+      "name_pais": "ZAMBIA",
+      "dial_pais": "+260",
+      "code_pais": "ZM",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 241,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ZIMBABWE",
+      "name_pais": "ZIMBABUE",
+      "dial_pais": "+263",
+      "code_pais": "ZW",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  },
+  {
+    "pk": 242,
+    "model": "asiam.pais",
+    "fields": {
+      "nomb_pais": "ÅLAND ISLANDS",
+      "name_pais": "ÅLAND",
+      "dial_pais": "+358",
+      "code_pais": "AX",
+      "created": "2022-05-09T15:16:28.53272"
+    }
+  }
+]
