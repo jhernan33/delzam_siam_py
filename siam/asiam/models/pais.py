@@ -12,3 +12,12 @@ class Pais(Base):
         ordering = ['nomb_pais']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"pais"'
+
+    def save(self, *args, **kwargs):        
+        self.nomb_pais = self.nomb_pais.upper()
+        self.name_pais = self.name_pais.upper()
+        return super(Pais,self).save(*args, **kwargs)
+
+    def __str__(self):
+        """Unicode representation of Familia."""
+        return self.nomb_pais, self.name_pais.upper()
