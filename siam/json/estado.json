@@ -1,0 +1,202 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "AMAZONAS",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "ANZOATEGUI",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "APURE",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "ARAGUA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "BARINAS",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "BOLIVAR",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "CARABOBO",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "COJEDES",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "DELTA AMACURO",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "FALCON",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "GUARICO",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "LARA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "MERIDA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "MIRANDA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "MONAGAS",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "NUEVA ESPARTA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "PORTUGUESA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "SUCRE",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "TACHIRA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "TRUJILLO",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "LA GUAIRA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 22,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "YARACUY",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 23,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "ZULIA",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 24,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "DISTRITO CAPITAL",
+      "codi_pais_id": 234
+    }
+  },
+  {
+    "pk": 25,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "DEPENDENCIAS FEDERALES",
+      "codi_pais_id": 234
+    }
+  }
+]
