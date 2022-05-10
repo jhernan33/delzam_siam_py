@@ -1,0 +1,202 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "PUERTO AYACUCHO",
+      "codi_esta_id": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "BARCELONA",
+      "codi_esta_id": 2
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "SAN FERNANDO DE APURE",
+      "codi_esta_id": 3
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "MARACAY",
+      "codi_esta_id": 4
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "BARINAS",
+      "codi_esta_id": 5
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "CIUDAD BOLIVAR",
+      "codi_esta_id": 6
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "VALENCIA",
+      "codi_esta_id": 7
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "SAN CARLOS",
+      "codi_esta_id": 8
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "TUCUPITA",
+      "codi_esta_id": 9
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "CORO",
+      "codi_esta_id": 10
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "SAN JUAN DE LOS MORROS",
+      "codi_esta_id": 11
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "BARQUISIMETO",
+      "codi_esta_id": 12
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "MERIDA",
+      "codi_esta_id": 13
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "LOS TEQUES",
+      "codi_esta_id": 14
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "MATURIN",
+      "codi_esta_id": 15
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "LA ASUNCION",
+      "codi_esta_id": 16
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "GUANARE",
+      "codi_esta_id": 17
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "CUMANA",
+      "codi_esta_id": 18
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "SAN CRISTOBAL",
+      "codi_esta_id": 19
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "TRUJILLO",
+      "codi_esta_id": 20
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "LA GUAIRA",
+      "codi_esta_id": 21
+    }
+  },
+  {
+    "pk": 22,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "SAN FELIPE",
+      "codi_esta_id": 22
+    }
+  },
+  {
+    "pk": 23,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "MARACAIBO",
+      "codi_esta_id": 23
+    }
+  },
+  {
+    "pk": 24,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "CARACAS",
+      "codi_esta_id": 24
+    }
+  },
+  {
+    "pk": 25,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "DEPENDENCIAS FEDERALES",
+      "codi_esta_id": 25
+    }
+  }
+]
