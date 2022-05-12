@@ -5,5 +5,6 @@ class CiudadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ciudad
-        read_only_fields = ('id','codi_esta','nomb_ciud')
-        exclude =['created','updated','deleted']
+        # read_only_fields = ('id','codi_esta','nomb_ciud')
+        field = ['id','codi_esta','nomb_ciud']
+        exclude =['created','updated','deleted','esta_ttus']

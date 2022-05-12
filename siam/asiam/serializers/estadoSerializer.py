@@ -5,7 +5,7 @@ class EstadoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Estado
-        #fields = ('id','nomb_esta','codi_pais')
+        # fields = ('id','nomb_esta','codi_pais')
         # fields = "__all__"
         read_only_fields = ('id','codi_pais')
-        exclude =['created','updated','deleted']
+        exclude =['created','updated','deleted','esta_ttus']

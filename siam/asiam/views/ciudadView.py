@@ -29,7 +29,7 @@ class CiudadListView(generics.ListAPIView):
 class CiudadCreateView(generics.CreateAPIView):
     permission_classes = []
     serializer_class = CiudadSerializer
-
+    
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -51,21 +51,18 @@ class CiudadUpdateView(generics.UpdateAPIView):
 
 class CiudadDestroyView(generics.DestroyAPIView):
     permission_classes = []
-    serializer_class = CiudadSerializer    
-    queryset = Ciudad.objects.all()
+    serializer_class = CiudadSerializer
     lookup_field = 'id'
+    queryset = Ciudad.objects.all()
+    
 
 
 class CiudadComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = CiudadSerializer    
     lookup_field = 'id'
-    queryset = Ciudad.objects.all()
-    
-    def list(self, request, *args, **kwargs):
-        pais_id = self.kwargs['id']
-        paises = get_object_or_404(Ciudad,id=pais_id)
-        Ciudads = Ciudad.objects.filter(codi_pais_id=pais_id)
-        ser = CiudadSerializer(Ciudads,many=True).data
-        return Response(ser, status=status.HTTP_200_OK)
-    
+
+    def get_queryset(self):
+        estado_id = self.kwargs['id']
+        queryset = Ciudad.objects.all().order_by('-id')
+        return queryset.filter(codi_esta_id = estado_id)    

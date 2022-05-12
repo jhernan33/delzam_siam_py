@@ -104,12 +104,10 @@ class EstadoComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = EstadoSerializer    
     lookup_field = 'id'
-    queryset = Estado.objects.all()
     
-    def list(self, request, *args, **kwargs):
+    
+    def get_queryset(self):
+        # pais_id = self.request.query_params.get('id',None)
         pais_id = self.kwargs['id']
-        paises = get_object_or_404(Estado,id=pais_id)
-        estados = Estado.objects.filter(codi_pais_id=pais_id)
-        ser = EstadoSerializer(estados,many=True).data
-        return Response(ser, status=status.HTTP_200_OK)
-    
+        queryset = Estado.objects.all()
+        return queryset.filter(codi_pais_id = pais_id)
