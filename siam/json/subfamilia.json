@@ -1,0 +1,6722 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "BA1",
+      "desc_sufa": "BATIDOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "BU1",
+      "desc_sufa": "BUDARE PLANO CON BORDE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "CA1",
+      "desc_sufa": "CALDERO CON TAPA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "CA2",
+      "desc_sufa": "CAZUELA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "CO1",
+      "desc_sufa": "COLADORES  DE ALUMINIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "CU1",
+      "desc_sufa": "BANDEJA PIZZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "EX1",
+      "desc_sufa": "EXPRIMIDOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "JA1",
+      "desc_sufa": "JARRAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "MO1",
+      "desc_sufa": "MOLDE DE TORTA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "OL1",
+      "desc_sufa": "OLLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "OL2",
+      "desc_sufa": "OLLAS JERYCAR",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "OL3",
+      "desc_sufa": "OLLA SANCOCHERA ZENIT",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "OL4",
+      "desc_sufa": "OLLA PRESION ZENIT",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "PO1",
+      "desc_sufa": "PORTA CAFE ALUMINIO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "RA1",
+      "desc_sufa": "RAYADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "TO1",
+      "desc_sufa": "TOSTA AREPA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 1,
+      "abae_sufa": "VA1",
+      "desc_sufa": "VASOS DE ALUMINIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 2,
+      "abae_sufa": "BO1",
+      "desc_sufa": "BOLAS DE ANIME",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 2,
+      "abae_sufa": "CA1",
+      "desc_sufa": "CAVAS DE ANIME",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 2,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAMINAS DE ANIME",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA1",
+      "desc_sufa": "BOMBA CARNAVAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA2",
+      "desc_sufa": "BOMBA STD",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA3",
+      "desc_sufa": "BOMBAS DECORATIVA N° 5",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA4",
+      "desc_sufa": "BOMBA LINKING",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA5",
+      "desc_sufa": "BOMBA METALIZADA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 3,
+      "abae_sufa": "CA6",
+      "desc_sufa": "BOMBA PERLADO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "AD1",
+      "desc_sufa": "BOLSA DE ALTA DENSIDAD",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "AD2",
+      "desc_sufa": "BOLSA TRANSPARENTE TETA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BC1",
+      "desc_sufa": "BOLSA DE CAFE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BR1",
+      "desc_sufa": "BOLSA REGALO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BR2",
+      "desc_sufa": "BOLSA REGALO DAMA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BR3",
+      "desc_sufa": "BOLSA REGALO NIÑO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BR4",
+      "desc_sufa": "BOLSA REGALO DAMA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BR5",
+      "desc_sufa": "BOLSA REGALO NIÑO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BT1",
+      "desc_sufa": "BOLSA TOBITA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "BT2",
+      "desc_sufa": "BOLSA TRANSPARENTE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "CA2",
+      "desc_sufa": "BOLSA CON ASA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 5,
+      "abae_sufa": "CC1",
+      "desc_sufa": "BOTA CAÑA CORTA STA NINFA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 5,
+      "abae_sufa": "CL1",
+      "desc_sufa": "BOTAS CAÑA LARGA STA NINFA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 5,
+      "abae_sufa": "NI1",
+      "desc_sufa": "BOTA NIÑO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD1",
+      "desc_sufa": "CEPILLO BIODEN",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD2",
+      "desc_sufa": "CEPILLO DENTAL CARAVELLE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD3",
+      "desc_sufa": "CEPILLO DENTAL COLGATE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD4",
+      "desc_sufa": "CEPILLO DENTAL ORAL B",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD5",
+      "desc_sufa": "CEPILLO DENTAL PRINCE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD6",
+      "desc_sufa": "CEPILLO DENTAL TEK",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD7",
+      "desc_sufa": "CEPILLO ÑINO TOLA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 6,
+      "abae_sufa": "AD8",
+      "desc_sufa": "CEPILLO DENTAL VRAL-D",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 8,
+      "abae_sufa": "CE1",
+      "desc_sufa": "CERA DE PISO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 8,
+      "abae_sufa": "CE2",
+      "desc_sufa": "CERA NEUTRA LA ESPECIAL 12/1000",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 8,
+      "abae_sufa": "KE1",
+      "desc_sufa": "KEROSENE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 9,
+      "abae_sufa": "CL1",
+      "desc_sufa": "CEPILLOS BARRER PALMA REAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 9,
+      "abae_sufa": "CL2",
+      "desc_sufa": "CEPILLO DE  LAVAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 9,
+      "abae_sufa": "CL3",
+      "desc_sufa": "PALOS PARA CEPILLO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 9,
+      "abae_sufa": "CL4",
+      "desc_sufa": "CEPILLO DE PEINARSE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 9,
+      "abae_sufa": "CL5",
+      "desc_sufa": "CEPILLOS DE POSETA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C01",
+      "desc_sufa": "KIENA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C02",
+      "desc_sufa": "CHAMPU ELVIVE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C03",
+      "desc_sufa": "EVERY NIGHT",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C04",
+      "desc_sufa": "LOONEY",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 61,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C05",
+      "desc_sufa": "MARIANGEL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 62,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C06",
+      "desc_sufa": "TOMI TIPI",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 63,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C07",
+      "desc_sufa": "ACOND DRENE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 64,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C08",
+      "desc_sufa": "AVISPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 65,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C09",
+      "desc_sufa": "CHICCO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 66,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C10",
+      "desc_sufa": "DRENE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 67,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C11",
+      "desc_sufa": "PANTENE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 68,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C12",
+      "desc_sufa": "ROLDA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 69,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C13",
+      "desc_sufa": "POWER",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 70,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C14",
+      "desc_sufa": "FRESH ONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 71,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C15",
+      "desc_sufa": "HAVANA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 72,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 10,
+      "abae_sufa": "C16",
+      "desc_sufa": "NATURALISIMA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 73,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 11,
+      "abae_sufa": "TA1",
+      "desc_sufa": "TAPA AMARILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 74,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 12,
+      "abae_sufa": "VA1",
+      "desc_sufa": "VASELINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 75,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 12,
+      "abae_sufa": "ZA1",
+      "desc_sufa": "CREMA CHERRY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 76,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 12,
+      "abae_sufa": "ZA2",
+      "desc_sufa": "CEPILLO DE ZAPATO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 77,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 12,
+      "abae_sufa": "ZA3",
+      "desc_sufa": "APLICADOR CHERRY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 78,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 12,
+      "abae_sufa": "ZA4",
+      "desc_sufa": "APLICADOR BUFALO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 79,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 13,
+      "abae_sufa": "DE1",
+      "desc_sufa": "DESOD.DEQUINO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 80,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 13,
+      "abae_sufa": "DE2",
+      "desc_sufa": "DESODORANTES DIOXOGEN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 81,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 13,
+      "abae_sufa": "DE3",
+      "desc_sufa": "DESOD.MARIANGEL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 82,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "DE1",
+      "desc_sufa": "CREOLINA PEARSON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 83,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "DE2",
+      "desc_sufa": "DIABLO ROJO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 84,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "DE3",
+      "desc_sufa": "DESINFECTANTE LIDO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 85,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "DE4",
+      "desc_sufa": "DESINFECTANTE TAPA AMARILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 86,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "DE5",
+      "desc_sufa": "MULTIUSO TAPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 87,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 15,
+      "abae_sufa": "DE1",
+      "desc_sufa": "DETERGENTE ABC",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 88,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 15,
+      "abae_sufa": "DE2",
+      "desc_sufa": "DETERGENTE SUPER DEX",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 89,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 15,
+      "abae_sufa": "DE3",
+      "desc_sufa": "DETERGENTE TAPA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 90,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL1",
+      "desc_sufa": "CARGADORES CELULAR",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 91,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL2",
+      "desc_sufa": "LAMPARAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 92,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL3",
+      "desc_sufa": "LINTERNAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 93,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL4",
+      "desc_sufa": "ELECTREDOMESTICOS OSTER",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 94,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL5",
+      "desc_sufa": "RADIOS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 95,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 16,
+      "abae_sufa": "EL6",
+      "desc_sufa": "RELOJ",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 96,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F01",
+      "desc_sufa": "ACEITE DE ALMENDRAS DULCES 30CC X12",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 97,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F02",
+      "desc_sufa": "ADDESIVO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 98,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F03",
+      "desc_sufa": "ALCOHOL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 99,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F04",
+      "desc_sufa": "ALGODON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 100,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F05",
+      "desc_sufa": "ALCANFORINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 101,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F06",
+      "desc_sufa": "ALCANFOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 102,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F07",
+      "desc_sufa": "AGUA OXIGENADA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 103,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F08",
+      "desc_sufa": "CURITAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 104,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F09",
+      "desc_sufa": "DENCORUB",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 105,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F10",
+      "desc_sufa": "DIOXOGEN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 106,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F11",
+      "desc_sufa": "BUCAL DENTAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 107,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F12",
+      "desc_sufa": "GASA COMPRIMIDA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 108,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F13",
+      "desc_sufa": "HISOPOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 109,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F14",
+      "desc_sufa": "JERINGA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 110,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F15",
+      "desc_sufa": "MANTECA CACAO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 111,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F16",
+      "desc_sufa": "MENTOL DAVIS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 112,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F17",
+      "desc_sufa": "PASTILLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 113,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F18",
+      "desc_sufa": "PRESERVATIVO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 114,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F19",
+      "desc_sufa": "RECOLECTOR HECES / ORINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 115,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F20",
+      "desc_sufa": "TORNIQUETE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 116,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F21",
+      "desc_sufa": "VENDAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 117,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 18,
+      "abae_sufa": "F22",
+      "desc_sufa": "VICK VAPORUB",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 118,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F01",
+      "desc_sufa": "ACEITES 3 EN 1",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 119,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F02",
+      "desc_sufa": "ACEITE SINGER",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 120,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F03",
+      "desc_sufa": "ALAMBRE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 121,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F04",
+      "desc_sufa": "ANZUELOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 122,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F05",
+      "desc_sufa": "ANZUELO PICO DE LORO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 123,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F06",
+      "desc_sufa": "APAGADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 124,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F07",
+      "desc_sufa": "BOMBILLOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 125,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F08",
+      "desc_sufa": "BOMBILLO LED",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 126,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F09",
+      "desc_sufa": "AHORRADOR DURALUX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 127,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F10",
+      "desc_sufa": "BOMBILLO  LINTERNA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 128,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F11",
+      "desc_sufa": "BROCHAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 129,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F12",
+      "desc_sufa": "BROCHA STANDARD CEBRA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 130,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F13",
+      "desc_sufa": "CANDADOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 131,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F14",
+      "desc_sufa": "CANDADO UNIVERSAL",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 132,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F15",
+      "desc_sufa": "CANDADO CASTOR",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 133,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F16",
+      "desc_sufa": "CANDADO ANTICISALLA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 134,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F17",
+      "desc_sufa": "CANDADO DISPENSADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 135,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F18",
+      "desc_sufa": "CANDADO SHEN",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 136,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F19",
+      "desc_sufa": "CANDADO SECURITY",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 137,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F20",
+      "desc_sufa": "CABLES ELECTRICIDAD",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 138,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F21",
+      "desc_sufa": "CABLE TW",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 139,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F22",
+      "desc_sufa": "CLAVOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 140,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F23",
+      "desc_sufa": "CUCHILLO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 141,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F24",
+      "desc_sufa": "CUCHILLA PARA LUZ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 142,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F25",
+      "desc_sufa": "DESTORNILLADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 143,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F26",
+      "desc_sufa": "ENCHUFE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 144,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F27",
+      "desc_sufa": "EXTENSIONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 145,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F28",
+      "desc_sufa": "GOMAS DE FERRETERIA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 146,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F29",
+      "desc_sufa": "GRAPAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 147,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F30",
+      "desc_sufa": "GUANTES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 148,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F31",
+      "desc_sufa": "HERRAMIENTAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 149,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F32",
+      "desc_sufa": "LLAVE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 150,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 4,
+      "abae_sufa": "F33",
+      "desc_sufa": "ABRAZADERA METALICAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 151,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F34",
+      "desc_sufa": "PALUSTRE PALETA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 152,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F35",
+      "desc_sufa": "ESPATULA METAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 153,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F36",
+      "desc_sufa": "IMPERMEABLE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 154,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F37",
+      "desc_sufa": "JUNTAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 155,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F38",
+      "desc_sufa": "LLAVE SECURITY 8/9",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 156,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F39",
+      "desc_sufa": "MANGUERA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 157,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F40",
+      "desc_sufa": "MECATE ELEFANTE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 158,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F41",
+      "desc_sufa": "MECATE SISALARA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 159,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F42",
+      "desc_sufa": "MECATE MONITEX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 160,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F43",
+      "desc_sufa": "MOLINOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 161,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F44",
+      "desc_sufa": "METRO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 162,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F45",
+      "desc_sufa": "NAYLON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 163,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F46",
+      "desc_sufa": "NAYLON P-30",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 164,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F47",
+      "desc_sufa": "NAYLON TARRALLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 165,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F48",
+      "desc_sufa": "NAYLON DE PESCAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 166,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F49",
+      "desc_sufa": "NAVAJAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 167,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F50",
+      "desc_sufa": "PILAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 168,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F51",
+      "desc_sufa": "RAYO-VAC",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 169,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F52",
+      "desc_sufa": "PILA ALCALINA ENERGIZER",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 170,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F53",
+      "desc_sufa": "PILA DIGA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 171,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F54",
+      "desc_sufa": "RACHE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 172,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F55",
+      "desc_sufa": "REGLETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 173,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F56",
+      "desc_sufa": "SEGUETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 174,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F57",
+      "desc_sufa": "SILICON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 175,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F58",
+      "desc_sufa": "SOCATES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 176,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F59",
+      "desc_sufa": "TEIPE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 177,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F60",
+      "desc_sufa": "TEFLON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 178,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F61",
+      "desc_sufa": "TIRRAP",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 179,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F62",
+      "desc_sufa": "TOMACORRIENTE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 180,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F63",
+      "desc_sufa": "TORNILLOS SET",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 181,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F64",
+      "desc_sufa": "REPUESTO PARA TUBO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 182,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F65",
+      "desc_sufa": "NIPLES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 183,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F66",
+      "desc_sufa": "LLAVES DE TUBO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 184,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F67",
+      "desc_sufa": "WD-40 FORMULA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 185,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 19,
+      "abae_sufa": "F68",
+      "desc_sufa": "YESQUEROS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 186,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN1",
+      "desc_sufa": "INSECTICIDA BAYGON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 187,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN2",
+      "desc_sufa": "PEGA DE RATONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 188,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN3",
+      "desc_sufa": "INSECTICIDAS PLAGATOX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 189,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN4",
+      "desc_sufa": "INSECTICIDA RAID MAX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 190,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN5",
+      "desc_sufa": "REPELENTE OSI",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 191,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 21,
+      "abae_sufa": "IN6",
+      "desc_sufa": "TIZA CHINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 192,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 22,
+      "abae_sufa": "JB1",
+      "desc_sufa": "JABON MELODY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 193,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 22,
+      "abae_sufa": "JB2",
+      "desc_sufa": "JABON DE BAÑO RUBIS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 194,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J01",
+      "desc_sufa": "AJEDRES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 195,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J02",
+      "desc_sufa": "AVION",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 196,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J03",
+      "desc_sufa": "BALONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 197,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J04",
+      "desc_sufa": "BINGO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 198,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J05",
+      "desc_sufa": "BOWLING",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 199,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J06",
+      "desc_sufa": "DOMINO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 200,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J07",
+      "desc_sufa": "CARRO DE FRICCION",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 201,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J08",
+      "desc_sufa": "LEGO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 202,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J09",
+      "desc_sufa": "LUDO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 203,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J10",
+      "desc_sufa": "MUÑECAS EN BOLSA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 204,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J11",
+      "desc_sufa": "MUÑECAS EN CAJA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 205,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J12",
+      "desc_sufa": "METRAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 206,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J13",
+      "desc_sufa": "MEMORIA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 207,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J14",
+      "desc_sufa": "NAIPES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 208,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J15",
+      "desc_sufa": "PELOTAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 209,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J16",
+      "desc_sufa": "PERINOLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 210,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J17",
+      "desc_sufa": "PITO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 211,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J18",
+      "desc_sufa": "ROMPE CABEZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 212,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J19",
+      "desc_sufa": "TOBO PLAYERO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 213,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J20",
+      "desc_sufa": "TROMPOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 214,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J21",
+      "desc_sufa": "VOLTEOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 215,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J22",
+      "desc_sufa": "CARROS EXIPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 216,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 23,
+      "abae_sufa": "J23",
+      "desc_sufa": "YO - YO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 217,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO1",
+      "desc_sufa": "JARRA DE VIDRIO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 218,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO2",
+      "desc_sufa": "MELAMINE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 219,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO3",
+      "desc_sufa": "PLATO LOZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 220,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO4",
+      "desc_sufa": "POSILLOS DE LOZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 221,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO5",
+      "desc_sufa": "POSILLO VIDOSA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 222,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO6",
+      "desc_sufa": "VASOS DE VIDRIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 223,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 24,
+      "abae_sufa": "LO7",
+      "desc_sufa": "VAJILLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 224,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 25,
+      "abae_sufa": "LP1",
+      "desc_sufa": "AXION",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 225,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 25,
+      "abae_sufa": "LP2",
+      "desc_sufa": "TAPA AMARILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 226,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M01",
+      "desc_sufa": "AGUJAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 227,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M02",
+      "desc_sufa": "AGUJA PUNTA DE ORO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 228,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M03",
+      "desc_sufa": "BOTONES",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 229,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M04",
+      "desc_sufa": "CAUCHO ELASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 230,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M05",
+      "desc_sufa": "CIERRES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 231,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M06",
+      "desc_sufa": "METAL 15/5 GRUESO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 232,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M07",
+      "desc_sufa": "METAL 20/5 GRUESO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 233,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M08",
+      "desc_sufa": "METAL 15/3 FINO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 234,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M09",
+      "desc_sufa": "METAL 20/3 FINO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 235,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M10",
+      "desc_sufa": "NAYLO 15",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 236,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M11",
+      "desc_sufa": "NAYLON 20",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 237,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M12",
+      "desc_sufa": "CINTAS DE MERCERIA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 238,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M13",
+      "desc_sufa": "ENCAJE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 239,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M14",
+      "desc_sufa": "GANCHOS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 240,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M15",
+      "desc_sufa": "HILOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 241,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M16",
+      "desc_sufa": "HILO CHINO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 242,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M17",
+      "desc_sufa": "HILO CYSCO  200",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 243,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M18",
+      "desc_sufa": "HILO INTERBIRDS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 244,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M19",
+      "desc_sufa": "HILO CEBRA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 245,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M20",
+      "desc_sufa": "HILO BAMBARY 400",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 246,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M21",
+      "desc_sufa": "HILOS TUBINO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 247,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M22",
+      "desc_sufa": "TIJERA BARBERA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 248,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "M23",
+      "desc_sufa": "COSTURA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 249,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA1",
+      "desc_sufa": "PANTUFLA ALOHA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 250,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA2",
+      "desc_sufa": "PANTUFLA IMPORTADA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 251,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA3",
+      "desc_sufa": "PANTUFLA MACUTO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 252,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA4",
+      "desc_sufa": "PANTUFLA NOVAFLEX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 253,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA5",
+      "desc_sufa": "PANTUFLAS VARIAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 254,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 27,
+      "abae_sufa": "PA6",
+      "desc_sufa": "ZAPATO PUCCINI",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 255,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P01",
+      "desc_sufa": "CUCHARILLAS PLASTICAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 256,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P02",
+      "desc_sufa": "ANIME ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 257,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P03",
+      "desc_sufa": "PALILLOS DENTAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 258,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P04",
+      "desc_sufa": "PITILLOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 259,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P05",
+      "desc_sufa": "PLATO FIESTA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 260,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P06",
+      "desc_sufa": "PLATO PLASTILLANO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 261,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P07",
+      "desc_sufa": "PLATO SELVA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 262,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P08",
+      "desc_sufa": "PLATO FAVEP",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 263,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P09",
+      "desc_sufa": "PLATO CARTON PROVO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 264,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P10",
+      "desc_sufa": "TENEDORES PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 265,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P11",
+      "desc_sufa": "VASO DESECHABLE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 266,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P12",
+      "desc_sufa": "VASOS LOS LLANOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 267,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P13",
+      "desc_sufa": "VASO FAPEP",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 268,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "P14",
+      "desc_sufa": "VASO SELVA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 269,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P01",
+      "desc_sufa": "AGUA OXIGENADA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 270,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P02",
+      "desc_sufa": "CORTA  UÑAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 271,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P03",
+      "desc_sufa": "COLITAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 272,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P04",
+      "desc_sufa": "COMPACTOS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 273,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P05",
+      "desc_sufa": "GANCHOS PARA EL CABELLO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 274,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P06",
+      "desc_sufa": "GELATINAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 275,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P07",
+      "desc_sufa": "HOJILLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 276,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P08",
+      "desc_sufa": "LABIALES",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 277,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P09",
+      "desc_sufa": "LIMAS DE UÑAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 278,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P10",
+      "desc_sufa": "LIGA PELO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 279,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P11",
+      "desc_sufa": "LOCION CORPORAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 280,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P12",
+      "desc_sufa": "MAQUINA DE HOJILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 281,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P13",
+      "desc_sufa": "REPUESTOS PARA MAQUINAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 282,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P14",
+      "desc_sufa": "PEINES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 283,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P15",
+      "desc_sufa": "PINTURA DE UÑAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 284,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P16",
+      "desc_sufa": "PINZA DE CEJA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 285,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P17",
+      "desc_sufa": "PINZA DE PELO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 286,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P18",
+      "desc_sufa": "REMOVEDORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 287,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P19",
+      "desc_sufa": "CUTEX",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 288,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P20",
+      "desc_sufa": "TABACOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 289,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P21",
+      "desc_sufa": "TINTES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 290,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P22",
+      "desc_sufa": "UÑAS POSTIZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 291,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 29,
+      "abae_sufa": "P23",
+      "desc_sufa": "TIÑE PARA ROPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 292,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 31,
+      "abae_sufa": "PL1",
+      "desc_sufa": "PLATOS DE PELTRE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 293,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 31,
+      "abae_sufa": "PL2",
+      "desc_sufa": "POSILLO DE PELTRE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 294,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 31,
+      "abae_sufa": "PL3",
+      "desc_sufa": "TAZA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 295,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 32,
+      "abae_sufa": "PN1",
+      "desc_sufa": "PAÑAL PARA ADULTO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 296,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 32,
+      "abae_sufa": "PN2",
+      "desc_sufa": "COMODITOS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 297,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 32,
+      "abae_sufa": "PN3",
+      "desc_sufa": "DONDI",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 298,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 32,
+      "abae_sufa": "PN4",
+      "desc_sufa": "HUGGIES",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 299,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 32,
+      "abae_sufa": "PN5",
+      "desc_sufa": "PAMPERS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 300,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P01",
+      "desc_sufa": "ALCANCIAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 301,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P02",
+      "desc_sufa": "ASIENTO BABY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 302,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P03",
+      "desc_sufa": "ATOMIZADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 303,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P04",
+      "desc_sufa": "BAÑERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 304,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P05",
+      "desc_sufa": "BACINILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 305,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P06",
+      "desc_sufa": "BANQUETA APILABLE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 306,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P07",
+      "desc_sufa": "CAVA PLASTICA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 307,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P08",
+      "desc_sufa": "CAVA CON RUEDAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 308,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P09",
+      "desc_sufa": "CAVAS COMBO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 309,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P10",
+      "desc_sufa": "CAJA HERRAMIENTA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 310,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P11",
+      "desc_sufa": "CESTA ROPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 311,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P12",
+      "desc_sufa": "COLADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 312,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P13",
+      "desc_sufa": "CONTENEDOR MULTIUSO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 313,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P14",
+      "desc_sufa": "CONSERVADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 314,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P15",
+      "desc_sufa": "CONSERVADOR OPTIPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 315,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P16",
+      "desc_sufa": "CUBIERTERA PLASTICA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 316,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P17",
+      "desc_sufa": "EMBUDOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 317,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P18",
+      "desc_sufa": "ENSALADERA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 318,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P19",
+      "desc_sufa": "ESCUDILLA MANAPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 319,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P20",
+      "desc_sufa": "EXPRIMIDOR DE JUGO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 320,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P21",
+      "desc_sufa": "GARRAFAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 321,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P22",
+      "desc_sufa": "GANCHOS PLASTICOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 322,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P23",
+      "desc_sufa": "HIELERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 323,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P24",
+      "desc_sufa": "JARRAS PLASTICAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 324,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P25",
+      "desc_sufa": "JABONERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 325,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P26",
+      "desc_sufa": "MATEROS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 326,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P27",
+      "desc_sufa": "MESA FESTIVAL MANAPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 327,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P28",
+      "desc_sufa": "MULTI- POTE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 328,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P29",
+      "desc_sufa": "PALAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 329,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P30",
+      "desc_sufa": "PAPELERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 330,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P31",
+      "desc_sufa": "PAPELERA MANAPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 331,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P32",
+      "desc_sufa": "PIPOTES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 332,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P33",
+      "desc_sufa": "PIPOTE MANAPLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 333,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P34",
+      "desc_sufa": "ENVASE MULTIUSO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 334,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P35",
+      "desc_sufa": "PLATOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 335,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P36",
+      "desc_sufa": "PLATERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 336,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P37",
+      "desc_sufa": "PONCHERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 337,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P38",
+      "desc_sufa": "PONCHERA CON ASA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 338,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P39",
+      "desc_sufa": "PONCHERA  GALAXY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 339,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P40",
+      "desc_sufa": "POSILLO PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 340,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P41",
+      "desc_sufa": "PONCHERA SIN ASA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 341,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P42",
+      "desc_sufa": "POTES COCINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 342,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P43",
+      "desc_sufa": "SALCERO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 343,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P44",
+      "desc_sufa": "SILLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 344,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P45",
+      "desc_sufa": "TAZAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 345,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P46",
+      "desc_sufa": "TERMOS PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 346,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P47",
+      "desc_sufa": "TERMO VIAJERO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 347,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P48",
+      "desc_sufa": "TERMO POTAMITO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 348,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P49",
+      "desc_sufa": "TERMO POPOTAMO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 349,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P50",
+      "desc_sufa": "TERMOS TROPIC",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 350,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P51",
+      "desc_sufa": "TERMO PLASTICO INDUSTRIAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 351,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P52",
+      "desc_sufa": "TINAS GRANDE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 352,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P53",
+      "desc_sufa": "TOBOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 353,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P54",
+      "desc_sufa": "VASO PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 354,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "P55",
+      "desc_sufa": "VIANDA PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 355,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 34,
+      "abae_sufa": "RB1",
+      "desc_sufa": "BOMBA DE BICICLETA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 356,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 34,
+      "abae_sufa": "RB2",
+      "desc_sufa": "CANDADO BICICLETA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 357,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 35,
+      "abae_sufa": "SU1",
+      "desc_sufa": "BOLSA DE LAVADO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 358,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 35,
+      "abae_sufa": "SU2",
+      "desc_sufa": "VEL ROSA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 359,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA1",
+      "desc_sufa": "BOROCANFOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 360,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA2",
+      "desc_sufa": "TALCO BORIFOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 361,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA3",
+      "desc_sufa": "TALCO BOXITAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 362,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA4",
+      "desc_sufa": "CHICCO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 363,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA5",
+      "desc_sufa": "FRESH GNES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 364,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA6",
+      "desc_sufa": "TALCO KIENA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 365,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "TA7",
+      "desc_sufa": "MELODY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 366,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 37,
+      "abae_sufa": "TR1",
+      "desc_sufa": "TRENZA BOTA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 367,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 37,
+      "abae_sufa": "TR2",
+      "desc_sufa": "TRENZA DE ZAPATO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 368,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 38,
+      "abae_sufa": "TS1",
+      "desc_sufa": "TOALLA ALWAYS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 369,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 38,
+      "abae_sufa": "TS2",
+      "desc_sufa": "TOALLAS CLINICAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 370,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 38,
+      "abae_sufa": "TS3",
+      "desc_sufa": "TOALLA DE MUJER",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 371,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 38,
+      "abae_sufa": "TS4",
+      "desc_sufa": "TOALLAS FRIENDS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 372,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 38,
+      "abae_sufa": "TS5",
+      "desc_sufa": "TOALLA NATURELLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 373,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U01",
+      "desc_sufa": "ACEITE NIÑOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 374,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U02",
+      "desc_sufa": "ACEITE FRESH ONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 375,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U03",
+      "desc_sufa": "COLONIAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 376,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U04",
+      "desc_sufa": "COLONIAS CHICCO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 377,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U05",
+      "desc_sufa": "COLONIA FRESH",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 378,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U06",
+      "desc_sufa": "COLONIA CARICIAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 379,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U07",
+      "desc_sufa": "COLONIA KIENA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 380,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U08",
+      "desc_sufa": "GEL ANTIBACTERIAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 381,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U09",
+      "desc_sufa": "MAMILAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 382,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "U10",
+      "desc_sufa": "PAPEL BOND",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 383,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U11",
+      "desc_sufa": "TETEROS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 384,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 39,
+      "abae_sufa": "U12",
+      "desc_sufa": "TOALLITAS PARA BEBE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 385,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "001",
+      "desc_sufa": "ACUARELA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 386,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "002",
+      "desc_sufa": "AGENDAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 387,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "003",
+      "desc_sufa": "ALMOHADILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 388,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "004",
+      "desc_sufa": "CARTON GRIS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 389,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "005",
+      "desc_sufa": "BLACKCOLOR ",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 390,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "006",
+      "desc_sufa": "BISTURI",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 391,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "007",
+      "desc_sufa": "BLOCK",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 392,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "008",
+      "desc_sufa": "BORRADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 393,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "009",
+      "desc_sufa": "BOLSOS ESCOLARES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 394,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "010",
+      "desc_sufa": "CARPETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 395,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "011",
+      "desc_sufa": "CARPETA AMARILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 396,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "012",
+      "desc_sufa": "CARPETA FIBRA PLASTIFICADA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 397,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "013",
+      "desc_sufa": "CARPETA TRANSPARENTE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 398,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "014",
+      "desc_sufa": "CARTUCHERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 399,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "015",
+      "desc_sufa": "CARTULINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 400,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "016",
+      "desc_sufa": "CARTON CORRUGADO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 401,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "017",
+      "desc_sufa": "CARTULINA DOBLE FAX",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 402,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "018",
+      "desc_sufa": "CD - DVD",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 403,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "019",
+      "desc_sufa": "CINTA CELOVEN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 404,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "020",
+      "desc_sufa": "CHINCHES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 405,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "021",
+      "desc_sufa": "CINTAS MORROPAC",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 406,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "022",
+      "desc_sufa": "COMPAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 407,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "023",
+      "desc_sufa": "CORRECTOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 408,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "024",
+      "desc_sufa": "CREYONES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 409,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "025",
+      "desc_sufa": "CALCULADORA CASIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 410,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "026",
+      "desc_sufa": "CUADERNOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 411,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "027",
+      "desc_sufa": "CUADERNO DE LINEA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 412,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "028",
+      "desc_sufa": "CUADERNO DOBLE LINEA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 413,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "029",
+      "desc_sufa": "CUADERNO CUADRICULADO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 414,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "030",
+      "desc_sufa": "DICCIONARIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 415,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "031",
+      "desc_sufa": "ENGRAPADORAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 416,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "032",
+      "desc_sufa": "LIBRETA ESPIRAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 417,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "033",
+      "desc_sufa": "LIBRETA ESPIRAL GRANDE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 418,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "034",
+      "desc_sufa": "OFICOLORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 419,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "035",
+      "desc_sufa": "FICHAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 420,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "036",
+      "desc_sufa": "FIELTRO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 421,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "037",
+      "desc_sufa": "FOAMY",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 422,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "038",
+      "desc_sufa": "FOAMY PAÑO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 423,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "039",
+      "desc_sufa": "FUNDAS PROTECTORAS  PREMIER X 100",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 424,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "040",
+      "desc_sufa": "GANCHOS ESCOLARES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 425,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "041",
+      "desc_sufa": "GANCHO CARPETA  X50 UNI      BTO/50",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 426,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "042",
+      "desc_sufa": "GANCHO CLIPS Nº1 ITECA X 100",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 427,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "043",
+      "desc_sufa": "GOMA  ESCOLAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 428,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "044",
+      "desc_sufa": "GRAPAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 429,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "045",
+      "desc_sufa": "HOJA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 430,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "046",
+      "desc_sufa": "JUEGO GEOMETRICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 431,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "047",
+      "desc_sufa": "LAPICERO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 432,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "048",
+      "desc_sufa": "LIBRO DE LECTURA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 433,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "049",
+      "desc_sufa": "METODO PALMER",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 434,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "050",
+      "desc_sufa": "LIBRO CONTABILIDAD",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 435,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "051",
+      "desc_sufa": "LANA ESCOLAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 436,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "052",
+      "desc_sufa": "LIGAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 437,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "053",
+      "desc_sufa": "LIBRETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 438,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "054",
+      "desc_sufa": "LLAVEROS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 439,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "055",
+      "desc_sufa": "LIBRETA NORMA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 440,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "056",
+      "desc_sufa": "LONCHERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 441,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "057",
+      "desc_sufa": "LAPIZ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 442,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "058",
+      "desc_sufa": "LAMINA DE PLASTIFICAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 443,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "059",
+      "desc_sufa": "LUPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 444,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "060",
+      "desc_sufa": "MARCADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 445,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "061",
+      "desc_sufa": "MARCADOR FINO 690",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 446,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "062",
+      "desc_sufa": "MARCADOR GRUESO 680",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 447,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "063",
+      "desc_sufa": "MARCADOR PIZARRON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 448,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "064",
+      "desc_sufa": "MARCADOR SHARPIE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 449,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "065",
+      "desc_sufa": "MINAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 450,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "066",
+      "desc_sufa": "MORRAL ESCOLAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 451,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "067",
+      "desc_sufa": "OROCOLOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 452,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "068",
+      "desc_sufa": "PALETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 453,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "069",
+      "desc_sufa": "PAPEL PERGAMINO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 454,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "070",
+      "desc_sufa": "PAPEL FOTOGRAFICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 455,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "071",
+      "desc_sufa": "PAPEL CARBON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 456,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "072",
+      "desc_sufa": "PAPEL CONTAC",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 457,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "073",
+      "desc_sufa": "LUSTRILLO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 458,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "074",
+      "desc_sufa": "CELOFAN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 459,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "075",
+      "desc_sufa": "CREPE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 460,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "076",
+      "desc_sufa": "PERFORADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 461,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "077",
+      "desc_sufa": "PINCELES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 462,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "078",
+      "desc_sufa": "PINCEL EVA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 463,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "079",
+      "desc_sufa": "PLASTILINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 464,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "080",
+      "desc_sufa": "PLANTILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 465,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "081",
+      "desc_sufa": "PLUMA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 466,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "082",
+      "desc_sufa": "PORTAMINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 467,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "083",
+      "desc_sufa": "PAPEL REGALO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 468,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "084",
+      "desc_sufa": "PAPEL POR RESMAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 469,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "085",
+      "desc_sufa": "PAPEL FOTOCOPIADORA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 470,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "086",
+      "desc_sufa": "PAPEL EXAMEN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 471,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "087",
+      "desc_sufa": "RESALTADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 472,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "088",
+      "desc_sufa": "PAPEL COMPUTADORA COMTINUO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 473,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "089",
+      "desc_sufa": "REGLAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 474,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "090",
+      "desc_sufa": "ROLLO  SUMADORA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 475,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "091",
+      "desc_sufa": "SACAPUNTAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 476,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "092",
+      "desc_sufa": "SACAGRAPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 477,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "093",
+      "desc_sufa": "PAPEL SEDA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 478,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "094",
+      "desc_sufa": "SELLOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 479,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "095",
+      "desc_sufa": "SILICON BARRA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 480,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "096",
+      "desc_sufa": "SILICON LIQUIDO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 481,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "097",
+      "desc_sufa": "PISTOLAS DE SILICON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 482,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "098",
+      "desc_sufa": "SOBRES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 483,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "099",
+      "desc_sufa": "TALONARIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 484,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "100",
+      "desc_sufa": "TEMPERAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 485,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "101",
+      "desc_sufa": "TABLA CON GANCHO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 486,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "102",
+      "desc_sufa": "TIRRO BLANCO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 487,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "103",
+      "desc_sufa": "TIZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 488,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "104",
+      "desc_sufa": "TIJERA ESCOLAR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 489,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "105",
+      "desc_sufa": "TINTA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 490,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "106",
+      "desc_sufa": "TRANSPORTADOR",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 491,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH1",
+      "desc_sufa": "PORTA CD",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 492,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH2",
+      "desc_sufa": "CORTINAS",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 493,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH3",
+      "desc_sufa": "CUCHARILLA TENEDORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 494,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH4",
+      "desc_sufa": "DESTAPADORES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 495,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH5",
+      "desc_sufa": "ESPEJOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 496,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH6",
+      "desc_sufa": "PINZA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 497,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH7",
+      "desc_sufa": "SOMBRILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 498,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 41,
+      "abae_sufa": "UH8",
+      "desc_sufa": "TERMO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 499,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U01",
+      "desc_sufa": "BRILLO SIN JABON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 500,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U02",
+      "desc_sufa": "BRILLO CON JABON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 501,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U03",
+      "desc_sufa": "CHUPON  SANITARIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 502,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U04",
+      "desc_sufa": "COBIJA COLETO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 503,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U05",
+      "desc_sufa": "ESCUBILLON",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 504,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U06",
+      "desc_sufa": "ESPONJAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 505,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U07",
+      "desc_sufa": "ESPONJA UNIVERSAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 506,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U08",
+      "desc_sufa": "ESPONJAS SCOTH BRITE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 507,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U09",
+      "desc_sufa": "ESPONJA ALAMBRE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 508,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U10",
+      "desc_sufa": "ESPONJA ACERO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 509,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U11",
+      "desc_sufa": "ESPONJA DOBLE USO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 510,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U12",
+      "desc_sufa": "ESPONJA XOTIC",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 511,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U13",
+      "desc_sufa": "HARAGANES",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 512,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U14",
+      "desc_sufa": "LIMPIA HORNOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 513,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U15",
+      "desc_sufa": "LIMPIA HORNOS OSIREX",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 514,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U16",
+      "desc_sufa": "MOPAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 515,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U17",
+      "desc_sufa": "PAÑITO COCINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 516,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U18",
+      "desc_sufa": "PORTA MOPA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 517,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "U19",
+      "desc_sufa": "RASTRILLOS PLASTICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 518,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VC1",
+      "desc_sufa": "VELAS CUMPLEAñOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 519,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 43,
+      "abae_sufa": "VC2",
+      "desc_sufa": "VELA DE LUJO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 520,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 43,
+      "abae_sufa": "VC3",
+      "desc_sufa": "VELAS AZUL",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 521,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 43,
+      "abae_sufa": "VC4",
+      "desc_sufa": "VELAS ROSA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 522,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 43,
+      "abae_sufa": "VC5",
+      "desc_sufa": "VELAS CUMPLEAÑOS PARTY",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 523,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V01",
+      "desc_sufa": "ACEITE DE OLIVA",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 524,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V02",
+      "desc_sufa": "ADOBO LA COMADRE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 525,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V03",
+      "desc_sufa": "BEBIDA ENERGY",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 526,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V04",
+      "desc_sufa": "CHIMU ITALA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 527,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V05",
+      "desc_sufa": "CUAJO GIBER",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 528,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V06",
+      "desc_sufa": "FOSFOROS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 529,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V07",
+      "desc_sufa": "MAIZINA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 530,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V08",
+      "desc_sufa": "PAPEL  ALUMINIO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 531,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V09",
+      "desc_sufa": "PAVILOS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 532,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 28,
+      "abae_sufa": "V10",
+      "desc_sufa": "PAPEL HIGIENICO",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 533,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V11",
+      "desc_sufa": "SERVILLETAS",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 534,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V12",
+      "desc_sufa": "TOALLIN",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 535,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 44,
+      "abae_sufa": "V13",
+      "desc_sufa": "ESENCIAS DE VAINILLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 536,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VV1",
+      "desc_sufa": "LA NOCHE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 537,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VV2",
+      "desc_sufa": " PALMERA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 538,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VV3",
+      "desc_sufa": "VELUZ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 539,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VV4",
+      "desc_sufa": "VELON BLANCO",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 540,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 45,
+      "abae_sufa": "VV5",
+      "desc_sufa": "LA ESTRELLA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 541,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 42,
+      "abae_sufa": "PRE",
+      "desc_sufa": "PALMA REAL",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 542,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "FL1",
+      "desc_sufa": "FLORATEIPE",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 543,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 26,
+      "abae_sufa": "FL1",
+      "desc_sufa": "FLORATEIPE",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 544,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 46,
+      "abae_sufa": "ES1",
+      "desc_sufa": "ESCARCHA",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 545,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "AC1",
+      "desc_sufa": "ACIBOR ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 546,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 36,
+      "abae_sufa": "AC1",
+      "desc_sufa": "ACIBOR ",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 547,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "BA1",
+      "desc_sufa": "BLACKCOLOR",
+      "agru_sufa": "S",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 548,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 40,
+      "abae_sufa": "BA1",
+      "desc_sufa": "BLACKCOLOR",
+      "agru_sufa": "S",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 549,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 15,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAVALIN ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 550,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 15,
+      "abae_sufa": "VA1",
+      "desc_sufa": "DETERGENTE VANISH",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 551,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 35,
+      "abae_sufa": "SU1",
+      "desc_sufa": "SUAVITEL ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 552,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 35,
+      "abae_sufa": "SU1",
+      "desc_sufa": "SUAVITEL ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 553,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 7,
+      "abae_sufa": "CO1",
+      "desc_sufa": "COLGATE",
+      "agru_sufa": "",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 554,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "OS1",
+      "desc_sufa": "OSIREX",
+      "agru_sufa": "",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 555,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 25,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAVALIN",
+      "agru_sufa": "",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 556,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 33,
+      "abae_sufa": "BA1",
+      "desc_sufa": "BANDEJAS",
+      "agru_sufa": "",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 557,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 43,
+      "abae_sufa": "CU1",
+      "desc_sufa": "VELAS1",
+      "agru_sufa": "N",
+      "esta_ttus": "E",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 558,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 11,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAVALIN ",
+      "agru_sufa": "N",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 559,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 14,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAVALIN ",
+      "agru_sufa": "S",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 560,
+    "model": "asiam.subfamilia",
+    "fields": {
+      "codi_fami_id": 35,
+      "abae_sufa": "LA1",
+      "desc_sufa": "LAVALIN ",
+      "agru_sufa": "S",
+      "esta_ttus": "",
+      "created": "2022-05-13T01:17:31.907851"
+    }
+  }
+]

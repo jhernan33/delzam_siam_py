@@ -19,7 +19,7 @@ from .rutaView import RutaListView, RutaCreateView, RutaRetrieveView, RutaUpdate
 from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, UnidadMedidaRetrieveView, UnidadMedidaUpdateView, UnidadMedidaDestroyView
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
-
+from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView
 
 # from .banco import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView
 # from .cuenta import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView

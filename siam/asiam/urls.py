@@ -128,6 +128,11 @@ urlpatterns = [
     path('iva/update/<int:id>',             views.IvaUpdateView.as_view(),   name='iva_update'),
     path('iva/delete/<int:id>',             views.IvaDestroyView.as_view(),  name='iva_delete'),
 
+    path('cliente/',                            views.ClienteListView.as_view(),     name='cliente'),
+    path('cliente/create/',                     views.ClienteCreateView.as_view(),   name='cliente_create'),
+    path('cliente/<int:id>/',                   views.ClienteRetrieveView.as_view(), name='cliente'),
+    path('cliente/update/<int:id>',             views.ClienteUpdateView.as_view(),   name='cliente_update'),
+    path('cliente/delete/<int:id>',             views.ClienteDestroyView.as_view(),  name='cliente_delete'),
 
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
