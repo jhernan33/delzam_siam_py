@@ -30,30 +30,25 @@ class VendedorCreateView(generics.CreateAPIView):
     serializer_class = VendedorSerializer
     
     def create(self, request, *args, **kwargs):
-        # try:
             with transaction.atomic():
-                #try:
-                    # result_natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
-                    # result_natural = Vendedor.objects.select_related('natural').get(natural__cedu_pena = self.request.data.get("cedu_pena"))
                     result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
                     result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("cedu_pena"))
-                    #result_natural = Natural.objects.filter(cedu_pena = self.request.data.get("cedu_pena")).prefetch_related('vendedor_set')
-                    print(str(result_natural.query))
-                    # result_natural.filter(natural__cedu_pena = self.request.data.get("cedu_pena"))
-                    # print(result_natural)
                     if result_natural.exists():
                         return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
                     else:
-                #except Vendedor.DoesNotExist:
-                    # print("No existe la Persona con la Cedula Registrada")
-                        natural = Natural(naci_pena=self.request.data.get("naci_pena", None)
-                        , cedu_pena = self.request.data.get("cedu_pena")
-                        , prno_pena = self.request.data.get("prno_pena")
-                        , prap_pena = self.request.data.get("prap_pena")
-                        , sexo_pena = self.request.data.get("sexo_pena")
-                        , codi_ciud_id = self.request.data.get("codi_ciud_id")
-                        , codi_sect_id = self.request.data.get("codi_sect_id")
-                        , created = datetime.now())
+                        # Verificar si existe la personal Natural
+                        natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
+                        natural.naci_pena =  self.request.data.get("naci_pena")
+                        natural.prno_pena =  self.request.data.get("prno_pena")
+                        natural.seno_pena =  self.request.data.get("seno_pena")
+                        natural.prap_pena =  self.request.data.get("prap_pena")
+                        natural.seap_pena =  self.request.data.get("seap_pena")
+                        natural.sexo_pena =  self.request.data.get("sexo_pena")
+                        natural.codi_ciud_id =  self.request.data.get("codi_ciud_id")
+                        natural.codi_sect_id =  self.request.data.get("codi_sect_id")
+                        natural.dire_pena =  self.request.data.get("dire_pena")
+                        natural.edoc_pena =  self.request.data.get("edoc_pena")
+                        natural.created =  datetime.now()
                         natural.save()
 
                         vendedor = Vendedor(
@@ -63,10 +58,8 @@ class VendedorCreateView(generics.CreateAPIView):
                         )
                         vendedor.save()
                         return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
-        # except Exception as e:
-        #      raise str(e)        
-        
-    
+
+
 class VendedorRetrieveView(generics.RetrieveAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
