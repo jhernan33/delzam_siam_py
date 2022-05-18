@@ -13,3 +13,7 @@ class Sector(Base):
         ordering = ['nomb_sect']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"sector"'
+
+    def save(self, *args, **kwargs):
+        self.nomb_sect = self.nomb_sect.upper()
+        return super(Sector,self).save(*args, **kwargs)    

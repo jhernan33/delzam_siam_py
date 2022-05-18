@@ -20,6 +20,8 @@ from .unidadMedida import UnidadMedida
 from .iva import Iva
 from .unidadTributaria import UnidadTributaria
 from .moneda import Moneda
+from .articulo import Articulo
+from .cliente import Cliente
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco
@@ -33,7 +35,7 @@ from .moneda import Moneda
 
 # from .profesiones import Profesiones
 # from .waletr import Waletr
-# from .articulo import Articulo
+
 #from .cuen_rela import Cuen_rela
 #from .menu import Menu
 #from .menu_f import Menu_f

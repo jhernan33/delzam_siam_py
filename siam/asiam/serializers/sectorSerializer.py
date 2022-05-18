@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from asiam.models import sector
+from asiam.models import Sector
 
 class SectorSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = sector
-        fields = ('id','nomb_sect','codi_ciud_id',)
-        read_only_fields = ('id','codi_ciud_id', )
+        model = Sector
+        read_only_fields = ('id','codi_ciud_id')
+        exclude =['created','updated','deleted','esta_ttus']

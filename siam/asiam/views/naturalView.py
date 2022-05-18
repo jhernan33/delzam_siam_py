@@ -1,3 +1,4 @@
+from datetime import datetime
 import imp
 from re import search
 from urllib import request
@@ -6,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from html5lib import serialize
 from httplib2 import Response
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from django.http.response import JsonResponse
@@ -30,9 +31,17 @@ class NaturalListView(generics.ListAPIView):
 
 
 class NaturalCreateView(generics.CreateAPIView):
+    permission_classes = []
     serializer_class = NaturalSerializer
-    #permission_classes = (IsAuthenticated, )
-    permission_classes = ()
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        serializer.save(created = datetime.now())
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
 
 class NaturalRetrieveView(generics.RetrieveAPIView):
     serializer_class = NaturalSerializer
@@ -47,9 +56,10 @@ class NaturalUpdateView(generics.UpdateAPIView):
     lookup_field = 'id'    
 
 class NaturalDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
-    queryset = Natural.objects.all().delete
+    permission_classes = []
+    serializer_class = NaturalSerializer
     lookup_field = 'id'
+    queryset = Natural.objects.all()
 
 class NaturalFilterView(generics.ListCreateAPIView):
     permission_classes = ()

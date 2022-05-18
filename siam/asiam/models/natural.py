@@ -12,7 +12,7 @@ class Natural(Base):
     seap_pena = models.CharField    ('Segundo Apellido',     max_length=50, null=True, blank=True, default='')
     sexo_pena = models.CharField    ('Sexo',                 max_length=10, null=False, blank=False, default='')
     edoc_pena = models.CharField    ('Estado Civil',         max_length=10, null=True, blank=True, default='')
-    fena_pena = models.DateField    ('Fecha de Nacimiento')
+    fena_pena = models.DateField    ('Fecha de Nacimiento', blank=True, null=True,auto_now=False, auto_now_add=False)
     dire_pena = models.TextField    ('Direccion Habitacion', max_length=254, null=True, blank=True, default='')
     riff_pena = models.CharField    ('RIF',                  max_length=15, null=True, blank=True, default='')
     codi_ciud = models.ForeignKey(
@@ -40,6 +40,6 @@ class Natural(Base):
 
 
     class Meta:
-        ordering = ['cedu_pena']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"natural"'

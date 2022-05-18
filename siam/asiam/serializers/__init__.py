@@ -19,7 +19,7 @@ from .rutaSerializer import RutaSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
-
+from .clienteSerializer import ClienteSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

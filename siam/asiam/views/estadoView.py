@@ -36,21 +36,6 @@ class EstadoCreateView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-        #return self.create(request, *args, **kwargs)
-
-    # serializer_class = EstadoSerializer
-    # queryset = Estado.objects.all()
-    #permission_classes = (IsAuthenticated, )
-    # def post(self, request):
-    #     print(request.POST)
-
-    # return HttpResponse(request.POST.items())
-    # tutorial_data = JSONParser().parse(request)
-    # estados_serializer = EstadoSerializer(data=tutorial_data)
-    # if estados_serializer.is_valid():
-    #     estados_serializer.save()
-    #     return JsonResponse(estados_serializer.data, status=status.HTTP_201_CREATED) 
-    # return JsonResponse(estados_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EstadoRetrieveView(generics.RetrieveAPIView):
     serializer_class = EstadoSerializer
@@ -66,48 +51,16 @@ class EstadoUpdateView(generics.UpdateAPIView):
 
 class EstadoDestroyView(generics.DestroyAPIView):
     permission_classes = []
-
-    # def get(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance)
-    #     return Response(serializer.data)
-
     serializer_class = EstadoSerializer    
     queryset = Estado.objects.all()
     lookup_field = 'id'
-
-    # def delete(self, request, *args, **kwargs):
-    #     return self.destroy(request, *args, **kwargs)
-
-    
-    
-
-    # def delete(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     instance.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-    # def delete(self, request, *args, **kwargs):
-    #     return self.destroy(request, *args, **kwargs)
-        #queryset = Estados.objects.filter()
-    #permission_classes = ()
-    #queryset = Estados.objects.all()
-    #return JsonResponse({'message': '{} Tutorials were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
-    #lookup_field = 'id'
-    # def get(self,request,pk):
-    #     todo = Estado.objects.get(id=pk)
-    #     todo_instance = todo.objects.get(id=pk)
-    #     todo_instance.delete()
-    #     return Response('')
 
 class EstadoComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = EstadoSerializer    
     lookup_field = 'id'
     
-    
     def get_queryset(self):
-        # pais_id = self.request.query_params.get('id',None)
         pais_id = self.kwargs['id']
         queryset = Estado.objects.all()
         return queryset.filter(codi_pais_id = pais_id)
