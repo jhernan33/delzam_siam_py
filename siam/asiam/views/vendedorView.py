@@ -1,3 +1,4 @@
+from urllib.error import HTTPError
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 from genericpath import exists
@@ -34,40 +35,75 @@ class VendedorCreateView(generics.CreateAPIView):
     
     def create(self, request, *args, **kwargs):
             with transaction.atomic():
-                try:
-                    result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
-                    result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("cedu_pena"))
-                    print(str(result_natural.query))
-                    # if not result_natural:
+                # try:
+                    #if result_natural:
                     #if result_natural.exists():
-                    print(str(result_natural.count()))
-                    if result_natural.count() == 0:
-                        natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
-                        natural.naci_pena =  self.request.data.get("naci_pena")
-                        natural.prno_pena =  self.request.data.get("prno_pena")
-                        natural.seno_pena =  self.request.data.get("seno_pena")
-                        natural.prap_pena =  self.request.data.get("prap_pena")
-                        natural.seap_pena =  self.request.data.get("seap_pena")
-                        natural.sexo_pena =  self.request.data.get("sexo_pena")
-                        natural.codi_ciud_id =  self.request.data.get("codi_ciud_id")
-                        natural.codi_sect_id =  self.request.data.get("codi_sect_id")
-                        natural.dire_pena =  self.request.data.get("dire_pena")
-                        natural.edoc_pena =  self.request.data.get("edoc_pena")
-                        natural.created =  datetime.now()
-                        natural.save()
-
-                        vendedor = Vendedor(
-                            fein_vend       = self.request.data.get("fein_vend")
-                            ,codi_natu_id   = natural.id
-                            ,created        = datetime.now()
-                        )
-                        vendedor.save()
-                        return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
-                    else:
-                        return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
+                    try:
+                        result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
+                        result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("cedu_pena"))
+                        print(str(result_natural.count()))
+                        if result_natural.count() == 0:
+                            print("No Encontro")
+                            try:
+                                natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
+                                vendedor = Vendedor(
+                                    fein_vend       = self.request.data.get("fein_vend")
+                                    ,codi_natu_id   = natural.id
+                                    ,created        = datetime.now()
+                                )
+                                vendedor.save()
+                                return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
+                            except ObjectDoesNotExist:
+                                natural = Natural(
+                                    cedu_pena =  self.request.data.get("cedu_pena"),
+                                    naci_pena =  self.request.data.get("naci_pena"),
+                                    prno_pena =  self.request.data.get("prno_pena"),
+                                    seno_pena =  self.request.data.get("seno_pena"),
+                                    prap_pena =  self.request.data.get("prap_pena"),
+                                    seap_pena =  self.request.data.get("seap_pena"),
+                                    sexo_pena =  self.request.data.get("sexo_pena"),
+                                    codi_ciud_id =  self.request.data.get("codi_ciud_id"),
+                                    codi_sect_id =  self.request.data.get("codi_sect_id"),
+                                    dire_pena =  self.request.data.get("dire_pena"),
+                                    edoc_pena =  self.request.data.get("edoc_pena"),
+                                    created =  datetime.now() 
+                                )
+                                # natural.naci_pena =  self.request.data.get("naci_pena")
+                                # natural.prno_pena =  self.request.data.get("prno_pena")
+                                # natural.seno_pena =  self.request.data.get("seno_pena")
+                                # natural.prap_pena =  self.request.data.get("prap_pena")
+                                # natural.seap_pena =  self.request.data.get("seap_pena")
+                                # natural.sexo_pena =  self.request.data.get("sexo_pena")
+                                # natural.codi_ciud_id =  self.request.data.get("codi_ciud_id")
+                                # natural.codi_sect_id =  self.request.data.get("codi_sect_id")
+                                # natural.dire_pena =  self.request.data.get("dire_pena")
+                                # natural.edoc_pena =  self.request.data.get("edoc_pena")
+                                # natural.created =  datetime.now()
+                                natural.save()
+                            
+                                vendedor = Vendedor(
+                                    fein_vend       = self.request.data.get("fein_vend")
+                                    ,codi_natu_id   = natural.id
+                                    ,created        = datetime.now()
+                                )
+                                vendedor.save()
+                                return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
+                            
+                            #print(str(natural.query))
+                            
+                        else:
+                            return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
+                    except Natural.DoesNotExist:
+                        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
+                #except Natural.ObjectDoesNotExist:
+                    #print(str(result_natural.count()))
+                        #print("No existe la Persona como vendedor")
+                    #if result_natural.count() == 0:
+                    #else:
+                        
                 #except IndexError:
-                except Exception as e:
-                    return Http404
+                # except Exception as e:
+                #     return Http404
                 #except Natural.DoesNotExist:
                      # Verificar si existe la personal Natural
                 
