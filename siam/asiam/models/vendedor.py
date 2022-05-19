@@ -10,8 +10,11 @@ class Vendedor(Base):
         on_delete=models.CASCADE,
         related_name='natural',
     )
-
+    
     class Meta:
         ordering = ['codi_natu']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"vendedor"'
+
+    def get_queryset():
+        return Vendedor.objects.all().filter(deleted__isnull=True)
