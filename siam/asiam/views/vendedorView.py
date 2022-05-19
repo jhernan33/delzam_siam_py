@@ -22,7 +22,6 @@ from asiam.paginations import SmallResultsSetPagination
 class VendedorListView(generics.ListAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
-    # queryset = Vendedor.objects.all().filter(deleted__isnull=True)
     queryset = Vendedor.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends = (df.SearchFilter, )
@@ -89,7 +88,11 @@ class VendedorUpdateView(generics.UpdateAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
     queryset = Vendedor.objects.all()
-    lookup_field = 'id'    
+    lookup_field = 'id'
+
+    def perform_update(self, serializer):
+        serializer.save(fein_vend = self.request.data.get("fein_vend"),updated = datetime.now())
+    
 
 class VendedorDestroyView(generics.DestroyAPIView):
     permission_classes = ()
