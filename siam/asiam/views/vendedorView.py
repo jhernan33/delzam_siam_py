@@ -1,5 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
+from genericpath import exists
 import json
+from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from rest_framework import generics
 from rest_framework import filters as df
@@ -31,12 +34,14 @@ class VendedorCreateView(generics.CreateAPIView):
     
     def create(self, request, *args, **kwargs):
             with transaction.atomic():
+                try:
                     result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
                     result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("cedu_pena"))
-                    if result_natural.exists():
-                        return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
-                    else:
-                        # Verificar si existe la personal Natural
+                    print(str(result_natural.query))
+                    # if not result_natural:
+                    #if result_natural.exists():
+                    print(str(result_natural.count()))
+                    if result_natural.count() == 0:
                         natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
                         natural.naci_pena =  self.request.data.get("naci_pena")
                         natural.prno_pena =  self.request.data.get("prno_pena")
@@ -58,8 +63,14 @@ class VendedorCreateView(generics.CreateAPIView):
                         )
                         vendedor.save()
                         return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
-
-
+                    else:
+                        return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
+                #except IndexError:
+                except Exception as e:
+                    return Http404
+                #except Natural.DoesNotExist:
+                     # Verificar si existe la personal Natural
+                
 class VendedorRetrieveView(generics.RetrieveAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
