@@ -17,7 +17,6 @@ from asiam.views.baseMensajeView import BaseMessage
 
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
-from rest_framework import status
 from django.http import HttpResponse
 
 
@@ -45,7 +44,7 @@ class CiudadCreateView(generics.CreateAPIView):
             
 
 class CiudadRetrieveView(generics.RetrieveAPIView):
-    serializer_class = CiudadSerializer()
+    serializer_class = CiudadSerializer
     permission_classes = ()
     queryset = Ciudad.get_queryset()
     lookup_field = 'id'
