@@ -11,6 +11,13 @@ class Ciudad(Base):
     )
 
     class Meta:
-        ordering = ['nomb_ciud']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"ciudad"'
+
+    def save(self, **kwargs):
+        self.nomb_ciud = self.nomb_ciud.upper()
+        return super().save(**kwargs)
+
+    def get_queryset():
+        return Ciudad.objects.all().filter(deleted__isnull=True)

@@ -2,12 +2,31 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Auth View
+    path('signup/',                     views.SignupView.as_view(), name='signup'),
+    path('login/',                      views.LoginView.as_view(), name='login'),
+    path('logout/',                     views.LogoutView.as_view(), name='login'),
+
+    # Grupos
+    path('grupo/',                 views.GrupoListView.as_view(),     name='grupo'),
+    path('grupo/create/',          views.GrupoCreateView.as_view(),   name='grupo_create'),
+    path('grupo/<int:id>/',        views.GrupoRetrieveView.as_view(), name='grupo'),
+    path('grupo/update/<int:id>',  views.GrupoUpdateView.as_view(),   name='grupo_update'),
+    path('grupo/delete/<int:id>', views.GrupoDestroyView.as_view(),  name='grupo_delete'),
+
+    # Grupo Usuario
+    path('grupoUsuario/',                 views.GrupoListView.as_view(),     name='grupoUsuario'),
+    path('grupoUsuario/create/',          views.GrupoCreateView.as_view(),   name='grupoUsuario_create'),
+    path('grupoUsuario/<int:id>/',        views.GrupoRetrieveView.as_view(), name='grupoUsuario'),
+    path('grupoUsuario/update/<int:id>',  views.GrupoUpdateView.as_view(),   name='grupoUsuario_update'),
+    path('grupoUsuario/delete/<int:id>',  views.GrupoDestroyView.as_view(),  name='grupoUsuario_delete'),
+
 
     path('pais/',                 views.PaisListView.as_view(),     name='pais'),
     path('pais/create/',          views.PaisCreateView.as_view(),   name='pais_create'),
     path('pais/<int:id>/',        views.PaisRetrieveView.as_view(), name='pais'),
     path('pais/update/<int:id>', views.PaisUpdateView.as_view(),   name='pais_update'),
-    path('pais/<int:id>/delete/', views.PaisDestroyView.as_view(),  name='pais_delete'),
+    path('pais/delete/<int:id>', views.PaisDestroyView.as_view(),  name='pais_delete'),
     path('pais/combo/<int:id>',   views.PaisComboView.as_view(),    name='pais_combo'),
 
     path('estado/',                     views.EstadoListView.as_view(),     name='estado'),

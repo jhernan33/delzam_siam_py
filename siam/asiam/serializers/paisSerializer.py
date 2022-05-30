@@ -1,3 +1,4 @@
+import datetime
 from rest_framework import serializers
 from asiam.models import Pais
 
@@ -7,3 +8,8 @@ class PaisSerializer(serializers.ModelSerializer):
         model = Pais
         fields = ('id','nomb_pais','name_pais','dial_pais','code_pais')
         read_only_fields = ('id', )
+    
+    def update(self, instance, validated_data):
+        instance.updated = datetime.now()
+        instance.save()
+        return instance

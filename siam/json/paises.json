@@ -1,19 +1,4 @@
 {
-<<<<<<< HEAD
-  {
-    "pk": 1,
-    "model": "asiam.pais",
-    "fields": {
-      "abae_fami": "AL1",
-      "desc_fami": "PRODUCTOS DE ALUMINIO",
-      "agru_fami": "N",
-      "esta_ttus": "",
-      "created": "2022-05-03T02:34:08.871244"
-    }
-  },
-
-=======
->>>>>>> Dev
   "countries": [
     {
       "name_en": "Afghanistan",

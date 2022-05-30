@@ -5,5 +5,5 @@ class SectorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sector
-        read_only_fields = ('id','codi_ciud_id')
+        field = ('id','codi_ciud_id')
         exclude =['created','updated','deleted','esta_ttus']
