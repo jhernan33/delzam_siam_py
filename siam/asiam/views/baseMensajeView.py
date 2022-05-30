@@ -22,3 +22,7 @@ class BaseMessage:
     def NotFoundMessage(self):
         message = {"message":"No se Encontro","status":status.HTTP_404_NOT_FOUND,"data":self}
         return Response(message)
+
+    def ShowMessage(self):
+        message = {"message":"Registro Encontrado","status":status.HTTP_200_OK,"data":self}
+        return Response(message)

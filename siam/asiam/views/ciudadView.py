@@ -1,5 +1,6 @@
 from datetime import datetime
 from email import message
+import json
 from django.shortcuts import render
 from rest_framework import generics, status
 
@@ -9,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
+from yaml import serialize
 
 from asiam.models import Ciudad
 from asiam.serializers import CiudadSerializer
@@ -17,7 +19,7 @@ from asiam.views.baseMensajeView import BaseMessage
 
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 
 
 class CiudadListView(generics.ListAPIView):
@@ -44,11 +46,21 @@ class CiudadCreateView(generics.CreateAPIView):
             
 
 class CiudadRetrieveView(generics.RetrieveAPIView):
-    serializer_class = CiudadSerializer
     permission_classes = ()
+    serializer_class = CiudadSerializer
     queryset = Ciudad.get_queryset()
     lookup_field = 'id'
-
+      
+    def retrieve(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Ciudad no Registrada")  
+        else:
+            serialize = self.get_serializer(instance)
+            return message.ShowMessage(self.serializer_class(instance).data)
+    
 class CiudadUpdateView(generics.UpdateAPIView):
     serializer_class = CiudadSerializer
     permission_classes = ()
