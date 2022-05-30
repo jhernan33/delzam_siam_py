@@ -12,14 +12,15 @@ class SubFamilia(Base):
     )
 
     class Meta:
-        # ordering = ['desc_sufa']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"sub_familia"'
 
     def save(self, *args, **kwargs):        
-        # self.desc_sufa = self.desc_sufa.upper()        
+        self.desc_sufa = self.desc_sufa.upper()
+        self.agru_sufa = self.agru_sufa.upper()
+        self.abae_sufa = self.abae_sufa.upper()
         return super(SubFamilia,self).save(*args, **kwargs)
 
-    # def __str__(self):
-    #     """Unicode representation of Familia."""
-    #     return self.desc_sufa
+    def get_queryset():
+        return SubFamilia.objects.all().filter(deleted__isnull=True)

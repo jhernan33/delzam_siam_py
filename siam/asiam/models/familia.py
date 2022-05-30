@@ -14,8 +14,8 @@ class Familia(Base):
     def save(self, *args, **kwargs):        
         self.desc_fami = self.desc_fami.upper()
         self.abae_fami = self.abae_fami.upper()
+        self.agru_fami = self.agru_fami.upper()
         return super(Familia,self).save(*args, **kwargs)
 
-    def __str__(self):
-        """Unicode representation of Familia."""
-        return self.desc_fami, self.abae_fami.upper()
+    def get_queryset():
+        return Familia.objects.all().filter(deleted__isnull=True)
