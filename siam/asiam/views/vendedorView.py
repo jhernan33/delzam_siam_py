@@ -18,6 +18,7 @@ from asiam.models import Vendedor
 from asiam.models import Natural
 from asiam.serializers import VendedorSerializer
 from asiam.paginations import SmallResultsSetPagination
+from asiam.views.baseMensajeView import BaseMessage
 
 class VendedorListView(generics.ListAPIView):
     serializer_class = VendedorSerializer
@@ -84,24 +85,54 @@ class VendedorRetrieveView(generics.RetrieveAPIView):
     queryset = Vendedor.get_queryset()
     lookup_field = 'id'
 
+    def retrieve(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Ciudad no Registrada")  
+        else:
+            serialize = self.get_serializer(instance)
+            return message.ShowMessage(self.serializer_class(instance).data)
+
 class VendedorUpdateView(generics.UpdateAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
-    queryset = Vendedor.objects.all()
+    queryset = Vendedor.get_queryset()
     lookup_field = 'id'
-
-    def perform_update(self, serializer):
-        serializer.save(fein_vend = self.request.data.get("fein_vend"),updated = datetime.now())
+    
+    def update(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Ciudad no Registrada")
+        else:
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save(fein_vend = self.request.data.get("fein_vend"),updated = datetime.now())
+                return message.UpdateMessage(serializer.data)
+            else:
+                return message.ErrorMessage("Actualizar Ciudad")
     
 
 class VendedorDestroyView(generics.DestroyAPIView):
     permission_classes = ()
+    lookup_field = 'id' 
+
     def delete(self, request, *args, **kwargs):
-        with transaction.atomic():
-            vendedor = Vendedor.objects.get(pk=kwargs['id'])
-            vendedor.deleted = datetime.now()
-            vendedor.save()
-            natural = Natural.objects.get(pk=vendedor.codi_natu_id)
-            natural.deleted = datetime.now()
-            natural.save()
-            return Response({'result':'Registro Eliminado Existosamente'},status=status.HTTP_200_OK)
+        message = BaseMessage
+        try:
+            with transaction.atomic():
+                vendedor = Vendedor.objects.get(pk=kwargs['id'])
+                vendedor.deleted = datetime.now()
+                vendedor.save()
+                natural = Natural.objects.get(pk=vendedor.codi_natu_id)
+                natural.deleted = datetime.now()
+                natural.save()
+                #return Response({'result':'Registro Eliminado Exitosamente'},status=status.HTTP_200_OK)
+                return message.DeleteMessage('Vendedor '+str(vendedor.id))
+        except ObjectDoesNotExist:
+            return message.NotFoundMessage("Id de Vendedor no Registrado")
+            
+        

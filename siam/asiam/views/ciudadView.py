@@ -68,14 +68,18 @@ class CiudadUpdateView(generics.UpdateAPIView):
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save(updated = datetime.now())
-            message = BaseMessage
-            return message.UpdateMessage(serializer.data)
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Ciudad no Registrada")
         else:
-            return Response({"message":"Error al Actualizar"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save(updated = datetime.now())
+                return message.UpdateMessage(serializer.data)
+            else:
+                return Response({"message":"Error al Actualizar"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CiudadDestroyView(generics.DestroyAPIView):
     permission_classes = ()
