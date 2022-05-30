@@ -13,3 +13,6 @@ class TipoEmpresa(Base):
     def save(self, **kwargs):
         self.desc_tiem = self.desc_tiem.upper()
         return super().save(**kwargs)
+    
+    def get_queryset():
+        return TipoEmpresa.objects.all().filter(deleted__isnull=True)
