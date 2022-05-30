@@ -1,3 +1,4 @@
+from unittest import result
 from urllib.error import HTTPError
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
@@ -104,16 +105,14 @@ class VendedorUpdateView(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            instance = self.get_object()
+            result_update = Vendedor.get_queryset().get(id=kwargs['id'])
+            result_update.fein_vend = self.request.data.get("fein_vend")
+            result_update.updated = datetime.now()
+            result_update.save()
+            serialize = VendedorSerializer(result_update)
+            return message.UpdateMessage(serialize.data) 
         except Exception as e:
-            return message.NotFoundMessage("Id de Ciudad no Registrada")
-        else:
-            serializer = self.get_serializer(instance, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save(fein_vend = self.request.data.get("fein_vend"),updated = datetime.now())
-                return message.UpdateMessage(serializer.data)
-            else:
-                return message.ErrorMessage("Actualizar Ciudad")
+            return message.NotFoundMessage("Id de Vendedor no Registrado")
     
 
 class VendedorDestroyView(generics.DestroyAPIView):
