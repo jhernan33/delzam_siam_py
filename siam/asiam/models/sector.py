@@ -10,10 +10,13 @@ class Sector(Base):
     )
 
     class Meta:
-        ordering = ['nomb_sect']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"sector"'
 
     def save(self, *args, **kwargs):
         self.nomb_sect = self.nomb_sect.upper()
         return super(Sector,self).save(*args, **kwargs)    
+
+    def get_queryset():
+        return Sector.objects.all().filter(deleted__isnull=True)

@@ -79,7 +79,7 @@ class CiudadUpdateView(generics.UpdateAPIView):
                 serializer.save(updated = datetime.now())
                 return message.UpdateMessage(serializer.data)
             else:
-                return Response({"message":"Error al Actualizar"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                return message.ErrorMessage("Error al Intentar Actualizar Ciudad")
 
 class CiudadDestroyView(generics.DestroyAPIView):
     permission_classes = ()

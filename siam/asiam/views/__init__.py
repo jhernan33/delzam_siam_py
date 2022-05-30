@@ -6,7 +6,7 @@ from .ciudadView   import CiudadListView,    CiudadCreateView,    CiudadRetrieve
 from .sectorView  import SectorListView,   SectorCreateView,   SectorRetrieveView,   SectorUpdateView,   SectorDestroyView
 from .subSectorView import SubSectorListView, SubSectorCreateView, SubSectorRetrieveView, SubSectorUpdateView, SubSectorDestroyView
 from .naturalView import NaturalListView, NaturalCreateView, NaturalRetrieveView, NaturalUpdateView, NaturalDestroyView, NaturalFilterView
-from .tipoEmpresaView import TipoEmpresaListView, TipoEmpresaCreateView, TipoEmpresaRetrieveView, TipoEmpresaUpdateView, TipoEmpresaDestroyView
+from .tipoEmpresaView import TipoEmpresaListView, TipoEmpresaCreateView, TipoEmpresaRetrieveView, TipoEmpresaUpdateView, TipoEmpresaDestroyView,TipoEmpresaComboView
 from .juridicaView import JuridicaListView, JuridicaCreateView, JuridicaRetrieveView, JuridicaUpdateView, JuridicaDestroyView
 from .acccionistaView import AccionistaListView, AccionistaCreateView, AccionistaRetrieveView, AccionistaUpdateView, AccionistaDestroyView
 from .sucursalView import SucursalListView, SucursalCreateView, SucursalRetrieveView, SucursalUpdateView, SucursalDestroyView

@@ -6,9 +6,5 @@ class TipoEmpresaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TipoEmpresa
-        fields = ['id','desc_tiem']
-
-    def update(self, instance, validated_data):
-        instance.updated = datetime.now()
-        instance.save()
-        return instance
+        field = ['id','desc_tiem']
+        exclude =['created','updated','deleted','esta_ttus']

@@ -80,6 +80,7 @@ urlpatterns = [
     path('tipoempresa/<int:id>/',        views.TipoEmpresaRetrieveView.as_view(), name='tipoempresa'),
     path('tipoempresa/update/<int:id>', views.TipoEmpresaUpdateView.as_view(),   name='tipoempresa_update'),
     path('tipoempresa/delete/<int:id>', views.TipoEmpresaDestroyView.as_view(),  name='tipoempresa_delete'),
+    path('tipoempresa/combo/',          views.TipoEmpresaComboView.as_view(),    name='tipoempresa_combo'),
 
     path('juridica/',                 views.JuridicaListView.as_view(),     name='juridica'),
     path('juridica/create/',          views.JuridicaCreateView.as_view(),   name='juridica_create'),
