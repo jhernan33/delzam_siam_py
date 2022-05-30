@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import serializers
 from asiam.models import SubFamilia
 
@@ -9,3 +10,8 @@ class SubFamiliaSerializer(serializers.ModelSerializer):
         # fields = ['id','desc_fami','agru_fami']
         # fields = "__all__"        
         read_only_fields = ('id', )
+    
+    def update(self, instance, validated_data):
+        instance.updated = datetime.now()
+        instance.save()
+        return instance

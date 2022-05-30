@@ -1,4 +1,5 @@
 from datetime import datetime
+from email import message
 from django.shortcuts import render
 from rest_framework import generics, status
 
@@ -7,25 +8,27 @@ from rest_framework.response import Response
 
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
+from django.core.exceptions import ObjectDoesNotExist
 
 from asiam.models import Ciudad
 from asiam.serializers import CiudadSerializer
 from asiam.paginations import SmallResultsSetPagination
+from asiam.views.baseMensajeView import BaseMessage
 
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 from django.http import HttpResponse
 
+
 class CiudadListView(generics.ListAPIView):
     serializer_class = CiudadSerializer
     permission_classes = ()
-    queryset = Ciudad.objects.all()
+    queryset = Ciudad.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends = (df.SearchFilter, )
     search_fields = ('id', )
     ordering_fields = ('id', )
-
 
 class CiudadCreateView(generics.CreateAPIView):
     permission_classes = []
@@ -37,35 +40,53 @@ class CiudadCreateView(generics.CreateAPIView):
         self.perform_create(serializer)
         serializer.save(created = datetime.now())
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        message = BaseMessage
+        return message.SaveMessage(serializer.data)
             
 
 class CiudadRetrieveView(generics.RetrieveAPIView):
-    serializer_class = CiudadSerializer
+    serializer_class = CiudadSerializer()
     permission_classes = ()
-    queryset = Ciudad.objects.all()
+    queryset = Ciudad.get_queryset()
     lookup_field = 'id'
 
 class CiudadUpdateView(generics.UpdateAPIView):
     serializer_class = CiudadSerializer
     permission_classes = ()
-    queryset = Ciudad.objects.all()
-    lookup_field = 'id'    
+    queryset = Ciudad.get_queryset()
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save(updated = datetime.now())
+            message = BaseMessage
+            return message.UpdateMessage(serializer.data)
+        else:
+            return Response({"message":"Error al Actualizar"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CiudadDestroyView(generics.DestroyAPIView):
-    permission_classes = []
-    serializer_class = CiudadSerializer
-    lookup_field = 'id'
-    queryset = Ciudad.objects.all()
-    
+    permission_classes = ()
+    lookup_field = 'id'  
+
+    def delete(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            result_city = Ciudad.get_queryset().get(id=kwargs['id'])
+            result_city.deleted = datetime.now()
+            result_city.save()
+            return message.DeleteMessage('Ciudad '+str(result_city.id))
+        except ObjectDoesNotExist:
+            return message.NotFoundMessage("Id de Ciudad no Registrada")
 
 
 class CiudadComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = CiudadSerializer    
+    serializer_class = CiudadSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
         estado_id = self.kwargs['id']
-        queryset = Ciudad.objects.all().order_by('-id')
-        return queryset.filter(codi_esta_id = estado_id)    
+        queryset = Ciudad.get_queryset().order_by('-id')
+        return queryset.filter(codi_esta_id = estado_id) 
