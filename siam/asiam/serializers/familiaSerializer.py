@@ -6,10 +6,8 @@ class FamiliaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Familia
-        fields = ('id','desc_fami','abae_fami','agru_fami','created','updated','deleted')
-        # read_only_fields = ('id', )
+        field = ('id','desc_fami','abae_fami','agru_fami')
+        exclude =['created','updated','deleted','esta_ttus']
 
-    def update(self, instance, validated_data):
-        instance.updated = datetime.now()
-        instance.save()
-        return instance
+
+    

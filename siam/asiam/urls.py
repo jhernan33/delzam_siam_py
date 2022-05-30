@@ -105,12 +105,14 @@ urlpatterns = [
     path('familia/<int:id>/',        views.FamiliaRetrieveView.as_view(), name='familia'),
     path('familia/update/<int:id>', views.FamiliaUpdateView.as_view(),   name='familia_update'),
     path('familia/delete/<int:id>', views.FamiliaDestroyView.as_view(),  name='familia_delete'),
+    path('familia/combo/',          views.FamiliaComboView.as_view(),name='familia_combo'),
 
     path('subfamilia/',                 views.SubFamiliaListView.as_view(),     name='subfamilia'),
     path('subfamilia/create/',          views.SubFamiliaCreateView.as_view(),   name='subfamilia_create'),
     path('subfamilia/<int:id>/',        views.SubFamiliaRetrieveView.as_view(), name='subfamilia'),
     path('subfamilia/update/<int:id>', views.SubFamiliaUpdateView.as_view(),   name='subfamilia_update'),
     path('subfamilia/delete/<int:id>', views.SubFamiliaDestroyView.as_view(),  name='subfamilia_delete'),
+    path('subfamilia/combo/',          views.SubFamiliaComboView.as_view(),name='familia_combo'),
 
     path('zona/',                 views.ZonaListView.as_view(),     name='zona'),
     path('zona/create/',          views.ZonaCreateView.as_view(),   name='zona_create'),

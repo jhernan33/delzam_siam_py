@@ -3,15 +3,10 @@ from rest_framework import serializers
 from asiam.models import SubFamilia
 
 class SubFamiliaSerializer(serializers.ModelSerializer):
+    familia = serializers.ReadOnlyField(source='codi_fami.desc_fami')
 
     class Meta:
         model = SubFamilia
-        fields = ('id','desc_sufa','abae_sufa','agru_sufa','codi_fami')
-        # fields = ['id','desc_fami','agru_fami']
-        # fields = "__all__"        
-        read_only_fields = ('id', )
+        field = ('id','desc_sufa','abae_sufa','agru_sufa','codi_fami','familia')
+        exclude =['created','updated','deleted','esta_ttus']
     
-    def update(self, instance, validated_data):
-        instance.updated = datetime.now()
-        instance.save()
-        return instance
