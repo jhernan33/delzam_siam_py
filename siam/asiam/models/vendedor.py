@@ -10,6 +10,8 @@ class Vendedor(Base):
         on_delete=models.CASCADE,
         related_name='natural',
     )
+    # lice_vend = models.BooleanField('Poseee Licencia S/N',null=True, blank=True)
+    # grli_vend = models.CharField('')
     
     class Meta:
         ordering = ['codi_natu']

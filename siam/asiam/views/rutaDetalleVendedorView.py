@@ -9,23 +9,22 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 
 from asiam.models import Ruta,Zona,Vendedor,RutaDetalleVendedor
-from asiam.serializers import RutaSerializer
+from asiam.serializers import RutaDetalleVendedorSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
-class RutaListView(generics.ListAPIView):
-    serializer_class = RutaSerializer
+class RutaDetalleVendedorListView(generics.ListAPIView):
+    serializer_class = RutaDetalleVendedorSerializer
     permission_classes = ()
-    queryset = Ruta.get_queryset()
+    queryset = RutaDetalleVendedor.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends = (df.SearchFilter, )
     search_fields = ('id', )
     ordering_fields = ('id', )
 
 
-class RutaCreateView(generics.CreateAPIView):
-    serializer_class = RutaSerializer
-    # queryset = Ruta.get_queryset()
+class RutaDetalleVendedorCreateView(generics.CreateAPIView):
+    serializer_class = RutaDetalleVendedorSerializer
     permission_classes = ()
 
     def create(self, request, *args, **kwargs):
@@ -38,43 +37,30 @@ class RutaCreateView(generics.CreateAPIView):
         # headers = self.get_success_headers(serializer.data)
         # return message.SaveMessage(serializer.data)
         try:
-            result_ruta = Ruta.get_queryset().filter(nomb_ruta = self.request.data.get("nomb_ruta"))
+            result_ruta = RutaDetalleVendedor.get_queryset().filter(codi_ruta=self.request.data.get('codi_ruta')).filter(codi_vend=self.request.data.get('codi_vend'))
             if result_ruta.count()==0:
                 with transaction.atomic():
                     try:
-                        ruta = Ruta(
-                            nomb_ruta = self.request.data.get("nomb_ruta"),
-                            codi_zona = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) ,
-                            created =  datetime.now(),
-                        )
-                        ruta.save()
-
-                        rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = ruta.id,
+                        rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = self.request.data.get('codi_ruta'),
                             codi_vend = Vendedor.get_queryset().get(id = self.request.data.get('codi_vend')),
                             created =  datetime.now(),
                             )
                         rutaDetalle.save()
-                        return message.SaveMessage("Ruta Guardada con Exito")
+                        return message.SaveMessage("Ruta Detalle Vendedor Guardada con Exito")
                     except Exception as e:
                         return message.ErrorMessage(str(e))
-                    
+            else:
+                return message.ShowMessage("Vendedor ya Asignado a la Ruta")    
         except Exception as e:
-                # Verificar si la Ruta y Vendedor estan registrados en RutaDetalleVendedor
-                rutaDetalle = RutaDetalleVendedor.get_queryset().filter(codi_ruta=self.request.data.get("codi_ruta")).filter(codi_vend = self.request.data.get("codi_vend"))
-                if rutaDetalle.count()==0:
-                    rutaDetalle  = RutaDetalleVendedor(codi_ruta = self.request.data.get("codi_ruta"),
-                        codi_vend = self.request.data.get('codi_vent'),
-                        )
-                    rutaDetalle.save()
-                return message.SaveMessage("Ruta Guardada con Exito")
+            return message.ErrorMessage("Error al Intentar Guardar la Ruta Detalle Vendedor "+str(e))
         # except Exception as e:
         #     return message.ErrorMessage("Error al Intentar Guardar Ruta "+str(e))
             
 
-class RutaRetrieveView(generics.RetrieveAPIView):
-    serializer_class = RutaSerializer
+class RutaDetalleVendedorRetrieveView(generics.RetrieveAPIView):
+    serializer_class = RutaDetalleVendedorSerializer
     permission_classes = ()
-    queryset = Ruta.get_queryset()
+    queryset = RutaDetalleVendedor.get_queryset()
     lookup_field = 'id'
 
     def retrieve(self, request, *args, **kwargs):
@@ -87,10 +73,10 @@ class RutaRetrieveView(generics.RetrieveAPIView):
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class RutaUpdateView(generics.UpdateAPIView):
-    serializer_class = RutaSerializer
+class RutaDetalleVendedorUpdateView(generics.UpdateAPIView):
+    serializer_class = RutaDetalleVendedorSerializer
     permission_classes = ()
-    queryset = Ruta.get_queryset()
+    queryset = RutaDetalleVendedor.get_queryset()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -107,26 +93,26 @@ class RutaUpdateView(generics.UpdateAPIView):
             else:
                 return message.ErrorMessage("Error al Intentar Actualizar Ruta")
 
-class RutaDestroyView(generics.DestroyAPIView):
+class RutaDetalleVendedorDestroyView(generics.DestroyAPIView):
     permission_classes = ()
-    queryset = Ruta.get_queryset()
+    queryset = RutaDetalleVendedor.get_queryset()
     lookup_field = 'id'
 
     def delete(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_ruta = Ruta.get_queryset().get(id=kwargs['id'])
+            result_ruta = RutaDetalleVendedor.get_queryset()
             result_ruta.deleted = datetime.now()
             result_ruta.save()
             return message.DeleteMessage('Ruta '+str(result_ruta.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Ruta no Registrada")
 
-class RutaComboView(generics.ListAPIView):
+class RutaDetalleVendedorComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = RutaSerializer
+    serializer_class = RutaDetalleVendedorSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Ruta.get_queryset().order_by('-id')
+        queryset = RutaDetalleVendedor.get_queryset()
         return queryset

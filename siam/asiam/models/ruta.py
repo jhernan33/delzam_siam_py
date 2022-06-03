@@ -8,13 +8,15 @@ class Ruta(Base):
         on_delete=models.CASCADE,
         related_name='Zona',
     )
-    codi_vend = models.ForeignKey(
-        'Vendedor',
-        on_delete=models.CASCADE,
-        related_name='Vendedor'
-    )
 
     class Meta:
-        ordering = ['nomb_ruta']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"ruta"'
+    
+    def save(self, **kwargs):
+        self.nomb_ruta = self.nomb_ruta.upper()
+        return super().save(**kwargs)
+
+    def get_queryset():
+        return Ruta.objects.all().filter(deleted__isnull=True)

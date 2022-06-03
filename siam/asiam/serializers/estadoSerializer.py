@@ -8,8 +8,3 @@ class EstadoSerializer(serializers.ModelSerializer):
         model = Estado
         field = ('id','codi_pais')
         exclude =['created','updated','deleted','esta_ttus']
-
-    def update(self, instance, validated_data):
-        instance.updated = datetime.now()
-        instance.save()
-        return instance

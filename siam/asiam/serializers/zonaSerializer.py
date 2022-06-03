@@ -5,5 +5,5 @@ class ZonaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Zona
-        fields = ('id','desc_zona')
-        read_only_fields = ('id', )
+        field = ('id','desc_zona')
+        exclude =['created','updated','deleted','esta_ttus']
