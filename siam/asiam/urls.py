@@ -117,8 +117,9 @@ urlpatterns = [
     path('zona/',                 views.ZonaListView.as_view(),     name='zona'),
     path('zona/create/',          views.ZonaCreateView.as_view(),   name='zona_create'),
     path('zona/<int:id>/',        views.ZonaRetrieveView.as_view(), name='zona'),
-    path('zona/update/<int:id>', views.ZonaUpdateView.as_view(),   name='zona_update'),
-    path('zona/delete/<int:id>', views.ZonaDestroyView.as_view(),  name='zona_delete'),
+    path('zona/update/<int:id>', views.ZonaUpdateView.as_view(),    name='zona_update'),
+    path('zona/delete/<int:id>', views.ZonaDestroyView.as_view(),   name='zona_delete'),
+    path('zona/combo/',          views.ZonaComboView.as_view(),     name='zona_combo'),
 
     path('vendedor/',                 views.VendedorListView.as_view(),     name='vendedor'),
     path('vendedor/create/',          views.VendedorCreateView.as_view(),   name='vendedor_create'),
@@ -129,8 +130,24 @@ urlpatterns = [
     path('ruta/',                 views.RutaListView.as_view(),     name='ruta'),
     path('ruta/create/',          views.RutaCreateView.as_view(),   name='ruta_create'),
     path('ruta/<int:id>/',        views.RutaRetrieveView.as_view(), name='ruta'),
-    path('ruta/update/<int:id>', views.RutaUpdateView.as_view(),   name='ruta_update'),
-    path('ruta/delete/<int:id>', views.RutaDestroyView.as_view(),  name='ruta_delete'),
+    path('ruta/update/<int:id>',  views.RutaUpdateView.as_view(),   name='ruta_update'),
+    path('ruta/delete/<int:id>',  views.RutaDestroyView.as_view(),  name='ruta_delete'),
+    path('ruta/combo/',           views.RutaComboView.as_view(),    name='ruta_combo'),
+
+    path('rutaDetalleVendedor/',                 views.RutaDetalleVendedorListView.as_view(),     name='rutaDetalleVendedor'),
+    path('rutaDetalleVendedor/create/',          views.RutaDetalleVendedorCreateView.as_view(),   name='rutaDetalleVendedor_create'),
+    path('rutaDetalleVendedor/<int:id>/',        views.RutaDetalleVendedorRetrieveView.as_view(), name='rutaDetalleVendedor'),
+    path('rutaDetalleVendedor/update/<int:id>',  views.RutaDetalleVendedorUpdateView.as_view(),   name='rutaDetalleVendedor_update'),
+    path('rutaDetalleVendedor/delete/<int:id>',  views.RutaDetalleVendedorDestroyView.as_view(),  name='rutaDetalleVendedor_delete'),
+    path('rutaDetalleVendedor/combo/',           views.RutaDetalleVendedorComboView.as_view(),    name='rutaDetalleVendedor_combo'),
+
+    # Articulo
+    path('articulo/',                            views.ArticuloListView.as_view(),                name='articulo'),
+    path('articulo/create/',                     views.ArticuloCreateView.as_view(),              name='articulo_create'),
+    path('articulo/<int:id>/',                   views.ArticuloRetrieveView.as_view(),            name='articulo'),
+    path('articulo/update/<int:id>',             views.ArticuloUpdateView.as_view(),              name='articulo_update'),
+    path('articulo/delete/<int:id>',             views.ArticuloDestroyView.as_view(),             name='articulo_delete'),
+    path('articulo/combo/',                      views.ArticuloComboView.as_view(),               name='articulo_combo'),
 
     path('unidadmedida/',                       views.UnidadMedidaListView.as_view(),     name='unidadmedida'),
     path('unidadmedida/create/',                views.UnidadMedidaCreateView.as_view(),   name='unidadmedida_create'),
@@ -143,12 +160,21 @@ urlpatterns = [
     path('unidadtributaria/<int:id>/',            views.UnidadTributariaRetrieveView.as_view(), name='unidadtributaria'),
     path('unidadtributaria/update/<int:id>',     views.UnidadTributariaUpdateView.as_view(),   name='unidadtributaria_update'),
     path('unidadtributaria/delete/<int:id>',     views.UnidadTributariaDestroyView.as_view(),  name='unidadtributaria_delete'),
+    
+    # IVa General (Maestro)
+    path('iva/',                                   views.IvaGeneralListView.as_view(),     name='iva'),
+    path('iva/create/',                            views.IvaGeneralCreateView.as_view(),   name='iva_create'),
+    path('iva/<int:id>/',                          views.IvaGeneralRetrieveView.as_view(), name='iva'),
+    path('iva/update/<int:id>',                    views.IvaGeneralUpdateView.as_view(),   name='iva_update'),
+    path('iva/delete/<int:id>',                    views.IvaGeneralDestroyView.as_view(),  name='iva_delete'),
+    path('iva/combo/',                             views.IvaGeneralComboView.as_view(),    name='iva_combo'),
 
-    path('iva/',                             views.IvaListView.as_view(),     name='iva'),
-    path('iva/create/',                      views.IvaCreateView.as_view(),   name='iva_create'),
-    path('iva/<int:id>/',                    views.IvaRetrieveView.as_view(), name='iva'),
-    path('iva/update/<int:id>',             views.IvaUpdateView.as_view(),   name='iva_update'),
-    path('iva/delete/<int:id>',             views.IvaDestroyView.as_view(),  name='iva_delete'),
+    # Iva Detalle
+    path('ivaDetalle/',                            views.IvaListView.as_view(),     name='ivaDetalle'),
+    path('ivaDetalle/create/',                     views.IvaCreateView.as_view(),   name='ivaDetalle_create'),
+    path('ivaDetalle/<int:id>/',                   views.IvaRetrieveView.as_view(), name='ivaDetalle'),
+    path('ivaDetalle/update/<int:id>',             views.IvaUpdateView.as_view(),   name='ivaDetalle_update'),
+    path('ivaDetalle/delete/<int:id>',             views.IvaDestroyView.as_view(),  name='ivaDetalle_delete'),
 
     path('cliente/',                            views.ClienteListView.as_view(),     name='cliente'),
     path('cliente/create/',                     views.ClienteCreateView.as_view(),   name='cliente_create'),
@@ -175,11 +201,6 @@ urlpatterns = [
     # path('agencia/<int:id>/update/', views.AgenciaUpdateView.as_view(),   name='agencia_update'),
     # path('agencia/<int:id>/delete/', views.AgenciaDestroyView.as_view(),  name='agencia_delete'),
 
-    # path('articulo/',                        views.ArticuloListView.as_view(),     name='articulo'),
-    # path('articulo/create/',                 views.ArticuloCreateView.as_view(),   name='articulo_create'),
-    # path('articulo/<int:id>/',               views.ArticuloRetrieveView.as_view(), name='articulo'),
-    # path('articulo/<int:id>/update/',        views.ArticuloUpdateView.as_view(),   name='articulo_update'),
-    # path('articulo/<int:id>/delete/',        views.ArticuloDestroyView.as_view(),  name='articulo_delete'),
 
     # path('cmarco/',                          views.CmarcoListView.as_view(),     name='cmarco'),
     # path('cmarco/create/',                   views.CmarcoCreateView.as_view(),   name='cmarco_create'),
@@ -210,18 +231,6 @@ urlpatterns = [
     # path('monedas/<int:id>/',                views.MonedasRetrieveView.as_view(), name='monedas'),
     # path('monedas/<int:id>/update/',         views.MonedasUpdateView.as_view(),   name='monedas_update'),
     # path('monedas/<int:id>/delete/',         views.MonedasDestroyView.as_view(),  name='monedas_delete'),
-
-    # path('pcontratacion/',                   views.PcontratacionListView.as_view(),     name='pcontratacion'),
-    # path('pcontratacion/create/',            views.PcontratacionCreateView.as_view(),   name='pcontratacion_create'),
-    # path('pcontratacion/<int:id>/',          views.PcontratacionRetrieveView.as_view(), name='pcontratacion'),
-    # path('pcontratacion/<int:id>/update/',   views.PcontratacionUpdateView.as_view(),   name='pcontratacion_update'),
-    # path('pcontratacion/<int:id>/delete/',   views.PcontratacionDestroyView.as_view(),  name='pcontratacion_delete'),
-
-    # path('presupuesto/',                     views.PresupuestoListView.as_view(),     name='presupuesto'),
-    # path('presupuesto/create/',              views.PresupuestoCreateView.as_view(),   name='presupuesto_create'),
-    # path('presupuesto/<int:id>/',            views.PresupuestoRetrieveView.as_view(), name='presupuesto'),
-    # path('presupuesto/<int:id>/update/',     views.PresupuestoUpdateView.as_view(),   name='presupuesto_update'),
-    # path('presupuesto/<int:id>/delete/',     views.PresupuestoDestroyView.as_view(),  name='presupuesto_delete'),
 
     # path('profesiones/',                     views.ProfesionesListView.as_view(),     name='profesiones'),
     # path('profesiones/create/',              views.ProfesionesCreateView.as_view(),   name='profesiones_create'),

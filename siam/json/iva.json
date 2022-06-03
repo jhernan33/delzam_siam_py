@@ -1,0 +1,32 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.ivageneral",
+    "fields": {
+      "id": 1,
+      "desc_ivag": "I.V.A. 0 %",
+      "esta_ttus": "",
+      "created": "2022-06-02T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.ivageneral",
+    "fields": {
+      "id": 2,
+      "desc_ivag": "I.V.A. 8 %",
+      "esta_ttus": "",
+      "created": "2022-06-02T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.ivageneral",
+    "fields": {
+      "id": 3,
+      "desc_ivag": "I.V.A. 16 %",
+      "esta_ttus": "",
+      "created": "2022-06-02T01:17:31.907851"
+    }
+  }
+]

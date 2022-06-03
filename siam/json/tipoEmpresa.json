@@ -3,7 +3,7 @@
     "pk": 1,
     "model": "asiam.tipoempresa",
     "fields": {
-      "desc_tiem": "BATIDOR",
+      "desc_tiem": "FIRMA PERSONAL",
       "esta_ttus": "",
       "created": "2022-05-28 13:46:39.841629"
     }
@@ -12,7 +12,7 @@
     "pk": 2,
     "model": "asiam.tipoempresa",
     "fields": {
-      "desc_tiem": "BUDARE PLANO CON BORDE",
+      "desc_tiem": "COMPAÑIA ANONIMA",
       "esta_ttus": "",
       "created": "2022-05-28 13:46:39.841629"
     }
@@ -21,7 +21,7 @@
     "pk": 3,
     "model": "asiam.tipoempresa",
     "fields": {
-      "desc_tiem": "CALDERO CON TAPA",
+      "desc_tiem": "OTROS",
       "esta_ttus": "",
       "created": "2022-05-28 13:46:39.841629"
     }

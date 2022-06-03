@@ -5,23 +5,23 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
-from asiam.models import Iva
-from asiam.serializers import IvaSerializer
+from asiam.models import Iva,IvaGeneral
+from asiam.serializers import IvaGeneralSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
-class IvaListView(generics.ListAPIView):
-    serializer_class = IvaSerializer
+class IvaGeneralListView(generics.ListAPIView):
+    serializer_class = IvaGeneralSerializer
     permission_classes = ()
-    queryset = Iva.get_queryset()
+    queryset = IvaGeneral.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends = (df.SearchFilter, )
     search_fields = ('id', )
     ordering_fields = ('id', )
 
 
-class IvaCreateView(generics.CreateAPIView):
-    serializer_class = IvaSerializer
+class IvaGeneralCreateView(generics.CreateAPIView):
+    serializer_class = IvaGeneralSerializer
     permission_classes = ()
 
     def create(self, request, *args, **kwargs):
@@ -33,10 +33,10 @@ class IvaCreateView(generics.CreateAPIView):
         message = BaseMessage
         return message.SaveMessage(serializer.data)
 
-class IvaRetrieveView(generics.RetrieveAPIView):
-    serializer_class = IvaSerializer
+class IvaGeneralRetrieveView(generics.RetrieveAPIView):
+    serializer_class = IvaGeneralSerializer
     permission_classes = ()
-    queryset = Iva.get_queryset()
+    queryset = IvaGeneral.get_queryset()
     lookup_field = 'id'
 
     def retrieve(self, request, *args, **kwargs):
@@ -49,10 +49,10 @@ class IvaRetrieveView(generics.RetrieveAPIView):
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class IvaUpdateView(generics.UpdateAPIView):
-    serializer_class = IvaSerializer
+class IvaGeneralUpdateView(generics.UpdateAPIView):
+    serializer_class = IvaGeneralSerializer
     permission_classes = ()
-    queryset = Iva.get_queryset()
+    queryset = IvaGeneral.get_queryset()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -69,25 +69,25 @@ class IvaUpdateView(generics.UpdateAPIView):
             else:
                 return message.ErrorMessage("Error al Intentar Actualizar IVA")   
 
-class IvaDestroyView(generics.DestroyAPIView):
+class IvaGeneralDestroyView(generics.DestroyAPIView):
     permission_classes = ()
     lookup_field = 'id'
 
     def delete(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_city = Iva.get_queryset().get(id=kwargs['id'])
+            result_city = IvaGeneral.get_queryset().get(id=kwargs['id'])
             result_city.deleted = datetime.now()
             result_city.save()
             return message.DeleteMessage('Iva '+str(result_city.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Iva no Registrado")
 
-class IvaComboView(generics.ListAPIView):
+class IvaGeneralComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = IvaSerializer
+    serializer_class = IvaGeneralSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Iva.get_queryset().order_by('-id')
+        queryset = IvaGeneral.get_queryset().order_by('-id')
         return queryset

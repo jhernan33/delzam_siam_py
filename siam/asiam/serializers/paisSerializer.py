@@ -9,7 +9,3 @@ class PaisSerializer(serializers.ModelSerializer):
         fields = ('id','nomb_pais','name_pais','dial_pais','code_pais')
         read_only_fields = ('id', )
     
-    def update(self, instance, validated_data):
-        instance.updated = datetime.now()
-        instance.save()
-        return instance
