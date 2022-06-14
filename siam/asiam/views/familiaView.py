@@ -1,4 +1,5 @@
 from datetime import datetime
+from warnings import filters
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http.response import JsonResponse
@@ -13,6 +14,8 @@ from rest_framework.response import Response
 from rest_framework.parsers import JSONParser 
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Familia
 from asiam.serializers import FamiliaSerializer
@@ -24,9 +27,11 @@ class FamiliaListView(generics.ListAPIView):
     permission_classes = []
     queryset = Familia.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','desc_fami','abae_fami','agru_fami']
+    search_fields = ['id','desc_fami','abae_fami','agru_fami']
+    ordering_fields = ['desc_fami','abae_fami']
+    ordering = ['desc_fami']
 
 class FamiliaCreateView(generics.CreateAPIView):
     permission_classes = []
@@ -41,8 +46,6 @@ class FamiliaCreateView(generics.CreateAPIView):
         message = BaseMessage
         return message.SaveMessage(serializer.data)
 
-    # def perform_create(self, serializer):
-    #     serializer.save(created = datetime.now())
 
 class FamiliaRetrieveView(generics.RetrieveAPIView):
     serializer_class = FamiliaSerializer
@@ -102,3 +105,23 @@ class FamiliaComboView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Familia.get_queryset().order_by('-id')
         return queryset
+
+class FamiliaRestore(generics.UpdateAPIView):
+    serializer_class = FamiliaSerializer
+    permission_classes = ()
+    queryset = Familia.objects.all()
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Familia no Registrada")
+        else:
+            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save(deleted = None)
+                return message.RestoreMessage(serializer.data)
+            else:
+                return message.ErrorMessage("Error al Intentar Restaurar Familia")
