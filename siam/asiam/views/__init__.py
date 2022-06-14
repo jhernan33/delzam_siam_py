@@ -11,7 +11,7 @@ from .juridicaView import JuridicaListView, JuridicaCreateView, JuridicaRetrieve
 from .acccionistaView import AccionistaListView, AccionistaCreateView, AccionistaRetrieveView, AccionistaUpdateView, AccionistaDestroyView
 from .sucursalView import SucursalListView, SucursalCreateView, SucursalRetrieveView, SucursalUpdateView, SucursalDestroyView
 from .tipoClienteView import TipoClienteListView, TipoClienteCreateView, TipoClienteRetrieveView, TipoClienteUpdateView, TipoClienteDestroyView
-from .familiaView import FamiliaListView, FamiliaCreateView, FamiliaRetrieveView, FamiliaUpdateView, FamiliaDestroyView,FamiliaComboView
+from .familiaView import FamiliaListView, FamiliaCreateView, FamiliaRetrieveView, FamiliaUpdateView, FamiliaDestroyView,FamiliaComboView, FamiliaRestore
 from .subFamiliaView import SubFamiliaListView, SubFamiliaCreateView, SubFamiliaRetrieveView, SubFamiliaUpdateView, SubFamiliaDestroyView, SubFamiliaComboView
 from .zonaView import ZonaListView, ZonaCreateView, ZonaRetrieveView, ZonaUpdateView, ZonaDestroyView,ZonaComboView
 from .vendedorView import VendedorListView, VendedorCreateView, VendedorRetrieveView, VendedorUpdateView, VendedorDestroyView

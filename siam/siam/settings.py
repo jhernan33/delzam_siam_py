@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_seed',
     'rest_framework_gis',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
@@ -55,6 +56,7 @@ REST_FRAMEWORK = {
          # rest_framework.permissions.IsAuthenticated',
          'rest_framework.permissions.IsAdminUser'
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 MIDDLEWARE = [
@@ -248,3 +250,30 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOWED_ORIGIN_REGEXES = []
 
 DEFAULT_AUTO_FIELD =  'django.db.models.BigAutoField'
+
+LOGGING = {
+    'disable_existing_loggers': False,
+    'version': 1,
+    'handlers': {
+        'console': {
+            # logging handler that outputs log messages to terminal
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG', # message level to be written to console
+        },
+    },
+    'loggers': {
+        '': {
+            # this sets root level logger to log debug and higher level
+            # logs to console. All other loggers inherit settings from
+            # root level logger.
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False, # this tells logger to send logging message
+                                # to its parent (will send if set to True)
+        },
+        'django.db': {
+            # django also has database level logging
+            'level': 'DEBUG'
+        },
+    },
+}

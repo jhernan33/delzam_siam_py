@@ -26,3 +26,7 @@ class BaseMessage:
     def ShowMessage(self):
         message = {"message":"Registro Encontrado","status":status.HTTP_200_OK,"data":self}
         return Response(message)
+    
+    def RestoreMessage(self):
+        update = {"message":"Restaurado Exitosamente","status":status.HTTP_200_OK,"data":self}
+        return Response(update)

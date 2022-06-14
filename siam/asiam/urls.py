@@ -106,6 +106,7 @@ urlpatterns = [
     path('familia/update/<int:id>', views.FamiliaUpdateView.as_view(),   name='familia_update'),
     path('familia/delete/<int:id>', views.FamiliaDestroyView.as_view(),  name='familia_delete'),
     path('familia/combo/',          views.FamiliaComboView.as_view(),name='familia_combo'),
+    path('familia/restore/<int:id>', views.FamiliaRestore.as_view(),   name='familia_restore'),
 
     path('subfamilia/',                 views.SubFamiliaListView.as_view(),     name='subfamilia'),
     path('subfamilia/create/',          views.SubFamiliaCreateView.as_view(),   name='subfamilia_create'),
