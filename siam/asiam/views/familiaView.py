@@ -1,3 +1,4 @@
+from dataclasses import fields
 from datetime import datetime
 from warnings import filters
 from django.shortcuts import render
@@ -21,6 +22,7 @@ from asiam.models import Familia
 from asiam.serializers import FamiliaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+
 
 class FamiliaListView(generics.ListAPIView):
     serializer_class = FamiliaSerializer
