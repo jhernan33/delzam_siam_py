@@ -15,6 +15,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from asiam.models import SubFamilia
 from asiam.serializers import SubFamiliaSerializer
 from asiam.paginations import SmallResultsSetPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from asiam.views.baseMensajeView import BaseMessage
 
 class SubFamiliaListView(generics.ListAPIView):
@@ -22,9 +24,11 @@ class SubFamiliaListView(generics.ListAPIView):
     permission_classes = []
     queryset = SubFamilia.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','desc_sufa','abae_sufa','agru_sufa']
+    search_fields = ['id','desc_sufa','abae_sufa','agru_sufa']
+    ordering_fields = ['desc_sufa','abae_sufa']
+    ordering = ['desc_sufa']
 
 class SubFamiliaCreateView(generics.CreateAPIView):
     permission_classes = []
