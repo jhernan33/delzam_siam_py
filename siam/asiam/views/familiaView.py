@@ -102,10 +102,10 @@ class FamiliaDestroyView(generics.DestroyAPIView):
 class FamiliaComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = FamiliaSerializer
-    lookup_field = 'id'
+    # lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Familia.get_queryset().order_by('-id')
+        queryset = Familia.get_queryset().order_by('desc_fami')
         return queryset
 
 class FamiliaRestore(generics.UpdateAPIView):
