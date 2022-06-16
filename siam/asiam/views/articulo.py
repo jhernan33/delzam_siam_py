@@ -8,6 +8,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from asiam.models import Articulo
 from asiam.serializers import ArticuloSerializer
 from asiam.paginations import SmallResultsSetPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 from asiam.views.baseMensajeView import BaseMessage
 
 class ArticuloListView(generics.ListAPIView):
@@ -15,9 +17,11 @@ class ArticuloListView(generics.ListAPIView):
     permission_classes = ()
     queryset = Articulo.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','desc_arti','idae_arti']
+    search_fields = ['id','desc_arti','idae_arti']
+    ordering_fields = ['desc_arti','idae_arti']
+    ordering = ['desc_arti']
 
 
 class ArticuloCreateView(generics.CreateAPIView):
