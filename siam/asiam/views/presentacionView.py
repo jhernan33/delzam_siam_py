@@ -32,7 +32,7 @@ class PresentacionListView(generics.ListAPIView):
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_fields = ['id','desc_pres','tipo_pres','abre_pres']
     search_fields = ['id','desc_pres','tipo_pres','abre_pres']
-    ordering_fields = ['desc_pres','tipo_pres']
+    ordering_fields = ['desc_pres','tipo_pres','id']
     ordering = ['desc_pres']
 
 class PresentacionCreateView(generics.CreateAPIView):
@@ -104,7 +104,7 @@ class PresentacionComboView(generics.ListAPIView):
     serializer_class = PresentacionSerializer
     # lookup_field = 'id'
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    ordering_fields = ['desc_pres','tipo_pres','abre_pres']
+    ordering_fields = ['desc_pres','tipo_pres','abre_pres','id']
 
     def get_queryset(self):
         queryset = Presentacion.get_queryset()
