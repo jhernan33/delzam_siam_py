@@ -1,0 +1,46 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.presentacion",
+    "fields": {
+      "id": 1,
+      "desc_pres": "Unidad",
+      "abre_pres": "Ud",
+      "esta_ttus": "",
+      "created": "2022-06-17T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.presentacion",
+    "fields": {
+      "id": 2,
+      "desc_pres": "SubBulto",
+      "abre_pres": "Sbtl",
+      "esta_ttus": "",
+      "created": "2022-06-17T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.presentacion",
+    "fields": {
+      "id": 3,
+      "desc_pres": "Bulto",
+      "abre_pres": "Btl",
+      "esta_ttus": "",
+      "created": "2022-06-17T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.presentacion",
+    "fields": {
+      "id": 4,
+      "desc_pres": "No posee",
+      "abre_pres": "NP",
+      "esta_ttus": "",
+      "created": "2022-06-17T01:17:31.907851"
+    }
+  }
+]

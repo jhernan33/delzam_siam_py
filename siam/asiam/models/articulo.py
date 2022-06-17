@@ -19,8 +19,16 @@ class Articulo(Base):
     )
     foto_arti = models.JSONField()
     exgr_arti = models.CharField('Exento Grabado del Articulo',max_length=1, null=True, blank=True)
-    codc_pres = models.IntegerField('Codigo de Presentacion de Compra')
-    codv_pres = models.IntegerField('Codigo de Presentacion de Venta')
+    codc_pres = models.ForeignKey(
+        'Presentacion',
+        on_delete=models.CASCADE,
+        related_name='presentacion_compra',
+    )
+    codv_pres = models.ForeignKey(
+        'Presentacion',
+        on_delete=models.CASCADE,
+        related_name='presentacion_venta',
+    )
     capc_arti = models.IntegerField('Capacidad de Compra del Articulo')
     capv_arti = models.IntegerField('Capacidad de Venta del Articulo')
     proc_arti = models.CharField   ('Codigo del Articulo SIAE',max_length=1, null=True, blank=True, default='')

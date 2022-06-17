@@ -183,6 +183,14 @@ urlpatterns = [
     path('cliente/update/<int:id>',             views.ClienteUpdateView.as_view(),   name='cliente_update'),
     path('cliente/delete/<int:id>',             views.ClienteDestroyView.as_view(),  name='cliente_delete'),
 
+    # Presentacion
+    path('presentacion/',                            views.PresentacionListView.as_view(),     name='presentacion'),
+    path('presentacion/create/',                     views.PresentacionCreateView.as_view(),   name='presentacion_create'),
+    path('presentacion/<int:id>/',                   views.PresentacionRetrieveView.as_view(), name='presentacion'),
+    path('presentacion/update/<int:id>',             views.PresentacionUpdateView.as_view(),   name='presentacion_update'),
+    path('presentacion/delete/<int:id>',             views.PresentacionDestroyView.as_view(),  name='presentacion_delete'),
+    path('presentacion/combo/',                      views.PresentacionComboView.as_view(),    name='presentacion_combo'),
+    path('presentacion/restore/<int:id>',            views.PresentacionRestore.as_view(),      name='presentacion_restore'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
