@@ -148,7 +148,7 @@ urlpatterns = [
     path('articulo/<int:id>/',                   views.ArticuloRetrieveView.as_view(),            name='articulo'),
     path('articulo/update/<int:id>',             views.ArticuloUpdateView.as_view(),              name='articulo_update'),
     path('articulo/delete/<int:id>',             views.ArticuloDestroyView.as_view(),             name='articulo_delete'),
-    path('articulo/combo/',                      views.ArticuloComboView.as_view(),               name='articulo_combo'),
+    # path('articulo/combo/',                      views.ArticuloComboView.as_view(),               name='articulo_combo'),
 
     path('unidadmedida/',                       views.UnidadMedidaListView.as_view(),     name='unidadmedida'),
     path('unidadmedida/create/',                views.UnidadMedidaCreateView.as_view(),   name='unidadmedida_create'),
