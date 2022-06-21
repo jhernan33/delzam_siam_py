@@ -6,18 +6,18 @@ class Articulo(Base):
     idae_arti = models.CharField    ('Codigo del Articulo SIAE',max_length=15, null=True, blank=True)
     desc_arti = models.CharField    ('Nombre del Articulo',    max_length=250, null=True, blank=True, default='', unique=False)
     coba_arti = models.CharField    ('Codigo de Barras del Articulo',    max_length=30, null=True, blank=True, default='')
-    cmin_arti = models.DecimalField ('Cantidad Minima',max_digits=6,decimal_places=0)
-    cmax_arti = models.DecimalField ('Cantidad Maxima',max_digits=6,decimal_places=0)
-    por1_arti = models.DecimalField ('Porcentaje de Utilidad 1 Por Articulo',max_digits=7,decimal_places=2)
-    por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2)
-    por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2)
-    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=7,decimal_places=2)
+    cmin_arti = models.DecimalField ('Cantidad Minima',max_digits=6,decimal_places=0,null=True, blank=True)
+    cmax_arti = models.DecimalField ('Cantidad Maxima',max_digits=6,decimal_places=0,null=True, blank=True)
+    por1_arti = models.DecimalField ('Porcentaje de Utilidad 1 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
+    por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
+    por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
+    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     codi_sufa = models.ForeignKey(
         'SubFamilia',
         on_delete=models.CASCADE,
         related_name='sub_familia',
     )
-    foto_arti = models.JSONField()
+    foto_arti = models.JSONField('Foto del Articulo',null=True, blank=True)
     exgr_arti = models.CharField('Exento Grabado del Articulo',max_length=1, null=True, blank=True)
     codc_pres = models.ForeignKey(
         'Presentacion',
@@ -29,8 +29,8 @@ class Articulo(Base):
         on_delete=models.CASCADE,
         related_name='presentacion_venta',
     )
-    capc_arti = models.IntegerField('Capacidad de Compra del Articulo')
-    capv_arti = models.IntegerField('Capacidad de Venta del Articulo')
+    capc_arti = models.IntegerField('Capacidad de Compra del Articulo',null=True, blank=True)
+    capv_arti = models.IntegerField('Capacidad de Venta del Articulo',null=True, blank=True)
     proc_arti = models.CharField   ('Codigo del Articulo SIAE',max_length=1, null=True, blank=True, default='')
     codi_ivti = models.ForeignKey(
         'IvaGeneral',
