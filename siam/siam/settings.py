@@ -62,9 +62,9 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     # Para que CORS funcione bien debe estar lo mas alto, simpre sobre django.middleware.common.CommonMiddleware
     'corsheaders.middleware.CorsMiddleware', 
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -198,12 +198,14 @@ STATIC_URL = '/static/'
 # }
 
 # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = False
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://192.168.0.101:8082"
+    #"http://192.168.0.101:8082"
+    "http://159.223.168.118:8082"
 ]
 
 CORS_ORIGIN_WHITELIST = [] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
