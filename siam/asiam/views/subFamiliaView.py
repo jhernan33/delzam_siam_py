@@ -96,8 +96,10 @@ class SubFamiliaDestroyView(generics.DestroyAPIView):
 class SubFamiliaComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = SubFamiliaSerializer
-    # lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = SubFamilia.get_queryset().order_by('desc_sufa')
+        if self.request.query_params.get('codi_fami') == None:
+            queryset = SubFamilia.get_queryset().order_by('desc_sufa')
+        else:
+            queryset = SubFamilia.get_queryset().filter(codi_fami=self.request.query_params.get('codi_fami')).order_by('desc_sufa')
         return queryset

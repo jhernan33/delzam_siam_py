@@ -129,7 +129,6 @@ class VendedorDestroyView(generics.DestroyAPIView):
                 natural = Natural.objects.get(pk=vendedor.codi_natu_id)
                 natural.deleted = datetime.now()
                 natural.save()
-                #return Response({'result':'Registro Eliminado Exitosamente'},status=status.HTTP_200_OK)
                 return message.DeleteMessage('Vendedor '+str(vendedor.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Vendedor no Registrado")
