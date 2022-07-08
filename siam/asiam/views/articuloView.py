@@ -1,4 +1,7 @@
 from datetime import datetime
+from os import environ
+import os
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import filters as df
@@ -11,6 +14,10 @@ from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from asiam.views.baseMensajeView import BaseMessage
+from .serviceImageView import ServiceImageView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 class ArticuloListView(generics.ListAPIView):
     serializer_class = ArticuloSerializer
@@ -20,7 +27,7 @@ class ArticuloListView(generics.ListAPIView):
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_fields = ['id','desc_arti','idae_arti']
     search_fields = ['id','desc_arti','idae_arti']
-    ordering_fields = ['desc_arti','idae_arti']
+    ordering_fields = ['id','desc_arti','idae_arti']
     ordering = ['desc_arti']
 
 
@@ -29,8 +36,14 @@ class ArticuloCreateView(generics.CreateAPIView):
     permission_classes = []
     
     def create(self, request, *args, **kwargs):
+        listImages = request.data['foto_arti']
+        enviroment = os.path.realpath(settings.WEBSERVER_ARTICLE)
+        ServiceImage = ServiceImageView()
+        json_images = ServiceImage.saveImag(listImages,enviroment)
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        serializer.validated_data['foto_arti'] = json_images
         self.perform_create(serializer)
         serializer.save(created = datetime.now())
         headers = self.get_success_headers(serializer.data)
@@ -67,6 +80,14 @@ class ArticuloUpdateView(generics.UpdateAPIView):
         except Exception as e:
             return message.NotFoundMessage("Id de Articulo no Registrado")
         else:
+            listImages = request.data['foto_arti']
+            enviroment = os.path.realpath(settings.WEBSERVER_ARTICLE)
+            ServiceImage = ServiceImageView()
+            json_images = ServiceImage.updateImage(listImages,enviroment)
+
+            return message.ErrorMessage("Revisando")
+
+            serializer.validated_data['foto_arti'] = json_images
             serializer = self.get_serializer(instance, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save(updated = datetime.now())
