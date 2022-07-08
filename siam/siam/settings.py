@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+DIR = os.path.abspath(os.path.dirname(__file__))
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -278,3 +279,15 @@ LOGGING = {
         },
     },
 }
+
+MEDIA_ROOT = os.path.join(DIR,'media')
+
+MEDIA_URL = '/media/'
+WEBSERVER_ARTICLE = '/article/'
+WEBSERVER_CUSTOMER = '/customer/'
+WEBSERVER_SELLER = '/seller/'
+WEBSERVER_PORT=':8083'
+WEBSERVER_HOST='192.168.0.101'
+WEBSERVER_PROTOCOL='http://'
+WEBSERVER_API='/siam'
+WEBSERVER_IMAGES = WEBSERVER_PROTOCOL+WEBSERVER_HOST+WEBSERVER_PORT+WEBSERVER_API+MEDIA_URL
