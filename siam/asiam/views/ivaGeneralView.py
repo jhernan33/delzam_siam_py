@@ -4,6 +4,8 @@ from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Iva,IvaGeneral
 from asiam.serializers import IvaGeneralSerializer
@@ -15,9 +17,11 @@ class IvaGeneralListView(generics.ListAPIView):
     permission_classes = ()
     queryset = IvaGeneral.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','desc_ivag']
+    search_fields = ['id','desc_ivag']
+    ordering_fields = ['desc_ivag']
+    ordering = ['desc_ivag']
 
 
 class IvaGeneralCreateView(generics.CreateAPIView):
