@@ -85,12 +85,10 @@ class ArticuloUpdateView(generics.UpdateAPIView):
             ServiceImage = ServiceImageView()
             json_images = ServiceImage.updateImage(listImages,enviroment)
 
-            return message.ErrorMessage("Revisando")
-
-            serializer.validated_data['foto_arti'] = json_images
+            # return message.ErrorMessage("Revisando")
             serializer = self.get_serializer(instance, data=request.data, partial=True)
             if serializer.is_valid():
-                serializer.save(updated = datetime.now())
+                serializer.save(updated = datetime.now(), foto_arti = json_images)
                 return message.UpdateMessage(serializer.data)
             else:
                 return message.ErrorMessage("Error al Intentar Actualizar Articulo")
