@@ -85,7 +85,6 @@ class ArticuloUpdateView(generics.UpdateAPIView):
             ServiceImage = ServiceImageView()
             json_images = ServiceImage.updateImage(listImages,enviroment)
 
-            # return message.ErrorMessage("Revisando")
             serializer = self.get_serializer(instance, data=request.data, partial=True)
             if serializer.is_valid():
                 serializer.save(updated = datetime.now(), foto_arti = json_images)
