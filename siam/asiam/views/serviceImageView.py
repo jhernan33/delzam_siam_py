@@ -60,7 +60,7 @@ class ServiceImageView():
                 else:
                     cadena_image = l['image']
                     solo_image = cadena_image.find('article/')
-                    image = cadena_image[solo_image:len(cadena_image)]
+                    image = cadena_image[solo_image+8:len(cadena_image)]
                     recurso = place +argDue+'/'+image
                     if l['delete']:    
                         if os.path.exists(recurso):
