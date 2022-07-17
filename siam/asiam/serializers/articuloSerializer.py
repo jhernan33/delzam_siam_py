@@ -33,17 +33,18 @@ class ArticuloSerializer(serializers.ModelSerializer):
         model = Articulo
         field = ('id','codi_arti','idae_arti','desc_arti','coba_arti','cmin_arti','cmax_arti'
         ,'por1_arti','por2_arti','por3_arti','por4_arti','ppre_arti','codi_sufa','foto_arti','exgr_arti'
-        ,'codc_pres','codv_pres','capc_arti','capv_arti','proc_arti','codi_ivti','familia','subfamilia','compraPresentacion','ventaPresentacion','ivaValor')
+        ,'codc_pres','codv_pres','capc_arti','capv_arti','proc_arti','codi_ivti','familia','subfamilia','compraPresentacion','ventaPresentacion','ivaValor','cos1_arti')
         exclude =['created','updated','deleted','esta_ttus']
     
         desc_arti = serializers.CharField(trim_whitespace=False)
     
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-    #     # totals_images = serializers.SerializerMethodField
-    #     print(instance)
-    #     # representation['countImages'] = instance.foto_arti__count
-    #     return representation
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['cos1_arti'] = 0 if instance.por1_arti is None  else instance.ppre_arti*(instance.por1_arti/100)
+        representation['cos2_arti'] = 0 if instance.por2_arti is None  else instance.ppre_arti*(instance.por2_arti/100)
+        representation['cos3_arti'] = 0 if instance.por3_arti is None  else instance.ppre_arti*(instance.por3_arti/100)
+        representation['cos4_arti'] = 0 if instance.por4_arti is None  else instance.ppre_arti*(instance.por4_arti/100)
+        return representation
 
     # def get_totals_images(self,obj):
     #     # return serializers.IntegerField(source='foto_arti.count',read_only=True)
