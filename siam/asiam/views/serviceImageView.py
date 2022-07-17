@@ -7,14 +7,6 @@ from PIL import Image
 
 class ServiceImageView():
     
-    def is_base64(Cadena):
-        x = re.search("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$", Cadena)
-
-        if x:
-            return True
-        else:
-            return False
-    
     @staticmethod
     def saveImag(arg,argDue):
         is_many = isinstance(arg,list)
@@ -43,7 +35,6 @@ class ServiceImageView():
             ite=0;
             obj_json = []
             place = os.path.realpath(settings.MEDIA_ROOT)
-            print(place+""+argDue)
             for l in listImages:
                 ite +=1
                 checkBase64 = re.search("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$", l['image'])
