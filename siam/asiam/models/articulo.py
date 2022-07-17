@@ -11,6 +11,7 @@ class Articulo(Base):
     por1_arti = models.DecimalField ('Porcentaje de Utilidad 1 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
+    por4_arti = models.DecimalField ('Porcentaje de Utilidad 4 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     codi_sufa = models.ForeignKey(
         'SubFamilia',
