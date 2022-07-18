@@ -41,9 +41,9 @@ class ArticuloSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['cos1_arti'] = 0 if instance.por1_arti is None  else (instance.ppre_arti*(instance.por1_arti/100))+instance.ppre_arti
-        representation['cos2_arti'] = 0 if instance.por2_arti is None  else instance.ppre_arti*(instance.por2_arti/100)
-        representation['cos3_arti'] = 0 if instance.por3_arti is None  else instance.ppre_arti*(instance.por3_arti/100)
-        representation['cos4_arti'] = 0 if instance.por4_arti is None  else instance.ppre_arti*(instance.por4_arti/100)
+        representation['cos2_arti'] = 0 if instance.por2_arti is None  else instance.ppre_arti*(instance.por2_arti/100)+instance.ppre_arti
+        representation['cos3_arti'] = 0 if instance.por3_arti is None  else instance.ppre_arti*(instance.por3_arti/100)+instance.ppre_arti
+        representation['cos4_arti'] = 0 if instance.por4_arti is None  else instance.ppre_arti*(instance.por4_arti/100)+instance.ppre_arti
         return representation
 
     # def get_totals_images(self,obj):
