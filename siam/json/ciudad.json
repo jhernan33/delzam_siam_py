@@ -3,12 +3,20 @@
     "pk": 1,
     "model": "asiam.ciudad",
     "fields": {
+      "nomb_ciud": "NO POSEE CIUDAD",
+      "codi_esta_id": 26
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.ciudad",
+    "fields": {
       "nomb_ciud": "PUERTO AYACUCHO",
       "codi_esta_id": 1
     }
   },
   {
-    "pk": 2,
+    "pk": 3,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "BARCELONA",
@@ -16,7 +24,7 @@
     }
   },
   {
-    "pk": 3,
+    "pk": 4,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "SAN FERNANDO DE APURE",
@@ -24,7 +32,7 @@
     }
   },
   {
-    "pk": 4,
+    "pk": 5,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "MARACAY",
@@ -32,7 +40,7 @@
     }
   },
   {
-    "pk": 5,
+    "pk": 6,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "BARINAS",
@@ -40,7 +48,7 @@
     }
   },
   {
-    "pk": 6,
+    "pk": 7,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "CIUDAD BOLIVAR",
@@ -48,7 +56,7 @@
     }
   },
   {
-    "pk": 7,
+    "pk": 8,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "VALENCIA",
@@ -56,7 +64,7 @@
     }
   },
   {
-    "pk": 8,
+    "pk": 9,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "SAN CARLOS",
@@ -64,7 +72,7 @@
     }
   },
   {
-    "pk": 9,
+    "pk": 10,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "TUCUPITA",
@@ -72,7 +80,7 @@
     }
   },
   {
-    "pk": 10,
+    "pk": 11,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "CORO",
@@ -80,7 +88,7 @@
     }
   },
   {
-    "pk": 11,
+    "pk": 12,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "SAN JUAN DE LOS MORROS",
@@ -88,7 +96,7 @@
     }
   },
   {
-    "pk": 12,
+    "pk": 13,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "BARQUISIMETO",
@@ -96,7 +104,7 @@
     }
   },
   {
-    "pk": 13,
+    "pk": 14,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "MERIDA",
@@ -104,7 +112,7 @@
     }
   },
   {
-    "pk": 14,
+    "pk": 15,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "LOS TEQUES",
@@ -112,7 +120,7 @@
     }
   },
   {
-    "pk": 15,
+    "pk": 16,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "MATURIN",
@@ -120,7 +128,7 @@
     }
   },
   {
-    "pk": 16,
+    "pk": 17,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "LA ASUNCION",
@@ -128,7 +136,7 @@
     }
   },
   {
-    "pk": 17,
+    "pk": 18,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "GUANARE",
@@ -136,7 +144,7 @@
     }
   },
   {
-    "pk": 18,
+    "pk": 19,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "CUMANA",
@@ -144,7 +152,7 @@
     }
   },
   {
-    "pk": 19,
+    "pk": 20,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "SAN CRISTOBAL",
@@ -152,7 +160,7 @@
     }
   },
   {
-    "pk": 20,
+    "pk": 21,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "TRUJILLO",
@@ -160,7 +168,7 @@
     }
   },
   {
-    "pk": 21,
+    "pk": 22,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "LA GUAIRA",
@@ -168,7 +176,7 @@
     }
   },
   {
-    "pk": 22,
+    "pk": 23,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "SAN FELIPE",
@@ -176,7 +184,7 @@
     }
   },
   {
-    "pk": 23,
+    "pk": 24,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "MARACAIBO",
@@ -184,7 +192,7 @@
     }
   },
   {
-    "pk": 24,
+    "pk": 25,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "CARACAS",
@@ -192,11 +200,19 @@
     }
   },
   {
-    "pk": 25,
+    "pk": 26,
     "model": "asiam.ciudad",
     "fields": {
       "nomb_ciud": "DEPENDENCIAS FEDERALES",
       "codi_esta_id": 25
+    }
+  },
+  {
+    "pk": 27,
+    "model": "asiam.ciudad",
+    "fields": {
+      "nomb_ciud": "PALMIRA - GUASIMOS",
+      "codi_esta_id": 19
     }
   }
 ]

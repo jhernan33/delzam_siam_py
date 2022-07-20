@@ -1,0 +1,21 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.juridica",
+    "fields": {
+      "riff_peju": "J-11111111",
+      "raso_peju": "No Posee Persona Juridica",
+      "dofi_peju": "No Posee",
+      "ivaa_peju": null,
+      "islr_peju": null,
+      "desc_peju": "RIF para indicar no Posee",
+      "pure_peju": "No Posee",
+      "fevi_peju": "2030-12-31",
+      "codi_ciud_id": 1,
+      "codi_sect_id": 1,
+      "codi_tiem_id": 3,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  }
+]

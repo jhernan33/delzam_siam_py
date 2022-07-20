@@ -9,8 +9,8 @@ class Base(models.Model):
     updated  =models.DateTimeField(auto_now=False, null=True,auto_now_add=False,blank=True)
     deleted  =models.DateTimeField(auto_now=False, null=True,auto_now_add=False,blank=True)
 
-    def __str__(self):
-        return self.name 
+    # def __str__(self):
+    #     return self.name 
             
     class Meta:
         abstract = True

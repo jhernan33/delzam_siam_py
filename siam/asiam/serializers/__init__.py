@@ -26,6 +26,7 @@ from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer
 from .ivaGeneralSerializer import IvaGeneralSerializer
 from .articuloSerializer import ArticuloSerializer
 from .presentacionSerializer import PresentacionSerializer
+from .proveedorSerializer import ProveedorSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

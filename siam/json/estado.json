@@ -198,5 +198,13 @@
       "nomb_esta": "DEPENDENCIAS FEDERALES",
       "codi_pais_id": 234
     }
+  },
+  {
+    "pk": 26,
+    "model": "asiam.estado",
+    "fields": {
+      "nomb_esta": "NO POSEE ESTADO",
+      "codi_pais_id": 234
+    }
   }
 ]

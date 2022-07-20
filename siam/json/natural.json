@@ -1,0 +1,23 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.natural",
+    "fields": {
+      "naci_pena": "V",
+      "cedu_pena": "1",
+      "prno_pena": "No Posee Nombre",
+      "seno_pena": "No Posee",
+      "prap_pena": "No Posee",
+      "seap_pena": "No Posee",
+      "sexo_pena": "M",
+      "edoc_pena": "S",
+      "fena_pena": null,
+      "dire_pena": null,
+      "riff_pena": null,
+      "codi_ciud_id": 1,
+      "codi_sect_id": 1,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  }
+]

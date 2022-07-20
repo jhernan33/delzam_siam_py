@@ -91,7 +91,7 @@ class VendedorRetrieveView(generics.RetrieveAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Ciudad no Registrada")  
+            return message.NotFoundMessage("Id de Vendedor no Registrado")  
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
