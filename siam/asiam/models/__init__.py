@@ -25,6 +25,8 @@ from .cliente import Cliente
 from .rutaDetalleVendedor import RutaDetalleVendedor
 from .ivaGeneral import IvaGeneral
 from .presentacion import Presentacion
+from .proveedor import Proveedor
+from .articuloProveedor import ArticuloProveedor
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco

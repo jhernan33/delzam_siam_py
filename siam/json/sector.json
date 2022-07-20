@@ -1,0 +1,42 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.sector",
+    "fields": {
+      "nomb_sect": "NO POSEE SECTOR",
+      "codi_ciud_id": 1,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.sector",
+    "fields": {
+      "nomb_sect": "LA ESTACION - PALMIRA",
+      "codi_ciud_id": 27,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.sector",
+    "fields": {
+      "nomb_sect": "EL ABEJAL - PALMIRA",
+      "codi_ciud_id": 27,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.sector",
+    "fields": {
+      "nomb_sect": "SAN CRISTOBAL - SAN CRISTOBAL",
+      "codi_ciud_id": 20,
+      "esta_ttus": "",
+      "created": "2022-07-19 13:46:39.841629"
+    }
+  } 
+]

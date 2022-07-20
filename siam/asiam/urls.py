@@ -194,6 +194,15 @@ urlpatterns = [
     path('presentacion/combo/',                      views.PresentacionComboView.as_view(),    name='presentacion_combo'),
     path('presentacion/restore/<int:id>',            views.PresentacionRestore.as_view(),      name='presentacion_restore'),
 
+    # Supplier
+    path('proveedor/',                            views.ProveedorListView.as_view(),     name='proveedor'),
+    path('proveedor/create/',                     views.ProveedorCreateView.as_view(),   name='proveedor_create'),
+    path('proveedor/<int:id>/',                   views.ProveedorRetrieveView.as_view(), name='proveedor'),
+    path('proveedor/update/<int:id>',             views.ProveedorUpdateView.as_view(),   name='proveedor_update'),
+    path('proveedor/delete/<int:id>',             views.ProveedorDestroyView.as_view(),  name='proveedor_delete'),
+    path('proveedor/combo/',                      views.ProveedorComboView.as_view(),    name='proveedor_combo'),
+    path('proveedor/restore/<int:id>',            views.ProveedorRestore.as_view(),      name='proveedor_restore'),
+
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
     # path('banco/<int:id>/',        views.BancoRetrieveView.as_view(), name='banco'),

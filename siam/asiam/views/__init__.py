@@ -27,6 +27,7 @@ from .ivaGeneralView    import IvaGeneralListView, IvaGeneralCreateView, IvaGene
 from .articuloView     import ArticuloListView, ArticuloCreateView, ArticuloRetrieveView, ArticuloUpdateView, ArticuloDestroyView, ArticuloComboView
 from .presentacionView import PresentacionListView, PresentacionCreateView, PresentacionRetrieveView, PresentacionUpdateView, PresentacionDestroyView, PresentacionComboView, PresentacionRestore
 from .serviceImageView import ServiceImageView
+from .proveedorView    import ProveedorListView, ProveedorCreateView, ProveedorRetrieveView, ProveedorUpdateView, ProveedorDestroyView, ProveedorComboView, ProveedorRestore
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage

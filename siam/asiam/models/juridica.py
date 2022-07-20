@@ -3,7 +3,7 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 class Juridica(Base):
-    riff_peju = models.CharField   ('RIF',    max_length=10, null=False, blank=False, default='',unique=True)
+    riff_peju = models.CharField   ('RIF',    max_length=12, null=False, blank=False, default='',unique=True)
     raso_peju = models.CharField   ('Razon Social ',    max_length=254, null=False, blank=False, default='', unique=True)
     dofi_peju = models.TextField   ('Domicilio Fiscal',    max_length=254, null=False, blank=False, default='')
     ivaa_peju = models.CharField   ('Paga IVA',    max_length=1, null=True, blank=True, default='')
@@ -33,3 +33,6 @@ class Juridica(Base):
         ordering = ['raso_peju']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"juridica"'
+    
+    def get_queryset():
+        return Juridica.objects.all().filter(deleted__isnull=True)
