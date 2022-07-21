@@ -3,7 +3,6 @@ from os import environ
 import os
 from django.http import JsonResponse
 from django.shortcuts import render
-from pymysql import NULL
 from requests import delete
 from rest_framework import generics
 from rest_framework import filters as df
