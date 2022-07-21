@@ -3,6 +3,8 @@ from os import environ
 import os
 from django.http import JsonResponse
 from django.shortcuts import render
+from pymysql import NULL
+from requests import delete
 from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
@@ -62,6 +64,14 @@ class ArticuloRetrieveView(generics.RetrieveAPIView):
     permission_classes = ()
     queryset = Articulo.get_queryset()
     lookup_field = 'id'
+    
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Articulo.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        
+        return queryset.filter(deleted__isnull=True)
 
     def retrieve(self, request, *args, **kwargs):
         message = BaseMessage
@@ -77,7 +87,7 @@ class ArticuloRetrieveView(generics.RetrieveAPIView):
 class ArticuloUpdateView(generics.UpdateAPIView):
     serializer_class = ArticuloSerializer
     permission_classes = ()
-    queryset = Articulo.get_queryset()
+    queryset = Articulo.objects.all()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -91,10 +101,14 @@ class ArticuloUpdateView(generics.UpdateAPIView):
             enviroment = os.path.realpath(settings.WEBSERVER_ARTICLE)
             ServiceImage = ServiceImageView()
             json_images = ServiceImage.updateImage(listImages,enviroment)
-
+            Deleted = request.data['erased']
+            if Deleted:
+                isdeleted = datetime.now()
+            else:
+                isdeleted = None
             serializer = self.get_serializer(instance, data=request.data, partial=True)
             if serializer.is_valid():
-                serializer.save(updated = datetime.now(), foto_arti = json_images)
+                serializer.save(updated = datetime.now(), foto_arti = json_images, deleted = isdeleted)
                 return message.UpdateMessage(serializer.data)
             else:
                 return message.ErrorMessage("Error al Intentar Actualizar Articulo")

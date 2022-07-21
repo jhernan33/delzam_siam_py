@@ -33,8 +33,8 @@ class ArticuloSerializer(serializers.ModelSerializer):
         model = Articulo
         field = ('id','codi_arti','idae_arti','desc_arti','coba_arti','cmin_arti','cmax_arti'
         ,'por1_arti','por2_arti','por3_arti','por4_arti','ppre_arti','codi_sufa','foto_arti','exgr_arti'
-        ,'codc_pres','codv_pres','capc_arti','capv_arti','proc_arti','codi_ivti','familia','subfamilia','compraPresentacion','ventaPresentacion','ivaValor','cos1_arti')
-        exclude =['created','updated','deleted','esta_ttus']
+        ,'codc_pres','codv_pres','capc_arti','capv_arti','proc_arti','codi_ivti','familia','subfamilia','compraPresentacion','ventaPresentacion','ivaValor','cos1_arti','deleted')
+        exclude =['created','updated','esta_ttus']
     
         desc_arti = serializers.CharField(trim_whitespace=False)
     
