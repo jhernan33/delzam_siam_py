@@ -5,16 +5,16 @@ from .ciudadSerializer import CiudadSerializer
 # # from .parroquiaSerializer import ParroquiaSerializer
 from .sectorSerializer import SectorSerializer
 from .subSectorSerializer import SubSectorSerializer
-from .naturalSerializer import NaturalSerializer
+from .naturalSerializer import NaturalSerializer, NaturalBasicSerializer
 from .tipoempresaSerializer import TipoEmpresaSerializer
-from .juridicaSerializer import JuridicaSerializer
+from .juridicaSerializer import JuridicaSerializer, JuridicaBasicSerializer
 from .accionistaSerializer import AccionistaSerializer
 from .sucursalSerializer import SucursalSerializer
 from .tipoClienteSerializer import TipoClienteSerializer
 from .familiaSerializer import FamiliaSerializer
 from .subFamiliaSerializer import SubFamiliaSerializer
-from .zonaSerializer import ZonaSerializer
-from .vendedorSerializer import VendedorSerializer
+from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
+from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
 from .rutaSerializer import RutaSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
@@ -26,7 +26,8 @@ from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer
 from .ivaGeneralSerializer import IvaGeneralSerializer
 from .articuloSerializer import ArticuloSerializer
 from .presentacionSerializer import PresentacionSerializer
-from .proveedorSerializer import ProveedorSerializer
+from .proveedorSerializer import ProveedorSerializer, ProveedorBasicSerializer
+from .articuloProveedorSerializer import ArticuloProveedorSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

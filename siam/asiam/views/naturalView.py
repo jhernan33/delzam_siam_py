@@ -14,7 +14,7 @@ from rest_framework import status
 from django.http import HttpResponse
 
 from asiam.models import Natural
-from asiam.serializers import NaturalSerializer
+from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 
 class NaturalListView(generics.ListAPIView):
@@ -69,4 +69,13 @@ class NaturalFilterView(generics.ListCreateAPIView):
     def get_queryset(self):
         valor = self.request.query_params.get("valor", None)
         queryset = Natural.objects.raw("select id from ppal.natural(%s)",[valor])
+        return queryset
+
+class NaturalComboView(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = NaturalBasicSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        queryset = Natural.get_queryset().order_by('-id')
         return queryset

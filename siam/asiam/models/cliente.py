@@ -4,7 +4,7 @@ from django.contrib.postgres.fields import JSONField
 
 class Cliente(Base):
     fein_clie = models.DateField  ('Fecha de Ingreso del Cliente',auto_now=False, auto_now_add=False,blank=True, null=True)
-    codi_ante = models.IntegerField('Codigo Anterior',null=True, blank=True)
+    codi_ante = models.CharField    ('Codigo Anterior', max_length=75, null=True, blank=True)
     cred_clie = models.BooleanField('Credito del Cliente')
     mocr_clie = models.DecimalField ('Monto del Credito',max_digits=7,decimal_places=2)
     plcr_clie = models.IntegerField ('Plazo del del Credito')
@@ -27,8 +27,12 @@ class Cliente(Base):
         related_name='Juridica.codi_juri+'
     )
     foto_clie = models.JSONField  ('Foto del Cliente',null=True, blank=True)
+    obse_clie = models.TextField('Observaciones del Cliente',null=True, blank=True)
 
     class Meta:
         ordering = ['codi_natu']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"cliente"'
+
+    def get_queryset():
+        return Cliente.objects.all().filter(deleted__isnull=True)

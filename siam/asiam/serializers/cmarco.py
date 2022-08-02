@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Cmarcoclass CmarcoSerializer(serializers.ModelSerializer):    class Meta:        model = Cmarco        fields = ('id','fech_coma','nome_coma','desc_coma',)        read_only_fields = ('id', )

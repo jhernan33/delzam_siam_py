@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Waletrclass WaletrSerializer(serializers.ModelSerializer):    class Meta:        model = Waletr        fields = ('id','coor_ware','orgi_ware','dire_ware',)        read_only_fields = ('id', )

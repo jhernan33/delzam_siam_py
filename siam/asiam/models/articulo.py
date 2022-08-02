@@ -46,10 +46,10 @@ class Articulo(Base):
         db_table = u'"empr\".\"articulo"'
 
     def save(self, **kwargs):
-        self.idae_arti = self.idae_arti.upper()
-        self.desc_arti = self.desc_arti.upper()
-        self.exgr_arti = self.exgr_arti.upper()
-        return super().save(**kwargs)
+        self.idae_arti = self.idae_arti.upper().strip()
+        self.desc_arti = self.desc_arti.upper().strip()
+        self.exgr_arti = self.exgr_arti.upper().strip()
+        return super(Articulo,self).save(**kwargs)
 
     def get_queryset():
         return Articulo.objects.all().filter(deleted__isnull=True)

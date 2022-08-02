@@ -6,9 +6,10 @@ from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
+from yaml import serialize
 
 from asiam.models import Juridica
-from asiam.serializers import JuridicaSerializer
+from asiam.serializers import JuridicaSerializer, JuridicaBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from django.core.exceptions import ObjectDoesNotExist
@@ -31,14 +32,14 @@ class JuridicaCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_juridica = Juridica.get_queryset().filter(riff_peju = self.request.data.get("cedu_pena"))
-            if result_juridica.count() == 0:
+            result_juridica = Juridica.get_queryset().filter(riff_peju = self.request.data.get("riff_peju").strip().upper())
+            result_raso = Juridica.get_queryset().filter(raso_peju = self.request.data.get("raso_peju").strip().upper())
+
+            if result_juridica.count() == 0 and result_raso.count() ==0:
                 enviroment = os.path.realpath(settings.WEBSERVER_LEGAL)
                 ServiceImage = ServiceImageView()
                 try:
-                    #print(request.data['fori_peju'])
                     if request.data['fori_peju'] is None:
-                        print("Ingreso a Foto RIF")
                         listImagesRiff  = request.data['fori_peju']
                         json_foto_riff  = ServiceImage.saveImag(listImagesRiff,enviroment)
 
@@ -47,15 +48,15 @@ class JuridicaCreateView(generics.CreateAPIView):
                         json_foto_loca = ServiceImage.saveImag(listImagesLocal,enviroment)
 
                     juridica = Juridica(
-                         riff_peju       = self.request.data.get("riff_peju")
-                        ,raso_peju      = self.request.data.get("raso_peju")
-                        ,dofi_peju      = self.request.data.get("dofi_peju")
+                        riff_peju       = self.request.data.get("riff_peju").strip().upper()
+                        ,raso_peju      = self.request.data.get("raso_peju").strip().upper()
+                        ,dofi_peju      = self.request.data.get("dofi_peju").strip().upper()
                         ,ivaa_peju      = self.request.data.get("ivaa_peju")
                         ,islr_peju      = self.request.data.get("islr_peju")
-                        ,desc_peju      = self.request.data.get("desc_peju")
+                        ,desc_peju      = self.request.data.get("desc_peju").strip().upper()
                         ,fori_peju      = '' if json_foto_riff is None else json_foto_riff
                         ,folo_peju      = '' if json_foto_loca is None else json_foto_loca
-                        ,pure_peju      = self.request.data.get("pure_peju")
+                        ,pure_peju      = self.request.data.get("pure_peju").strip().upper()
                         ,fevi_peju      = self.request.data.get("fevi_peju")
                         ,codi_ciud_id   = self.request.data.get("codi_ciud_id")
                         ,codi_sect_id   = self.request.data.get("codi_sect_id")
@@ -63,11 +64,13 @@ class JuridicaCreateView(generics.CreateAPIView):
                         ,created        = datetime.now()
                     )
                     juridica.save()
-                    return message.SaveMessage(juridica)
+                    return message.SaveMessage('Registro Juridico guardado Exitosamente')
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar la Persona Juridica: "+str(e))
-            else:
+            elif result_juridica.count()>0:
                 return message.ShowMessage('Rif ya Registrado')
+            elif result_raso.count()>0:
+                return message.ShowMessage('Razon Social ya Registrada')
         except Juridica.DoesNotExist:
             return message.NotFoundMessage("Id de Juridico no Registrado")
 
@@ -87,3 +90,12 @@ class JuridicaDestroyView(generics.DestroyAPIView):
     permission_classes = ()
     queryset = Juridica.get_queryset()
     lookup_field = 'id'
+
+class JuridicaComboView(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = JuridicaBasicSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        queryset = Juridica.get_queryset().order_by('-id')
+        return queryset
