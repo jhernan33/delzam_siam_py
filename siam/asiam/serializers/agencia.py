@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Agenciaclass AgenciaSerializer(serializers.ModelSerializer):    class Meta:        model = Agencia        fields = ('id','desc_agen','dire_agen','codi_banc_id',)        read_only_fields = ('id','codi_banc_id',)

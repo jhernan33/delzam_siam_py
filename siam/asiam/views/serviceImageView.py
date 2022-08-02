@@ -50,9 +50,11 @@ class ServiceImageView():
                     obj_json.append({'id':ite, 'image':fileName})
                 else:
                     cadena_image = l['image']
-                    solo_image = cadena_image.find('article/')
-                    image = cadena_image[solo_image+8:len(cadena_image)]
-                    recurso = place +argDue+'/'+image
+                    enviroment_string = argDue+'/'
+                    length_enviroment = len(enviroment_string)
+                    position_initial = cadena_image.find(enviroment_string)
+                    image = cadena_image[position_initial +length_enviroment:len(cadena_image)]
+                    recurso = place + enviroment_string + image
                     if l['delete']:    
                         if os.path.exists(recurso):
                             os.remove(recurso)

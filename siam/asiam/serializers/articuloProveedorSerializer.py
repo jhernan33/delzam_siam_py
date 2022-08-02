@@ -1,16 +1,30 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Articulo
-from asiam.serializers import SubFamiliaSerializer
+from asiam.models import ArticuloProveedor, Articulo, Proveedor
+from asiam.serializers import ArticuloSerializer, ProveedorSerializer
 from django.conf import settings
 from django.conf.urls.static import static
 
 class ArticuloProveedorSerializer(serializers.ModelSerializer):
-    articulo = serializers.ReadOnlyField(source='codi_arti.desc_arti')
-    proveedor = serializers.ReadOnlyField(source='codi.desc_pres')
+    codi_arti = ArticuloSerializer()
+    codi_prov = ProveedorSerializer()
 
     class Meta:
-        model = Articulo
-        field = ('id','codi_arti','codi_prov','codi_arti_prov','obse_arti_prov','articulo','proveedor')
-        exclude =['created','updated','deleted','esta_ttus']
+        model = ArticuloProveedor
+        field = ('id','codi_arti','codi_prov','codi_arti_prov','obse_arti_prov','deleted')
+        exclude =['created','updated','esta_ttus']
+    
+    def validate_codi_arti(value):
+        queryset = Articulo.get_queryset().filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
+    
+    def validate_codi_prov(value):
+        queryset = Proveedor.get_queryset().filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True

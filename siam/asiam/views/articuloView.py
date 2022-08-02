@@ -29,14 +29,15 @@ class ArticuloListView(generics.ListAPIView):
     filterset_fields = ['id','desc_arti','idae_arti','codi_arti']
     search_fields = ['id','desc_arti','idae_arti','codi_arti']
     ordering_fields = ['id','desc_arti','idae_arti','codi_arti']
-    ordering = ['desc_arti']
+    ordering = ['-id']
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
         queryset = Articulo.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
-        
+        if show =='all':
+            return queryset
         return queryset.filter(deleted__isnull=True)
 
 class ArticuloCreateView(generics.CreateAPIView):

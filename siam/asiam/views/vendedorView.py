@@ -17,7 +17,7 @@ from django.db import transaction
 
 from asiam.models import Vendedor
 from asiam.models import Natural
-from asiam.serializers import VendedorSerializer
+from asiam.serializers import VendedorSerializer, VendedorBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -133,4 +133,11 @@ class VendedorDestroyView(generics.DestroyAPIView):
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Vendedor no Registrado")
             
-        
+class VendedorComboView(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = VendedorBasicSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        queryset = Vendedor.get_queryset().order_by('-id').values()
+        return queryset

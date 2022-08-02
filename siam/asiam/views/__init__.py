@@ -5,16 +5,16 @@ from .ciudadView   import CiudadListView,    CiudadCreateView,    CiudadRetrieve
 # from .parroquiaView import ParroquiaListView, ParroquiaCreateView, ParroquiaRetrieveView, ParroquiaUpdateView, ParroquiaDestroyView
 from .sectorView  import SectorListView,   SectorCreateView,   SectorRetrieveView,   SectorUpdateView,   SectorDestroyView
 from .subSectorView import SubSectorListView, SubSectorCreateView, SubSectorRetrieveView, SubSectorUpdateView, SubSectorDestroyView
-from .naturalView import NaturalListView, NaturalCreateView, NaturalRetrieveView, NaturalUpdateView, NaturalDestroyView, NaturalFilterView
+from .naturalView import NaturalListView, NaturalCreateView, NaturalRetrieveView, NaturalUpdateView, NaturalDestroyView, NaturalFilterView, NaturalComboView
 from .tipoEmpresaView import TipoEmpresaListView, TipoEmpresaCreateView, TipoEmpresaRetrieveView, TipoEmpresaUpdateView, TipoEmpresaDestroyView,TipoEmpresaComboView
-from .juridicaView import JuridicaListView, JuridicaCreateView, JuridicaRetrieveView, JuridicaUpdateView, JuridicaDestroyView
+from .juridicaView import JuridicaListView, JuridicaCreateView, JuridicaRetrieveView, JuridicaUpdateView, JuridicaDestroyView, JuridicaComboView
 from .acccionistaView import AccionistaListView, AccionistaCreateView, AccionistaRetrieveView, AccionistaUpdateView, AccionistaDestroyView
 from .sucursalView import SucursalListView, SucursalCreateView, SucursalRetrieveView, SucursalUpdateView, SucursalDestroyView
 from .tipoClienteView import TipoClienteListView, TipoClienteCreateView, TipoClienteRetrieveView, TipoClienteUpdateView, TipoClienteDestroyView
 from .familiaView import FamiliaListView, FamiliaCreateView, FamiliaRetrieveView, FamiliaUpdateView, FamiliaDestroyView,FamiliaComboView, FamiliaRestore
 from .subFamiliaView import SubFamiliaListView, SubFamiliaCreateView, SubFamiliaRetrieveView, SubFamiliaUpdateView, SubFamiliaDestroyView, SubFamiliaComboView
 from .zonaView import ZonaListView, ZonaCreateView, ZonaRetrieveView, ZonaUpdateView, ZonaDestroyView,ZonaComboView
-from .vendedorView import VendedorListView, VendedorCreateView, VendedorRetrieveView, VendedorUpdateView, VendedorDestroyView
+from .vendedorView import VendedorListView, VendedorCreateView, VendedorRetrieveView, VendedorUpdateView, VendedorDestroyView, VendedorComboView
 from .rutaView import RutaListView, RutaCreateView, RutaRetrieveView, RutaUpdateView, RutaDestroyView, RutaComboView
 from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, UnidadMedidaRetrieveView, UnidadMedidaUpdateView, UnidadMedidaDestroyView
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
@@ -28,6 +28,7 @@ from .articuloView     import ArticuloListView, ArticuloCreateView, ArticuloRetr
 from .presentacionView import PresentacionListView, PresentacionCreateView, PresentacionRetrieveView, PresentacionUpdateView, PresentacionDestroyView, PresentacionComboView, PresentacionRestore
 from .serviceImageView import ServiceImageView
 from .proveedorView    import ProveedorListView, ProveedorCreateView, ProveedorRetrieveView, ProveedorUpdateView, ProveedorDestroyView, ProveedorComboView, ProveedorRestore
+from .articuloProveedorView import ArticuloProveedorListView, ArticuloProveedorCreateView, ArticuloProveedorRetrieveView, ArticuloProveedorUpdateView, ArticuloProveedorDestroyView, ArticuloProveedorComboView
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage

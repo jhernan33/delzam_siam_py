@@ -34,5 +34,6 @@ class Juridica(Base):
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"juridica"'
     
+    
     def get_queryset():
         return Juridica.objects.all().filter(deleted__isnull=True)

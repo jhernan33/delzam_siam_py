@@ -43,3 +43,6 @@ class Natural(Base):
         ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"natural"'
+    
+    def get_queryset():
+        return Natural.objects.all().filter(deleted__isnull=True)

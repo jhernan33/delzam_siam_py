@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Presupuestoclass PresupuestoSerializer(serializers.ModelSerializer):    class Meta:        model = Presupuesto        fields = ('id','desc_prep','anos_prep',)        read_only_fields = ('id', )

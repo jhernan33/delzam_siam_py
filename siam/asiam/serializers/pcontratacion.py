@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Pcontratacionclass PcontratacionSerializer(serializers.ModelSerializer):    class Meta:        model = Pcontratacion        fields = ('id','fech_prco','nome_prco','tipo_prco','desc_prco','codi_coma',)        read_only_fields = ('id', )

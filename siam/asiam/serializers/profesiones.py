@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Profesionesclass ProfesionesSerializer(serializers.ModelSerializer):    class Meta:        model = Profesiones        fields = ('id','desc_prof',)        read_only_fields = ('id', )

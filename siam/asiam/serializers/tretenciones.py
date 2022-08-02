@@ -1,1 +1,0 @@
-from rest_framework import serializersfrom asiam.models import Tretencionesclass TretencionesSerializer(serializers.ModelSerializer):    class Meta:        model = Tretenciones        fields = ('id','desc_tire','mont_tire','porc_tire','reso_tire','labo_tire',)        read_only_fields = ('id', )

@@ -73,9 +73,10 @@ urlpatterns = [
     path('natural/',                 views.NaturalListView.as_view(),     name='natural'),
     path('natural/create/',          views.NaturalCreateView.as_view(),   name='natural_create'),
     path('natural/<int:id>/',        views.NaturalRetrieveView.as_view(), name='natural'),
-    path('natural/update/<int:id>', views.NaturalUpdateView.as_view(),   name='natural_update'),
-    path('natural/delete/<int:id>', views.NaturalDestroyView.as_view(),  name='natural_delete'),
+    path('natural/update/<int:id>',  views.NaturalUpdateView.as_view(),   name='natural_update'),
+    path('natural/delete/<int:id>',  views.NaturalDestroyView.as_view(),  name='natural_delete'),
     path('natural/filter/',          views.NaturalFilterView.as_view(),   name='natural_filter'),
+    path('natural/combo/',           views.NaturalComboView.as_view(),   name='natural_combo'),
 
     path('tipoempresa/',                 views.TipoEmpresaListView.as_view(),     name='tipoempresa'),
     path('tipoempresa/create/',          views.TipoEmpresaCreateView.as_view(),   name='tipoempresa_create'),
@@ -89,6 +90,7 @@ urlpatterns = [
     path('juridica/<int:id>/',        views.JuridicaRetrieveView.as_view(), name='juridica'),
     path('juridica/update/<int:id>', views.JuridicaUpdateView.as_view(),   name='juridica_update'),
     path('juridica/delete/<int:id>', views.JuridicaDestroyView.as_view(),  name='juridica_delete'),
+    path('juridica/combo/',          views.JuridicaComboView.as_view(),    name='juridica_combo'),
 
     path('accionista/',                 views.AccionistaListView.as_view(),     name='accionista'),
     path('accionista/create/',          views.AccionistaCreateView.as_view(),   name='accionista_create'),
@@ -127,8 +129,9 @@ urlpatterns = [
     path('vendedor/',                 views.VendedorListView.as_view(),     name='vendedor'),
     path('vendedor/create/',          views.VendedorCreateView.as_view(),   name='vendedor_create'),
     path('vendedor/<int:id>/',        views.VendedorRetrieveView.as_view(), name='vendedor'),
-    path('vendedor/update/<int:id>', views.VendedorUpdateView.as_view(),   name='vendedor_update'),
-    path('vendedor/delete/<int:id>', views.VendedorDestroyView.as_view(),  name='vendedor_delete'),
+    path('vendedor/update/<int:id>', views.VendedorUpdateView.as_view(),    name='vendedor_update'),
+    path('vendedor/delete/<int:id>', views.VendedorDestroyView.as_view(),   name='vendedor_delete'),
+    path('vendedor/combo/',          views.VendedorComboView.as_view(),     name='vendedor_combo'),
 
     path('ruta/',                 views.RutaListView.as_view(),     name='ruta'),
     path('ruta/create/',          views.RutaCreateView.as_view(),   name='ruta_create'),
@@ -202,6 +205,14 @@ urlpatterns = [
     path('proveedor/delete/<int:id>',             views.ProveedorDestroyView.as_view(),  name='proveedor_delete'),
     path('proveedor/combo/',                      views.ProveedorComboView.as_view(),    name='proveedor_combo'),
     path('proveedor/restore/<int:id>',            views.ProveedorRestore.as_view(),      name='proveedor_restore'),
+
+    # Article Supplier
+    path('proveedorArticulo/',                    views.ArticuloProveedorListView.as_view(),     name='proveedorArticulo'),
+    path('proveedorArticulo/create/',             views.ArticuloProveedorCreateView.as_view(),   name='proveedorArticulo_create'),
+    path('proveedorArticulo/<int:id>/',           views.ArticuloProveedorRetrieveView.as_view(), name='proveedorArticulo'),
+    path('proveedorArticulo/update/<int:id>',     views.ArticuloProveedorUpdateView.as_view(),   name='proveedorArticulo_update'),
+    path('proveedorArticulo/delete/<int:id>',     views.ArticuloProveedorDestroyView.as_view(),  name='proveedorArticulo_delete'),
+    path('proveedorArticulo/combo/',              views.ArticuloProveedorComboView.as_view(),    name='proveedorArticulo_combo'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
