@@ -21,8 +21,8 @@ class RutaListView(generics.ListAPIView):
     queryset = Ruta.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ('id','desc_ruta')
-    ordering_fields = ('id', 'desc_ruta')
+    search_fields = ('id','nomb_ruta')
+    ordering_fields = ('id', 'nomb_ruta')
     ordering = ['-id']
 
     def get_queryset(self):
@@ -87,7 +87,7 @@ class RutaCreateView(generics.CreateAPIView):
         else:
             try:
                 # Validate Description Route
-                result_zone = Zona.objects.filter(desc_ruta = self.request.data.get("desc_ruta").upper().strip())
+                result_zone = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip())
                 if result_zone.count() > 0:
                     if result_zone[0].id != instance.id:
                         return message.ShowMessage("Descripcion de Ruta ya Registrada con el ID:"+str(result_zone[0].id))
@@ -98,11 +98,11 @@ class RutaCreateView(generics.CreateAPIView):
                 else:
                     isdeleted = None
 
-                instance.desc_ruta = request.data['desc_ruta'].upper().strip()
+                instance.nomb_ruta = request.data['nomb_ruta'].upper().strip()
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
-                return message.UpdateMessage({"id":instance.id,"desc_ruta":instance.desc_zona})
+                return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.desc_zona})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
             
