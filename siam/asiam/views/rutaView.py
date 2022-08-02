@@ -87,10 +87,10 @@ class RutaCreateView(generics.CreateAPIView):
         else:
             try:
                 # Validate Description Route
-                result_zone = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip())
-                if result_zone.count() > 0:
-                    if result_zone[0].id != instance.id:
-                        return message.ShowMessage("Descripcion de Ruta ya Registrada con el ID:"+str(result_zone[0].id))
+                result_route = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip())
+                if result_route.count() > 0:
+                    if result_route[0].id != instance.id:
+                        return message.ShowMessage("Descripcion de Ruta ya Registrada con el ID:"+str(result_route[0].id))
 
                 Deleted = request.data['erased']
                 if Deleted:
@@ -102,7 +102,7 @@ class RutaCreateView(generics.CreateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
-                return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.desc_zona})
+                return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.nomb_ruta})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
             
