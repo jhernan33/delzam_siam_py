@@ -81,30 +81,25 @@ class RutaCreateView(generics.CreateAPIView):
         #         return message.SaveMessage("Ruta Guardada con Exito")
 
         try:
-            instance = self.get_object()
-        except Exception as e:
-            return message.NotFoundMessage("Id de Ruta no Registrada")
-        else:
-            try:
-                # Validate Description Route
-                result_route = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip())
-                if result_route.count() > 0:
-                    if result_route[0].id != instance.id:
-                        return message.ShowMessage("Descripcion de Ruta ya Registrada con el ID:"+str(result_route[0].id))
+            nane_route = self.request.data.get("nomb_ruta").upper().strip()
+            result_route = Ruta.objects.filter(nomb_ruta = nane_route)
+            # print(self.request.data.get("codi_zona"))
+            if result_route.count() <= 0:
+                try:
+                    route = Ruta(
+                        nomb_ruta = nane_route,
+                        codi_zona = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) ,
+                        created  = datetime.now()
+                    )
+                    route.save()
+                    return message.SaveMessage({"id":route.id,"nomb_ruta":route.nomb_ruta})
+                except Exception as e:
+                    return message.ErrorMessage("Error al Intentar Guardar La Ruta: "+str(e))
+            elif result_route.count()>0:
+                return message.ShowMessage('Descripcion de Ruta ya Registrada')
+        except Zona.DoesNotExist:
+            return message.NotFoundMessage("Id de Ruta no Registrado")
 
-                Deleted = request.data['erased']
-                if Deleted:
-                    isdeleted = datetime.now()
-                else:
-                    isdeleted = None
-
-                instance.nomb_ruta = request.data['nomb_ruta'].upper().strip()
-                instance.deleted = isdeleted
-                instance.updated = datetime.now()
-                instance.save()
-                return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.nomb_ruta})
-            except Exception as e:
-                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
             
 
 class RutaRetrieveView(generics.RetrieveAPIView):
