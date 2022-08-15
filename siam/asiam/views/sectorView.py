@@ -8,7 +8,7 @@ from rest_framework import generics, status
 from django.core.exceptions import ObjectDoesNotExist
 
 from asiam.models import Sector
-from asiam.serializers import SectorSerializer
+from asiam.serializers import SectorSerializer, SectorBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -85,3 +85,15 @@ class SectorDestroyView(generics.DestroyAPIView):
             return message.DeleteMessage('Sector '+str(result_sector.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Sector no Registrado")
+
+class SectorComboView(generics.ListAPIView):
+    permission_classes = ()
+    serializer_class = SectorBasicSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        if self.request.query_params.get('codi_ciud') == None:
+            queryset = Sector.get_queryset().all()
+        else:
+            queryset = Sector.get_queryset().filter(codi_ciud = self.request.query_params.get('codi_ciud')).order_by('nomb_sect')
+        return queryset

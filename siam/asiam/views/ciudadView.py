@@ -13,7 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from yaml import serialize
 
 from asiam.models import Ciudad
-from asiam.serializers import CiudadSerializer
+from asiam.serializers import CiudadSerializer, CiudadBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -98,10 +98,12 @@ class CiudadDestroyView(generics.DestroyAPIView):
 
 class CiudadComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = CiudadSerializer
+    serializer_class = CiudadBasicSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        estado_id = self.kwargs['id']
-        queryset = Ciudad.get_queryset().order_by('-id')
-        return queryset.filter(codi_esta_id = estado_id) 
+        if self.request.query_params.get('codi_esta') == None:
+            queryset = Ciudad.get_queryset().all()
+        else:
+            queryset = Ciudad.get_queryset().filter(codi_esta = self.request.query_params.get('codi_esta')).order_by('nomb_ciud')
+        return queryset

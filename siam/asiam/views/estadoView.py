@@ -8,7 +8,7 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 
 from asiam.models import Estado
-from asiam.serializers import EstadoSerializer
+from asiam.serializers import EstadoSerializer, EstadoBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 
 from django.http.response import JsonResponse
@@ -57,10 +57,13 @@ class EstadoDestroyView(generics.DestroyAPIView):
 
 class EstadoComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = EstadoSerializer    
+    serializer_class = EstadoBasicSerializer    
     lookup_field = 'id'
     
     def get_queryset(self):
-        pais_id = self.kwargs['id']
-        queryset = Estado.objects.all()
-        return queryset.filter(codi_pais_id = pais_id)
+        #pais_id = self.kwargs['id']
+        if self.request.query_params.get('codi_pais') == None:
+            queryset = Estado.get_queryset().all()
+        else:
+            queryset = Estado.get_queryset().filter(codi_pais_id = self.request.query_params.get('codi_pais')).order_by('nomb_esta')
+        return queryset

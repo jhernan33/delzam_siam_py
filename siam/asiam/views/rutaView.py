@@ -81,22 +81,33 @@ class RutaCreateView(generics.CreateAPIView):
         #         return message.SaveMessage("Ruta Guardada con Exito")
 
         try:
-            nane_route = self.request.data.get("nomb_ruta").upper().strip()
-            result_route = Ruta.objects.filter(nomb_ruta = nane_route)
+            name_route = self.request.data.get("nomb_ruta").upper().strip()
+            code_zone = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) 
+            result_route = Ruta.objects.filter(nomb_ruta = name_route).filter(codi_zona_id = code_zone)
             # print(self.request.data.get("codi_zona"))
             if result_route.count() <= 0:
                 try:
                     route = Ruta(
-                        nomb_ruta = nane_route,
-                        codi_zona = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) ,
+                        nomb_ruta = name_route,
+                        codi_zona = code_zone,
                         created  = datetime.now()
                     )
                     route.save()
+                    is_many = isinstance(self.request.data.get("sellers"),list)
+                    if is_many:
+                        for l in self.request.data.get("sellers"):
+                            codi_vend = l['codi_vend']
+                            #print(codi_vend)
+                            rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = route.id,
+                                codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
+                                created =  datetime.now(),
+                                )
+                            rutaDetalle.save()
                     return message.SaveMessage({"id":route.id,"nomb_ruta":route.nomb_ruta})
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar La Ruta: "+str(e))
             elif result_route.count()>0:
-                return message.ShowMessage('Descripcion de Ruta ya Registrada')
+                return message.ShowMessage({'information':name_route+' con la Zona '+str(code_zone.id),'message':"Ya Registrada"})
         except Zona.DoesNotExist:
             return message.NotFoundMessage("Id de Ruta no Registrado")
 
