@@ -34,7 +34,7 @@ class NaturalListView(generics.ListAPIView):
         queryset = Natural.objects.all()
         if show =='true':
             queryset = queryset.filter(deleted__isnull=False)
-        if show =='false':
+        if show =='false' or show is None:
             queryset = queryset.filter(deleted__isnull=True)        
 
         field = self.request.query_params.get('field',None)
