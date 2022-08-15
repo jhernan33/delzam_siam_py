@@ -12,3 +12,6 @@ class Pais(Base):
         ordering = ['nomb_pais']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"pais"'
+
+    def get_queryset():
+        return Pais.objects.all().filter(deleted__isnull=True)

@@ -1,10 +1,11 @@
+from multiprocessing import context
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 
 from asiam.models import Pais
-from asiam.serializers import PaisSerializer
+from asiam.serializers import PaisSerializer, PaisBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 
 class PaisListView(generics.ListAPIView):
@@ -40,5 +41,13 @@ class PaisDestroyView(generics.DestroyAPIView):
 
 class PaisComboView(generics.ListAPIView):
     permission_classes = ()
-    queryset = Pais.objects.all()
+    serializer_class = PaisBasicSerializer
     lookup_field = 'id'
+
+    def get_queryset(self):
+        if self.request.query_params.get('order') is not None:
+            order = self.request.query_params.get('order')
+            queryset = Pais.get_queryset().order_by(order)
+        else:
+            queryset = Pais.get_queryset().order_by('nomb_pais')
+        return queryset

@@ -1,9 +1,9 @@
-from .paisSerializer import PaisSerializer
-from .estadoSerializer import EstadoSerializer
-from .ciudadSerializer import CiudadSerializer
+from .paisSerializer import PaisSerializer, PaisBasicSerializer
+from .estadoSerializer import EstadoSerializer, EstadoBasicSerializer
+from .ciudadSerializer import CiudadSerializer, CiudadBasicSerializer
 # # from .municipioSerializer import MunicipioSerializer
 # # from .parroquiaSerializer import ParroquiaSerializer
-from .sectorSerializer import SectorSerializer
+from .sectorSerializer import SectorSerializer, SectorBasicSerializer
 from .subSectorSerializer import SubSectorSerializer
 from .naturalSerializer import NaturalSerializer, NaturalBasicSerializer
 from .tipoempresaSerializer import TipoEmpresaSerializer

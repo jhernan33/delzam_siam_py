@@ -36,4 +36,20 @@ class NaturalSerializer(serializers.ModelSerializer):
         data['sexo_pena'] = data['sexo_pena'].upper().strip() if data['sexo_pena'] else data['sexo_pena']
         data['dire_pena'] = data['dire_pena'].upper().strip() if data['dire_pena'] else data['dire_pena']
         data['riff_pena'] = data['riff_pena'].upper().strip() if data['riff_pena'] else data['riff_pena']
+        data['nombre_completo'] = data['prno_pena'].upper().strip()+' '+data['seno_pena'].upper().strip() if data['prno_pena'].upper().strip() else data['prno_pena'].upper().strip()
+        data['apellido_completo'] = data['prap_pena'].upper().strip()+' '+data['seap_pena'].upper().strip() if data['prap_pena'].upper().strip() else data['prap_pena'].upper().strip()
         return data
+    
+    def validate_cedu_pena(value):
+        queryset = Natural.get_queryset().filter(cedu_pena = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
+    
+    def validate_riff_pena(value,Dni):
+        queryset = Natural.get_queryset().filter(riff_pena = value).exclude(cedu_pena=Dni)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True

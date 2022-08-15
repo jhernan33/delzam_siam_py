@@ -17,3 +17,6 @@ class Estado(Base):
     def save(self, *args, **kwargs):
         self.nomb_esta = self.nomb_esta.upper()
         return super(Estado,self).save(*args, **kwargs)
+    
+    def get_queryset():
+        return Estado.objects.all().filter(deleted__isnull=True)

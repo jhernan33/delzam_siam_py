@@ -3,7 +3,7 @@ from .estadoView   import EstadoListView,    EstadoCreateView,    EstadoRetrieve
 from .ciudadView   import CiudadListView,    CiudadCreateView,    CiudadRetrieveView,    CiudadUpdateView,    CiudadDestroyView     ,CiudadComboView
 # from .municipioView import MunicipioListView, MunicipioCreateView, MunicipioRetrieveView, MunicipioUpdateView, MunicipioDestroyView
 # from .parroquiaView import ParroquiaListView, ParroquiaCreateView, ParroquiaRetrieveView, ParroquiaUpdateView, ParroquiaDestroyView
-from .sectorView  import SectorListView,   SectorCreateView,   SectorRetrieveView,   SectorUpdateView,   SectorDestroyView
+from .sectorView  import SectorListView,   SectorCreateView,   SectorRetrieveView,   SectorUpdateView,   SectorDestroyView, SectorComboView
 from .subSectorView import SubSectorListView, SubSectorCreateView, SubSectorRetrieveView, SubSectorUpdateView, SubSectorDestroyView
 from .naturalView import NaturalListView, NaturalCreateView, NaturalRetrieveView, NaturalUpdateView, NaturalDestroyView, NaturalFilterView, NaturalComboView
 from .tipoEmpresaView import TipoEmpresaListView, TipoEmpresaCreateView, TipoEmpresaRetrieveView, TipoEmpresaUpdateView, TipoEmpresaDestroyView,TipoEmpresaComboView
