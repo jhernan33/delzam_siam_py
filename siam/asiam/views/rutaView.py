@@ -96,8 +96,6 @@ class RutaCreateView(generics.CreateAPIView):
                     is_many = isinstance(self.request.data.get("sellers"),list)
                     if is_many:
                         for l in self.request.data.get("sellers"):
-                            codi_vend = l['codi_vend']
-                            #print(codi_vend)
                             rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = route.id,
                                 codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
                                 created =  datetime.now(),
@@ -140,7 +138,7 @@ class RutaRetrieveView(generics.RetrieveAPIView):
 class RutaUpdateView(generics.UpdateAPIView):
     serializer_class = RutaSerializer
     permission_classes = ()
-    queryset = Ruta.get_queryset()
+    queryset = Ruta.objects.all()
     lookup_field = 'id'
 
     # def update(self, request, *args, **kwargs):
@@ -180,6 +178,17 @@ class RutaUpdateView(generics.UpdateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+                # Save Detail Sellers
+                is_many = isinstance(self.request.data.get("sellers"),list)
+                if is_many:
+                    RutaDetalleVendedor.objects.filter(codi_ruta_id = instance.id).delete()
+                    for l in self.request.data.get("sellers"):
+                        rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = instance.id,
+                            codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
+                            created =  datetime.now(),
+                            )
+                        rutaDetalle.save()
+
                 return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.nomb_ruta})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))

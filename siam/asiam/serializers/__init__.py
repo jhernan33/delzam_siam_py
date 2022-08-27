@@ -22,12 +22,12 @@ from .unidadTributariaSerializer import UnidadTributariaSerializer
 from .clienteSerializer import ClienteSerializer
 from .userSerializer import UserSerializer
 from .grupoSerializer import GrupoSerializer
-from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer
+from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics
 from .ivaGeneralSerializer import IvaGeneralSerializer
 from .articuloSerializer import ArticuloSerializer
 from .presentacionSerializer import PresentacionSerializer
 from .proveedorSerializer import ProveedorSerializer, ProveedorBasicSerializer
-from .articuloProveedorSerializer import ArticuloProveedorSerializer
+from .articuloProveedorSerializer import ArticuloProveedorSerializer, ArticuloProveedorSerializerBasics
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

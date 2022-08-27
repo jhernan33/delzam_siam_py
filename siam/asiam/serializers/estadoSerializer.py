@@ -16,3 +16,10 @@ class EstadoSerializer(serializers.ModelSerializer):
         model = Estado
         field = ('id','codi_pais')
         exclude =['created','updated','deleted','esta_ttus']
+    
+    def validate_codi_esta(value):
+        queryset = Estado.get_queryset().filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True

@@ -139,5 +139,5 @@ class VendedorComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Vendedor.get_queryset().order_by('-id').values()
+        queryset = Vendedor.get_queryset().order_by('-id')
         return queryset

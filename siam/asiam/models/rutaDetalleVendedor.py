@@ -22,6 +22,16 @@ class RutaDetalleVendedor(Base):
     
     def get_queryset():
         return RutaDetalleVendedor.objects.all().filter(deleted__isnull=True)
+    
+    """
+    Method List Seller from Router
+    Self Id
+    """    
+    def listSellerRoute(self):
+        queryset = RutaDetalleVendedor.objects.filter(codi_ruta=self.id)
+        # print(queryset)
+        return queryset
+        #return "id="+str(self.id)
 
     # def __str__(self):
     #     return '%d: %d' % (self.codi_ruta, self.codi_vend)
