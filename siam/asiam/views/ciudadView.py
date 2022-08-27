@@ -12,8 +12,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from yaml import serialize
 
-from asiam.models import Ciudad
-from asiam.serializers import CiudadSerializer, CiudadBasicSerializer
+from asiam.models import Ciudad, Estado
+from asiam.serializers import CiudadSerializer, CiudadBasicSerializer, EstadoSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -27,22 +27,50 @@ class CiudadListView(generics.ListAPIView):
     permission_classes = ()
     queryset = Ciudad.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filterset_fields = ['id','nomb_ciud','codi_esta']
+    search_fields = ['id','nomb_ciud','codi_esta']
+    ordering_fields = ['id','nomb_ciud','codi_esta']
+    ordering = ['-id']
+
+    def get_queryset(self):
+        show = self.request.query_params.get('show',None)
+
+        queryset = Ciudad.objects.all()
+        if show =='true':
+            queryset = queryset.filter(deleted__isnull=False)
+        if show =='false' or show is None:
+            queryset = queryset.filter(deleted__isnull=True)        
+
+        # field = self.request.query_params.get('field',None)
+        # value = self.request.query_params.get('value',None)
+        # if field is not None and value is not None:
+        #     if field=='cedu_pena':
+        #         queryset = queryset.filter(cedu_pena=value)
+        return queryset
 
 class CiudadCreateView(generics.CreateAPIView):
     permission_classes = []
     serializer_class = CiudadSerializer
     
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        serializer.save(created = datetime.now())
-        headers = self.get_success_headers(serializer.data)
         message = BaseMessage
-        return message.SaveMessage(serializer.data)
+        try:
+            result_city = Ciudad.get_queryset().filter(nomb_ciud = str(self.request.data.get("nomb_ciud")).strip().upper())
+            if result_city.count() == 0:
+                try:
+                    city = Ciudad(
+                         nomb_ciud      = str(self.request.data.get("nomb_ciud")).strip().upper()
+                        ,codi_esta      = Estado.get_queryset().get(id = self.request.data.get("codi_esta"))
+                        ,created        = datetime.now()
+                    )
+                    city.save()
+                    return message.SaveMessage('Registro de Ciudad guardado Exitosamente')
+                except Exception as e:
+                    return message.ErrorMessage("Error al Intentar Guardar la Ciudad: "+str(e))
+            elif result_city.count()>0:
+                return message.ShowMessage('Nombre de Ciudad ya Registrada')
+        except Ciudad.DoesNotExist:
+            return message.NotFoundMessage("Id de Ciudad no Registrado")
             
 
 class CiudadRetrieveView(generics.RetrieveAPIView):
@@ -50,7 +78,15 @@ class CiudadRetrieveView(generics.RetrieveAPIView):
     serializer_class = CiudadSerializer
     queryset = Ciudad.get_queryset()
     lookup_field = 'id'
-      
+    
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Ciudad.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        
+        return queryset.filter(deleted__isnull=True)
+        
     def retrieve(self, request, *args, **kwargs):
         message = BaseMessage
         try:
@@ -72,14 +108,33 @@ class CiudadUpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Ciudad no Registrada")
+            return message.NotFoundMessage("Id de Ciudad no Registrado")
         else:
-            serializer = self.get_serializer(instance, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save(updated = datetime.now())
-                return message.UpdateMessage(serializer.data)
-            else:
-                return message.ErrorMessage("Error al Intentar Actualizar Ciudad")
+            try:
+                # Validate Name City
+                result_name_city = CiudadSerializer.validate_nomb_ciud(str(request.data['nomb_ciud']).upper().strip(),instance.id)
+                if result_name_city == True:
+                    return message.ShowMessage("Nombre de Ciudad ya Registrado")
+
+                # Validate Id State
+                result_state = EstadoSerializer.validate_codi_esta(request.data['codi_esta'])
+                if result_state == False:
+                    return message.ShowMessage("Id de Estado No Regsistrado, en la Lista de Ciudad")
+
+                Deleted = request.data['erased']
+                if Deleted:
+                    isdeleted = datetime.now()
+                else:
+                    isdeleted = None
+
+                instance.nomb_ciud      = str('' if self.request.data.get("nomb_ciud") is None else self.request.data.get("nomb_ciud")).strip().upper()
+                instance.codi_esta      = Estado.get_queryset().get(id = self.request.data.get("codi_esta"))
+                instance.deleted = isdeleted
+                instance.updated = datetime.now()
+                instance.save()
+                return message.UpdateMessage("Actualizado Exitosamente los Datos de la Ciudad: "+str(instance.id))
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class CiudadDestroyView(generics.DestroyAPIView):
     permission_classes = ()

@@ -1,14 +1,17 @@
-import os
-from typing import List
 from rest_framework import serializers
 from asiam.models import ArticuloProveedor, Articulo, Proveedor
-from asiam.serializers import ArticuloSerializer, ProveedorSerializer
-from django.conf import settings
-from django.conf.urls.static import static
+from asiam.serializers import *
+# from asiam.serializers.proveedorSerializer import *
 
+class ArticuloProveedorSerializerBasics(serializers.ModelSerializer):
+    class Meta:
+        model = ArticuloProveedor
+        field = ('codi_prov')
+        exclude =['created','updated','deleted','esta_ttus','id','codi_arti','codi_arti_prov','obse_arti_prov']
+        
 class ArticuloProveedorSerializer(serializers.ModelSerializer):
-    codi_arti = ArticuloSerializer()
-    codi_prov = ProveedorSerializer()
+    #codi_arti = ArticuloSerializer()
+    #codi_prov = ProveedorSerializer()
 
     class Meta:
         model = ArticuloProveedor

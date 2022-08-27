@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from asiam.models import Sector
+from asiam.serializers import CiudadSerializer, EstadoSerializer
 
 class SectorBasicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,14 +9,16 @@ class SectorBasicSerializer(serializers.ModelSerializer):
         exclude = ['codi_ciud','created','updated','deleted','esta_ttus']
 
 class SectorSerializer(serializers.ModelSerializer):
-    ciudad = serializers.ReadOnlyField(source='codi_ciud.nomb_ciud')
+    codi_ciud = CiudadSerializer()
 
     class Meta:
         model = Sector
-        field = ('id','codi_ciud','ciudad')
-        exclude =['created','updated','deleted','esta_ttus']
+        field = ('id','nomb_sect','codi_ciud','deleted')
+        exclude =['created','updated','esta_ttus']
     
-    def to_representation(self, instance):
-        data = super(SectorSerializer, self).to_representation(instance=instance)
-        data['ciudad'] = data['ciudad'].upper().strip() if data['ciudad'] else data['ciudad']
-        return data
+    def validate_nomb_sect(value,id):
+        queryset = Sector.get_queryset().filter(nomb_sect = value).exclude(id=id)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True

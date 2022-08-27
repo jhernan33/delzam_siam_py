@@ -13,7 +13,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http import HttpResponse
 
-from asiam.models import Natural
+from asiam.models import Natural, Vendedor
 from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -119,7 +119,7 @@ class NaturalUpdateView(generics.UpdateAPIView):
                 # Validate Id Juridica
                 result_riff = NaturalSerializer.validate_riff_pena(request.data['riff_pena'],request.data['cedu_pena'])
                 if result_riff == True:
-                    return message.ShowMessage("RIF no permitido, poruque se encuentra asignado a otra Persona Natural")
+                    return message.ShowMessage("RIF no permitido, porque se encuentra asignado a otra Persona Natural")
 
                 Deleted = request.data['erased']
                 if Deleted:
@@ -149,9 +149,19 @@ class NaturalUpdateView(generics.UpdateAPIView):
 
 class NaturalDestroyView(generics.DestroyAPIView):
     permission_classes = []
-    serializer_class = NaturalSerializer
+    #serializer_class = NaturalSerializer
     lookup_field = 'id'
     queryset = Natural.get_queryset()
+
+    def delete(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            result_natural = Natural.get_queryset().get(id=kwargs['id'])
+            result_natural.deleted = datetime.now()
+            result_natural.save()
+            return message.DeleteMessage('Natural '+str(result_natural.id))
+        except ObjectDoesNotExist:
+            return message.NotFoundMessage("Id de Natural no Registrado")
 
 class NaturalFilterView(generics.ListCreateAPIView):
     permission_classes = ()

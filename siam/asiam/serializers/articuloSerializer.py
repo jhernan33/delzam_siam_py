@@ -1,8 +1,8 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Articulo
-from asiam.serializers import SubFamiliaSerializer
+from asiam.models import Articulo, ArticuloProveedor
+from asiam.serializers.articuloProveedorSerializer import ArticuloProveedorSerializerBasics
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -44,6 +44,10 @@ class ArticuloSerializer(serializers.ModelSerializer):
         representation['cos2_arti'] = 0 if instance.por2_arti is None  else instance.ppre_arti*(instance.por2_arti/100)+instance.ppre_arti
         representation['cos3_arti'] = 0 if instance.por3_arti is None  else instance.ppre_arti*(instance.por3_arti/100)+instance.ppre_arti
         representation['cos4_arti'] = 0 if instance.por4_arti is None  else instance.ppre_arti*(instance.por4_arti/100)+instance.ppre_arti
+
+        queryset = ArticuloProveedor.objects.filter(codi_arti=instance.id)
+        result = ArticuloProveedorSerializerBasics(queryset, many=True).data
+        representation['supplier'] = {"data":result}
         return representation
 
     # def get_totals_images(self,obj):
