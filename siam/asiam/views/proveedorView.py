@@ -36,8 +36,7 @@ class ProveedorListView(generics.ListAPIView):
             return queryset.filter(deleted__isnull=True)
         if show =='all':
             return queryset
-        queryset = queryset.filter(deleted__isnull=True)
-        return queryset
+        return queryset.filter(deleted__isnull=True)
 
 
 class ProveedorCreateView(generics.CreateAPIView):
