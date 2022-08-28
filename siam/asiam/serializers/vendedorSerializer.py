@@ -1,7 +1,7 @@
 from dataclasses import field
 from rest_framework import serializers
 from asiam.serializers import NaturalSerializer
-from asiam.models import Vendedor,Natural
+from asiam.models import Vendedor,Natural,RutaDetalleVendedor
 
 class VendedorBasicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,3 +23,15 @@ class VendedorSerializer(serializers.ModelSerializer):
         model = Vendedor
         field = ('id','fein_vend','foto_vend','codi_natu')
         exclude =['created','updated','deleted','esta_ttus']
+    
+    def to_representation(self, instance):
+        data = super(VendedorSerializer, self).to_representation(instance=instance)
+        # data['nomb_ruta'] = data['nomb_ruta'].upper().strip() if data['nomb_ruta'] else data['nomb_ruta']
+        # data['zona'] = data['zona'].upper().strip() if data['zona'] else data['zona']
+        data['route_count'] = RutaDetalleVendedor.objects.all().filter(codi_vend=instance.id).count()
+
+        # queryset = RutaDetalleVendedor.objects.filter(codi_ruta=instance.id)
+        # result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
+        # data['sellers'] = {"data":result}
+        return data
+    
