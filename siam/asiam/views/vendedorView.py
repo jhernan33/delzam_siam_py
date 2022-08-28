@@ -1,19 +1,13 @@
-from unittest import result
-from urllib.error import HTTPError
-from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
-from genericpath import exists
-import json
-from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import generics
-from rest_framework import filters as df
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import generics, status
-from yaml import serialize
-from django.db import transaction
-
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
 from asiam.models import Natural
@@ -26,10 +20,19 @@ class VendedorListView(generics.ListAPIView):
     permission_classes = ()
     queryset = Vendedor.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    search_fields = ['id','codi_natu_id']
+    ordering_fields = ['id','codi_natu_id']
+    ordering = ['-id']
 
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Vendedor.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=True)
+        if show =='all':
+            return queryset
+        return  queryset.filter(deleted__isnull=True)
 
 class VendedorCreateView(generics.CreateAPIView):
     permission_classes = ()
