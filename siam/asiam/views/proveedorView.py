@@ -26,7 +26,7 @@ class ProveedorListView(generics.ListAPIView):
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     #filterset_fields = ['id','codi_natu_id','codi_juri_id','codi_repr_id']
-    search_fields = ['id','codi_natu__id','codi_juri__id','codi_repr_id']
+    search_fields = ['id','codi_natu_id','codi_juri_id','codi_repr_id']
     ordering_fields = ['id','codi_natu_id','codi_juri_id','codi_repr_id']
     ordering = ['-id']
 
@@ -34,10 +34,10 @@ class ProveedorListView(generics.ListAPIView):
         show = self.request.query_params.get('show')
         queryset = Proveedor.objects.all()
         if show =='true':
-            return queryset.filter(deleted__isnull=False)
+            return queryset.filter(deleted__isnull=True)
         if show =='all':
             return queryset
-        return queryset.filter(deleted__isnull=True)
+        return queryset.filter(deleted__isnull=False)
 
 
 class ProveedorCreateView(generics.CreateAPIView):

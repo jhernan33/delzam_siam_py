@@ -48,12 +48,21 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-
-        natural = Natural.get_queryset().filter(id=instance.codi_natu_id).values('prno_pena','seno_pena','prap_pena','seap_pena')
-        juridica = Juridica.get_queryset().filter(id=instance.codi_juri_id).values('raso_peju')
         
-        representation['description_natural'] = (natural[0]['prno_pena']+' '+natural[0]['seno_pena']+' '+natural[0]['prap_pena']+' '+natural[0]['seap_pena']).upper().strip()
-        representation['description_juridico'] = (juridica[0]['raso_peju']).upper().strip()
+        naturalDescription = None
+        juridicaDescription = None
+
+        result_natural = '' if instance.codi_natu_id is None else Natural.get_queryset().filter(id=instance.codi_natu_id).values('prno_pena','seno_pena','prap_pena','seap_pena')
+        if result_natural.count()>0:
+            naturalDescription = str(result_natural[0]['prno_pena']+' '+result_natural[0]['seno_pena']+' '+result_natural[0]['prap_pena']+' '+result_natural[0]['seap_pena']).upper().strip()
+
+        representation['description_natural'] = naturalDescription
+        
+        if instance.codi_juri_id:
+            juridica = Juridica.get_queryset().filter(id=instance.codi_juri_id).values('raso_peju')     
+            juridicaDescription = (juridica[0]['raso_peju']).upper().strip()
+
+        representation['description_juridico'] = juridicaDescription
         return representation
 
     def validate_codi_natu(value):
