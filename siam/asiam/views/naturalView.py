@@ -159,6 +159,7 @@ class NaturalDestroyView(generics.DestroyAPIView):
             result_natural = Natural.get_queryset().get(id=kwargs['id'])
             result_natural.deleted = datetime.now()
             result_natural.save()
+            # Deleted in Seller, Supplier, Customer
             return message.DeleteMessage('Natural '+str(result_natural.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Natural no Registrado")

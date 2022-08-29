@@ -29,7 +29,7 @@ class VendedorListView(generics.ListAPIView):
         show = self.request.query_params.get('show')
         queryset = Vendedor.objects.all()
         if show =='true':
-            return queryset.filter(deleted__isnull=True)
+            return queryset.filter(deleted__isnull=False)
         if show =='all':
             return queryset
         return  queryset.filter(deleted__isnull=True)
@@ -42,11 +42,11 @@ class VendedorCreateView(generics.CreateAPIView):
             with transaction.atomic():
                     try:
                         result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
-                        result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("cedu_pena"))
+                        result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("codi_natu"))
 
                         if result_natural.count() == 0:
                             try:
-                                natural = Natural.objects.get(cedu_pena = self.request.data.get("cedu_pena"))
+                                natural = Natural.objects.get(codi_natu = self.request.data.get("codi_natu"))
                                 vendedor = Vendedor(
                                     fein_vend       = self.request.data.get("fein_vend")
                                     ,codi_natu_id   = natural.id
