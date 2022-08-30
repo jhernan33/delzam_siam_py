@@ -110,37 +110,41 @@ class VendedorUpdateView(generics.UpdateAPIView):
         except Exception as e:
             return message.NotFoundMessage("Id de Vendedor no Registrado")
         else:
-            try:           
-                # Validate Id Natural
-                result_natural = NaturalSerializer.validate_codi_natu(request.data['codi_natu'])
-                if result_natural == False:
-                    return message.NotFoundMessage("Codigo de la Persona Natural no se encuentra Registrado")
+            with transaction.atomic():
+                try:           
+                    # Validate Id Natural
+                    result_natural = NaturalSerializer.validate_codi_natu(request.data['codi_natu'])
+                    if result_natural == False:
+                        return message.NotFoundMessage("Codigo de la Persona Natural no se encuentra Registrado")
 
-                # Validate Id Natural in Seller
-                result_seller = VendedorSerializer.validate_codi_natu(request.data,instance.id)
-                if result_seller == False:
-                    return message.NotFoundMessage("Codigo Natural Ya Asigando a otro Vendedor")
+                    # Validate Id Natural in Seller
+                    result_seller = VendedorSerializer.validate_codi_natu(request.data,instance.id)
+                    if result_seller == False:
+                        return message.NotFoundMessage("Codigo Natural Ya Asigando a otro Vendedor")
 
-                listImages = request.data['foto_vend']
-                enviroment = os.path.realpath(settings.WEBSERVER_SUPPLIER)
-                ServiceImage = ServiceImageView()
-                json_images = ServiceImage.updateImage(listImages,enviroment)
-                Deleted = request.data['erased']
-                if Deleted:
-                    isdeleted = datetime.now()
-                else:
-                    # Restore Seller and Natural
-                    NaturalSerializer.restoreNatural(Natural.objects.filter(id,request.data['codi_natu']))
-                    isdeleted = None
+                    listImages = request.data['foto_vend']
+                    enviroment = os.path.realpath(settings.WEBSERVER_SUPPLIER)
+                    ServiceImage = ServiceImageView()
+                    json_images = ServiceImage.updateImage(listImages,enviroment)
+                    Deleted = request.data['erased']
+                    if Deleted:
+                        isdeleted = datetime.now()
+                    else:
+                        print("Ingreso a Restaurar")
+                        # Restore Seller and Natural
+                        #print(Natural.objects.filter(id = request.data['codi_natu']).values(id))
+                        object_natural =Natural.objects.filter(id = request.data['codi_natu'])
+                        NaturalSerializer.restoreNatural(object_natural[0].id)
+                        isdeleted = None
 
-                instance.codi_natu = request.data['codi_natu']
-                instance.foto_vend = json_images
-                instance.deleted = isdeleted
-                instance.updated = datetime.now()
-                instance.save()
-                return message.UpdateMessage({"id":instance.id,"natural":instance.codi_natu})
-            except Exception as e:
-                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
+                    instance.codi_natu = request.data['codi_natu']
+                    instance.foto_vend = json_images
+                    instance.deleted = isdeleted
+                    instance.updated = datetime.now()
+                    instance.save()
+                    return message.UpdateMessage({"id":instance.id,"natural":instance.codi_natu})
+                except Exception as e:
+                    return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
     
 
 class VendedorDestroyView(generics.DestroyAPIView):

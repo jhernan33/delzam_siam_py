@@ -63,4 +63,6 @@ class NaturalSerializer(serializers.ModelSerializer):
     
     # Restore Id Deleted
     def restoreNatural(key):
-        Natural.objects.filter(id = key).update(deleted =None)
+        natural = Natural.objects.get(pk=key)
+        natural.deleted = None
+        natural.save()
