@@ -1,12 +1,12 @@
 from datetime import datetime
+import os
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django_filters.rest_framework import DjangoFilterBackend
+from django.conf import settings
 
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import generics, status
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
@@ -14,6 +14,7 @@ from asiam.models import Natural
 from asiam.serializers import VendedorSerializer, VendedorBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from .serviceImageView import ServiceImageView
 
 class VendedorListView(generics.ListAPIView):
     serializer_class = VendedorSerializer
@@ -21,7 +22,7 @@ class VendedorListView(generics.ListAPIView):
     queryset = Vendedor.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','codi_natu_id']
+    search_fields = ['id','codi_natu_id','codi_natu__nombre_completo']
     ordering_fields = ['id','codi_natu_id']
     ordering = ['-id']
 
@@ -39,49 +40,35 @@ class VendedorCreateView(generics.CreateAPIView):
     serializer_class = VendedorSerializer
     
     def create(self, request, *args, **kwargs):
-            with transaction.atomic():
-                    try:
-                        result_natural = Vendedor.objects.all().prefetch_related('codi_natu')
-                        result_natural = result_natural.filter(codi_natu__cedu_pena = self.request.data.get("codi_natu"))
+        message = BaseMessage
+        with transaction.atomic():
+            try:
+                result_seller = Vendedor.get_queryset().filter(codi_natu = self.request.data.get("codi_natu"))
+                if result_seller.count() ==0:
+                    result_natural = Natural.get_queryset().filter(id=self.request.data.get("codi_natu"))
+                    if result_natural.count() >0:
+                        enviroment = os.path.realpath(settings.WEBSERVER_SELLER)
+                        ServiceImage = ServiceImageView()
 
-                        if result_natural.count() == 0:
-                            try:
-                                natural = Natural.objects.get(codi_natu = self.request.data.get("codi_natu"))
-                                vendedor = Vendedor(
-                                    fein_vend       = self.request.data.get("fein_vend")
-                                    ,codi_natu_id   = natural.id
-                                    ,created        = datetime.now()
-                                )
-                                vendedor.save()
-                                return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
-                            except ObjectDoesNotExist:
-                                natural = Natural(
-                                    cedu_pena =  self.request.data.get("cedu_pena"),
-                                    naci_pena =  self.request.data.get("naci_pena"),
-                                    prno_pena =  self.request.data.get("prno_pena"),
-                                    seno_pena =  self.request.data.get("seno_pena"),
-                                    prap_pena =  self.request.data.get("prap_pena"),
-                                    seap_pena =  self.request.data.get("seap_pena"),
-                                    sexo_pena =  self.request.data.get("sexo_pena"),
-                                    codi_ciud_id =  self.request.data.get("codi_ciud_id"),
-                                    codi_sect_id =  self.request.data.get("codi_sect_id"),
-                                    dire_pena =  self.request.data.get("dire_pena"),
-                                    edoc_pena =  self.request.data.get("edoc_pena"),
-                                    created =  datetime.now() 
-                                )
-                                natural.save()
-                            
-                                vendedor = Vendedor(
-                                    fein_vend       = self.request.data.get("fein_vend")
-                                    ,codi_natu_id   = natural.id
-                                    ,created        = datetime.now()
-                                )
-                                vendedor.save()
-                                return Response({'id':vendedor.id, 'feig_vend':vendedor.fein_vend},status=status.HTTP_201_CREATED)
-                        else:
-                            return Response({'data':'Cedula del Vendedor Ya Registrada','Numero de Cedula': self.request.data.get("cedu_pena")},status=status.HTTP_200_OK)
-                    except Natural.DoesNotExist:
-                        return Response({'data':'No se Encontro Natural'},status=status.HTTP_404_NOT_FOUND) 
+                        json_photo_selller = None
+                        if request.data['foto_vend'] is not None:
+                            listImagesProv  = request.data['foto_vend']
+                            json_photo_selller  = ServiceImage.saveImag(listImagesProv,enviroment)
+                        vendedor = Vendedor(
+                            fein_vend       = self.request.data.get("fein_vend")
+                            ,codi_natu_id   = result_natural[0].id
+                            ,foto_vend      = None if json_photo_selller is None else json_photo_selller
+                            ,created        = datetime.now()
+                        )
+                        vendedor.save()
+                        return message.SaveMessage({"id":vendedor.id})
+                    else:
+                        return message.NotFoundMessage("Id de Persona Natural no se encuentra Registrado")
+                else:
+                    return message.ShowMessage('Vendedor ya Registrado')
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Guardar el Proveedor: "+str(e))
+            
                 
 class VendedorRetrieveView(generics.RetrieveAPIView):
     serializer_class = VendedorSerializer
