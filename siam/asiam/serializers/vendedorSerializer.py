@@ -1,4 +1,5 @@
 from dataclasses import field
+from operator import truediv
 import os
 
 from django.conf import settings
@@ -35,7 +36,8 @@ class VendedorBasicSerializer(serializers.ModelSerializer):
 
 class VendedorSerializer(serializers.ModelSerializer):
     codi_natu = NaturalSerializer()
-    
+    foto_vend = JSONSerializerField()
+
     class Meta:
         model = Vendedor
         field = ('id','fein_vend','foto_vend','codi_natu','deleted')
@@ -52,3 +54,13 @@ class VendedorSerializer(serializers.ModelSerializer):
         # data['sellers'] = {"data":result}
         return data
     
+    def validate_codi_natu(data,key):
+        queryset = Vendedor.objects.filter(codi_natu = data['codi_natu'])
+        if queryset.count() == 0:
+            return True
+        else:
+            # Check id 
+            if queryset[0].id == key:
+                return True
+            else:
+                return False

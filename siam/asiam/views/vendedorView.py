@@ -11,19 +11,20 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
 from asiam.models import Natural
-from asiam.serializers import VendedorSerializer, VendedorBasicSerializer
+from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
 
 class VendedorListView(generics.ListAPIView):
+    message = BaseMessage
     serializer_class = VendedorSerializer
     permission_classes = ()
     queryset = Vendedor.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','codi_natu_id','codi_natu__nombre_completo']
-    ordering_fields = ['id','codi_natu_id']
+    search_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena']
+    ordering_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -34,6 +35,8 @@ class VendedorListView(generics.ListAPIView):
         if show =='all':
             return queryset
         return  queryset.filter(deleted__isnull=True)
+
+    
 
 class VendedorCreateView(generics.CreateAPIView):
     permission_classes = ()
@@ -67,7 +70,7 @@ class VendedorCreateView(generics.CreateAPIView):
                 else:
                     return message.ShowMessage('Vendedor ya Registrado')
             except Exception as e:
-                return message.ErrorMessage("Error al Intentar Guardar el Proveedor: "+str(e))
+                return message.ErrorMessage("Error al Intentar Guardar el Vendedor: "+str(e))
             
                 
 class VendedorRetrieveView(generics.RetrieveAPIView):
@@ -75,6 +78,14 @@ class VendedorRetrieveView(generics.RetrieveAPIView):
     permission_classes = ()
     queryset = Vendedor.get_queryset()
     lookup_field = 'id'
+
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Vendedor.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        
+        return queryset.filter(deleted__isnull=True)
 
     def retrieve(self, request, *args, **kwargs):
         message = BaseMessage
@@ -89,20 +100,47 @@ class VendedorRetrieveView(generics.RetrieveAPIView):
 class VendedorUpdateView(generics.UpdateAPIView):
     serializer_class = VendedorSerializer
     permission_classes = ()
-    queryset = Vendedor.get_queryset()
+    queryset = Vendedor.objects.all()
     lookup_field = 'id'
     
     def update(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_update = Vendedor.get_queryset().get(id=kwargs['id'])
-            result_update.fein_vend = self.request.data.get("fein_vend")
-            result_update.updated = datetime.now()
-            result_update.save()
-            serialize = VendedorSerializer(result_update)
-            return message.UpdateMessage(serialize.data) 
+            instance = self.get_object()
         except Exception as e:
             return message.NotFoundMessage("Id de Vendedor no Registrado")
+        else:
+            try:           
+                # Validate Id Natural
+                result_natural = NaturalSerializer.validate_codi_natu(request.data['codi_natu'])
+                if result_natural == False:
+                    return message.NotFoundMessage("Codigo de la Persona Natural no se encuentra Registrado")
+
+                # Validate Id Natural in Seller
+                result_seller = VendedorSerializer.validate_codi_natu(request.data,instance.id)
+                if result_seller == False:
+                    return message.NotFoundMessage("Codigo Natural Ya Asigando a otro Vendedor")
+
+                listImages = request.data['foto_vend']
+                enviroment = os.path.realpath(settings.WEBSERVER_SUPPLIER)
+                ServiceImage = ServiceImageView()
+                json_images = ServiceImage.updateImage(listImages,enviroment)
+                Deleted = request.data['erased']
+                if Deleted:
+                    isdeleted = datetime.now()
+                else:
+                    # Restore Seller and Natural
+                    NaturalSerializer.restoreNatural(Natural.objects.filter(id,request.data['codi_natu']))
+                    isdeleted = None
+
+                instance.codi_natu = request.data['codi_natu']
+                instance.foto_vend = json_images
+                instance.deleted = isdeleted
+                instance.updated = datetime.now()
+                instance.save()
+                return message.UpdateMessage({"id":instance.id,"natural":instance.codi_natu})
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
     
 
 class VendedorDestroyView(generics.DestroyAPIView):
@@ -116,6 +154,7 @@ class VendedorDestroyView(generics.DestroyAPIView):
                 vendedor = Vendedor.objects.get(pk=kwargs['id'])
                 vendedor.deleted = datetime.now()
                 vendedor.save()
+                # Deleted Natural
                 natural = Natural.objects.get(pk=vendedor.codi_natu_id)
                 natural.deleted = datetime.now()
                 natural.save()
