@@ -12,7 +12,7 @@ class ServiceImageView():
         is_many = isinstance(arg,list)
         if is_many:
             listImages = arg
-            ite=1;
+            ite=1
             obj_json = []
             place = os.path.realpath(settings.MEDIA_ROOT)
             for l in listImages:
@@ -32,7 +32,7 @@ class ServiceImageView():
         is_many = isinstance(arg,list)
         if is_many:
             listImages = arg
-            ite=0;
+            ite=0
             obj_json = []
             place = os.path.realpath(settings.MEDIA_ROOT)
             for l in listImages:

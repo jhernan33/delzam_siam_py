@@ -1,17 +1,17 @@
 from datetime import datetime
-from django.shortcuts import render
-from rest_framework import generics, status
-
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
 
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
-
-from django.http.response import JsonResponse
+from rest_framework import generics, status
+from rest_framework.response import Response
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
+
+from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.http.response import JsonResponse
 from django.http import HttpResponse
+from django.db.models import Exists, OuterRef
 
 from asiam.models import Natural, Vendedor
 from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
@@ -159,6 +159,7 @@ class NaturalDestroyView(generics.DestroyAPIView):
             result_natural = Natural.get_queryset().get(id=kwargs['id'])
             result_natural.deleted = datetime.now()
             result_natural.save()
+            # Deleted in Seller, Supplier, Customer
             return message.DeleteMessage('Natural '+str(result_natural.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Natural no Registrado")
@@ -183,5 +184,12 @@ class NaturalComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Natural.get_queryset().order_by('-id')
-        return queryset
+        show = self.request.query_params.get('show',None)
+
+        queryset = Natural.objects.filter(
+            ~Exists(Vendedor.objects.filter(codi_natu =OuterRef('pk')))
+            ).order_by('-id')
+        if show =='true':
+            return queryset.all()
+        if show =='false' or show is None:
+            return queryset.filter(deleted__isnull=True)

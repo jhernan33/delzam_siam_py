@@ -33,7 +33,7 @@ class ProveedorListView(generics.ListAPIView):
         show = self.request.query_params.get('show')
         queryset = Proveedor.objects.all()
         if show =='true':
-            return queryset.filter(deleted__isnull=True)
+            return queryset.filter(deleted__isnull=False)
         if show =='all':
             return queryset
         return queryset.filter(deleted__isnull=True)

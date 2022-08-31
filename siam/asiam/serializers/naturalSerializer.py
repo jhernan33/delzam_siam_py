@@ -11,7 +11,7 @@ class NaturalBasicSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        natural = Natural.get_queryset().filter(id=instance.id).values('prno_pena','seno_pena','prap_pena','seap_pena')
+        natural = Natural.objects.filter(id=instance.id).values('prno_pena','seno_pena','prap_pena','seap_pena')
         
         representation['description'] = (natural[0]['prno_pena']+' '+natural[0]['seno_pena']+' '+natural[0]['prap_pena']+' '+natural[0]['seap_pena']).strip().upper()
         return representation
@@ -53,3 +53,6 @@ class NaturalSerializer(serializers.ModelSerializer):
             return False
         else:
             return True
+    
+    
+    

@@ -1,8 +1,26 @@
 from dataclasses import field
+from operator import truediv
+import os
+
+from django.conf import settings
 from rest_framework import serializers
 from asiam.serializers import NaturalSerializer
 from asiam.models import Vendedor,Natural,RutaDetalleVendedor
 
+class JSONSerializerField(serializers.Field):
+    """Serializer for JSONField -- required to make field writable"""
+
+    def to_representation(self, value):
+        if isinstance(value, list):
+            place = settings.WEBSERVER_IMAGES
+            enviromentSeller = os.path.realpath(settings.WEBSERVER_SELLER)[1:]+'/'
+            for obj in value:
+                obj['image'] = place+enviromentSeller+obj['image']
+            return value
+
+    def to_internal_value(self, data):
+        return data
+        
 class VendedorBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendedor
@@ -18,11 +36,12 @@ class VendedorBasicSerializer(serializers.ModelSerializer):
 
 class VendedorSerializer(serializers.ModelSerializer):
     codi_natu = NaturalSerializer()
-    
+    foto_vend = JSONSerializerField()
+
     class Meta:
         model = Vendedor
-        field = ('id','fein_vend','foto_vend','codi_natu')
-        exclude =['created','updated','deleted','esta_ttus']
+        field = ('id','fein_vend','foto_vend','codi_natu','deleted')
+        exclude =['created','updated','esta_ttus']
     
     def to_representation(self, instance):
         data = super(VendedorSerializer, self).to_representation(instance=instance)
@@ -34,4 +53,3 @@ class VendedorSerializer(serializers.ModelSerializer):
         # result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         # data['sellers'] = {"data":result}
         return data
-    
