@@ -38,6 +38,7 @@ class NaturalSerializer(serializers.ModelSerializer):
         data['riff_pena'] = data['riff_pena'].upper().strip() if data['riff_pena'] else data['riff_pena']
         data['nombre_completo'] = data['prno_pena'].upper().strip()+' '+data['seno_pena'].upper().strip() if data['prno_pena'].upper().strip() else data['prno_pena'].upper().strip()
         data['apellido_completo'] = data['prap_pena'].upper().strip()+' '+data['seap_pena'].upper().strip() if data['prap_pena'].upper().strip() else data['prap_pena'].upper().strip()
+        data['natural'] = data['nombre_completo'].upper().strip()+' '+data['apellido_completo'].upper().strip()
         return data
     
     def validate_cedu_pena(value):

@@ -183,11 +183,11 @@ urlpatterns = [
     path('ivaDetalle/update/<int:id>',             views.IvaUpdateView.as_view(),   name='ivaDetalle_update'),
     path('ivaDetalle/delete/<int:id>',             views.IvaDestroyView.as_view(),  name='ivaDetalle_delete'),
 
-    path('cliente/',                            views.ClienteListView.as_view(),     name='cliente'),
-    path('cliente/create/',                     views.ClienteCreateView.as_view(),   name='cliente_create'),
-    path('cliente/<int:id>/',                   views.ClienteRetrieveView.as_view(), name='cliente'),
-    path('cliente/update/<int:id>',             views.ClienteUpdateView.as_view(),   name='cliente_update'),
-    path('cliente/delete/<int:id>',             views.ClienteDestroyView.as_view(),  name='cliente_delete'),
+    path('cliente/',                                views.ClienteListView.as_view(),     name='cliente'),
+    path('cliente/create/',                         views.ClienteCreateView.as_view(),   name='cliente_create'),
+    path('cliente/<int:id>/',                       views.ClienteRetrieveView.as_view(), name='cliente'),
+    path('cliente/update/<int:id>',                 views.ClienteUpdateView.as_view(),   name='cliente_update'),
+    path('cliente/delete/<int:id>',                 views.ClienteDestroyView.as_view(),  name='cliente_delete'),
 
     # Presentacion
     path('presentacion/',                            views.PresentacionListView.as_view(),     name='presentacion'),

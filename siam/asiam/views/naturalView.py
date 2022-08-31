@@ -184,11 +184,16 @@ class NaturalComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
+        queryset = Natural.objects.all()
         show = self.request.query_params.get('show',None)
-
-        queryset = Natural.objects.filter(
-            ~Exists(Vendedor.objects.filter(codi_natu =OuterRef('pk')))
-            ).order_by('-id')
+        seller = self.request.query_params.get('seller',None)
+        
+        # Parameter Seller
+        if seller == 'true':
+            return  Natural.objects.filter(
+                ~Exists(Vendedor.objects.filter(codi_natu =OuterRef('pk')))
+                ).order_by('-id')
+            
         if show =='true':
             return queryset.all()
         if show =='false' or show is None:
