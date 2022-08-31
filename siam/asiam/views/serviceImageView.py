@@ -39,7 +39,6 @@ class ServiceImageView():
                 ite +=1
                 checkBase64 = re.search("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$", l['image'])
                 if checkBase64:
-                    print("Imagen Nueva")
                     # Save Base 64
                     image = base64.b64decode(str(l['image']))
                     img = Image.open(io.BytesIO(image))
@@ -50,7 +49,6 @@ class ServiceImageView():
                     img.save(imagePath)
                     obj_json.append({'id':ite, 'image':fileName})
                 else:
-                    print("Imagen Ya Registrada")
                     cadena_image = l['image']
                     enviroment_string = argDue+'/'
                     length_enviroment = len(enviroment_string)
