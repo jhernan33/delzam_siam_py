@@ -11,7 +11,7 @@ from rest_framework import generics
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
-from asiam.models import Natural
+from asiam.models import Natural,RutaDetalleVendedor, Ruta
 from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -173,5 +173,17 @@ class VendedorComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Vendedor.get_queryset().order_by('-id')
-        return queryset
+        queryset = Vendedor.objects.all().order_by('-id')
+
+        show = self.request.query_params.get('show',None)
+        route = self.request.query_params.get('route',None)
+        
+        # Parameter route
+        if route:
+            queryset = Vendedor.get_queryset() # RutaDetalleVendedor.get_queryset().filter(codi_ruta = route)
+            return queryset
+            
+        if show =='true':
+            return queryset.all()
+        if show =='false' or show is None:
+            return queryset.filter(deleted__isnull=True)

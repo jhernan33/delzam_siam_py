@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 
 from asiam.models import Ruta,Zona,Vendedor,RutaDetalleVendedor
-from asiam.serializers import RutaSerializer
+from asiam.serializers import RutaSerializer, RutaBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -41,45 +41,6 @@ class RutaCreateView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         message = BaseMessage
-        # # many = isinstance(request.data,list)
-        # serializer = self.get_serializer(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        # self.perform_create(serializer)
-        # serializer.save(created = datetime.now())
-        # headers = self.get_success_headers(serializer.data)
-        # return message.SaveMessage(serializer.data)
-
-        # try:
-        #     result_ruta = Ruta.get_queryset().filter(nomb_ruta = self.request.data.get("nomb_ruta"))
-        #     if result_ruta.count()==0:
-        #         with transaction.atomic():
-        #             try:
-        #                 ruta = Ruta(
-        #                     nomb_ruta = self.request.data.get("nomb_ruta"),
-        #                     codi_zona = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) ,
-        #                     created =  datetime.now(),
-        #                 )
-        #                 ruta.save()
-
-        #                 # rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = ruta.id,
-        #                 #     codi_vend = Vendedor.get_queryset().get(id = self.request.data.get('codi_vend')),
-        #                 #     created =  datetime.now(),
-        #                 #     )
-        #                 # rutaDetalle.save()
-        #                 return message.SaveMessage("Ruta Guardada con Exito")
-        #             except Exception as e:
-        #                 return message.ErrorMessage(str(e))
-                    
-        # except Exception as e:
-        #         # Verificar si la Ruta y Vendedor estan registrados en RutaDetalleVendedor
-        #         rutaDetalle = RutaDetalleVendedor.get_queryset().filter(codi_ruta=self.request.data.get("codi_ruta")).filter(codi_vend = self.request.data.get("codi_vend"))
-        #         if rutaDetalle.count()==0:
-        #             rutaDetalle  = RutaDetalleVendedor(codi_ruta = self.request.data.get("codi_ruta"),
-        #                 codi_vend = self.request.data.get('codi_vent'),
-        #                 )
-        #             rutaDetalle.save()
-        #         return message.SaveMessage("Ruta Guardada con Exito")
-
         try:
             name_route = self.request.data.get("nomb_ruta").upper().strip()
             code_zone = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) 
@@ -141,19 +102,6 @@ class RutaUpdateView(generics.UpdateAPIView):
     queryset = Ruta.objects.all()
     lookup_field = 'id'
 
-    # def update(self, request, *args, **kwargs):
-    #     message = BaseMessage
-    #     try:
-    #         instance = self.get_object()
-    #     except Exception as e:
-    #         return message.NotFoundMessage("Id de Ruta no Registrada")
-    #     else:
-    #         serializer = self.get_serializer(instance, data=request.data, partial=True)
-    #         if serializer.is_valid():
-    #             serializer.save(updated = datetime.now())
-    #             return message.UpdateMessage(serializer.data)
-    #         else:
-    #             return message.ErrorMessage("Error al Intentar Actualizar Ruta")
     def update(self, request, *args, **kwargs):
         message = BaseMessage
         try:
@@ -210,9 +158,21 @@ class RutaDestroyView(generics.DestroyAPIView):
 
 class RutaComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = RutaSerializer
+    serializer_class = RutaBasicSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Ruta.get_queryset().order_by('-id')
-        return queryset
+        queryset = Ruta.objects.all()
+
+        show = self.request.query_params.get('show',None)
+        zone = self.request.query_params.get('zone',None)
+        
+        # Parameter Zone
+        if zone:
+            return queryset.filter(codi_zona = zone).filter(deleted__isnull=True)
+            
+        if show =='true':
+            return queryset.all()
+        if show =='false' or show is None:
+            return queryset.filter(deleted__isnull=True)
+        

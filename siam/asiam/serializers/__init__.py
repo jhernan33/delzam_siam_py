@@ -15,7 +15,7 @@ from .familiaSerializer import FamiliaSerializer
 from .subFamiliaSerializer import SubFamiliaSerializer
 from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
 from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
-from .rutaSerializer import RutaSerializer
+from .rutaSerializer import RutaSerializer, RutaBasicSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
