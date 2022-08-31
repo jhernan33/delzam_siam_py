@@ -20,3 +20,14 @@ class Vendedor(Base):
 
     def get_queryset():
         return Vendedor.objects.all().filter(deleted__isnull=True)
+    
+    def validate_codi_natu(data,key):
+        queryset = Vendedor.objects.filter(codi_natu = data['codi_natu'])
+        if queryset.count() == 0:
+            return True
+        else:
+            # Check id 
+            if queryset[0].id == key:
+                return True
+            else:
+                return False

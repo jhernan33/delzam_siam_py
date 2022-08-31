@@ -54,15 +54,5 @@ class NaturalSerializer(serializers.ModelSerializer):
         else:
             return True
     
-    def validate_codi_natu(value):
-        queryset = Natural.objects.filter(id = value)
-        if queryset.count() == 0:
-            return False
-        else:
-            return True
     
-    # Restore Id Deleted
-    def restoreNatural(key):
-        natural = Natural.objects.get(pk=key)
-        natural.deleted = None
-        natural.save()
+    

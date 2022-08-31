@@ -53,14 +53,3 @@ class VendedorSerializer(serializers.ModelSerializer):
         # result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         # data['sellers'] = {"data":result}
         return data
-    
-    def validate_codi_natu(data,key):
-        queryset = Vendedor.objects.filter(codi_natu = data['codi_natu'])
-        if queryset.count() == 0:
-            return True
-        else:
-            # Check id 
-            if queryset[0].id == key:
-                return True
-            else:
-                return False

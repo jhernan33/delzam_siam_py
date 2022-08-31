@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 import os
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -11,7 +12,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
 from asiam.models import Natural
-from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer
+from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -113,36 +114,36 @@ class VendedorUpdateView(generics.UpdateAPIView):
             with transaction.atomic():
                 try:           
                     # Validate Id Natural
-                    result_natural = NaturalSerializer.validate_codi_natu(request.data['codi_natu'])
+                    result_natural = Natural.validate_codi_natu(request.data['codi_natu'])
                     if result_natural == False:
                         return message.NotFoundMessage("Codigo de la Persona Natural no se encuentra Registrado")
 
                     # Validate Id Natural in Seller
-                    result_seller = VendedorSerializer.validate_codi_natu(request.data,instance.id)
+                    result_seller = Vendedor.validate_codi_natu(request.data,instance.id)
                     if result_seller == False:
                         return message.NotFoundMessage("Codigo Natural Ya Asigando a otro Vendedor")
 
                     listImages = request.data['foto_vend']
-                    enviroment = os.path.realpath(settings.WEBSERVER_SUPPLIER)
+                    enviroment = os.path.realpath(settings.WEBSERVER_SELLER)
                     ServiceImage = ServiceImageView()
                     json_images = ServiceImage.updateImage(listImages,enviroment)
+
                     Deleted = request.data['erased']
                     if Deleted:
                         isdeleted = datetime.now()
                     else:
-                        print("Ingreso a Restaurar")
-                        # Restore Seller and Natural
-                        #print(Natural.objects.filter(id = request.data['codi_natu']).values(id))
-                        object_natural =Natural.objects.filter(id = request.data['codi_natu'])
-                        NaturalSerializer.restoreNatural(object_natural[0].id)
+                        result_natural = Natural.objects.get(id=request.data['codi_natu'])
+                        result_natural.deleted = None
+                        result_natural.save()
                         isdeleted = None
 
-                    instance.codi_natu = request.data['codi_natu']
+                    instance.codi_natu = Natural.objects.get(id = self.request.data.get("codi_natu"))
                     instance.foto_vend = json_images
+                    instance.fein_vend = self.request.data.get("fein_vend")
                     instance.deleted = isdeleted
                     instance.updated = datetime.now()
                     instance.save()
-                    return message.UpdateMessage({"id":instance.id,"natural":instance.codi_natu})
+                    return message.UpdateMessage({"id":instance.id})
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
     

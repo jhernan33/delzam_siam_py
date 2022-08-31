@@ -46,3 +46,17 @@ class Natural(Base):
     
     def get_queryset():
         return Natural.objects.all().filter(deleted__isnull=True)
+
+    # Restore Id Deleted
+    def restoreNatural(key):
+        # natural = Natural.objects.get(pk=key)
+        # natural.deleted = None
+        # natural.save()
+        Natural.objects.filter(id=key).update(deleted =None)
+    
+    def validate_codi_natu(value):
+        queryset = Natural.objects.filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
