@@ -8,6 +8,7 @@ class Ruta(Base):
         related_name='Zona',
     )
     nomb_ruta = models.CharField    ('Nombre de la Ruta', max_length=200, null=True, blank=True)
+    posi_ruta = models.IntegerField('Posicion de la Ruta',null=True, blank=True)
 
     class Meta:
         ordering = ['-id']
