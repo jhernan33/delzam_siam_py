@@ -15,7 +15,7 @@ class JSONSerializerField(serializers.Field):
             place = settings.WEBSERVER_IMAGES
             enviromentArticle = os.path.realpath(settings.WEBSERVER_CUSTOMER)[1:]+'/'
             for obj in value:
-                obj['image'] = place+enviromentArticle+obj['image'];
+                obj['image'] = place+enviromentArticle+obj['image']
             return value
 
     def to_internal_value(self, data):
@@ -28,7 +28,8 @@ class ClienteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cliente
-        field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plzr_clie','prde_clie','prau_clie','codi_vend','codi_natu','codi_juri','foto_clie','obse_clie','deleted')
+        field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plzr_clie'
+        ,'prde_clie','prau_clie','codi_vend','codi_natu','codi_juri','foto_clie','obse_clie','deleted')
         exclude =['created','updated','esta_ttus']
     
     def validate_codi_vend(value):

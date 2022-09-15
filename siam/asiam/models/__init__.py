@@ -27,6 +27,9 @@ from .ivaGeneral import IvaGeneral
 from .presentacion import Presentacion
 from .proveedor import Proveedor
 from .articuloProveedor import ArticuloProveedor
+from .categoriaContacto import CategoriaContacto
+from .grupoCategoriaContacto import GrupoCategoriaContacto
+from .contacto import Contacto
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco

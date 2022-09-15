@@ -147,7 +147,7 @@ DATABASES = {
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '159.223.168.118',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },    
 }
@@ -283,13 +283,15 @@ DEFAULT_AUTO_FIELD =  'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(DIR,'media')
 
 MEDIA_URL = '/media/'
-WEBSERVER_ARTICLE = '/article/'
-WEBSERVER_CUSTOMER = '/customer/'
-WEBSERVER_SELLER = '/seller/'
-WEBSERVER_PORT=':8082'
-WEBSERVER_HOST='159.223.168.118'
-WEBSERVER_SUPPLIER = '/supplier/'
-WEBSERVER_LEGAL    = '/legal/'
+WEBSERVER_ARTICLE   = '/article/'
+WEBSERVER_CUSTOMER  = '/customer/'
+WEBSERVER_SELLER    = '/seller/'
+WEBSERVER_SUPPLIER  = '/supplier/'
+WEBSERVER_LEGAL     = '/legal/'
+WEBSERVER_PORT      =':8082'
+WEBSERVER_HOST      ='159.223.168.118'
+WEBSERVER_SUPPLIER  = '/supplier/'
+WEBSERVER_LEGAL     = '/legal/'
 WEBSERVER_PROTOCOL='http://'
 WEBSERVER_API='/siam'
 WEBSERVER_IMAGES = WEBSERVER_PROTOCOL+WEBSERVER_HOST+WEBSERVER_PORT+WEBSERVER_API+MEDIA_URL

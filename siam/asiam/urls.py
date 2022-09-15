@@ -183,11 +183,11 @@ urlpatterns = [
     path('ivaDetalle/update/<int:id>',             views.IvaUpdateView.as_view(),   name='ivaDetalle_update'),
     path('ivaDetalle/delete/<int:id>',             views.IvaDestroyView.as_view(),  name='ivaDetalle_delete'),
 
-    path('cliente/',                            views.ClienteListView.as_view(),     name='cliente'),
-    path('cliente/create/',                     views.ClienteCreateView.as_view(),   name='cliente_create'),
-    path('cliente/<int:id>/',                   views.ClienteRetrieveView.as_view(), name='cliente'),
-    path('cliente/update/<int:id>',             views.ClienteUpdateView.as_view(),   name='cliente_update'),
-    path('cliente/delete/<int:id>',             views.ClienteDestroyView.as_view(),  name='cliente_delete'),
+    path('cliente/',                                views.ClienteListView.as_view(),     name='cliente'),
+    path('cliente/create/',                         views.ClienteCreateView.as_view(),   name='cliente_create'),
+    path('cliente/<int:id>/',                       views.ClienteRetrieveView.as_view(), name='cliente'),
+    path('cliente/update/<int:id>',                 views.ClienteUpdateView.as_view(),   name='cliente_update'),
+    path('cliente/delete/<int:id>',                 views.ClienteDestroyView.as_view(),  name='cliente_delete'),
 
     # Presentacion
     path('presentacion/',                            views.PresentacionListView.as_view(),     name='presentacion'),
@@ -214,6 +214,22 @@ urlpatterns = [
     path('proveedorArticulo/update/<int:id>',     views.ArticuloProveedorUpdateView.as_view(),   name='proveedorArticulo_update'),
     path('proveedorArticulo/delete/<int:id>',     views.ArticuloProveedorDestroyView.as_view(),  name='proveedorArticulo_delete'),
     path('proveedorArticulo/combo/',              views.ArticuloProveedorComboView.as_view(),    name='proveedorArticulo_combo'),
+
+    # Category Contact
+    path('categoriaContacto/',                    views.CategoriaContactoListView.as_view(),     name='categoriaContacto'),
+    path('categoriaContacto/create/',             views.CategoriaContactoCreateView.as_view(),   name='categoriaContacto_create'),
+    path('categoriaContacto/<int:id>/',           views.CategoriaContactoRetrieveView.as_view(), name='categoriaContacto'),
+    path('categoriaContacto/update/<int:id>',     views.CategoriaContactoUpdateView.as_view(),   name='categoriaContacto_update'),
+    path('categoriaContacto/delete/<int:id>',     views.CategoriaContactoDestroyView.as_view(),  name='categoriaContacto_delete'),
+    path('categoriaContacto/combo/',              views.CategoriaContactoComboView.as_view(),    name='categoriaContacto_combo'),
+
+    # Group Category Contact
+    path('grupocc/',                              views.GrupoCategoriaContactoListView.as_view(),     name='grupoCategoriaContacto'),
+    path('grupocc/create/',                       views.GrupoCategoriaContactoCreateView.as_view(),   name='grupoCategoriaContacto_create'),
+    path('grupocc/<int:id>/',                     views.GrupoCategoriaContactoRetrieveView.as_view(), name='grupoCategoriaContacto'),
+    path('grupocc/update/<int:id>',               views.GrupoCategoriaContactoUpdateView.as_view(),   name='grupoCategoriaContacto_update'),
+    path('grupocc/delete/<int:id>',               views.GrupoCategoriaContactoDestroyView.as_view(),  name='grupoCategoriaContacto_delete'),
+    path('grupocc/combo/',                        views.GrupoCategoriaContactoComboView.as_view(),    name='grupoCategoriaContacto_combo'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),

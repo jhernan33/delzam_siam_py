@@ -8,7 +8,7 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from yaml import serialize
 
-from asiam.models import Juridica
+from asiam.models import Juridica, Ciudad, Sector, TipoEmpresa
 from asiam.serializers import JuridicaSerializer, JuridicaBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -21,9 +21,24 @@ class JuridicaListView(generics.ListAPIView):
     queryset = Juridica.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends = (df.SearchFilter, )
-    search_fields = ('id', )
-    ordering_fields = ('id', )
+    search_fields = ('id','riff_peju','raso_peju','desc_peju','dofi_peju','desc_peju','pure_peju')
+    ordering_fields = ('id','riff_peju','raso_peju','desc_peju','dofi_peju','desc_peju','pure_peju')
 
+    def get_queryset(self):
+        show = self.request.query_params.get('show',None)
+
+        queryset = Juridica.objects.all().order_by('-id')
+        if show =='true':
+            queryset = queryset.filter(deleted__isnull=False)
+        if show =='false' or show is None:
+            queryset = queryset.filter(deleted__isnull=True)        
+
+        field = self.request.query_params.get('field',None)
+        value = self.request.query_params.get('value',None)
+        if field is not None and value is not None:
+            if field=='riff_peju':
+                queryset = queryset.filter(riff_peju=value)
+        return queryset
 
 class JuridicaCreateView(generics.CreateAPIView):
     permission_classes = ()
@@ -38,29 +53,29 @@ class JuridicaCreateView(generics.CreateAPIView):
             if result_juridica.count() == 0 and result_raso.count() ==0:
                 enviroment = os.path.realpath(settings.WEBSERVER_LEGAL)
                 ServiceImage = ServiceImageView()
+                json_foto_riff = None
+                json_foto_loca = None
                 try:
-                    if request.data['fori_peju'] is None:
-                        listImagesRiff  = request.data['fori_peju']
-                        json_foto_riff  = ServiceImage.saveImag(listImagesRiff,enviroment)
+                    listImagesRiff  = request.data['fori_peju']
+                    json_foto_riff  = ServiceImage.saveImag(listImagesRiff,enviroment)
 
-                    if request.data['folo_peju'] is None:
-                        listImagesLocal = request.data['folo_peju']
-                        json_foto_loca = ServiceImage.saveImag(listImagesLocal,enviroment)
+                    listImagesLocal = request.data['folo_peju']
+                    json_foto_loca = ServiceImage.saveImag(listImagesLocal,enviroment)
 
                     juridica = Juridica(
-                        riff_peju       = self.request.data.get("riff_peju").strip().upper()
-                        ,raso_peju      = self.request.data.get("raso_peju").strip().upper()
-                        ,dofi_peju      = self.request.data.get("dofi_peju").strip().upper()
+                        riff_peju       = str(self.request.data.get("riff_peju")).strip().upper()
+                        ,raso_peju      = str(self.request.data.get("raso_peju")).strip().upper()
+                        ,dofi_peju      = str(self.request.data.get("dofi_peju")).strip().upper()
                         ,ivaa_peju      = self.request.data.get("ivaa_peju")
                         ,islr_peju      = self.request.data.get("islr_peju")
-                        ,desc_peju      = self.request.data.get("desc_peju").strip().upper()
-                        ,fori_peju      = '' if json_foto_riff is None else json_foto_riff
-                        ,folo_peju      = '' if json_foto_loca is None else json_foto_loca
-                        ,pure_peju      = self.request.data.get("pure_peju").strip().upper()
+                        ,desc_peju      = str(self.request.data.get("desc_peju")).strip().upper()
+                        ,fori_peju      = None if json_foto_riff is None else json_foto_riff
+                        ,folo_peju      = None if json_foto_loca is None else json_foto_loca
+                        ,pure_peju      = str(self.request.data.get("pure_peju")).strip().upper()
                         ,fevi_peju      = self.request.data.get("fevi_peju")
-                        ,codi_ciud_id   = self.request.data.get("codi_ciud_id")
-                        ,codi_sect_id   = self.request.data.get("codi_sect_id")
-                        ,codi_tiem_id   = self.request.data.get("codi_tiem_id")
+                        ,codi_ciud_id   = self.request.data.get("codi_ciud")
+                        ,codi_sect_id   = self.request.data.get("codi_sect")
+                        ,codi_tiem_id   = self.request.data.get("codi_tiem")
                         ,created        = datetime.now()
                     )
                     juridica.save()
@@ -80,16 +95,87 @@ class JuridicaRetrieveView(generics.RetrieveAPIView):
     queryset = Juridica.get_queryset()
     lookup_field = 'id'
 
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Juridica.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        
+        return queryset.filter(deleted__isnull=True)
+
 class JuridicaUpdateView(generics.UpdateAPIView):
     serializer_class = JuridicaSerializer
     permission_classes = ()
-    queryset = Juridica.get_queryset()
-    lookup_field = 'id'    
+    queryset = Juridica.objects.all()
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Juridica no Registrado")
+        else:
+            enviroment = os.path.realpath(settings.WEBSERVER_LEGAL)
+            ServiceImage = ServiceImageView()
+            json_foto_riff = None
+            json_foto_loca = None
+            try:
+                #if request.data['fori_peju'] is None:
+                listImagesRiff  = request.data['fori_peju']
+                json_foto_riff  = ServiceImage.updateImage(listImagesRiff,enviroment)
+
+                #if request.data['folo_peju'] is None:
+                listImagesLocal = request.data['folo_peju']
+                json_foto_loca = ServiceImage.updateImage(listImagesLocal,enviroment)
+
+                # Validate Rif Juridica
+                result_riff = JuridicaSerializer.validate_riff_peju(request.data['riff_peju'],instance.id)
+                if result_riff == True:
+                    return message.ShowMessage("RIF no permitido, porque se encuentra asignado a otra Empresa")
+
+                Deleted = request.data['erased']
+                if Deleted:
+                    isdeleted = datetime.now()
+                else:
+                    isdeleted = None
+
+                instance.riff_peju      = str(self.request.data.get("riff_peju")).strip().upper()
+                instance.raso_peju      = str('' if self.request.data.get("raso_peju") is None else self.request.data.get("raso_peju")).strip().upper()
+                instance.dofi_peju      = str('' if self.request.data.get("dofi_peju") is None else self.request.data.get("dofi_peju")).strip().upper()
+                instance.ivaa_peju      = str('' if self.request.data.get("ivaa_peju") is None else self.request.data.get("ivaa_peju")).strip().upper()
+                instance.islr_peju      = str('' if self.request.data.get("islr_peju") is None else self.request.data.get("islr_peju")).strip().upper()
+                instance.desc_peju      = str('' if self.request.data.get("desc_peju") is None else self.request.data.get("desc_peju")).strip().upper()
+                instance.fori_peju      = None if json_foto_riff is None else json_foto_riff
+                instance.folo_peju      = None if json_foto_loca is None else json_foto_loca
+                instance.fevi_peju      = None if self.request.data.get("fevi_peju") is None else self.request.data.get("fevi_peju")
+                instance.pure_peju      = str('' if self.request.data.get("pure_peju") is None else self.request.data.get("pure_peju")).strip().upper()
+                instance.codi_ciud_id   = Ciudad.objects.get(id = self.request.data.get("codi_ciud"))
+                instance.codi_sect_id   = Sector.objects.get(id = self.request.data.get("codi_sect"))
+                instance.codi_tiem_id   = TipoEmpresa.objects.get(id = self.request.data.get("codi_tiem"))
+                instance.deleted = isdeleted
+                instance.updated = datetime.now()
+                instance.save()
+                return message.UpdateMessage(" La informacion de la Persona Juridica con el Identificador: "+str(instance.id))
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class JuridicaDestroyView(generics.DestroyAPIView):
     permission_classes = ()
-    queryset = Juridica.get_queryset()
+    # queryset = Juridica.get_queryset()
     lookup_field = 'id'
+
+    def delete(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            result_juridic = Juridica.get_queryset().get(id=kwargs['id'])
+            result_juridic.deleted = datetime.now()
+            result_juridic.save()
+            # Deleted in Seller, Supplier, Customer
+            return message.DeleteMessage('Persona Juridica '+str(result_juridic.id))
+        except ObjectDoesNotExist:
+            return message.NotFoundMessage("Id de Persona Juridica no Registrado")
+
 
 class JuridicaComboView(generics.ListAPIView):
     permission_classes = []

@@ -28,6 +28,7 @@ class Cliente(Base):
     )
     foto_clie = models.JSONField  ('Foto del Cliente',null=True, blank=True)
     obse_clie = models.TextField('Observaciones del Cliente',null=True, blank=True)
+    posi_clie = models.IntegerField('Posicion del Cliente para la Entrega',null=True, blank=True)
 
     class Meta:
         ordering = ['codi_natu']

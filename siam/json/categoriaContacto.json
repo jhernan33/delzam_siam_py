@@ -1,0 +1,72 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 1,
+      "desc_ctco": "Correo Electronico",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 2,
+      "desc_ctco": "Numero de Telefono",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 3,
+      "desc_ctco": "WhatsApp",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 4,
+      "desc_ctco": "Telegram",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 5,
+      "desc_ctco": "Instagram",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 6,
+      "desc_ctco": "Facebook",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.categoriacontacto",
+    "fields": {
+      "id": 7,
+      "desc_ctco": "Twitter",
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  }
+]

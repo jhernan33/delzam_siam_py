@@ -15,7 +15,7 @@ from .familiaSerializer import FamiliaSerializer
 from .subFamiliaSerializer import SubFamiliaSerializer
 from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
 from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
-from .rutaSerializer import RutaSerializer
+from .rutaSerializer import RutaSerializer, RutaBasicSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
@@ -28,6 +28,9 @@ from .articuloSerializer import ArticuloSerializer
 from .presentacionSerializer import PresentacionSerializer
 from .proveedorSerializer import ProveedorSerializer, ProveedorBasicSerializer
 from .articuloProveedorSerializer import ArticuloProveedorSerializer, ArticuloProveedorSerializerBasics
+from .categoriaContactoSerializer import CategoriaContactoSerializer, CategoriaContactoBasicSerializer
+from .grupoCategoriaContactoSerializer import GrupoCategoriaContactoSerializer, GrupoCategoriaContactoBasicSerializer
+from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

@@ -10,6 +10,19 @@ from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorS
 #     def to_representation(self, value):
 #         return 'Detalle %d: ' % (value.codi_vend)
 
+class RutaBasicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ruta
+        field = ('id')
+        exclude = ['nomb_ruta','codi_zona','deleted','created','updated','esta_ttus']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        route = Ruta.objects.filter(id=instance.id).values('nomb_ruta')
+        
+        representation['description'] = (route[0]['nomb_ruta']).strip().upper()
+        return representation
+
 class RutaSerializer(serializers.ModelSerializer):
     # Ruta = serializers.SerializerMethodField()
     #codi_vend = RutaDetalleVendedorSerializer(many=True)

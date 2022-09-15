@@ -19,3 +19,6 @@ class Accionista(Base):
         ordering = ['codi_acci']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"accionista"'
+
+    def get_queryset():
+        return Accionista.objects.all().filter(deleted__isnull=True)
