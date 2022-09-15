@@ -29,6 +29,8 @@ from .presentacionView import PresentacionListView, PresentacionCreateView, Pres
 from .serviceImageView import ServiceImageView
 from .proveedorView    import ProveedorListView, ProveedorCreateView, ProveedorRetrieveView, ProveedorUpdateView, ProveedorDestroyView, ProveedorComboView, ProveedorRestore
 from .articuloProveedorView import ArticuloProveedorListView, ArticuloProveedorCreateView, ArticuloProveedorRetrieveView, ArticuloProveedorUpdateView, ArticuloProveedorDestroyView, ArticuloProveedorComboView
+from .categoriaContactoView import CategoriaContactoListView, CategoriaContactoCreateView, CategoriaContactoRetrieveView, CategoriaContactoUpdateView, CategoriaContactoDestroyView, CategoriaContactoComboView
+from .grupoCategoriaContactoView import GrupoCategoriaContactoListView, GrupoCategoriaContactoCreateView, GrupoCategoriaContactoRetrieveView, GrupoCategoriaContactoUpdateView, GrupoCategoriaContactoDestroyView, GrupoCategoriaContactoComboView
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage

@@ -93,6 +93,6 @@ class TipoEmpresaComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = TipoEmpresa.get_queryset().order_by('-id')
+        queryset = TipoEmpresa.get_queryset().order_by('id')
         return queryset
 

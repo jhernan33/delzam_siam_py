@@ -28,6 +28,9 @@ from .articuloSerializer import ArticuloSerializer
 from .presentacionSerializer import PresentacionSerializer
 from .proveedorSerializer import ProveedorSerializer, ProveedorBasicSerializer
 from .articuloProveedorSerializer import ArticuloProveedorSerializer, ArticuloProveedorSerializerBasics
+from .categoriaContactoSerializer import CategoriaContactoSerializer, CategoriaContactoBasicSerializer
+from .grupoCategoriaContactoSerializer import GrupoCategoriaContactoSerializer, GrupoCategoriaContactoBasicSerializer
+from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from asiam.models import Pais
 from asiam.serializers import PaisSerializer, PaisBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
+from django.db.models import Case, When, Value
 
 class PaisListView(generics.ListAPIView):
     serializer_class = PaisSerializer
@@ -49,5 +50,7 @@ class PaisComboView(generics.ListAPIView):
             order = self.request.query_params.get('order')
             queryset = Pais.get_queryset().order_by(order)
         else:
-            queryset = Pais.get_queryset().order_by('nomb_pais')
+            queryset = Pais.get_queryset().order_by(Case(
+                When(id='234', then = Value(234))
+            ))
         return queryset

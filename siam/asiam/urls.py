@@ -215,6 +215,22 @@ urlpatterns = [
     path('proveedorArticulo/delete/<int:id>',     views.ArticuloProveedorDestroyView.as_view(),  name='proveedorArticulo_delete'),
     path('proveedorArticulo/combo/',              views.ArticuloProveedorComboView.as_view(),    name='proveedorArticulo_combo'),
 
+    # Category Contact
+    path('categoriaContacto/',                    views.CategoriaContactoListView.as_view(),     name='categoriaContacto'),
+    path('categoriaContacto/create/',             views.CategoriaContactoCreateView.as_view(),   name='categoriaContacto_create'),
+    path('categoriaContacto/<int:id>/',           views.CategoriaContactoRetrieveView.as_view(), name='categoriaContacto'),
+    path('categoriaContacto/update/<int:id>',     views.CategoriaContactoUpdateView.as_view(),   name='categoriaContacto_update'),
+    path('categoriaContacto/delete/<int:id>',     views.CategoriaContactoDestroyView.as_view(),  name='categoriaContacto_delete'),
+    path('categoriaContacto/combo/',              views.CategoriaContactoComboView.as_view(),    name='categoriaContacto_combo'),
+
+    # Group Category Contact
+    path('grupocc/',                              views.GrupoCategoriaContactoListView.as_view(),     name='grupoCategoriaContacto'),
+    path('grupocc/create/',                       views.GrupoCategoriaContactoCreateView.as_view(),   name='grupoCategoriaContacto_create'),
+    path('grupocc/<int:id>/',                     views.GrupoCategoriaContactoRetrieveView.as_view(), name='grupoCategoriaContacto'),
+    path('grupocc/update/<int:id>',               views.GrupoCategoriaContactoUpdateView.as_view(),   name='grupoCategoriaContacto_update'),
+    path('grupocc/delete/<int:id>',               views.GrupoCategoriaContactoDestroyView.as_view(),  name='grupoCategoriaContacto_delete'),
+    path('grupocc/combo/',                        views.GrupoCategoriaContactoComboView.as_view(),    name='grupoCategoriaContacto_combo'),
+
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
     # path('banco/<int:id>/',        views.BancoRetrieveView.as_view(), name='banco'),

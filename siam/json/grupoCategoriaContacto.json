@@ -1,0 +1,233 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 1,
+      "desc_grup": "Personal",
+      "codi_ctco": 1,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 2,
+      "desc_grup": "Trabajo",
+      "codi_ctco": 1,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 3,
+      "desc_grup": "Casa",
+      "codi_ctco": 1,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 4,
+      "desc_grup": "Otro",
+      "codi_ctco": 1,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 5,
+      "desc_grup": "Movil",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 6,
+      "desc_grup": "Trabajo",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 7,
+      "desc_grup": "Casa",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 8,
+      "desc_grup": "Principal",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 9,
+      "desc_grup": "Fax del Trabajo",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 10,
+      "desc_grup": "Fax de Casa",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 11,
+      "desc_grup": "Otro",
+      "codi_ctco": 2,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 12,
+      "desc_grup": "Personal",
+      "codi_ctco": 3,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 13,
+      "desc_grup": "Empresa",
+      "codi_ctco": 3,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 14,
+      "desc_grup": "Personal",
+      "codi_ctco": 4,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 15,
+      "desc_grup": "Empresa",
+      "codi_ctco": 4,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 16,
+      "desc_grup": "Personal",
+      "codi_ctco": 5,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 17,
+      "desc_grup": "Empresa",
+      "codi_ctco": 5,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 18,
+      "desc_grup": "Personal",
+      "codi_ctco": 6,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 19,
+      "desc_grup": "Empresa",
+      "codi_ctco": 6,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 20,
+      "desc_grup": "Personal",
+      "codi_ctco": 7,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asiam.grupocategoriacontacto",
+    "fields": {
+      "id": 21,
+      "desc_grup": "Empresa",
+      "codi_ctco": 7,
+      "esta_ttus": "",
+      "created": "2022-09-08 05:59:47.755641-04"
+    }
+  }
+]
