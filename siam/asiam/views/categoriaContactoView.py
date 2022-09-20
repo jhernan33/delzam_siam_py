@@ -56,7 +56,7 @@ class CategoriaContactoCreateView(generics.CreateAPIView):
                     return message.ErrorMessage("Error al Intentar Guardar La Categoria de Contacto: "+str(e))
             elif result_categoria_Contacto.count()>0:
                 return message.ShowMessage({'information':name_ctco,'message':"Ya Registrada"})
-        except Zona.DoesNotExist:
+        except CategoriaContacto.DoesNotExist:
             return message.NotFoundMessage("Id de Categoria de Contacto no Registrado")
          
 class CategoriaContactoRetrieveView(generics.RetrieveAPIView):
@@ -140,7 +140,7 @@ class CategoriaContactoComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = CategoriaContacto.objects.all()
+        queryset = CategoriaContacto.objects.all().order_by("id")
         show = self.request.query_params.get('show',None)
             
         if show =='true':

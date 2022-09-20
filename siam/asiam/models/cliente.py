@@ -1,6 +1,7 @@
 from .base import Base
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.contrib.gis.db import models
 
 class Cliente(Base):
     fein_clie = models.DateField  ('Fecha de Ingreso del Cliente',auto_now=False, auto_now_add=False,blank=True, null=True)
@@ -29,6 +30,7 @@ class Cliente(Base):
     foto_clie = models.JSONField  ('Foto del Cliente',null=True, blank=True)
     obse_clie = models.TextField('Observaciones del Cliente',null=True, blank=True)
     posi_clie = models.IntegerField('Posicion del Cliente para la Entrega',null=True, blank=True)
+    location_clie = models.PointField(srid=4326, null=True, blank=True)
 
     class Meta:
         ordering = ['codi_natu']
