@@ -110,6 +110,16 @@ class NaturalRetrieveView(generics.RetrieveAPIView):
             return queryset.filter(deleted__isnull=False)
         
         return queryset.filter(deleted__isnull=True)
+    
+    def retrieve(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Natural no Registrado")  
+        else:
+            serialize = self.get_serializer(instance)
+            return message.ShowMessage(self.serializer_class(instance).data)
 
 
 class NaturalUpdateView(generics.UpdateAPIView):
