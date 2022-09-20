@@ -1,12 +1,23 @@
 from rest_framework import serializers
-from asiam.serializers import CiudadSerializer, SectorSerializer, Grup
-from asiam.models import Natural,Contacto
+from asiam.serializers import CiudadSerializer, SectorSerializer
+from asiam.models import Natural,Contacto,CategoriaContacto
 
-class ContactSimpleSerializer(serializers.ModelSerializer): 
+class ContactSimpleSerializer(serializers.ModelSerializer):
+    desc_grup = serializers.ReadOnlyField(source='codi_grco.desc_grup')
+    codi_cate = serializers.ReadOnlyField(source='codi_grco.codi_ctco_id')
+    
     class Meta:
         model = Contacto
-        field = ('id','desc_cont','codi_grco')
+        field = ('id','desc_grup','codi_cate')
         exclude = ['codi_clie','codi_prov','codi_vend','codi_natu','codi_juri','codi_acci','deleted','created','updated','esta_ttus']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['codi_cont'] = instance.desc_cont
+        representation['codi_grou'] = instance.codi_grco_id
+        result_category_contact = CategoriaContacto.objects.filter(id = instance.codi_grco.codi_ctco_id)
+        representation['desc_cate'] = result_category_contact[0].desc_ctco 
+        return representation
 
 class NaturalBasicSerializer(serializers.ModelSerializer):
     class Meta:
