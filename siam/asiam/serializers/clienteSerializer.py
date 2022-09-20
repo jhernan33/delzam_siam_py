@@ -5,6 +5,7 @@ from asiam.models import Cliente, Vendedor, Natural, Juridica
 from asiam.serializers import NaturalSerializer,JuridicaSerializer,VendedorSerializer
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_gis.serializers import GeoFeatureModelListSerializer
 
 
 class JSONSerializerField(serializers.Field):
@@ -22,6 +23,7 @@ class JSONSerializerField(serializers.Field):
         return data
 
 class ClienteSerializer(serializers.ModelSerializer):
+#class ClienteSerializer(GeoFeatureModelListSerializer):
     codi_vend = VendedorSerializer()
     codi_natu = NaturalSerializer()
     codi_juri = JuridicaSerializer()
@@ -31,6 +33,8 @@ class ClienteSerializer(serializers.ModelSerializer):
         field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plzr_clie'
         ,'prde_clie','prau_clie','codi_vend','codi_natu','codi_juri','foto_clie','obse_clie','deleted')
         exclude =['created','updated','esta_ttus']
+        geo_field = "location_clie"
+        # auto_bbox = True # Ubckyd
     
     def validate_codi_vend(value):
         queryset = Vendedor.get_queryset().filter(id = value)

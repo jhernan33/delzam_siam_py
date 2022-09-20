@@ -88,6 +88,7 @@ class ClienteCreateView(generics.CreateAPIView):
                         ,prau_clie      = self.request.data.get("prau_clie")
                         ,foto_clie      = None if json_foto_clie is None else json_foto_clie
                         ,obse_clie      = self.request.data.get("obse_clie")
+                        ,location_clie  = self.request.data.get("location")
                         ,created        = datetime.now()
                     )
                     cliente.save()
@@ -180,7 +181,7 @@ class ClienteUpdateView(generics.UpdateAPIView):
                     instance.obse_clie      = self.request.data.get("obse_clie")
                     instance.updated        = datetime.now()
                     instance.save()
-                    return message.UpdateMessage({"id":instance.id,"mocr_prov":instance.mocr_prov,"plcr_prov":instance.plcr_prov})
+                    return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
                

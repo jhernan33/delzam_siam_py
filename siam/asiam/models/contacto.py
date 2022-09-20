@@ -49,8 +49,15 @@ class Contacto(Base):
         db_table = u'"comun\".\"contacto"'
 
     def save(self, **kwargs):
-        self.desc_cont = self.desc_cont.upper()
+        self.desc_cont = self.desc_cont.lower()
         return super().save(**kwargs)
 
     def get_queryset():
         return Contacto.objects.all().filter(deleted__isnull=True)
+    
+    def check_contact(desc_cont,codi_grou):
+        queryset = Contacto.get_queryset().filter(desc_cont = str(desc_cont).strip().lower()).filter(codi_grco_id = codi_grou)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True

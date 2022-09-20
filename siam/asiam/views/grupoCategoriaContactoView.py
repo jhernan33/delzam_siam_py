@@ -143,8 +143,13 @@ class GrupoCategoriaContactoComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = GrupoCategoriaContacto.objects.all()
+        queryset = GrupoCategoriaContacto.objects.all().order_by('id')
         show = self.request.query_params.get('show',None)
+        category = self.request.query_params.get('category',None)
+        
+        # Parameter Category Contact
+        if category:
+            return queryset.filter(codi_ctco = category).filter(deleted__isnull=True)
             
         if show =='true':
             return queryset.all()

@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'siam.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'db_delzam_py',
         'USER': 'postgres',
         'PASSWORD': '123456',
@@ -107,7 +107,7 @@ DATABASES = {
         'PORT': '5432',
     },
     'comun': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'OPTIONS': {
             'options': '-c search_path=comun'
         },            
@@ -140,7 +140,7 @@ DATABASES = {
         'PORT': '5432',
     },
     'empr': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'OPTIONS': {
             'options': '-c search_path=empr'
         },            

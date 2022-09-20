@@ -12,8 +12,9 @@ from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
 from django.http import HttpResponse
 from django.db.models import Exists, OuterRef
+from django.db import transaction
 
-from asiam.models import Natural, Vendedor
+from asiam.models import Natural, Vendedor, Contacto
 from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -55,27 +56,41 @@ class NaturalCreateView(generics.CreateAPIView):
             result_natural = Natural.get_queryset().filter(cedu_pena = str(self.request.data.get("cedu_pena")).strip())
             #result_rif     = Natural.get_queryset().filter(riff_pena = self.request.data.get("riff_pena").strip().upper())
             if result_natural.count() == 0:
-                try:
-                    natural = Natural(
-                         cedu_pena      = str(self.request.data.get("cedu_pena")).strip().upper()
-                        ,naci_pena      = str('' if self.request.data.get("naci_pena") is None else self.request.data.get("naci_pena")).strip().upper()
-                        ,prno_pena      = str('' if self.request.data.get("prno_pena") is None else self.request.data.get("prno_pena")).strip().upper()
-                        ,seno_pena      = str('' if self.request.data.get("seno_pena") is None else self.request.data.get("seno_pena")).strip().upper()
-                        ,prap_pena      = str('' if self.request.data.get("prap_pena") is None else self.request.data.get("prap_pena")).strip().upper()
-                        ,seap_pena      = str('' if self.request.data.get("seap_pena") is None else self.request.data.get("seap_pena")).strip().upper()
-                        ,sexo_pena      = str('' if self.request.data.get("sexo_pena") is None else self.request.data.get("sexo_pena")).strip().upper()
-                        ,edoc_pena      = str('' if self.request.data.get("edoc_pena") is None else self.request.data.get("edoc_pena")).strip().upper()
-                        ,fena_pena      = self.request.data.get("fena_pena")
-                        ,dire_pena      = str('' if self.request.data.get("dire_pena") is None else self.request.data.get("dire_pena")).strip().upper()
-                        ,codi_ciud_id   = self.request.data.get("codi_ciud")
-                        ,codi_sect_id   = self.request.data.get("codi_sect")
-                        ,riff_pena      = str('' if self.request.data.get("riff_pena") is None else self.request.data.get("riff_pena")).strip().upper()
-                        ,created        = datetime.now()
-                    )
-                    natural.save()
-                    return message.SaveMessage('Registro Natural guardado Exitosamente')
-                except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar la Persona Natural: "+str(e))
+                with transaction.atomic():
+                    try:
+                        natural = Natural(
+                            cedu_pena      = str(self.request.data.get("cedu_pena")).strip().upper()
+                            ,naci_pena      = str('' if self.request.data.get("naci_pena") is None else self.request.data.get("naci_pena")).strip().upper()
+                            ,prno_pena      = str('' if self.request.data.get("prno_pena") is None else self.request.data.get("prno_pena")).strip().upper()
+                            ,seno_pena      = str('' if self.request.data.get("seno_pena") is None else self.request.data.get("seno_pena")).strip().upper()
+                            ,prap_pena      = str('' if self.request.data.get("prap_pena") is None else self.request.data.get("prap_pena")).strip().upper()
+                            ,seap_pena      = str('' if self.request.data.get("seap_pena") is None else self.request.data.get("seap_pena")).strip().upper()
+                            ,sexo_pena      = str('' if self.request.data.get("sexo_pena") is None else self.request.data.get("sexo_pena")).strip().upper()
+                            ,edoc_pena      = str('' if self.request.data.get("edoc_pena") is None else self.request.data.get("edoc_pena")).strip().upper()
+                            ,fena_pena      = self.request.data.get("fena_pena")
+                            ,dire_pena      = str('' if self.request.data.get("dire_pena") is None else self.request.data.get("dire_pena")).strip().upper()
+                            ,codi_ciud_id   = self.request.data.get("codi_ciud")
+                            ,codi_sect_id   = self.request.data.get("codi_sect")
+                            ,riff_pena      = str('' if self.request.data.get("riff_pena") is None else self.request.data.get("riff_pena")).strip().upper()
+                            ,created        = datetime.now()
+                        )
+                        natural.save()
+
+                        #   Save Contacts
+                        if isinstance(self.request.data.get("contacts"),list):
+                            for contact in self.request.data.get("contacts"):
+                                result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                                if result_contact == False:
+                                    contact = Contacto(
+                                         desc_cont      = contact['codi_cont']
+                                        ,codi_grco_id   = contact['codi_grou']
+                                        ,codi_natu_id   = natural.id
+                                        ,created        = datetime.now()
+                                    )
+                                    contact.save()
+                        return message.SaveMessage('Registro Natural guardado Exitosamente')
+                    except Exception as e:
+                        return message.ErrorMessage("Error al Intentar Guardar la Persona Natural: "+str(e))
             elif result_natural.count()>0:
                 return message.ShowMessage('Cedula ya Registrada')
         except Natural.DoesNotExist:
