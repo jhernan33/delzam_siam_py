@@ -142,9 +142,10 @@ class NaturalUpdateView(generics.UpdateAPIView):
                 #     return message.NotFoundMessage("Cedula no es un Valor Valido de Persona Natural")
 
                 # Validate Id Juridica
-                result_riff = NaturalSerializer.validate_riff_pena(request.data['riff_pena'],request.data['cedu_pena'])
-                if result_riff == True:
-                    return message.ShowMessage("RIF no permitido, porque se encuentra asignado a otra Persona Natural")
+                if len(str(request.data['riff_pena']).strip())>0:
+                    result_riff = NaturalSerializer.validate_riff_pena(request.data['riff_pena'],request.data['cedu_pena'])
+                    if result_riff == True:
+                        return message.ShowMessage("RIF no permitido, porque se encuentra asignado a otra Persona Natural")
 
                 Deleted = request.data['erased']
                 if Deleted:
@@ -168,6 +169,20 @@ class NaturalUpdateView(generics.UpdateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+
+                #   Check Save Contacts
+                if isinstance(self.request.data.get("contacts"),list):
+                    Contacto.delete_contact("codi_natu",instance.id)
+                    for contact in self.request.data.get("contacts"):
+                        result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                        if result_contact == False:
+                            contact = Contacto(
+                                    desc_cont      = contact['codi_cont']
+                                ,codi_grco_id   = contact['codi_grou']
+                                ,codi_natu_id   = instance.id
+                                ,created        = datetime.now()
+                            )
+                            contact.save()
                 return message.UpdateMessage(" La informacion de la Persona Natural con el Identificador: "+str(instance.id))
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
