@@ -55,9 +55,16 @@ class Contacto(Base):
     def get_queryset():
         return Contacto.objects.all().filter(deleted__isnull=True)
     
+    # Check Contact
     def check_contact(desc_cont,codi_grou):
         queryset = Contacto.get_queryset().filter(desc_cont = str(desc_cont).strip().lower()).filter(codi_grco_id = codi_grou)
         if queryset.count() == 0:
             return False
         else:
             return True
+    
+    def delete_contact(codi_eval,id):
+        if str(codi_eval).strip() =='codi_natu':
+            Contacto.objects.filter(codi_natu = id).delete()
+        elif str(codi_eval).strip() =='codi_juri':
+            Contacto.objects.filter(codi_juri = id).delete()
