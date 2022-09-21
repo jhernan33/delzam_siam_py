@@ -76,7 +76,7 @@ class NaturalCreateView(generics.CreateAPIView):
                         )
                         natural.save()
 
-                        #   Save Contacts
+                        #   Check Save Contacts
                         if isinstance(self.request.data.get("contacts"),list):
                             for contact in self.request.data.get("contacts"):
                                 result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
