@@ -176,7 +176,7 @@ class JuridicaDestroyView(generics.DestroyAPIView):
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Persona Juridica no Registrado")
 
-
+""" Drop Down Juridica """
 class JuridicaComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = JuridicaBasicSerializer
