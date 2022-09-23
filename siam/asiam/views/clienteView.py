@@ -80,7 +80,7 @@ class ClienteCreateView(generics.CreateAPIView):
                         ,codi_natu_id   = self.request.data.get("codi_natu")
                         ,codi_juri_id   = self.request.data.get("codi_juri")
                         ,fein_clie      = self.request.data.get("fein_clie")
-                        ,codi_ante      = self.request.data.get("codi_ante")
+                        ,codi_ante      = str(self.request.data.get("codi_ante")).strip().upper()
                         ,cred_clie      = True if self.request.data.get("cred_clie").lower()=="true" else False
                         ,mocr_clie      = self.request.data.get("mocr_clie")
                         ,plcr_clie      = self.request.data.get("plcr_clie")
@@ -171,7 +171,7 @@ class ClienteUpdateView(generics.UpdateAPIView):
                     instance.codi_natu_id   = self.request.data.get("codi_natu")
                     instance.codi_juri_id   = self.request.data.get("codi_juri")
                     instance.fein_clie      = self.request.data.get("fein_clie")
-                    instance.codi_ante      = self.request.data.get("codi_ante")
+                    instance.codi_ante      = str(self.request.data.get("codi_ante")).strip().upper()
                     instance.cred_clie      = True if self.request.data.get("cred_clie").lower()=="true" else False
                     instance.mocr_clie      = self.request.data.get("mocr_clie")
                     instance.plcr_clie      = self.request.data.get("plcr_clie")
