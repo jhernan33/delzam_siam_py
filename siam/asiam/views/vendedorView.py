@@ -11,7 +11,7 @@ from rest_framework import generics
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Vendedor
-from asiam.models import Natural,RutaDetalleVendedor, Ruta
+from asiam.models import Natural,RutaDetalleVendedor, Ruta, Contacto
 from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -36,8 +36,6 @@ class VendedorListView(generics.ListAPIView):
         if show =='all':
             return queryset
         return  queryset.filter(deleted__isnull=True)
-
-    
 
 class VendedorCreateView(generics.CreateAPIView):
     permission_classes = ()
@@ -65,6 +63,19 @@ class VendedorCreateView(generics.CreateAPIView):
                             ,created        = datetime.now()
                         )
                         vendedor.save()
+
+                        #   Check Save Contacts
+                        if isinstance(self.request.data.get("contacts"),list):
+                            for contact in self.request.data.get("contacts"):
+                                result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                                if result_contact == False:
+                                    contact = Contacto(
+                                         desc_cont      = contact['codi_cont']
+                                        ,codi_grco_id   = contact['codi_grou']
+                                        ,codi_vend_id   = vendedor.id
+                                        ,created        = datetime.now()
+                                    )
+                                    contact.save()
                         return message.SaveMessage({"id":vendedor.id})
                     else:
                         return message.NotFoundMessage("Id de Persona Natural no se encuentra Registrado")
@@ -72,7 +83,6 @@ class VendedorCreateView(generics.CreateAPIView):
                     return message.ShowMessage('Vendedor ya Registrado')
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Guardar el Vendedor: "+str(e))
-            
                 
 class VendedorRetrieveView(generics.RetrieveAPIView):
     serializer_class = VendedorSerializer
@@ -143,6 +153,21 @@ class VendedorUpdateView(generics.UpdateAPIView):
                     instance.deleted = isdeleted
                     instance.updated = datetime.now()
                     instance.save()
+
+                    #   Check Save Contacts
+                    if isinstance(self.request.data.get("contacts"),list):
+                        Contacto.delete_contact("codi_vend",instance.id)
+                        for contact in self.request.data.get("contacts"):
+                            result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                            if result_contact == False:
+                                contact = Contacto(
+                                    desc_cont      = contact['codi_cont']
+                                    ,codi_grco_id   = contact['codi_grou']
+                                    ,codi_vend_id   = instance.id
+                                    ,created        = datetime.now()
+                                    ,updated        = datetime.now()
+                                )
+                                contact.save()
                     return message.UpdateMessage({"id":instance.id})
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
