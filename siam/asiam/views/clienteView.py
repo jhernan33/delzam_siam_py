@@ -44,7 +44,6 @@ class ClienteListView(generics.ListAPIView):
             return queryset
         return queryset.filter(deleted__isnull=True)
 
-
 class ClienteCreateView(generics.CreateAPIView):
     permission_classes = []
     serializer_class = ClienteSerializer
@@ -104,7 +103,6 @@ class ClienteCreateView(generics.CreateAPIView):
         except Cliente.DoesNotExist:
             return message.NotFoundMessage("Id de Cliente no Registrado")
             
-
 class ClienteRetrieveView(generics.RetrieveAPIView):
     serializer_class = ClienteSerializer
     permission_classes = ()
@@ -185,8 +183,6 @@ class ClienteUpdateView(generics.UpdateAPIView):
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
                
-            
-
 class ClienteDestroyView(generics.DestroyAPIView):
     permission_classes = []
     serializer_class = ClienteSerializer

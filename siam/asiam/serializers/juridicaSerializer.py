@@ -3,7 +3,7 @@ from django.conf import settings
 
 from rest_framework import serializers
 from asiam.serializers import TipoEmpresaSerializer, CiudadSerializer, SectorSerializer
-from asiam.models import Juridica
+from asiam.models import Juridica, Contacto, CategoriaContacto
 
 class JSONSerializerField(serializers.Field):
     """Serializer for JSONField -- required to make field writable"""
@@ -18,6 +18,23 @@ class JSONSerializerField(serializers.Field):
 
     def to_internal_value(self, data):
         return data
+
+class ContactSimpleSerializer(serializers.ModelSerializer):
+    desc_grup = serializers.ReadOnlyField(source='codi_grco.desc_grup')
+    codi_cate = serializers.ReadOnlyField(source='codi_grco.codi_ctco_id')
+    
+    class Meta:
+        model = Contacto
+        field = ('id','desc_grup','codi_cate')
+        exclude = ['codi_clie','codi_prov','codi_vend','codi_natu','codi_juri','codi_acci','deleted','created','updated','esta_ttus']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['codi_cont'] = instance.desc_cont
+        representation['codi_grou'] = instance.codi_grco_id
+        result_category_contact = CategoriaContacto.objects.filter(id = instance.codi_grco.codi_ctco_id)
+        representation['desc_cate'] = result_category_contact[0].desc_ctco 
+        return representation
 
 class JuridicaBasicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,6 +68,12 @@ class JuridicaSerializer(serializers.ModelSerializer):
         data['dofi_peju'] = data['dofi_peju'].upper().strip() if data['dofi_peju'] else data['dofi_peju']
         data['desc_peju'] = data['desc_peju'].upper().strip() if data['desc_peju'] else data['desc_peju']
         data['pure_peju'] = data['pure_peju'].upper().strip() if data['pure_peju'] else data['pure_peju']
+
+        """ Search Conctac by instance Id"""
+        queryset = Contacto.objects.filter(codi_juri = instance.id)
+        result_contact = ContactSimpleSerializer(queryset, many=True).data
+        data['contacts'] = {"data":result_contact}
+
         return data
     
     def validate_riff_peju(value,Id):
