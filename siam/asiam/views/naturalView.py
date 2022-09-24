@@ -45,7 +45,6 @@ class NaturalListView(generics.ListAPIView):
                 queryset = queryset.filter(cedu_pena=value)
         return queryset
 
-
 class NaturalCreateView(generics.CreateAPIView):
     permission_classes = []
     serializer_class = NaturalSerializer
@@ -96,7 +95,6 @@ class NaturalCreateView(generics.CreateAPIView):
         except Natural.DoesNotExist:
             return message.NotFoundMessage("Id de Natural no Registrado")
     
-
 class NaturalRetrieveView(generics.RetrieveAPIView):
     serializer_class = NaturalSerializer
     permission_classes = ()
@@ -177,10 +175,11 @@ class NaturalUpdateView(generics.UpdateAPIView):
                         result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
                         if result_contact == False:
                             contact = Contacto(
-                                    desc_cont      = contact['codi_cont']
+                                desc_cont      = contact['codi_cont']
                                 ,codi_grco_id   = contact['codi_grou']
                                 ,codi_natu_id   = instance.id
                                 ,created        = datetime.now()
+                                ,updated        = datetime.now()
                             )
                             contact.save()
                 return message.UpdateMessage(" La informacion de la Persona Natural con el Identificador: "+str(instance.id))

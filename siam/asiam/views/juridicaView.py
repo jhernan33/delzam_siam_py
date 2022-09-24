@@ -8,7 +8,7 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from yaml import serialize
 
-from asiam.models import Juridica, Ciudad, Sector, TipoEmpresa
+from asiam.models import Juridica, Ciudad, Sector, TipoEmpresa, Contacto
 from asiam.serializers import JuridicaSerializer, JuridicaBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -79,6 +79,19 @@ class JuridicaCreateView(generics.CreateAPIView):
                         ,created        = datetime.now()
                     )
                     juridica.save()
+
+                    #   Check Save Contacts
+                    if isinstance(self.request.data.get("contacts"),list):
+                        for contact in self.request.data.get("contacts"):
+                            result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                            if result_contact == False:
+                                contact = Contacto(
+                                    desc_cont      = contact['codi_cont']
+                                    ,codi_grco_id   = contact['codi_grou']
+                                    ,codi_juri_id   = juridica.id
+                                    ,created        = datetime.now()
+                                )
+                                contact.save()
                     return message.SaveMessage('Registro Juridico guardado Exitosamente')
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar la Persona Juridica: "+str(e))
@@ -156,6 +169,21 @@ class JuridicaUpdateView(generics.UpdateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+
+                #   Check Save Contacts
+                if isinstance(self.request.data.get("contacts"),list):
+                    Contacto.delete_contact("codi_juri",instance.id)
+                    for contact in self.request.data.get("contacts"):
+                        result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
+                        if result_contact == False:
+                            contact = Contacto(
+                                desc_cont      = contact['codi_cont']
+                                ,codi_grco_id   = contact['codi_grou']
+                                ,codi_juri_id   = instance.id
+                                ,created        = datetime.now()
+                                ,updated        = datetime.now()
+                            )
+                            contact.save()
                 return message.UpdateMessage(" La informacion de la Persona Juridica con el Identificador: "+str(instance.id))
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
