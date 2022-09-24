@@ -68,3 +68,5 @@ class Contacto(Base):
             Contacto.objects.filter(codi_natu = id).delete()
         elif str(codi_eval).strip() =='codi_juri':
             Contacto.objects.filter(codi_juri = id).delete()
+        elif str(codi_eval).strip() =='codi_vend':
+            Contacto.objects.filter(codi_vend = id).delete()

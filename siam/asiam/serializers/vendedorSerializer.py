@@ -4,8 +4,9 @@ import os
 
 from django.conf import settings
 from rest_framework import serializers
+from django.db.models import Q
 from asiam.serializers import NaturalSerializer
-from asiam.models import Vendedor,Natural,RutaDetalleVendedor
+from asiam.models import Vendedor,Natural,RutaDetalleVendedor, Contacto, CategoriaContacto
 
 class JSONSerializerField(serializers.Field):
     """Serializer for JSONField -- required to make field writable"""
@@ -20,7 +21,25 @@ class JSONSerializerField(serializers.Field):
 
     def to_internal_value(self, data):
         return data
-        
+
+class ContactSimpleSerializer(serializers.ModelSerializer):
+    desc_grup = serializers.ReadOnlyField(source='codi_grco.desc_grup')
+    codi_cate = serializers.ReadOnlyField(source='codi_grco.codi_ctco_id')
+    
+    class Meta:
+        model = Contacto
+        field = ('id','desc_grup','codi_cate')
+        exclude = ['codi_clie','codi_prov','codi_vend','codi_natu','codi_juri','codi_acci','deleted','created','updated','esta_ttus']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['codi_cont'] = instance.desc_cont
+        representation['codi_grou'] = instance.codi_grco_id
+        result_category_contact = CategoriaContacto.objects.filter(id = instance.codi_grco.codi_ctco_id)
+        representation['desc_cate'] = result_category_contact[0].desc_ctco 
+        return representation
+
+
 class VendedorBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendedor
@@ -52,4 +71,10 @@ class VendedorSerializer(serializers.ModelSerializer):
         # queryset = RutaDetalleVendedor.objects.filter(codi_ruta=instance.id)
         # result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         # data['sellers'] = {"data":result}
+
+        """ Search Conctac by instance Id"""
+        queryset = Contacto.objects.filter(Q(codi_vend = instance.id) | Q(codi_natu = instance.codi_natu))
+        result_contact = ContactSimpleSerializer(queryset, many=True).data
+        data['contacts'] = {"data":result_contact}
+
         return data
