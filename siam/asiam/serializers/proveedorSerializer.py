@@ -14,7 +14,7 @@ class JSONSerializerField(serializers.Field):
             place = settings.WEBSERVER_IMAGES
             enviromentArticle = os.path.realpath(settings.WEBSERVER_SUPPLIER)[1:]+'/'
             for obj in value:
-                obj['image'] = place+enviromentArticle+obj['image'];
+                obj['image'] = place+enviromentArticle+obj['image']
             return value
 
     def to_internal_value(self, data):

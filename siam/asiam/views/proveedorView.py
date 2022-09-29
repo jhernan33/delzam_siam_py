@@ -25,8 +25,8 @@ class ProveedorListView(generics.ListAPIView):
     queryset = Proveedor.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','codi_natu_id','codi_juri_id','codi_repr_id']
-    ordering_fields = ['id','codi_natu_id','codi_juri_id','codi_repr_id']
+    search_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju']
+    ordering_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -40,7 +40,7 @@ class ProveedorListView(generics.ListAPIView):
 
 
 class ProveedorCreateView(generics.CreateAPIView):
-    serializer_class = ProveedorSerializer
+    serializer_class = ProveedorBasicSerializer
     permission_classes = []
     
     def create(self, request, *args, **kwargs):
@@ -69,14 +69,14 @@ class ProveedorCreateView(generics.CreateAPIView):
                         ,created           = datetime.now()
                     )
                     proveedor.save()
-                    return message.SaveMessage({"id":proveedor.id,"codi_juri":proveedor.codi_juri})
+                    return message.SaveMessage({"id":proveedor.id})
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar el Proveedor: "+str(e))
             elif result_juridica.count()<=0:
                 return message.ShowMessage('Registro Juridico no Registrado')
             elif result_natural.count()<=0:
                 return message.ShowMessage('Persona Natural no Registrada')
-        except Juridica.DoesNotExist:
+        except Proveedor.DoesNotExist:
             return message.NotFoundMessage("Id de Proveedor no Registrado")
 
 class ProveedorRetrieveView(generics.RetrieveAPIView):
@@ -103,7 +103,6 @@ class ProveedorRetrieveView(generics.RetrieveAPIView):
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
-
 
 class ProveedorUpdateView(generics.UpdateAPIView):
     serializer_class = ProveedorSerializer
