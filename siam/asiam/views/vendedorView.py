@@ -172,7 +172,6 @@ class VendedorUpdateView(generics.UpdateAPIView):
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
     
-
 class VendedorDestroyView(generics.DestroyAPIView):
     permission_classes = ()
     lookup_field = 'id' 

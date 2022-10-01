@@ -48,32 +48,33 @@ class ProveedorSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        
         naturalDescription = None
         juridicaDescription = None
 
-        result_natural = '' if instance.codi_natu_id is None else Natural.get_queryset().filter(id=instance.codi_natu_id).values('prno_pena','seno_pena','prap_pena','seap_pena')
+        result_natural = '' if instance.codi_natu_id is None else Natural.objects.filter(id=instance.codi_natu_id).values('prno_pena','seno_pena','prap_pena','seap_pena')
         if result_natural.count()>0:
             naturalDescription = str(result_natural[0]['prno_pena']+' '+result_natural[0]['seno_pena']+' '+result_natural[0]['prap_pena']+' '+result_natural[0]['seap_pena']).upper().strip()
 
         representation['description_natural'] = naturalDescription
         
         if instance.codi_juri_id:
-            juridica = Juridica.get_queryset().filter(id=instance.codi_juri_id).values('raso_peju')     
-            juridicaDescription = (juridica[0]['raso_peju']).upper().strip()
+            juridica = Juridica.objects.filter(id=instance.codi_juri_id).values('raso_peju')     
+            juridicaDescription = '' if juridica.count() < 1 else str(juridica[0]['raso_peju']).upper().strip()
 
         representation['description_juridico'] = juridicaDescription
         return representation
 
-    def validate_codi_natu(value):
-        queryset = Natural.get_queryset().filter(id = value)
+    def validate_codi_natu(value,state):
+        #print(str(value)+" "+str(state))
+        queryset =  Natural.objects.filter(id = value) if state else Natural.get_queryset().filter(id = value)
+        # print(queryset.query)
         if queryset.count() == 0:
             return False
         else:
             return True
     
-    def validate_codi_juri(value):
-        queryset = Juridica.get_queryset().filter(id = value)
+    def validate_codi_juri(value,state):
+        queryset = Juridica.objects.filter(id = value) if state else Juridica.get_queryset().filter(id = value)
         if queryset.count() == 0:
             return False
         else:
