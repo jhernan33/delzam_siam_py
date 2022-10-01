@@ -1,8 +1,10 @@
 from datetime import datetime
+from difflib import restore
 from os import environ
 import os
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.db import transaction
 from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
@@ -22,22 +24,25 @@ from django.conf.urls.static import static
 class ProveedorListView(generics.ListAPIView):
     serializer_class = ProveedorSerializer
     permission_classes = ()
-    queryset = Proveedor.get_queryset()
-    pagination_class = SmallResultsSetPagination
-    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju']
-    ordering_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju']
-    ordering = ['-id']
+    try:
+        message = BaseMessage    
+        queryset = Proveedor.get_queryset()
+        pagination_class = SmallResultsSetPagination
+        filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+        search_fields   = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju','codi_repr__prno_pena','codi_repr__seno_pena','codi_repr__prap_pena','codi_repr__seap_pena']
+        ordering_fields = ['id','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju','codi_repr__prno_pena','codi_repr__seno_pena','codi_repr__prap_pena','codi_repr__seap_pena']
+        ordering = ['-id']
 
-    def get_queryset(self):
-        show = self.request.query_params.get('show')
-        queryset = Proveedor.objects.all()
-        if show =='true':
-            return queryset.filter(deleted__isnull=False)
-        if show =='all':
-            return queryset
-        return queryset.filter(deleted__isnull=True)
-
+        def get_queryset(self):
+            show = self.request.query_params.get('show')
+            queryset = Proveedor.objects.all()
+            if show =='true':
+                return queryset.filter(deleted__isnull=False)
+            if show =='all':
+                return queryset
+            return queryset.filter(deleted__isnull=True)
+    except Exception as e:
+        message.ErrorMessage("Error al Listar el Proveedor: "+str(e))
 
 class ProveedorCreateView(generics.CreateAPIView):
     serializer_class = ProveedorBasicSerializer
@@ -109,7 +114,7 @@ class ProveedorUpdateView(generics.UpdateAPIView):
     permission_classes = ()
     queryset = Proveedor.objects.all()
     lookup_field = 'id'
-
+    
     def update(self, request, *args, **kwargs):
         message = BaseMessage
         try:
@@ -118,18 +123,29 @@ class ProveedorUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Proveedor no Registrado")
         else:
             try:
+                # State Deleted
+                state_deleted = None
+                if instance.deleted:
+                    state_deleted = True
+                
+                Deleted = request.data['erased']
+                if Deleted:                    
+                    isdeleted = datetime.now()
+                else:    
+                    isdeleted = None
+
                 # Validate Id Natural
-                result_natural = ProveedorSerializer.validate_codi_natu(request.data['codi_natu'])
+                result_natural = ProveedorSerializer.validate_codi_natu(request.data['codi_natu'],state_deleted)
                 if result_natural == False:
                     return message.NotFoundMessage("Codi_Natu no es un Valor Valido de Persona Natural")
 
                 # Validate Id Juridica
-                result_juridico = ProveedorSerializer.validate_codi_juri(request.data['codi_juri'])
+                result_juridico = ProveedorSerializer.validate_codi_juri(request.data['codi_juri'],state_deleted)
                 if result_juridico == False:
                     return message.NotFoundMessage("Codi_Juri no es un Valor Valido de Persona Juridica")
 
                 # Validate Id Representante
-                result_represent = ProveedorSerializer.validate_codi_natu(request.data['codi_repr'])
+                result_represent = ProveedorSerializer.validate_codi_natu(request.data['codi_repr'],state_deleted)
                 if result_represent == False:
                     return message.NotFoundMessage("Codi_Repr no es un Valor Valido de Persona Natural")
 
@@ -137,12 +153,7 @@ class ProveedorUpdateView(generics.UpdateAPIView):
                 enviroment = os.path.realpath(settings.WEBSERVER_SUPPLIER)
                 ServiceImage = ServiceImageView()
                 json_images = ServiceImage.updateImage(listImages,enviroment)
-                Deleted = request.data['erased']
-                if Deleted:
-                    isdeleted = datetime.now()
-                else:
-                    isdeleted = None
-
+                
                 instance.mocr_prov = request.data['mocr_prov']
                 instance.plcr_prov = request.data['plcr_prov']
                 instance.obse_prov = request.data['obse_prov']
@@ -153,9 +164,28 @@ class ProveedorUpdateView(generics.UpdateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+
+                # Restore Person: Legal, Natural, Representant
+                supplierId =instance.id
+                self.restoreSupplier(supplierId)
                 return message.UpdateMessage({"id":instance.id,"mocr_prov":instance.mocr_prov,"plcr_prov":instance.plcr_prov})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
+
+    """ Restore Person Legal, Natural, Represent     """
+    def restoreSupplier(self,arg):
+        queryset = Proveedor.objects.filter(id = arg)
+        if queryset.count() >0:
+             for supplier in queryset.values():
+                naturalId = supplier['codi_natu_id']
+                legalId = supplier["codi_juri_id"]
+                representantId = supplier["codi_repr_id"]
+                # Restore Natural
+                Natural.objects.filter(id = naturalId).update(deleted=None)
+                # Restore Juridic
+                Juridica.objects.filter(id = legalId).update(deleted=None)
+                # Restore Represent
+                Natural.objects.filter(id = representantId).update(deleted=None)
 
 class ProveedorDestroyView(generics.DestroyAPIView):
     permission_classes = ()
@@ -165,10 +195,24 @@ class ProveedorDestroyView(generics.DestroyAPIView):
     def delete(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_city = Proveedor.get_queryset().get(id=kwargs['id'])
-            result_city.deleted = datetime.now()
-            result_city.save()
-            return message.DeleteMessage('Proveedor '+str(result_city.id))
+            with transaction.atomic():
+                # Delete Supplier
+                result_supplier = Proveedor.get_queryset().get(id=kwargs['id'])
+                result_supplier.deleted = datetime.now()
+                result_supplier.save()
+                # Delete Natural
+                result_natural = Natural.objects.get(pk=result_supplier.codi_natu_id)
+                result_natural.deleted = datetime.now()
+                result_natural.save()
+                # Delete Legal
+                result_legal = Juridica.objects.get(pk=result_supplier.codi_juri_id)
+                result_legal.deleted = datetime.now()
+                result_legal.save()
+                # Delete Represent
+                result_represent = Natural.objects.get(pk=result_supplier.codi_repr_id)
+                result_represent.deleted = datetime.now()
+                result_represent.save()
+                return message.DeleteMessage('Proveedor '+str(result_supplier.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Proveedor no Registrado")
 
