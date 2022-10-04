@@ -50,7 +50,6 @@ class VendedorBasicSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        #print(type(instance))
         if isinstance(instance,Dict):
             vend = Vendedor.get_queryset().filter(id = instance['codi_vend']).values('codi_natu') #.select_related('codi_natu')
             natural =  Natural.get_queryset().filter(id =vend[0]['codi_natu'])
@@ -58,7 +57,6 @@ class VendedorBasicSerializer(serializers.ModelSerializer):
             if natural.count()>0:
                 representation['seller'] = str(natural[0].prno_pena+' '+natural[0].seno_pena +' '+natural[0].prap_pena+' '+natural[0].seap_pena).upper()
         else:
-            print("Models Vendedor")
         # if isinstance(instance,QuerySet):
         #     if instance['codi_vend']:
         #         vend = Vendedor.get_queryset().filter(id = instance['codi_vend']).values('codi_natu') #.select_related('codi_natu')
