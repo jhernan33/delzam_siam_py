@@ -1,7 +1,7 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Cliente, Vendedor, Natural, Juridica
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor
 from asiam.serializers import NaturalSerializer,JuridicaSerializer,VendedorSerializer
 from django.conf import settings
 from django.conf.urls.static import static
@@ -24,20 +24,20 @@ class JSONSerializerField(serializers.Field):
 
 class ClienteSerializer(serializers.ModelSerializer):
 #class ClienteSerializer(GeoFeatureModelListSerializer):
-    codi_vend = VendedorSerializer()
+    # codi_vend = VendedorSerializer()
     codi_natu = NaturalSerializer()
     codi_juri = JuridicaSerializer()
 
     class Meta:
         model = Cliente
         field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plzr_clie'
-        ,'prde_clie','prau_clie','codi_vend','codi_natu','codi_juri','foto_clie','obse_clie','deleted')
+        ,'prde_clie','prau_clie','codi_natu','codi_juri','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente')
         exclude =['created','updated','esta_ttus']
         geo_field = "location_clie"
         # auto_bbox = True # Ubckyd
     
     def validate_codi_vend(value):
-        queryset = Vendedor.get_queryset().filter(id = value)
+        queryset = RutaDetalleVendedor.get_queryset().filter(id = value)
         if queryset.count() == 0:
             return False
         else:

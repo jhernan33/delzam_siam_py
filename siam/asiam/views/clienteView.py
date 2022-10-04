@@ -30,9 +30,9 @@ class ClienteListView(generics.ListAPIView):
     queryset = Cliente.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = ['id','fein_clie','codi_ante','codi_vend','codi_natu','codi_juri']
-    search_fields = ['id','fein_clie','codi_ante','codi_vend','codi_natu','codi_juri']
-    ordering_fields = ['id','fein_clie','codi_ante','codi_vend','codi_natu','codi_juri']
+    filterset_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
+    search_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
+    ordering_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -64,7 +64,7 @@ class ClienteCreateView(generics.CreateAPIView):
             # Validate Id Vendedor
             result_vendedor = ClienteSerializer.validate_codi_vend(request.data['codi_vend'])
             if result_vendedor == False:
-                return message.NotFoundMessage("Codi_Juri de Persona Juridica no Registrada")
+                return message.NotFoundMessage("Codi_Vend de Vendedor no Registrado")
 
             if result_vendedor and result_natural and result_juridica:
                 enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
@@ -75,20 +75,20 @@ class ClienteCreateView(generics.CreateAPIView):
                         listImagesProv  = request.data['foto_clie']
                         json_foto_clie  = ServiceImage.saveImag(listImagesProv,enviroment)
                     cliente = Cliente(
-                         codi_vend_id   = self.request.data.get("codi_vend")
-                        ,codi_natu_id   = self.request.data.get("codi_natu")
-                        ,codi_juri_id   = self.request.data.get("codi_juri")
-                        ,fein_clie      = self.request.data.get("fein_clie")
-                        ,codi_ante      = str(self.request.data.get("codi_ante")).strip().upper()
-                        ,cred_clie      = True if self.request.data.get("cred_clie").lower()=="true" else False
-                        ,mocr_clie      = self.request.data.get("mocr_clie")
-                        ,plcr_clie      = self.request.data.get("plcr_clie")
-                        ,prde_clie      = self.request.data.get("prde_clie")
-                        ,prau_clie      = self.request.data.get("prau_clie")
-                        ,foto_clie      = None if json_foto_clie is None else json_foto_clie
-                        ,obse_clie      = self.request.data.get("obse_clie")
-                        ,location_clie  = self.request.data.get("location")
-                        ,created        = datetime.now()
+                        ruta_detalle_vendedor_cliente       = self.request.data.get("codi_vend")
+                        ,codi_natu_id                       = self.request.data.get("codi_natu")
+                        ,codi_juri_id                       = self.request.data.get("codi_juri")
+                        ,fein_clie                          = self.request.data.get("fein_clie")
+                        ,codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
+                        ,cred_clie                          = True if self.request.data.get("cred_clie").lower()=="true" else False
+                        ,mocr_clie                          = self.request.data.get("mocr_clie")
+                        ,plcr_clie                          = self.request.data.get("plcr_clie")
+                        ,prde_clie                          = self.request.data.get("prde_clie")
+                        ,prau_clie                          = self.request.data.get("prau_clie")
+                        ,foto_clie                          = None if json_foto_clie is None else json_foto_clie
+                        ,obse_clie                          = self.request.data.get("obse_clie")
+                        ,location_clie                      = self.request.data.get("location")
+                        ,created                            = datetime.now()
                     )
                     cliente.save()
                     return message.SaveMessage('Cliente guardado Exitosamente')
@@ -154,7 +154,7 @@ class ClienteUpdateView(generics.UpdateAPIView):
                 # Validate Id Vendedor
                 result_vendedor = ClienteSerializer.validate_codi_vend(request.data['codi_vend'])
                 if result_vendedor == False:
-                    return message.NotFoundMessage("Codi_Juri de Persona Juridica no Registrada")
+                    return message.NotFoundMessage("Codi_Vend de Vendedor no Registrado")
                 
                 if result_vendedor and result_natural and result_juridica:
                     enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
@@ -165,19 +165,19 @@ class ClienteUpdateView(generics.UpdateAPIView):
                         listImagesProv  = request.data['foto_clie']
                         json_foto_clie  = ServiceImage.updateImage(listImagesProv,enviroment)
                     
-                    instance.codi_vend_id   = self.request.data.get("codi_vend")
-                    instance.codi_natu_id   = self.request.data.get("codi_natu")
-                    instance.codi_juri_id   = self.request.data.get("codi_juri")
-                    instance.fein_clie      = self.request.data.get("fein_clie")
-                    instance.codi_ante      = str(self.request.data.get("codi_ante")).strip().upper()
-                    instance.cred_clie      = True if self.request.data.get("cred_clie").lower()=="true" else False
-                    instance.mocr_clie      = self.request.data.get("mocr_clie")
-                    instance.plcr_clie      = self.request.data.get("plcr_clie")
-                    instance.prde_clie      = self.request.data.get("prde_clie")
-                    instance.prau_clie      = self.request.data.get("prau_clie")
-                    instance.foto_clie      = None if json_foto_clie is None else json_foto_clie
-                    instance.obse_clie      = self.request.data.get("obse_clie")
-                    instance.updated        = datetime.now()
+                    instance.ruta_detalle_vendedor_cliente      = self.request.data.get("codi_vend")
+                    instance.codi_natu_id                       = self.request.data.get("codi_natu")
+                    instance.codi_juri_id                       = self.request.data.get("codi_juri")
+                    instance.fein_clie                          = self.request.data.get("fein_clie")
+                    instance.codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
+                    instance.cred_clie                          = True if self.request.data.get("cred_clie").lower()=="true" else False
+                    instance.mocr_clie                          = self.request.data.get("mocr_clie")
+                    instance.plcr_clie                          = self.request.data.get("plcr_clie")
+                    instance.prde_clie                          = self.request.data.get("prde_clie")
+                    instance.prau_clie                          = self.request.data.get("prau_clie")
+                    instance.foto_clie                          = None if json_foto_clie is None else json_foto_clie
+                    instance.obse_clie                          = self.request.data.get("obse_clie")
+                    instance.updated                            = datetime.now()
                     instance.save()
                     return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
             except Exception as e:
