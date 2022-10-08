@@ -1,5 +1,4 @@
 from datetime import datetime
-from numpy import result_type
 from rest_framework import serializers
 from asiam.models import RutaDetalleVendedor, Ruta
 from asiam.serializers import VendedorSerializer, ZonaSerializer
