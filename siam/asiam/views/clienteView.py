@@ -53,12 +53,12 @@ class ClienteCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Validate Id Natural
-            result_natural = ClienteSerializer.validate_codi_natu(request.data['codi_natu'])
+            result_natural = ClienteSerializer.validate_codi_natu(request.data['codi_natu'],False)
             if result_natural == False:
                 return message.NotFoundMessage("Codi_Natu de Persona no Registrada")
                 
             # Validate Id Juridica
-            result_juridica = ClienteSerializer.validate_codi_juri(request.data['codi_juri'])
+            result_juridica = ClienteSerializer.validate_codi_juri(request.data['codi_juri'],False)
             if result_juridica == False:
                 return message.NotFoundMessage("Codi_Juri de Persona Juridica no Registrada")
             
