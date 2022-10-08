@@ -29,7 +29,6 @@ class RutaDetalleVendedor(Base):
     """    
     def listSellerRoute(self):
         queryset = RutaDetalleVendedor.objects.filter(codi_ruta=self.id)
-        # print(queryset)
         return queryset
         #return "id="+str(self.id)
 

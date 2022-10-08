@@ -11,7 +11,8 @@ class Vendedor(Base):
         related_name='natural',
     )
     # lice_vend = models.BooleanField('Poseee Licencia S/N',null=True, blank=True)
-    # grli_vend = models.CharField('')
+    # grli_vend = models.CharField('Grado de Licencia', max_length=250, null=True, blank=True, default='')
+    # crtm_vend = models.CharField('Certificado Medico', max_length=250, null=True, blank=True, default='')
     
     class Meta:
         ordering = ['codi_natu']

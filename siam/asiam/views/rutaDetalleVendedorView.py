@@ -63,12 +63,20 @@ class RutaDetalleVendedorRetrieveView(generics.RetrieveAPIView):
     queryset = RutaDetalleVendedor.get_queryset()
     lookup_field = 'id'
 
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = RutaDetalleVendedor.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        
+        return queryset.filter(deleted__isnull=True)
+
     def retrieve(self, request, *args, **kwargs):
         message = BaseMessage
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Ruta no Registrada")  
+            return message.NotFoundMessage("Id de Ruta Detalle Vendedor no Registrada")  
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)

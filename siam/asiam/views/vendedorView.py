@@ -204,7 +204,10 @@ class VendedorComboView(generics.ListAPIView):
         
         # Parameter route
         if route:
-            return Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('codi_vend'))
+            # Queryset Old
+            # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('codi_vend'))
+            queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('id','codi_vend')
+            return queryset
             
         if show =='true':
             return queryset.all()
