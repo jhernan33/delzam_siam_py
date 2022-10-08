@@ -57,19 +57,10 @@ class VendedorBasicSerializer(serializers.ModelSerializer):
             if natural.count()>0:
                 representation['seller'] = str(natural[0].prno_pena+' '+natural[0].seno_pena +' '+natural[0].prap_pena+' '+natural[0].seap_pena).upper()
         else:
-        # if isinstance(instance,QuerySet):
-        #     if instance['codi_vend']:
-        #         vend = Vendedor.get_queryset().filter(id = instance['codi_vend']).values('codi_natu') #.select_related('codi_natu')
-        #         natural =  Natural.get_queryset().filter(id =vend[0]['codi_natu'])
-        #         representation['id'] = instance['id']
-        #         if natural.count()>0:
-        #             representation['seller'] = str(natural[0].prno_pena+' '+natural[0].seno_pena +' '+natural[0].prap_pena+' '+natural[0].seap_pena).upper()
-        # else:
-        #     vend = Vendedor.get_queryset().filter(id = instance['codi_vend']).values('codi_natu') #.select_related('codi_natu')
-        #     natural =  Natural.get_queryset().filter(id =vend[0]['codi_natu'])
-        #     representation['id'] = instance['id']
-        #     if natural.count()>0:
-        #         representation['seller'] = str(natural[0].prno_pena+' '+natural[0].seno_pena +' '+natural[0].prap_pena+' '+natural[0].seap_pena).upper()
+            natural = Natural.get_queryset().filter(id=instance.codi_natu_id).values('prno_pena','seno_pena','prap_pena','seap_pena')
+            if natural.count() >0:
+                representation['seller'] = (natural[0]['prno_pena']+' '+natural[0]['seno_pena']+' '+natural[0]['prap_pena']+' '+natural[0]['seap_pena']).upper()
+
         return representation
 
 class VendedorSerializer(serializers.ModelSerializer):

@@ -44,9 +44,9 @@ class JuridicaBasicSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        juridica = Juridica.get_queryset().filter(id=instance.id).values('raso_peju')
+        juridica = Juridica.objects.filter(id=instance.id).values('raso_peju')
         
-        representation['description'] = juridica[0]['raso_peju'].strip().upper()
+        representation['description'] = str(juridica[0]['raso_peju']).strip().upper()
         return representation
 
 class JuridicaSerializer(serializers.ModelSerializer):

@@ -65,9 +65,7 @@ class ProveedorSerializer(serializers.ModelSerializer):
         return representation
 
     def validate_codi_natu(value,state):
-        #print(str(value)+" "+str(state))
         queryset =  Natural.objects.filter(id = value) if state else Natural.get_queryset().filter(id = value)
-        # print(queryset.query)
         if queryset.count() == 0:
             return False
         else:

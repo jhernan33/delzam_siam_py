@@ -14,13 +14,17 @@ from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from django.core.exceptions import ObjectDoesNotExist
 from .serviceImageView import ServiceImageView
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 
 class JuridicaListView(generics.ListAPIView):
     serializer_class = JuridicaSerializer
     permission_classes = ()
     queryset = Juridica.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filter_backends = (df.SearchFilter, )
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','riff_peju','raso_peju','desc_peju','dofi_peju','desc_peju','pure_peju']
     search_fields = ('id','riff_peju','raso_peju','desc_peju','dofi_peju','desc_peju','pure_peju')
     ordering_fields = ('id','riff_peju','raso_peju','desc_peju','dofi_peju','desc_peju','pure_peju')
 
@@ -111,10 +115,23 @@ class JuridicaRetrieveView(generics.RetrieveAPIView):
     def get_queryset(self):
         show = self.request.query_params.get('show')
         queryset = Juridica.objects.all()
-        if show =='true':
-            return queryset.filter(deleted__isnull=False)
+
+        if show =='true' and self.kwargs['id']!=1:
+            queryset = queryset.filter(deleted__isnull=False)
+            #print(queryset.query)
+            return queryset
         
         return queryset.filter(deleted__isnull=True)
+    
+    def retrieve(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Juridico no Registrado")
+        else:
+            serialize = self.get_serializer(instance)
+            return message.ShowMessage(self.serializer_class(instance).data)
 
 class JuridicaUpdateView(generics.UpdateAPIView):
     serializer_class = JuridicaSerializer
@@ -211,5 +228,10 @@ class JuridicaComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Juridica.get_queryset().order_by('-id')
-        return queryset
+        queryset = Juridica.objects.all().order_by('-id')
+        show = self.request.query_params.get('show',None)        
+
+        if show =='true':
+            return queryset.all()
+        if show =='false' or show is None:
+            return queryset.filter(deleted__isnull=True)

@@ -19,12 +19,15 @@ from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from django.core.exceptions import ObjectDoesNotExist
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class NaturalListView(generics.ListAPIView):
     serializer_class = NaturalSerializer
     permission_classes = ()
     queryset = Natural.get_queryset()
     pagination_class = SmallResultsSetPagination
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']
     search_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']
     ordering_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']

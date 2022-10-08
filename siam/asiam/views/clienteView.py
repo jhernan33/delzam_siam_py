@@ -3,24 +3,25 @@ from os import environ
 import os
 from django.conf import settings
 from django.shortcuts import render
-from rest_framework import generics, status
-
 from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-
-from rest_framework import filters as df
-from rest_framework.permissions import IsAuthenticated
-
-from asiam.models import Cliente, Vendedor, Natural, Juridica
-from asiam.serializers import ClienteSerializer
-from asiam.paginations import SmallResultsSetPagination
-
+from django.db import transaction
 from django.http.response import JsonResponse
-from rest_framework.parsers import JSONParser 
-from rest_framework import status
 from django.http import HttpResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.core.exceptions import ObjectDoesNotExist
+
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework import filters as df
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
+
+
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor
+from asiam.serializers import ClienteSerializer
+from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
 
@@ -30,9 +31,9 @@ class ClienteListView(generics.ListAPIView):
     queryset = Cliente.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
-    search_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
-    ordering_fields = ['id','fein_clie','codi_ante','codi_natu','codi_juri','ruta_detalle_vendedor_cliente']
+    #filterset_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ruta_detalle_vendedor_cliente','ptor_clie']
+    search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie']
+    ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -75,7 +76,7 @@ class ClienteCreateView(generics.CreateAPIView):
                         listImagesProv  = request.data['foto_clie']
                         json_foto_clie  = ServiceImage.saveImag(listImagesProv,enviroment)
                     cliente = Cliente(
-                        ruta_detalle_vendedor_cliente       = self.request.data.get("codi_vend")
+                        ruta_detalle_vendedor_cliente       = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
                         ,codi_natu_id                       = self.request.data.get("codi_natu")
                         ,codi_juri_id                       = self.request.data.get("codi_juri")
                         ,fein_clie                          = self.request.data.get("fein_clie")
@@ -87,7 +88,8 @@ class ClienteCreateView(generics.CreateAPIView):
                         ,prau_clie                          = self.request.data.get("prau_clie")
                         ,foto_clie                          = None if json_foto_clie is None else json_foto_clie
                         ,obse_clie                          = self.request.data.get("obse_clie")
-                        ,location_clie                      = self.request.data.get("location")
+                        ,location_clie                      = self.request.data.get("location_clie")
+                        ,ptor_clie                          = self.request.data.get("ptor_clie")
                         ,created                            = datetime.now()
                     )
                     cliente.save()
@@ -141,13 +143,24 @@ class ClienteUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Cliente no Registrado")
         else:
             try:
+                # State Deleted
+                state_deleted = None
+                if instance.deleted:
+                    state_deleted = True
+                
+                Deleted = request.data['erased']
+                if Deleted:                    
+                    isdeleted = datetime.now()
+                else:    
+                    isdeleted = None
+                
                 # Validate Id Natural
-                result_natural = ClienteSerializer.validate_codi_natu(request.data['codi_natu'])
+                result_natural = ClienteSerializer.validate_codi_natu(request.data['codi_natu'],state_deleted)
                 if result_natural == False:
                     return message.NotFoundMessage("Codi_Natu de Persona no Registrada")
                     
                 # Validate Id Juridica
-                result_juridica = ClienteSerializer.validate_codi_juri(request.data['codi_juri'])
+                result_juridica = ClienteSerializer.validate_codi_juri(request.data['codi_juri'],state_deleted)
                 if result_juridica == False:
                     return message.NotFoundMessage("Codi_Juri de Persona Juridica no Registrada")
                 
@@ -165,7 +178,7 @@ class ClienteUpdateView(generics.UpdateAPIView):
                         listImagesProv  = request.data['foto_clie']
                         json_foto_clie  = ServiceImage.updateImage(listImagesProv,enviroment)
                     
-                    instance.ruta_detalle_vendedor_cliente      = self.request.data.get("codi_vend")
+                    instance.ruta_detalle_vendedor_cliente      = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
                     instance.codi_natu_id                       = self.request.data.get("codi_natu")
                     instance.codi_juri_id                       = self.request.data.get("codi_juri")
                     instance.fein_clie                          = self.request.data.get("fein_clie")
@@ -177,18 +190,51 @@ class ClienteUpdateView(generics.UpdateAPIView):
                     instance.prau_clie                          = self.request.data.get("prau_clie")
                     instance.foto_clie                          = None if json_foto_clie is None else json_foto_clie
                     instance.obse_clie                          = self.request.data.get("obse_clie")
+                    instance.location_clie                      = self.request.data.get("location_clie")
+                    instance.ptor_clie                          = self.request.data.get("ptor_clie")
+                    instance.deleted                            = isdeleted
                     instance.updated                            = datetime.now()
                     instance.save()
+
+                    # Check State Deleted
+                    if state_deleted:
+                        # Restore Natural Person
+                        natural = Natural.objects.get(pk=instance.codi_natu_id)
+                        natural.deleted = None
+                        natural.save()
+                        # Restore Legal Person
+                        legal = Juridica.objects.get(pk=instance.codi_juri_id)
+                        legal.deleted = None
+                        legal.save()
                     return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
                
 class ClienteDestroyView(generics.DestroyAPIView):
-    permission_classes = []
-    serializer_class = ClienteSerializer
-    lookup_field = 'id'
-    queryset = Cliente.objects.all()
+    permission_classes = ()
+    lookup_field = 'id' 
 
+    def delete(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            with transaction.atomic():
+                cliente = Cliente.objects.get(pk=kwargs['id'])
+                cliente.deleted = datetime.now()
+                cliente.save()
+                # Deleted Natural
+                natural = Natural.objects.get(pk=cliente.codi_natu_id)
+                natural.deleted = datetime.now()
+                natural.save()
+                # Deleted Legal
+                if cliente.codi_juri_id != 1:
+                    juridica = Juridica.objects.get(pk=cliente.codi_juri_id)
+                    juridica.deleted = datetime.now()
+                    juridica.save()
+
+                return message.DeleteMessage('Cliente '+str(cliente.id))
+        except ObjectDoesNotExist:
+            return message.NotFoundMessage("Id de Cliente no Registrado")
+            
 class ClienteComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = ClienteSerializer    
