@@ -1,3 +1,4 @@
+from email.policy import default
 from django.contrib.postgres.fields import JSONField
 from .base import Base
 from django.db import models
@@ -25,6 +26,8 @@ class Natural(Base):
         on_delete=models.CASCADE,
         related_name='natural.codi_sect+',
     )
+    fipe_natu = models.BooleanField('Firma Persona del Cliente', null=True, blank=True, default=False)
+    razo_natu = models.CharField('Razon Socila del Cliente', max_length=254, null=True, blank=True)
 
     def nomb_apel(self):
         return '%s %s %s %s' % (self.prno_pena, self.seno_pena, self.prap_pena, self.seap_pena)
