@@ -28,9 +28,9 @@ class NaturalListView(generics.ListAPIView):
     queryset = Natural.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']
-    search_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']
-    ordering_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena']
+    filterset_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','razo_natu']
+    search_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','razo_natu']
+    ordering_fields = ['id','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','razo_natu']
 
     def get_queryset(self):
         show = self.request.query_params.get('show',None)
@@ -74,6 +74,8 @@ class NaturalCreateView(generics.CreateAPIView):
                             ,codi_ciud_id   = self.request.data.get("codi_ciud")
                             ,codi_sect_id   = self.request.data.get("codi_sect")
                             ,riff_pena      = str('' if self.request.data.get("riff_pena") is None else self.request.data.get("riff_pena")).strip().upper()
+                            ,fipe_natu      = None if self.request.data.get("fipe_natu") is None else self.request.data.get("fipe_natu")
+                            ,razo_natu      = str('' if self.request.data.get("razo_natu") is None else self.request.data.get("razo_natu")).strip().upper()
                             ,created        = datetime.now()
                         )
                         natural.save()
@@ -167,6 +169,8 @@ class NaturalUpdateView(generics.UpdateAPIView):
                 instance.codi_ciud_id   = self.request.data.get("codi_ciud")
                 instance.codi_sect_id   = self.request.data.get("codi_sect")
                 instance.riff_pena      = str('' if self.request.data.get("riff_pena") is None else self.request.data.get("riff_pena")).strip().upper()
+                instance.fipe_natu      = None if self.request.data.get("fipe_natu") is None else self.request.data.get("fipe_natu")
+                instance.razo_natu      = str('' if self.request.data.get("razo_natu") is None else self.request.data.get("razo_natu")).strip().upper()
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()

@@ -24,7 +24,7 @@ class NaturalBasicSerializer(serializers.ModelSerializer):
         model = Natural
         field = ('id')
         exclude = ['naci_pena','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','sexo_pena','fena_pena','dire_pena','riff_pena','codi_ciud'
-        ,'deleted','created','updated','esta_ttus','edoc_pena','codi_sect']
+        ,'deleted','created','updated','esta_ttus','edoc_pena','codi_sect','fipe_natu','razo_natu']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -41,7 +41,7 @@ class NaturalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Natural
         field = ['id','naci_pena','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','sexo_pena','fena_pena'
-        ,'dire_pena','riff_pena','nomb_apel','nombre_completo','apellido_completo','riff_pena','codi_ciud','deleted']
+        ,'dire_pena','riff_pena','nomb_apel','nombre_completo','apellido_completo','riff_pena','codi_ciud','deleted','fipe_natu','razo_natu']
         exclude =['created','updated','esta_ttus']
     
     def to_representation(self, instance):
