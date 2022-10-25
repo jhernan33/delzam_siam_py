@@ -32,8 +32,8 @@ class ClienteListView(generics.ListAPIView):
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     #filterset_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ruta_detalle_vendedor_cliente','ptor_clie']
-    search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie']
-    ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie']
+    search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','cedu_pena']
+    ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','cedu_pena']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -43,6 +43,13 @@ class ClienteListView(generics.ListAPIView):
             return queryset.filter(deleted__isnull=False)
         if show =='all':
             return queryset
+
+        field = self.request.query_params.get('field',None)
+        value = self.request.query_params.get('value',None)
+        if field is not None and value is not None:
+            if field=='codi_natu':
+                queryset = queryset.filter(codi_natu=value)
+
         return queryset.filter(deleted__isnull=True)
 
 class ClienteCreateView(generics.CreateAPIView):

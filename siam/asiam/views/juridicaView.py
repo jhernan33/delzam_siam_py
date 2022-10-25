@@ -8,7 +8,7 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from yaml import serialize
 
-from asiam.models import Juridica, Ciudad, Sector, TipoEmpresa, Contacto
+from asiam.models import Juridica, Ciudad, Sector, TipoEmpresa, Contacto,Cliente
 from asiam.serializers import JuridicaSerializer, JuridicaBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -16,6 +16,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .serviceImageView import ServiceImageView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.db.models import Exists, OuterRef
 
 
 class JuridicaListView(generics.ListAPIView):
@@ -230,6 +231,17 @@ class JuridicaComboView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Juridica.objects.all().order_by('-id')
         show = self.request.query_params.get('show',None)        
+        customer = self.request.query_params.get('customer',None)
+        _selectCustomer = self.request.query_params.get('id',None)
+
+        # Parameter Customer
+        if customer == 'true':
+            queryCustomer = Juridica.objects.filter(id = _selectCustomer) if _selectCustomer == 1 else Juridica.objects.filter(id__in=[_selectCustomer,1])
+            query= Juridica.objects.filter(
+                ~Exists(Cliente.objects.filter(codi_juri =OuterRef('pk')))
+                )
+            queryCustomer = queryCustomer.union(query).order_by('-id')
+            return queryCustomer
 
         if show =='true':
             return queryset.all()

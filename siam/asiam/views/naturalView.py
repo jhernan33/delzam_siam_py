@@ -14,7 +14,7 @@ from django.http import HttpResponse
 from django.db.models import Exists, OuterRef
 from django.db import transaction
 
-from asiam.models import Natural, Vendedor, Contacto
+from asiam.models import Natural, Vendedor, Contacto, Cliente
 from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -233,13 +233,24 @@ class NaturalComboView(generics.ListAPIView):
         queryset = Natural.objects.all()
         show = self.request.query_params.get('show',None)
         seller = self.request.query_params.get('seller',None)
-        
+        customer = self.request.query_params.get('customer',None) 
+        _selectCustomer = self.request.query_params.get('id',None)
+
         # Parameter Seller
         if seller == 'true':
-            return  Natural.objects.filter(
+            return Natural.objects.filter(
                 ~Exists(Vendedor.objects.filter(codi_natu =OuterRef('pk')))
                 ).order_by('-id')
-            
+
+        # Parameter Customer
+        if customer == 'true':
+            queryCustomer = Natural.objects.filter(id = _selectCustomer) if _selectCustomer == 1 else Natural.objects.filter(id__in=[_selectCustomer,1])
+            query= Natural.objects.filter(
+                ~Exists(Cliente.objects.filter(codi_natu =OuterRef('pk')))
+                )
+            queryCustomer = queryCustomer.union(query).order_by('-id')
+            return queryCustomer
+
         if show =='true':
             return queryset.all()
         if show =='false' or show is None:
