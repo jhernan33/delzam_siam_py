@@ -1,0 +1,30 @@
+version: "3"
+
+services:  
+  apidjango:
+    build: .
+    env_file:
+      - .env
+    #command: python manage.py migrate
+    volumes:
+      - static:/code/static
+      - .:/code
+         
+  nginx:
+    image: nginx:1.13
+    ports:
+      - 8000:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/code/static
+    depends_on:
+      - apidjango
+
+volumes:
+  .:
+  static:
+
+networks:
+  default:
+    external:
+      name: delzam
