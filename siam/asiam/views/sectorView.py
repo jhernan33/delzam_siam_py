@@ -7,6 +7,9 @@ from rest_framework.response import Response
 from rest_framework import generics, status
 from django.core.exceptions import ObjectDoesNotExist
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 from asiam.models import Sector, Ciudad
 from asiam.serializers import SectorSerializer, SectorBasicSerializer, CiudadSerializer
 from asiam.paginations import SmallResultsSetPagination
@@ -17,10 +20,10 @@ class SectorListView(generics.ListAPIView):
     permission_classes = ()
     queryset = Sector.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filterset_fields = ['id','nomb_sect','codi_ciud']
-    search_fields = ['id','nomb_sect','codi_ciud']
-    ordering_fields = ['id','nomb_sect','codi_ciud']
-    ordering = ['-id']
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','nomb_sect','codi_ciud__nomb_ciud']
+    search_fields = ['id','nomb_sect','codi_ciud__nomb_ciud']
+    ordering_fields = ['id','nomb_sect','codi_ciud__nomb_ciud']
 
     def get_queryset(self):
         show = self.request.query_params.get('show',None)

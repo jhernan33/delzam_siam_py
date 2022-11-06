@@ -100,10 +100,10 @@ WSGI_APPLICATION = 'siam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'db_delzam_py',
-        'USER': 'udelzam',
-        'PASSWORD': 'p33dz64',
-        'HOST': '172.18.0.2',
+        'NAME': 'db_delzam_py_cloud',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },
     'comun': {
@@ -111,10 +111,10 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=comun'
         },            
-        'NAME': 'db_delzam_py',
-        'USER': 'udelzam',
-        'PASSWORD': 'p33dz64',
-        'HOST': '172.18.0.2',
+        'NAME': 'db_delzam_py_cloud',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },
     'p2021': {
@@ -122,10 +122,10 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=p2021'
         },            
-        'NAME': 'db_delzam_py',
-        'USER': 'udelzam',
-        'PASSWORD': 'p33dz64',
-        'HOST': '172.18.0.2',
+        'NAME': 'db_delzam_py_cloud',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },
     'p2022': {
@@ -133,10 +133,10 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=p2022'
         },            
-        'NAME': 'db_delzam_py',
-        'USER': 'udelzam',
-        'PASSWORD': 'p33dz64',
-        'HOST': '172.18.0.2',
+        'NAME': 'db_delzam_py_cloud',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },
     'empr': {
@@ -144,10 +144,10 @@ DATABASES = {
         'OPTIONS': {
             'options': '-c search_path=empr'
         },            
-        'NAME': 'db_delzam_py',
-        'USER': 'udelzam',
-        'PASSWORD': 'p33dz64',
-        'HOST': '172.18.0.2',
+        'NAME': 'db_delzam_py_cloud',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     },    
 }

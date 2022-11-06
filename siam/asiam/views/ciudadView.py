@@ -16,6 +16,9 @@ from asiam.models import Ciudad, Estado
 from asiam.serializers import CiudadSerializer, CiudadBasicSerializer, EstadoSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
@@ -27,10 +30,10 @@ class CiudadListView(generics.ListAPIView):
     permission_classes = ()
     queryset = Ciudad.get_queryset()
     pagination_class = SmallResultsSetPagination
-    filterset_fields = ['id','nomb_ciud','codi_esta']
-    search_fields = ['id','nomb_ciud','codi_esta']
-    ordering_fields = ['id','nomb_ciud','codi_esta']
-    ordering = ['-id']
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['id','nomb_ciud','codi_esta__nomb_esta']
+    search_fields = ['id','nomb_ciud','codi_esta__nomb_esta']
+    ordering_fields = ['id','nomb_ciud','codi_esta__nomb_esta']
 
     def get_queryset(self):
         show = self.request.query_params.get('show',None)
@@ -41,11 +44,6 @@ class CiudadListView(generics.ListAPIView):
         if show =='false' or show is None:
             queryset = queryset.filter(deleted__isnull=True)        
 
-        # field = self.request.query_params.get('field',None)
-        # value = self.request.query_params.get('value',None)
-        # if field is not None and value is not None:
-        #     if field=='cedu_pena':
-        #         queryset = queryset.filter(cedu_pena=value)
         return queryset
 
 class CiudadCreateView(generics.CreateAPIView):
