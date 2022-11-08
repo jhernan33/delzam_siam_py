@@ -58,7 +58,8 @@ class RutaSerializer(serializers.ModelSerializer):
         result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         data['sellers'] = {"data":result}
         return data
-
+        
+# Serialize Customer
 class RutaClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ruta
