@@ -33,7 +33,7 @@ class ClienteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cliente
-        field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plzr_clie'
+        field = ('id','fein_clie','codi_ante','cred_clie','mocr_clie','plcr_clie'
         ,'prde_clie','prau_clie','codi_natu','codi_juri','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie')
         exclude =['created','updated','esta_ttus']
         geo_field = "location_clie"
@@ -64,3 +64,9 @@ class ClienteSerializer(serializers.ModelSerializer):
             return False
         else:
             return True
+
+class ClienteBasicSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Cliente
+        field = ('id','codi_natu')
+        exclude = ['created','updated','esta_ttus','fein_clie','codi_ante','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie','location_clie','codi_juri','posi_clie']

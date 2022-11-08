@@ -15,11 +15,11 @@ from .familiaSerializer import FamiliaSerializer
 from .subFamiliaSerializer import SubFamiliaSerializer
 from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
 from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
-from .rutaSerializer import RutaSerializer, RutaBasicSerializer
+from .rutaSerializer import RutaSerializer, RutaBasicSerializer, RutaClienteSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
-from .clienteSerializer import ClienteSerializer
+from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer
 from .userSerializer import UserSerializer
 from .grupoSerializer import GrupoSerializer
 from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics

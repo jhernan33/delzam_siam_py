@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 
 from asiam.models import Ruta,Zona,Vendedor,RutaDetalleVendedor
-from asiam.serializers import RutaSerializer, RutaBasicSerializer
+from asiam.serializers import RutaSerializer, RutaBasicSerializer, RutaClienteSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -70,8 +70,6 @@ class RutaCreateView(generics.CreateAPIView):
         except Zona.DoesNotExist:
             return message.NotFoundMessage("Id de Ruta no Registrado")
 
-            
-
 class RutaRetrieveView(generics.RetrieveAPIView):
     serializer_class = RutaSerializer
     permission_classes = ()
@@ -83,7 +81,7 @@ class RutaRetrieveView(generics.RetrieveAPIView):
         queryset = Ruta.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
-        
+
         return queryset.filter(deleted__isnull=True)
 
     def retrieve(self, request, *args, **kwargs):
@@ -176,3 +174,28 @@ class RutaComboView(generics.ListAPIView):
         if show =='false' or show is None:
             return queryset.filter(deleted__isnull=True)
         
+class RutaClienteRetrieveView(generics.RetrieveAPIView):
+    serializer_class = RutaClienteSerializer
+    permission_classes = ()
+    queryset = Ruta.get_queryset()
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        customer = self.request.query_params.get('customer')
+
+        queryset = Ruta.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+
+        return queryset.filter(deleted__isnull=True)
+
+    def retrieve(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Ruta no Registrada")  
+        else:
+            serialize = self.get_serializer(instance)
+            return message.ShowMessage(self.serializer_class(instance).data)
