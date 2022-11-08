@@ -3,8 +3,9 @@ from rest_framework.response import Response
 from rest_framework import serializers
 # from django.http import JsonResponse
 
-from asiam.models import Ruta,RutaDetalleVendedor
+from asiam.models import Ruta,RutaDetalleVendedor,Cliente
 from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer, RutaDetalleVendedorSerializerBasics
+from asiam.serializers.clienteSerializer import ClienteBasicSerializer
 
 # class TrackListingField(serializers.RelatedField):
 #     def to_representation(self, value):
@@ -57,4 +58,18 @@ class RutaSerializer(serializers.ModelSerializer):
         result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         data['sellers'] = {"data":result}
         return data
+
+class RutaClienteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ruta
+        field = ('id','nomb_ruta')
+        exclude =['created','updated','esta_ttus','deleted','posi_ruta','codi_zona']
     
+    def to_representation(self, instance):
+        data = super(RutaClienteSerializer, self).to_representation(instance=instance)
+
+        queryset = RutaDetalleVendedor.objects.filter(codi_ruta=instance.id)
+        customer = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in=queryset)
+        result = ClienteBasicSerializer(customer, many=True).data
+        data['customers'] = result
+        return data

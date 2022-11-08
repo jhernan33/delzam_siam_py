@@ -140,6 +140,7 @@ urlpatterns = [
     path('ruta/update/<int:id>',  views.RutaUpdateView.as_view(),   name='ruta_update'),
     path('ruta/delete/<int:id>',  views.RutaDestroyView.as_view(),  name='ruta_delete'),
     path('ruta/combo/',           views.RutaComboView.as_view(),    name='ruta_combo'),
+    path('rutaCliente/<int:id>/', views.RutaClienteRetrieveView.as_view(), name='rutaCliente'),
 
     path('rutaDetalleVendedor/',                 views.RutaDetalleVendedorListView.as_view(),     name='rutaDetalleVendedor'),
     path('rutaDetalleVendedor/create/',          views.RutaDetalleVendedorCreateView.as_view(),   name='rutaDetalleVendedor_create'),

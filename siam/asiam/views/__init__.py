@@ -15,7 +15,7 @@ from .familiaView import FamiliaListView, FamiliaCreateView, FamiliaRetrieveView
 from .subFamiliaView import SubFamiliaListView, SubFamiliaCreateView, SubFamiliaRetrieveView, SubFamiliaUpdateView, SubFamiliaDestroyView, SubFamiliaComboView
 from .zonaView import ZonaListView, ZonaCreateView, ZonaRetrieveView, ZonaUpdateView, ZonaDestroyView,ZonaComboView
 from .vendedorView import VendedorListView, VendedorCreateView, VendedorRetrieveView, VendedorUpdateView, VendedorDestroyView, VendedorComboView
-from .rutaView import RutaListView, RutaCreateView, RutaRetrieveView, RutaUpdateView, RutaDestroyView, RutaComboView
+from .rutaView import RutaListView, RutaCreateView, RutaRetrieveView, RutaUpdateView, RutaDestroyView, RutaComboView, RutaClienteRetrieveView
 from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, UnidadMedidaRetrieveView, UnidadMedidaUpdateView, UnidadMedidaDestroyView
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
