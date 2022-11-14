@@ -43,6 +43,7 @@ coverage.xml
 .python-version
 
 # VirtualEnv
+.env/
 .venv/
 
 # Developers
