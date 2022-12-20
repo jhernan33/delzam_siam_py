@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 import re
 from unittest import result
 from django.shortcuts import render
@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 
-from asiam.models import Ruta,Zona,Vendedor,RutaDetalleVendedor
+from asiam.models import Ruta,Zona,Vendedor,RutaDetalleVendedor,Cliente
 from asiam.serializers import RutaSerializer, RutaBasicSerializer, RutaClienteSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -78,6 +78,7 @@ class RutaRetrieveView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
+
         queryset = Ruta.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
@@ -108,33 +109,39 @@ class RutaUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Ruta no Registrada")
         else:
             try:
+                _codi_zona = Zona.getInstanceZona(request.data['codi_zona'])
                 # Validate Description Route
-                result_route = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip())
+                result_route = Ruta.objects.filter(nomb_ruta = self.request.data.get("nomb_ruta").upper().strip()).filter(codi_zona = _codi_zona)
                 if result_route.count() > 0:
                     if result_route[0].id != instance.id:
                         return message.ShowMessage("Descripcion de Ruta ya Registrada con el ID:"+str(result_route[0].id))
 
                 Deleted = request.data['erased']
                 if Deleted:
-                    isdeleted = datetime.now()
+                    isdeleted = timezone.now()
                 else:
                     isdeleted = None
 
                 instance.nomb_ruta = request.data['nomb_ruta'].upper().strip()
+                instance.codi_zona = _codi_zona
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+
                 # Save Detail Sellers
                 is_many = isinstance(self.request.data.get("sellers"),list)
                 if is_many:
-                    RutaDetalleVendedor.objects.filter(codi_ruta_id = instance.id).delete()
                     for l in self.request.data.get("sellers"):
-                        rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = instance.id,
-                            codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
-                            created =  datetime.now(),
-                            )
-                        rutaDetalle.save()
-
+                        _querysetSeller = RutaDetalleVendedor.objects.filter(codi_ruta_id = instance.id).filter(codi_vend_id = l['codi_vend'])
+                        if _querysetSeller.count()>0:
+                            # Check Id in use Cliente
+                            Cliente.objects.filter(ruta_detalle_vendedor_cliente = _querysetSeller[0].id).update(updated = datetime.now())
+                
+                # Save Detail Customers
+                is_many_Customer = isinstance(self.request.data.get("customers"),list)
+                if is_many_Customer:     
+                    for k in self.request.data.get("customers"):
+                        Cliente.objects.filter(id = k['id']).update(posi_clie = k['posi_clie'],updated =  datetime.now())
                 return message.UpdateMessage({"id":instance.id,"nomb_ruta":instance.nomb_ruta})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
@@ -183,7 +190,7 @@ class RutaClienteRetrieveView(generics.RetrieveAPIView):
     def get_queryset(self):
         show = self.request.query_params.get('show')
         customer = self.request.query_params.get('customer')
-
+        print(self)
         queryset = Ruta.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
