@@ -15,3 +15,7 @@ class Zona(Base):
 
     def get_queryset():
         return Zona.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance Zona """
+    def getInstanceZona(Id):
+        return Zona.objects.get(id = Id)

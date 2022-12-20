@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.contrib.gis.db import models
 from asiam.models.rutaDetalleVendedor import RutaDetalleVendedor
+from asiam.models import Juridica, Natural
 
 class Cliente(Base):
     fein_clie = models.DateField  ('Fecha de Ingreso del Cliente',auto_now=False, auto_now_add=False,blank=True, null=True)
@@ -37,3 +38,29 @@ class Cliente(Base):
 
     def get_queryset():
         return Cliente.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Search Array Customer """
+    def searchCustomerArray(_arrayCustomer):
+        arrayCustomer = []
+        # Buscar las personas Naturales
+        queryset = Cliente.objects.filter(id__in =_arrayCustomer).exclude(codi_natu=1)
+        for customer in queryset:
+            arrayCustomer.append(customer.id)
+        _resultNatural = Natural.searchNaturalArray(arrayCustomer)
+        #print(_resultNatural)
+        return _resultNatural
+
+    """     Search Customer for Id     """
+    def searchCustomerId(_id):
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')
+        _descriptionCustomer = ""
+        for customer in _resultClient:
+            if customer['codi_natu'] != 1:
+                _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
+                for natural in _resultQuerySet:
+                    _descriptionCustomer = str(natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seno_pena).strip().upper()
+            else:
+                _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
+                for juridica in _resultQuerySet:
+                    _descriptionCustomer = str(juridica.raso_peju).strip().upper()
+            return _descriptionCustomer

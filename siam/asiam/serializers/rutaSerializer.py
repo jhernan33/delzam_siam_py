@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 from asiam.models import Ruta,RutaDetalleVendedor,Cliente
 from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer, RutaDetalleVendedorSerializerBasics
-from asiam.serializers.clienteSerializer import ClienteBasicSerializer
+from asiam.serializers.clienteSerializer import ClienteBasicSerializer, ClienteRutaSerializer
 
 # class TrackListingField(serializers.RelatedField):
 #     def to_representation(self, value):
@@ -47,7 +47,7 @@ class RutaSerializer(serializers.ModelSerializer):
         model = Ruta
         field = ('id','nomb_ruta','codi_zona','zona','Ruta','deleted')
         exclude =['created','updated','esta_ttus']
-    
+
     def to_representation(self, instance):
         data = super(RutaSerializer, self).to_representation(instance=instance)
         data['nomb_ruta'] = data['nomb_ruta'].upper().strip() if data['nomb_ruta'] else data['nomb_ruta']
@@ -57,6 +57,11 @@ class RutaSerializer(serializers.ModelSerializer):
         queryset = RutaDetalleVendedor.objects.filter(codi_ruta=instance.id)
         result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
         data['sellers'] = {"data":result}
+        
+        # Data Customer
+        querysetDue = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = instance.id).values('id')).values('id','posi_clie').order_by('posi_clie')
+        resultCustomer = ClienteRutaSerializer(querysetDue,many=True).data
+        data['customer'] = {"data":resultCustomer}
         return data
         
 # Serialize Customer
