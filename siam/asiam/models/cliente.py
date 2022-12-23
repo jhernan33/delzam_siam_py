@@ -58,9 +58,45 @@ class Cliente(Base):
             if customer['codi_natu'] != 1:
                 _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
                 for natural in _resultQuerySet:
-                    _descriptionCustomer = str(natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seno_pena).strip().upper()
+                    _descriptionCustomer = str(natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()
             else:
                 _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
                 for juridica in _resultQuerySet:
                     _descriptionCustomer = str(juridica.raso_peju).strip().upper()
             return _descriptionCustomer
+
+    # Search Type of Customer
+    def searchTypeCustomerId(_id):
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')
+        _descriptionCustomer = ""
+        for customer in _resultClient:
+            if customer['codi_natu'] != 1:
+                _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
+                for natural in _resultQuerySet:
+                    _descriptionCustomer = str(str(natural.cedu_pena)+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
+            else:
+                _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
+                for juridica in _resultQuerySet:
+                    _descriptionCustomer = str(juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
+            return _descriptionCustomer
+
+    # Search Adress of Customer
+    def searchAddressCustomer(_id):
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')
+        _addressCustomer = "" 
+        sector =""
+        ciudad =""
+        for customer in _resultClient:
+            if customer['codi_natu'] != 1:
+                _resultQuerySet = Natural.objects.filter(id = customer['codi_natu']).select_related('codi_sect').select_related('codi_ciud')
+                for natural in _resultQuerySet:
+                    sector = str(natural.codi_sect.nomb_sect).strip().upper() # .replace(" ","")
+                    ciudad = str(natural.codi_ciud.nomb_ciud).strip().upper()
+                    _addressCustomer = str("Sector: "+sector+" Ciudad: "+ciudad+" Dir. "+natural.dire_pena).strip().upper()
+            else:
+                _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri']).select_related('codi_sect').select_related('codi_ciud')
+                for juridica in _resultQuerySet:
+                    sector = str(juridica.codi_sect.nomb_sect).strip().upper()
+                    ciudad = str(juridica.codi_ciud.nomb_ciud).strip().upper()
+                    _addressCustomer = str("Sector: "+sector+" Ciudad: "+ciudad+" Dir. "+juridica.dofi_peju).strip().upper()
+            return _addressCustomer

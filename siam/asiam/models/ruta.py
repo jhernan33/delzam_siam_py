@@ -21,3 +21,10 @@ class Ruta(Base):
 
     def get_queryset():
         return Ruta.objects.all().filter(deleted__isnull=True)
+
+
+    """
+    Buscar las rutas por Zona
+    """
+    def getRouteFilterZone(_zoneId):
+        return Ruta.objects.all().filter(codi_zona = _zoneId).values("id")

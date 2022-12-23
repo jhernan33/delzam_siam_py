@@ -19,8 +19,8 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor
-from asiam.serializers import ClienteSerializer
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta
+from asiam.serializers import ClienteSerializer, ClienteReportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -251,3 +251,56 @@ class ClienteComboView(generics.ListAPIView):
         estado_id = self.kwargs['id']
         queryset = Cliente.objects.all().order_by('-id')
         return queryset.filter(codi_esta_id = estado_id)    
+
+"""
+Report Customer filter Zone, Route, Seller
+"""
+class ClienteReportView(generics.ListAPIView):
+    serializer_class = ClienteReportSerializer
+    permission_classes = ()
+    queryset = Cliente.get_queryset()
+    pagination_class = SmallResultsSetPagination
+    #filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    
+    # search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','codi_natu__cedu_pena']
+    # ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','codi_natu__cedu_pena']
+    # ordering = ['-id']
+
+    def get_queryset(self):
+        # show = self.request.query_params.get('show')
+        # queryset = Cliente.objects.all()
+        # if show =='true':
+        #     return queryset.filter(deleted__isnull=False)
+        # if show =='all':
+        #     return queryset
+
+        # Check parameter zone
+        zone = self.request.query_params.get('zone',None)
+        
+        if zone is not None:
+            # print("Zona:"+zone)
+            _rutas = Ruta.getRouteFilterZone(zone)
+            # print(_rutas)
+            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+            # print(_detail)
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            # for n in queryset:
+            #     print(n)
+            #return queryset
+            # if zone=='codi_natu':
+            #     queryset = queryset.filter(codi_natu=value)
+        
+
+        # Check Parameter Route
+        _route = self.request.query_params.get('route',None)
+        
+        if _route is not None:
+            # print("Zona:"+zone)
+            # _rutas = Ruta.getRouteFilterZone(route)
+            print(_route)
+            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = [_route])
+            #   print(_detail.query)
+            print(_detail)
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+
+        return queryset.filter(deleted__isnull=True)
