@@ -1,6 +1,7 @@
 import imp
 from .base import Base
 from django.db import models
+from asiam.models import Vendedor, Natural
 
 class RutaDetalleVendedor(Base):
     codi_ruta = models.ForeignKey(
@@ -34,3 +35,12 @@ class RutaDetalleVendedor(Base):
 
     # def __str__(self):
     #     return '%d: %d' % (self.codi_ruta, self.codi_vend)
+
+    """
+    Search Seller
+    """
+    def searchSeller(self):
+        _result_detail = RutaDetalleVendedor.objects.filter(id = self.id).values("codi_vend")
+        _result_seller = Vendedor.objects.filter(id = _result_detail[0]['codi_vend']).values('codi_natu')
+        _result_natural = Natural.objects.filter(id = _result_seller[0]['codi_natu'])
+        return str(_result_natural[0].prno_pena[0]+"."+_result_natural[0].seno_pena[0]+"."+_result_natural[0].prap_pena[0]+"."+_result_natural[0].seap_pena[0]).strip().upper()

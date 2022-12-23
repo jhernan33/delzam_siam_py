@@ -206,3 +206,4 @@ class RutaClienteRetrieveView(generics.RetrieveAPIView):
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
+

@@ -1,5 +1,6 @@
 from .base import Base
 from django.db import models
+from asiam.models import Juridica, Natural, Cliente
 
 class Contacto(Base):
     desc_cont = models.CharField ('Descripcion del Contacto', max_length=200, null=False, blank=False)
@@ -72,3 +73,18 @@ class Contacto(Base):
             Contacto.objects.filter(codi_vend = id).delete()
         elif str(codi_eval).strip() =='codi_prov':
             Contacto.objects.filter(codi_prov = id).delete()
+    
+    # Search Contact for 
+    def search_contact(_id):
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')
+        _descriptionContact = ""
+        for customer in _resultClient:
+            if customer['codi_natu'] != 1:
+                _resultQuerySet = Contacto.objects.filter(codi_natu = customer['codi_natu'])
+                for natural in _resultQuerySet:
+                    _descriptionContact = str(natural.desc_cont).strip().upper()
+            else:
+                _resultQuerySet = Contacto.objects.filter(codi_juri = customer['codi_juri'])
+                for juridica in _resultQuerySet:
+                    _descriptionContact = str(juridica.desc_cont).strip().upper()
+            return _descriptionContact

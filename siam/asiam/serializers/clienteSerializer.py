@@ -1,7 +1,7 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Contacto
 from asiam.serializers import NaturalSerializer,JuridicaSerializer,VendedorSerializer
 from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer
 from django.conf import settings
@@ -84,4 +84,30 @@ class ClienteRutaSerializer(serializers.ModelSerializer):
         _description = Cliente.searchCustomerId(instance['id'])
         representation["description"] = _description
         return representation
+
+class ClienteReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        field = ('id','codi_ante','description','codi_natu','codi_juri')
+        exclude =['created','updated','esta_ttus']
         
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        # Add Description Seller
+        _result_seller =  RutaDetalleVendedor.searchSeller(instance.ruta_detalle_vendedor_cliente)
+        _descriptionSeller = _result_seller
+
+        # Add Description for Natural or Juridica
+        _description = Cliente.searchTypeCustomerId(instance.id)
+        representation["description_customer"] = _description+" (Vend.) "+_descriptionSeller
+
+        # Add Contact for Customer c
+        _contact = Contacto.search_contact(instance.id)
+        representation["contact"] = _contact
+
+        # Add Adress for Customer Contacto
+        _address = Cliente.searchAddressCustomer(instance.id)
+        representation["address"] = _address
+
+        return representation
