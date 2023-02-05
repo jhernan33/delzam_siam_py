@@ -11,4 +11,4 @@ RUN apt-get update &&\
     
 RUN pip install -r requirements.txt
 
-CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "api", "api.wsgi:application"]
+CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
