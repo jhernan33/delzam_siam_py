@@ -10,7 +10,7 @@ from django.conf import settings
 from rest_framework import generics
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-from asiam.models import Vendedor
+from asiam.models import Vendedor, Cliente
 from asiam.models import Natural,RutaDetalleVendedor, Ruta, Contacto
 from asiam.serializers import VendedorSerializer, VendedorBasicSerializer, NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
@@ -201,12 +201,45 @@ class VendedorComboView(generics.ListAPIView):
 
         show = self.request.query_params.get('show',None)
         route = self.request.query_params.get('route',None)
+        customer = self.request.query_params.get('customer',None)
+        seller = self.request.query_params.get('seller',None)
         
+        # Parameter seller
+        if seller:
+            # String to Array
+            _array_seller = seller.split(',')
+            _array_customer = customer.split(',')
+
+            #   Queryset Get Sellers
+            querysetRoutes = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_customer).values('id')
+            querysetCustomer = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = querysetRoutes).values('ruta_detalle_vendedor_cliente')
+            querysetSeller = RutaDetalleVendedor.get_queryset().filter(id__in = querysetCustomer).filter(codi_vend__in = _array_seller).values('codi_vend')
+            print(querysetSeller)
+            queryset = queryset.filter(id__in = querysetSeller)
+            return queryset
+
+
         # Parameter route
         if route:
+            # String to Array
+            _array_route = route.split(',')
+
             # Queryset Old
             # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('codi_vend'))
-            queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('id','codi_vend')
+            querysetdue = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('codi_vend')
+            queryset = queryset.get_queryset().filter(id__in = querysetdue)
+            return queryset
+
+        # Parameter Customer
+        if customer:
+            # String to Array
+            _array_customer = customer.split(',')
+
+            #   Queryset Get Sellers
+            querysetRoutes = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_customer).values('id')
+            querysetCustomer = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = querysetRoutes).values('ruta_detalle_vendedor_cliente')
+            querysetSeller = RutaDetalleVendedor.get_queryset().filter(id__in = querysetCustomer).values('codi_vend')
+            queryset = queryset.filter(id__in = querysetSeller)
             return queryset
             
         if show =='true':

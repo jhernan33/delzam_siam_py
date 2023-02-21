@@ -267,40 +267,58 @@ class ClienteReportView(generics.ListAPIView):
     # ordering = ['-id']
 
     def get_queryset(self):
-        # show = self.request.query_params.get('show')
-        # queryset = Cliente.objects.all()
-        # if show =='true':
-        #     return queryset.filter(deleted__isnull=False)
-        # if show =='all':
-        #     return queryset
+        queryset = None
 
-        # Check parameter zone
-        zone = self.request.query_params.get('zone',None)
-        
-        if zone is not None:
-            # print("Zona:"+zone)
-            _rutas = Ruta.getRouteFilterZone(zone)
-            # print(_rutas)
-            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            # print(_detail)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
-            # for n in queryset:
-            #     print(n)
-            #return queryset
-            # if zone=='codi_natu':
-            #     queryset = queryset.filter(codi_natu=value)
-        
+        # Check Parameter Seller
+        _seller = self.request.query_params.get('seller',None)
+        if type(_seller) == str:
+            # Convert Str to List
+            _seller_customer = _seller.split(',')
+            #   Get Parameter Routes
+            _route = self.request.query_params.get('route',None)
+            if _route is not None:
+                _route = _route.split(',')
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                return queryset
+                
 
         # Check Parameter Route
         _route = self.request.query_params.get('route',None)
-        
-        if _route is not None:
-            # print("Zona:"+zone)
-            # _rutas = Ruta.getRouteFilterZone(route)
-            print(_route)
-            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = [_route])
-            #   print(_detail.query)
-            print(_detail)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+        if type(_route) == str:
+            # Create List
+            _routeList = []
+            ocu_pri = 0
+            # Check Count Ocurrences
+            indexes = [i for i, c in enumerate(_route) if c ==',']
+            if len(indexes) >0:
+                # Iterate Indexes
+                for x in indexes:
+                    if ocu_pri == 0:
+                        _routeList.append(int(_route[ocu_pri:x]))
+                        ocu_pri = x
+                    elif ocu_pri > 0:
+                        _routeList.append(int(_route[ocu_pri+1:x]))
+                        ocu_pri = x
+                _routeList.append(int(_route[ocu_pri+1:len(_route)]))
+            elif len(indexes) ==0:
+                _routeList.append(int(_route[0:len(_route)]))
 
-        return queryset.filter(deleted__isnull=True)
+            if _routeList is not None:
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            return queryset
+        
+        # Check parameter zone
+        zone = self.request.query_params.get('zone',None) 
+        if zone is not None:
+            _rutas = Ruta.getRouteFilterZone(zone)
+            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            return queryset
+        
+        # No Filter
+        if queryset is None:   
+            return Cliente.get_queryset().filter(deleted__isnull=True)
+        elif queryset is not None:
+            return queryset
