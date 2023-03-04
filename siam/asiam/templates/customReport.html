@@ -1,0 +1,32 @@
+{% extends "base-pdf.html" %}
+{% block content %}
+<h1 class="text-center">Reporte de Clientes</h1>
+<div class="row text-center">
+    <div class="col-1">
+        ID
+    </div>
+    <div class="col-1">
+        COD. ANT.
+    </div>
+    <div class="col-5">
+        CLIENTE
+    </div>
+    <div class="col-2">
+        TELEFONO
+    </div>
+    <div class="col-3">
+        DIRECCION
+    </div>
+</div>
+<br/>
+
+<table class="table">
+    {% for key in data %}
+        <tr>
+            <td style="width:2%">{{ key.id }}</td>
+            <td style="width:5%">{{ key.codi_ante }}</td>
+            <td style="width:20%">{{ key.description_customer}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

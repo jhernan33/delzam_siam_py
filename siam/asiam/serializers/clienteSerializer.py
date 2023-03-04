@@ -85,11 +85,14 @@ class ClienteRutaSerializer(serializers.ModelSerializer):
         representation["description"] = _description
         return representation
 
+"""
+    Report Custom Screen
+"""
 class ClienteReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         field = ('id','codi_ante','description','codi_natu','codi_juri')
-        exclude =['created','updated','esta_ttus']
+        exclude = ['created','updated','deleted','esta_ttus','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','location_clie','posi_clie']
         
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -110,4 +113,65 @@ class ClienteReportSerializer(serializers.ModelSerializer):
         _address = Cliente.searchAddressCustomer(instance.id)
         representation["address"] = _address
 
+        return representation
+
+
+class ClienteReportExportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        field = ('id','codi_ante','description','ruta_detalle_vendedor_cliente')
+        exclude = ['created','updated','deleted','esta_ttus','codi_juri','codi_natu','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','location_clie','posi_clie']
+        
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        
+        for obj in instance:
+            # print(obj['id'])
+            _result_detail = RutaDetalleVendedor.objects.filter(id = obj['ruta_detalle_vendedor_cliente_id']).values("codi_vend")
+            # print(_result_detail)
+            _result_seller = Vendedor.objects.filter(id = _result_detail[0]['codi_vend']).values('codi_natu')
+            # print(_result_seller)
+            _result_natural = Natural.objects.filter(id = _result_seller[0]['codi_natu'])
+            _description = str(_result_natural[0].prno_pena[0]+"."+_result_natural[0].seno_pena[0]+"."+_result_natural[0].prap_pena[0]+"."+_result_natural[0].seap_pena[0]).strip().upper()
+
+            # Add Description for Natural or Juridica
+            # _description = Cliente.searchTypeCustomerId(instance.id)
+
+            _resultClient = Cliente.objects.filter(id = obj['id']).values('id','codi_natu','codi_juri')
+            _descriptionCustomer = ""
+            # print("***************************")
+            for customer in _resultClient:
+                # print(customer)
+                if customer['codi_natu'] != 1:
+                    # print("Natural")
+                    _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
+                    # print(_resultQuerySet)
+                    for natural in _resultQuerySet:
+                        #print(natural.cedu_pena)
+                        _descriptionCustomer = str(str(natural.cedu_pena)+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
+                        # print(_descriptionCustomer)
+                else:
+                    # print("Juridico")
+                    _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
+                    for juridica in _resultQuerySet:
+                        _descriptionCustomer = str(juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
+            obj['description_customer'] = _description+" (Vend.) "+_descriptionCustomer
+            #print(obj['description_customer'])
+
+        # Add Description Seller
+        # _result_seller =  RutaDetalleVendedor.searchSeller(instance.ruta_detalle_vendedor_cliente)
+        # _descriptionSeller = _result_seller
+
+            # Add Description for Natural or Juridica
+            # _description = Cliente.searchTypeCustomerId(instance.id)
+            # representation["description_customer"] = _description+" (Vend.) "+_descriptionSeller
+
+            # # Add Contact for Customer c
+            # _contact = Contacto.search_contact(instance.id)
+            # representation["contact"] = _contact
+
+            # # Add Adress for Customer Contacto
+            # _address = Cliente.searchAddressCustomer(instance.id)
+            # representation["address"] = _address
+        
         return representation
