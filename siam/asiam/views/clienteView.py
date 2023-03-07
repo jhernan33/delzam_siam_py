@@ -268,7 +268,7 @@ class ClienteReportView(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = None
-
+        
         # Check Parameter Seller
         _seller = self.request.query_params.get('seller',None)
         if type(_seller) == str:
@@ -322,6 +322,79 @@ class ClienteReportView(generics.ListAPIView):
             return Cliente.get_queryset().filter(deleted__isnull=True)
         elif queryset is not None:
             return queryset
+    
+    '''
+    Method Get Request
+    '''
+    def setRequestCustom(self,request):
+        _zone = request.GET.get("zone",None)
+        _route = request.GET.get("route",None)
+        _seller = request.GET.get("seller",None)
+        serializer_class = ClienteReportSerializer
+        # print("Request Get Customer=",request,_zone,_route,_seller)
+        # a = super(ClienteReportView,self).get_queryset()
+        # return a
+        queryset = Cliente.get_queryset()
+        
+        # Check Parameter Seller
+        #_seller = self.request.query_params.get('seller',None)
+        if type(_seller) == str:
+            # Convert Str to List
+            _seller_customer = _seller.split(',')
+            #   Get Parameter Routes
+            _route = self.request.query_params.get('route',None)
+            if _route is not None:
+                _route = _route.split(',')
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                return queryset
+                
+
+        # Check Parameter Route
+        # _route = self.request.query_params.get('route',None)
+        if type(_route) == str:
+            # Create List
+            _routeList = []
+            ocu_pri = 0
+            # Check Count Ocurrences
+            indexes = [i for i, c in enumerate(_route) if c ==',']
+            if len(indexes) >0:
+                # Iterate Indexes
+                for x in indexes:
+                    if ocu_pri == 0:
+                        _routeList.append(int(_route[ocu_pri:x]))
+                        ocu_pri = x
+                    elif ocu_pri > 0:
+                        _routeList.append(int(_route[ocu_pri+1:x]))
+                        ocu_pri = x
+                _routeList.append(int(_route[ocu_pri+1:len(_route)]))
+            elif len(indexes) ==0:
+                _routeList.append(int(_route[0:len(_route)]))
+
+            if _routeList is not None:
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
+                print("QuerySet Route========>",queryset)
+                print("Serializador========>",serializer_class)
+                # data = serializer_class(queryset).data
+                # print("QuerySet Route========>",data)
+            return queryset
+        
+        # Check parameter zone
+        _zone = self.request.query_params.get('zone',None) 
+        if _zone is not None:
+            _rutas = Ruta.getRouteFilterZone(_zone)
+            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            return queryset
+        
+        # No Filter
+        if queryset is None:   
+            return Cliente.get_queryset().filter(deleted__isnull=True)
+        elif queryset is not None:
+            return queryset
+        
+
         
 """ 
 *********************   Export Report to File (Pdf) *********************
@@ -329,62 +402,72 @@ class ClienteReportView(generics.ListAPIView):
 def ClienteExportFile(request):
     # serializer_class = ClienteReportExportSerializer
     # Get Values Request
-    _zone = request.GET.get("zone",None)
-    _route = request.GET.get("route",None)
-    _seller = request.GET.get("seller",None)
+    # _zone = request.GET.get("zone",None)
+    # _route = request.GET.get("route",None)
+    # _seller = request.GET.get("seller",None)
 
-    #   Create Queryset
-    queryset = None   
+    # Instance Object
+    objectReportView = ClienteReportView()
+    result = objectReportView.setRequestCustom(request)
+    print("*********************************************")
+    for data in result:
+        print(data)
 
-    if type(_seller) == str:
-        # Convert Str to List
-        _seller_customer = _seller.split(',')
+    # message = {"message":"Registro Encontrado","status":status.HTTP_200_OK}
+    # return HttpResponse(result)
 
-        #   Check Get Parameter Routes
-        if _route is not None:
-            _route = _route.split(',')
-            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
-            queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
+    # #   Create Queryset
+    # queryset = None   
+
+    # if type(_seller) == str:
+    #     # Convert Str to List
+    #     _seller_customer = _seller.split(',')
+
+    #     #   Check Get Parameter Routes
+    #     if _route is not None:
+    #         _route = _route.split(',')
+    #         _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
+    #         queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
             
-    # Check Parameter Route
-    if type(_route) == str:
-        # Create List
-        _routeList = []
-        ocu_pri = 0
-        # Check Count Ocurrences
-        indexes = [i for i, c in enumerate(_route) if c ==',']
-        if len(indexes) >0:
-            # Iterate Indexes
-            for x in indexes:
-                if ocu_pri == 0:
-                    _routeList.append(int(_route[ocu_pri:x]))
-                    ocu_pri = x
-                elif ocu_pri > 0:
-                    _routeList.append(int(_route[ocu_pri+1:x]))
-                    ocu_pri = x
-            _routeList.append(int(_route[ocu_pri+1:len(_route)]))
-        elif len(indexes) ==0:
-            _routeList.append(int(_route[0:len(_route)]))
+    # # Check Parameter Route
+    # if type(_route) == str:
+    #     # Create List
+    #     _routeList = []
+    #     ocu_pri = 0
+    #     # Check Count Ocurrences
+    #     indexes = [i for i, c in enumerate(_route) if c ==',']
+    #     if len(indexes) >0:
+    #         # Iterate Indexes
+    #         for x in indexes:
+    #             if ocu_pri == 0:
+    #                 _routeList.append(int(_route[ocu_pri:x]))
+    #                 ocu_pri = x
+    #             elif ocu_pri > 0:
+    #                 _routeList.append(int(_route[ocu_pri+1:x]))
+    #                 ocu_pri = x
+    #         _routeList.append(int(_route[ocu_pri+1:len(_route)]))
+    #     elif len(indexes) ==0:
+    #         _routeList.append(int(_route[0:len(_route)]))
 
-        if _routeList is not None:
-            # queryset = serializer_class(queryset)
-            _data = searchCustomer(_routeList)
-            print(_data)
+    #     if _routeList is not None:
+    #         # queryset = serializer_class(queryset)
+    #         _data = searchCustomer(_routeList)
+    #         print(_data)
             
-    # Check parameter zone
-    if _zone is not None:
-        _rutas = Ruta.getRouteFilterZone(_zone)
-        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-        queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
+    # # Check parameter zone
+    # if _zone is not None:
+    #     _rutas = Ruta.getRouteFilterZone(_zone)
+    #     _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+    #     queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
     
-    # No Filter
-    if queryset is None:   
-        queryset = Cliente.get_queryset().filter(deleted__isnull=True).values()
+    # # No Filter
+    # if queryset is None:   
+    #     queryset = Cliente.get_queryset().filter(deleted__isnull=True).values()
     
-    # for value in queryset:
-    #     print(value)
+    # # for value in queryset:
+    # #     print(value)
 
-    context = {"data":queryset}
+    context = {"data":result}
     html = render_to_string("customReport.html", context)
 
     response = HttpResponse(content_type="application/pdf")
