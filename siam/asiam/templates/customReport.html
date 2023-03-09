@@ -1,32 +1,37 @@
 {% extends "base-pdf.html" %}
 {% block content %}
-<h1 class="text-center">Reporte de Clientes</h1>
-<div class="row text-center">
-    <div class="col-1">
-        ID
-    </div>
-    <div class="col-1">
-        COD. ANT.
-    </div>
-    <div class="col-5">
-        CLIENTE
-    </div>
-    <div class="col-2">
-        TELEFONO
-    </div>
-    <div class="col-3">
-        DIRECCION
-    </div>
+<div>
+    <span class="izquierda"><h3>Reporte de Clientes</h3></span>
+    <span class="titleCentro"><h3> Zona:</h3></span>
+    <span class="derecha"><h5 >Fecha Emisión: {{ Fecha|date:"d/m/Y"}}</h5></span>
 </div>
-<br/>
+
+<br/><br/>
 
 <table class="table">
+    <thead>
+        <tr>
+            <th>COD-ANT.</th>
+            <th>RIF, Nombre y Apellido/ Razon Social, Natural(N) Juridico(J)</th>
+            <th>Teléfono</th>
+            <th>Ciudad/Sector/Dirección</th>
+            <th>Visita</th>
+        </tr>
+    </thead>
     {% for key in data %}
         <tr>
-            <td style="width:2%">{{ key.id }}</td>
-            <td style="width:5%">{{ key.codi_ante }}</td>
-            <td style="width:20%">{{ key.description_customer}}</td>
+            <td style="width:1%">{{ key.codi_ante }}</td>
+            <td style="width:30%">{{ key.description_customer}}</td>
+            <td style="width:10%">{{ key.contact}}</td>
+            <td style="width:50%">{{ key.address}}</td>
+            <td style="width:10%">{{ key.posi_clie}}</td>
         </tr>
     {% endfor %}
+    <tfoot>
+        <tr>
+            <th>Total de Clientes:</th>
+            <th colspan="4">{{ total}}</th>
+          </tr>
+    </tfoot>
 </table>
 {% endblock %}

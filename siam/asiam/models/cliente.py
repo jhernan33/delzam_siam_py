@@ -73,7 +73,7 @@ class Cliente(Base):
             if customer['codi_natu'] != 1:
                 _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
                 for natural in _resultQuerySet:
-                    _descriptionCustomer = str(str(natural.cedu_pena)+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
+                    _descriptionCustomer = str(natural.riff_pena+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
             else:
                 _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
                 for juridica in _resultQuerySet:
@@ -92,11 +92,11 @@ class Cliente(Base):
                 for natural in _resultQuerySet:
                     sector = str(natural.codi_sect.nomb_sect).strip().upper() # .replace(" ","")
                     ciudad = str(natural.codi_ciud.nomb_ciud).strip().upper()
-                    _addressCustomer = str("Sector: "+sector+" Ciudad: "+ciudad+" Dir. "+natural.dire_pena).strip().upper()
+                    _addressCustomer = str(ciudad+" Sector: "+sector+" , "+natural.dire_pena).strip().upper()
             else:
                 _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri']).select_related('codi_sect').select_related('codi_ciud')
                 for juridica in _resultQuerySet:
                     sector = str(juridica.codi_sect.nomb_sect).strip().upper()
                     ciudad = str(juridica.codi_ciud.nomb_ciud).strip().upper()
-                    _addressCustomer = str("Sector: "+sector+" Ciudad: "+ciudad+" Dir. "+juridica.dofi_peju).strip().upper()
+                    _addressCustomer = str(ciudad+" Sector: "+sector+" , "+juridica.dofi_peju).strip().upper()
             return _addressCustomer

@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto
 from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -324,34 +324,32 @@ class ClienteReportView(generics.ListAPIView):
             return queryset
     
     '''
-    Method Get Request
+    Method Set Request
     '''
     def setRequestCustom(self,request):
         _zone = request.GET.get("zone",None)
         _route = request.GET.get("route",None)
         _seller = request.GET.get("seller",None)
-        serializer_class = ClienteReportSerializer
-        # print("Request Get Customer=",request,_zone,_route,_seller)
-        # a = super(ClienteReportView,self).get_queryset()
-        # return a
+        
         queryset = Cliente.get_queryset()
         
         # Check Parameter Seller
-        #_seller = self.request.query_params.get('seller',None)
         if type(_seller) == str:
             # Convert Str to List
             _seller_customer = _seller.split(',')
             #   Get Parameter Routes
-            _route = self.request.query_params.get('route',None)
+            # _route = self.request.query_params.get('route',None)
             if _route is not None:
                 _route = _route.split(',')
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
                 queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+
+                # Call method search Data Custom
+                queryset = searchCustomNaturalJuridica(queryset)
                 return queryset
                 
 
         # Check Parameter Route
-        # _route = self.request.query_params.get('route',None)
         if type(_route) == str:
             # Create List
             _routeList = []
@@ -373,19 +371,23 @@ class ClienteReportView(generics.ListAPIView):
 
             if _routeList is not None:
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
-                print("QuerySet Route========>",queryset)
-                print("Serializador========>",serializer_class)
-                # data = serializer_class(queryset).data
-                # print("QuerySet Route========>",data)
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                # Call method search Data Custom
+                queryset = searchCustomNaturalJuridica(queryset)
+
             return queryset
         
         # Check parameter zone
-        _zone = self.request.query_params.get('zone',None) 
         if _zone is not None:
             _rutas = Ruta.getRouteFilterZone(_zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').select_related('')
+            
+            # _allFields = queryset.values()
+            # print("Field==>",_allFields)
+            
+            # Call method search Data Custom
+            queryset = searchCustomNaturalJuridica(queryset)
             return queryset
         
         # No Filter
@@ -393,81 +395,44 @@ class ClienteReportView(generics.ListAPIView):
             return Cliente.get_queryset().filter(deleted__isnull=True)
         elif queryset is not None:
             return queryset
-        
 
         
+
+"""
+Search Data Custom
+"""
+def searchCustomNaturalJuridica(_queryset):
+    
+    for k in _queryset:
+        # Add Description Seller
+        _result_seller =  RutaDetalleVendedor.searchSeller(k.ruta_detalle_vendedor_cliente)
+        _descriptionSeller = _result_seller
+
+        # Add Description for Natural or Juridica
+        _description = Cliente.searchTypeCustomerId(k.id)
+        k.description_customer = _description+" (Vend.) "+_descriptionSeller
+
+        # Add Contact for Customer c
+        _contact = Contacto.search_contact(k.id)
+        k.contact = _contact
+
+        # Add Adress for Customer Contacto
+        _address = Cliente.searchAddressCustomer(k.id)
+        k.address = _address
+
+    return _queryset
+
 """ 
 *********************   Export Report to File (Pdf) *********************
 """
 def ClienteExportFile(request):
-    # serializer_class = ClienteReportExportSerializer
-    # Get Values Request
-    # _zone = request.GET.get("zone",None)
-    # _route = request.GET.get("route",None)
-    # _seller = request.GET.get("seller",None)
-
     # Instance Object
     objectReportView = ClienteReportView()
     result = objectReportView.setRequestCustom(request)
-    print("*********************************************")
-    for data in result:
-        print(data)
 
-    # message = {"message":"Registro Encontrado","status":status.HTTP_200_OK}
-    # return HttpResponse(result)
-
-    # #   Create Queryset
-    # queryset = None   
-
-    # if type(_seller) == str:
-    #     # Convert Str to List
-    #     _seller_customer = _seller.split(',')
-
-    #     #   Check Get Parameter Routes
-    #     if _route is not None:
-    #         _route = _route.split(',')
-    #         _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
-    #         queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
-            
-    # # Check Parameter Route
-    # if type(_route) == str:
-    #     # Create List
-    #     _routeList = []
-    #     ocu_pri = 0
-    #     # Check Count Ocurrences
-    #     indexes = [i for i, c in enumerate(_route) if c ==',']
-    #     if len(indexes) >0:
-    #         # Iterate Indexes
-    #         for x in indexes:
-    #             if ocu_pri == 0:
-    #                 _routeList.append(int(_route[ocu_pri:x]))
-    #                 ocu_pri = x
-    #             elif ocu_pri > 0:
-    #                 _routeList.append(int(_route[ocu_pri+1:x]))
-    #                 ocu_pri = x
-    #         _routeList.append(int(_route[ocu_pri+1:len(_route)]))
-    #     elif len(indexes) ==0:
-    #         _routeList.append(int(_route[0:len(_route)]))
-
-    #     if _routeList is not None:
-    #         # queryset = serializer_class(queryset)
-    #         _data = searchCustomer(_routeList)
-    #         print(_data)
-            
-    # # Check parameter zone
-    # if _zone is not None:
-    #     _rutas = Ruta.getRouteFilterZone(_zone)
-    #     _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-    #     queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
-    
-    # # No Filter
-    # if queryset is None:   
-    #     queryset = Cliente.get_queryset().filter(deleted__isnull=True).values()
-    
-    # # for value in queryset:
-    # #     print(value)
-
-    context = {"data":result}
+    _date = datetime.now().date()
+    # Create Context 
+    context = {"data":result, "total":result.count, "Fecha":_date}
     html = render_to_string("customReport.html", context)
 
     response = HttpResponse(content_type="application/pdf")
@@ -478,79 +443,3 @@ def ClienteExportFile(request):
 
     return response
 
-"""
-Search Data Custom
-"""
-def searchCustomer(_routes):
-    print(_routes)
-    print(type(_routes))
-    if isinstance(_routes,list):
-        # Search Routes
-        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routes).values("codi_vend","id")
-        print(_detail)
-        queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail[0]["codi_vend"]).order_by('id')
-        print(queryset)
-        # Search Seller
-        
-        # _result_natural = Natural.objects.filter(id = Vendedor.objects.filter(id = _detail[0]['codi_vend']).values('codi_natu'))
-        # print(_result_natural)
-
-    #     _objectCustomer = {}
-    #     # for obj in _routes:
-    #     #     # Search Routes
-    #     #     _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-    #     #     queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
-            
-    #     #     _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = obj)
-    #     #     # print(_detail)
-    #     #     # Search Custom
-    #     #     queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').values()
-    #     #     # print(queryset)
-    #     #     # Search Seller
-    #     #     _result_natural = Natural.objects.filter(id = Vendedor.objects.filter(id = _detail[0]['codi_vend']))
-    #     #     _description = str(_result_natural[0].prno_pena[0]+"."+_result_natural[0].seno_pena[0]+"."+_result_natural[0].prap_pena[0]+"."+_result_natural[0].seap_pena[0]).strip().upper()
-        
-    #     #     # Create Object
-    #     #     _objectCustomer.update({
-    #     #         'id': queryset[0]['id'],
-    #     #         'codi_ante': queryset[0]['codi_ante'],
-    #     #         'description_customer': _description,
-    #     #     })
-    #     # print(_objectCustomer)
-    #     # return _objectCustomer
-    #         # # print(obj)
-    #         # # _result_detail = RutaDetalleVendedor.objects.filter(codi_ruta = obj).values("codi_vend","id")
-    #         # # print(_result_detail)
-    #         # _result_seller = Vendedor.objects.filter(id = _detail[0]['codi_vend']).values('codi_natu')
-    #         # # print(_result_seller)
-    #         # _result_natural = Natural.objects.filter(id = _result_seller[0]['codi_natu'])
-    #         # # print(_result_natural)
-    #         # _description = str(_result_natural[0].prno_pena[0]+"."+_result_natural[0].seno_pena[0]+"."+_result_natural[0].prap_pena[0]+"."+_result_natural[0].seap_pena[0]).strip().upper()
-    #         # # print(_description)
-
-    #         # # Add Description for Natural or Juridica
-    #         # # _description = Cliente.searchTypeCustomerId(instance.id)
-
-    #         # # _resultClient = Cliente.objects.filter(id = _result_detail[0]['id']).values('id','codi_natu','codi_juri')
-    #         # # print(_resultClient)
-    #         # _descriptionCustomer = ""
-    #         # # print("***************************")
-    #         # for customer in queryset:
-    #         #     # print(customer)
-    #         #     if customer['codi_natu'] != 1:
-    #         #         # print("Natural")
-    #         #         _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
-    #         #         # print(_resultQuerySet)
-    #         #         for natural in _resultQuerySet:
-    #         #             #print(natural.cedu_pena)
-    #         #             _descriptionCustomer = str(str(natural.cedu_pena)+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
-    #         #             # print(_descriptionCustomer)
-    #         #     else:
-    #         #         # print("Juridico")
-    #         #         _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
-    #         #         for juridica in _resultQuerySet:
-    #         #             _descriptionCustomer = str(juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
-    #         # print(_description)
-    #         # print(_descriptionCustomer)
-    #         # queryset['description_customer'] = str(_description)+" (Vend.) "+str(_descriptionCustomer)
-    #         # # print(obj['description_customer'])
