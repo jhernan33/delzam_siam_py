@@ -40,10 +40,8 @@ class LoginView(generics.CreateAPIView):
 class LogoutView(generics.CreateAPIView):
     permission_classes = ()
     def post(self, request):
-        #print(request)
         # Borramos de la request la informacion de sesion
         logout(request)
-        # print(request)
 
         # Devolvemos la respuesta al cliente
         return Response(status=status.HTTP_200_OK)
