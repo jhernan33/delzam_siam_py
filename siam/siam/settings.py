@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
@@ -83,7 +84,7 @@ ROOT_URLCONF = 'siam.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

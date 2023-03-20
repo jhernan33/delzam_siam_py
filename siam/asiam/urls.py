@@ -300,7 +300,9 @@ urlpatterns = [
     # path('waletr/<int:id>/delete/',          views.WaletrDestroyView.as_view(),  name='waletr_delete'),
 
     # Reports
-    path('report/client/route/',                views.ClienteReportView.as_view(),    name='Report Client for Route'),
+    path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),
+    path('report/export',                       views.export_pdf,                       name="export-pdf"),
+    path('report/export/customer',              views.ClienteExportFile,                name='Report Pdf Customer'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

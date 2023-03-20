@@ -19,7 +19,7 @@ from .rutaView import RutaListView, RutaCreateView, RutaRetrieveView, RutaUpdate
 from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, UnidadMedidaRetrieveView, UnidadMedidaUpdateView, UnidadMedidaDestroyView
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
-from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView, ClienteReportView
+from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView, ClienteReportView, ClienteExportFile
 from .userView          import SignupView, LoginView, LogoutView
 from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView
 from .rutaDetalleVendedorView import RutaDetalleVendedorListView, RutaDetalleVendedorCreateView, RutaDetalleVendedorRetrieveView, RutaDetalleVendedorDestroyView, RutaDetalleVendedorUpdateView ,RutaDetalleVendedorComboView
@@ -31,7 +31,7 @@ from .proveedorView    import ProveedorListView, ProveedorCreateView, ProveedorR
 from .articuloProveedorView import ArticuloProveedorListView, ArticuloProveedorCreateView, ArticuloProveedorRetrieveView, ArticuloProveedorUpdateView, ArticuloProveedorDestroyView, ArticuloProveedorComboView
 from .categoriaContactoView import CategoriaContactoListView, CategoriaContactoCreateView, CategoriaContactoRetrieveView, CategoriaContactoUpdateView, CategoriaContactoDestroyView, CategoriaContactoComboView
 from .grupoCategoriaContactoView import GrupoCategoriaContactoListView, GrupoCategoriaContactoCreateView, GrupoCategoriaContactoRetrieveView, GrupoCategoriaContactoUpdateView, GrupoCategoriaContactoDestroyView, GrupoCategoriaContactoComboView
-
+from .exportView import export_pdf
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage
 

@@ -119,7 +119,6 @@ class JuridicaRetrieveView(generics.RetrieveAPIView):
 
         if show =='true' and self.kwargs['id']!=1:
             queryset = queryset.filter(deleted__isnull=False)
-            #print(queryset.query)
             return queryset
         
         return queryset.filter(deleted__isnull=True)
