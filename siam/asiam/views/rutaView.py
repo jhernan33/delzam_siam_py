@@ -174,7 +174,13 @@ class RutaComboView(generics.ListAPIView):
         
         # Parameter Zone
         if zone:
-            return queryset.filter(codi_zona = zone).filter(deleted__isnull=True)
+            if isinstance(zone,str):
+                _zone = zone.split()
+                _result = [eval(i) for i in _zone]
+                # return Ruta.get_queryset().filter(codi_zona__in = _result).values("id")
+                queryset = queryset.filter(codi_zona__in = _result).filter(deleted__isnull=True)
+                _resu = queryset.query
+                return queryset
             
         if show =='true':
             return queryset.all()
