@@ -6,8 +6,6 @@ from weasyprint import HTML
     
 def export_pdf(request):
     
-    # print("Request=======")
-    # print(request)
     context = {}
     html = render_to_string("report-pdf.html", context)
 

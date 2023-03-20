@@ -27,4 +27,24 @@ class Ruta(Base):
     Buscar las rutas por Zona
     """
     def getRouteFilterZone(_zoneId):
-        return Ruta.objects.all().filter(codi_zona = _zoneId).values("id")
+        if isinstance(_zoneId,str):
+            # Create List
+            _zoneList = []
+            ocu_pri = 0
+            # Check Count Ocurrences
+            indexes = [i for i, c in enumerate(_zoneId) if c ==',']
+            if len(indexes) >0:
+                # Iterate Indexes
+                for x in indexes:
+                    if ocu_pri == 0:
+                        _zoneList.append(int(_zoneId[ocu_pri:x]))
+                        ocu_pri = x
+                    elif ocu_pri > 0:
+                        _zoneList.append(int(_zoneId[ocu_pri+1:x]))
+                        ocu_pri = x
+                _zoneList.append(int(_zoneId[ocu_pri+1:len(_zoneId)]))
+            elif len(indexes) ==0:
+                _zoneList.append(int(_zoneId[0:len(_zoneId)]))
+
+            _result = Ruta.get_queryset().filter(codi_zona__in = _zoneList).values("id")
+            return _result

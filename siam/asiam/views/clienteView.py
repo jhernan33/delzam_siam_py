@@ -381,11 +381,8 @@ class ClienteReportView(generics.ListAPIView):
         if _zone is not None:
             _rutas = Ruta.getRouteFilterZone(_zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id').select_related('')
-            
-            # _allFields = queryset.values()
-            # print("Field==>",_allFields)
-            
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                        
             # Call method search Data Custom
             queryset = searchCustomNaturalJuridica(queryset)
             return queryset
