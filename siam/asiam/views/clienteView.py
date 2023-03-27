@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona
 from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -392,6 +392,17 @@ class ClienteReportView(generics.ListAPIView):
             return Cliente.get_queryset().filter(deleted__isnull=True)
         elif queryset is not None:
             return queryset
+    
+    """
+        Get String Zones
+    """
+    def getZones(self,request):
+        _zones = request.GET.get("zone",None)
+        _allDescriptionZones = ""
+        if _zones is not None:
+            _allDescriptionZones = Zona.getZoneFilterArray(_zones)
+        return _allDescriptionZones
+
 
         
 
@@ -426,10 +437,14 @@ def ClienteExportFile(request):
     # Instance Object
     objectReportView = ClienteReportView()
     result = objectReportView.setRequestCustom(request)
-
+    
     _date = datetime.now().date()
+    # Get All Zonas
+    _zonas = objectReportView.getZones(request)
+    
+
     # Create Context 
-    context = {"data":result, "total":result.count, "Fecha":_date}
+    context = {"data":result, "total":result.count, "Fecha":_date, "zonas":_zonas}
     html = render_to_string("customReport.html", context)
 
     response = HttpResponse(content_type="application/pdf")
