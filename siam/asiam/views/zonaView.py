@@ -20,7 +20,7 @@ class ZonaListView(generics.ListAPIView):
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     search_fields = ('id','desc_zona')
     ordering_fields = ('id', 'desc_zona')
-    ordering = ['-id']
+    ordering = ['-orde_zona']
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
