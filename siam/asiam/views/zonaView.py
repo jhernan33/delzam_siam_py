@@ -40,13 +40,15 @@ class ZonaCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             desc_zone = self.request.data.get("desc_zona").upper().strip()
-            result_zone = Zona.objects.filter(desc_zona = desc_zone)
+            orde_zone = self.request.data.get("orde_zona")
+            result_zone = Zona.get_queryset().filter(desc_zona = desc_zone)
 
             if result_zone.count() <= 0:
                 try:
                     zone = Zona(
-                        desc_zona = desc_zone
-                        ,created  = datetime.now()
+                        desc_zona = desc_zone,
+                        orde_zona  = orde_zone,
+                        created  = datetime.now()
                     )
                     zone.save()
                     return message.SaveMessage({"id":zone.id,"desc_zona":zone.desc_zona})
@@ -109,6 +111,7 @@ class ZonaUpdateView(generics.UpdateAPIView):
                     isdeleted = None
 
                 instance.desc_zona = request.data['desc_zona'].upper().strip()
+                instance.orde_zona  = request.data['orde_zona']
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
@@ -136,5 +139,5 @@ class ZonaComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Zona.get_queryset().order_by('-id')
+        queryset = Zona.get_queryset().order_by('orde_zona')
         return queryset
