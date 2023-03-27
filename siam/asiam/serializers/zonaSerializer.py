@@ -5,7 +5,7 @@ class ZonaBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Zona
         field = ('id')
-        exclude = ['created','updated','deleted','esta_ttus','desc_zona']
+        exclude = ['created','updated','deleted','esta_ttus','desc_zona','orde_zona']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

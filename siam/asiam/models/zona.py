@@ -3,7 +3,8 @@ from django.db import models
 
 class Zona(Base):
     desc_zona = models.CharField    ('Nombre de la Zona', max_length=200, null=False, blank=False, default='', unique=True)
-
+    orde_zona = models.IntegerField ('Ordenamiento de la Zona',null=True, blank=True)
+    
     class Meta:
         ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
