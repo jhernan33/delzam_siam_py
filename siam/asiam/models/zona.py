@@ -10,9 +10,9 @@ class Zona(Base):
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"zona"'
 
-    def save(self, **kwargs):
-        self.desc_zona = self.desc_zona.upper()
-        return super().save(**kwargs)
+    # def save(self, **kwargs):
+    #     self.desc_zona = self.desc_zona.upper()
+    #     return super().save(**kwargs)
 
     def get_queryset():
         return Zona.objects.all().filter(deleted__isnull=True)
@@ -21,7 +21,9 @@ class Zona(Base):
     def getInstanceZona(Id):
         return Zona.objects.get(id = Id)
     
-    """ Get All Zones """
+    """ 
+        Get All Zones  and return Str desc_zona
+    """
     def getZoneFilterArray(_zoneId):
         if isinstance(_zoneId,str):
             # Create List
@@ -48,3 +50,37 @@ class Zona(Base):
                 all += ","+k["desc_zona"] if len(all) > 1 else k["desc_zona"]
             
             return all
+    
+    """
+        Search Zones y return queryset
+    """
+    def searchZoneFilterArray(_zoneId):
+        if isinstance(_zoneId,str):
+            # Create List
+            _zoneList = []
+            ocu_pri = 0
+            # Check Count Ocurrences
+            indexes = [i for i, c in enumerate(_zoneId) if c ==',']
+            if len(indexes) >0:
+                # Iterate Indexes
+                for x in indexes:
+                    if ocu_pri == 0:
+                        _zoneList.append(int(_zoneId[ocu_pri:x]))
+                        ocu_pri = x
+                    elif ocu_pri > 0:
+                        _zoneList.append(int(_zoneId[ocu_pri+1:x]))
+                        ocu_pri = x
+                _zoneList.append(int(_zoneId[ocu_pri+1:len(_zoneId)]))
+            elif len(indexes) ==0:
+                _zoneList.append(int(_zoneId[0:len(_zoneId)]))
+
+            _result = Zona.get_queryset().filter(id__in = _zoneList).prefetch_related('Zona') #.values("id","desc_zona","orde_zona")
+            #_result = Zona.objects.prefetch_related('Zona').filter(id__in = _zoneList)
+            # print(_result.query)
+            # for zones in _result:
+            #     print(zones)
+            # all =""
+            # for k in _result:
+            #     all += ","+k["desc_zona"] if len(all) > 1 else k["desc_zona"]
+            
+            return _result
