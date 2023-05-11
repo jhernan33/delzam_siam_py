@@ -1,24 +1,17 @@
-version: "3"
+version: '3.8'
 
 services:  
-  apidjango:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn --bind 0.0.0.0:8082 licensing_platform.wsgi --workers=4
+    volumes:
+      - static_volume:/code/statictciles
+    expose:
+      - 8082
     env_file:
       - .env
-    #command: python manage.py migrate
-    volumes:
-      - static:/code/static
-      - .:/code
-         
-  nginx:
-    image: nginx:1.13
-    ports:
-      - 8082:80
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static:/code/static
-    depends_on:
-      - apidjango
 
 volumes:
   .:
