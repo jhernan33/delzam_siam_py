@@ -312,10 +312,11 @@ class ClienteReportView(generics.ListAPIView):
         # Check parameter zone
         zone = self.request.query_params.get('zone',None) 
         if zone is not None:
-            searchZone(zone)
+            # queryset = searchZone(zone)
             _rutas = Ruta.getRouteFilterZone(zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
             queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            # print(queryset, "*******",type(queryset))
             return queryset
         
         # No Filter
@@ -381,23 +382,19 @@ class ClienteReportView(generics.ListAPIView):
         # Check parameter zone
         if _zone is not None:
             # Call Filter Zonas
-            # searchZone(_zone)
-            #_zone = Zona.get_queryset().filter(id__=_zone).
-            _rutas = Ruta.getRouteFilterZone(_zone)
-            # print(type(_rutas))
-            # for obj in _rutas:
-            #     print(obj)
-            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
-            # Call method search Data Custom
-            queryset = searchCustomNaturalJuridica(queryset)
-            
-            # _results = []
-            # for _result in queryset:
-            #     _results.append({'codi_zona':33,"desc_zona":"hernan",'data':_result})
-            # #print("Queryset===>",queryset.query)
-            # print("Results==>",type(_results),_results)
-            # return _results
+            # _result_zone = searchZone(_zone)
+            _zone = Zona.getZone(_zone)
+            #print(type(_zone), _zone)
+            from asiam.models import Ruta
+            _rutas = Zona.objects.filter(Ruta__codi_zona__in =_zone)
+            # _rutas = Ruta.get_queryset().select_related('Zona').filter(codi_zona__in = _zone).values('id','nomb_ruta','codi_zona')
+            print(type(_rutas),_rutas,"*****",_rutas.query)
+            # _rutas = Ruta.getRouteFilterZone(_zone)
+            # _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+            # queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            # # Call method search Data Custom
+            # queryset = searchCustomNaturalJuridica(queryset)
+            queryset = []
             return queryset
         
         # No Filter
@@ -422,7 +419,9 @@ class ClienteReportView(generics.ListAPIView):
 """
 def searchZone(_arrayZone):
     _queryset = Ruta.searchRouteFilterZone(_arrayZone)
-    print(_queryset)
+    # for k  in _queryset:        
+    #     print(k)
+    # print(_queryset)
     # for k in _queryset:
     #     print(k)
     # print(type(_queryset),"***",_queryset,"******")
