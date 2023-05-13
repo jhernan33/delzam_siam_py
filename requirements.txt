@@ -25,6 +25,7 @@ html5lib==1.1
 httplib2==0.21.0
 idna==3.4
 jwcrypto==1.4.2
+licensing==0.39
 oauthlib==3.2.2
 Pillow==9.3.0
 pipreqs==0.4.11

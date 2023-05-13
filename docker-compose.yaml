@@ -1,13 +1,12 @@
-version: '3.8'
+version: '3.9'
 
 services:  
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn --bind 0.0.0.0:8082 licensing_platform.wsgi --workers=4
     volumes:
-      - static_volume:/code/statictciles
+      - ./app:/app
     expose:
       - 8082
     env_file:
