@@ -25,6 +25,7 @@ html5lib==1.1
 httplib2==0.21.0
 idna==3.4
 jwcrypto==1.4.2
+licensing==0.39
 oauthlib==3.2.2
 Pillow==9.3.0
 pipreqs==0.4.11
@@ -48,6 +49,7 @@ tinycss2==1.2.1
 tomli==2.0.1
 toposort==1.7
 typing_extensions==4.4.0
+tzdata==2023.3
 urllib3==1.26.13
 weasyprint==58.0
 webencodings==0.5.1
