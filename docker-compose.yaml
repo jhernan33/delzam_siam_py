@@ -48,9 +48,9 @@
 version: '3'
 
 services:
-  app:
+  api:
     build: .
-    command: "gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key --chdir=siam siam.wsgi:application --bind 0.0.0.0:443"
+    command: "gunicorn --certfile=/etc/certs/api.crt --keyfile=/etc/certs/api.key --chdir=siam siam.wsgi:application --bind 0.0.0.0:443"
     container_name: apidelzam
     env_file:
       - .env
@@ -68,4 +68,4 @@ services:
     volumes:
       - ./config/nginx/:/etc/nginx/conf.d
     depends_on:
-      - app
+      - api
