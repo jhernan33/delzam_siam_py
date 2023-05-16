@@ -1,17 +1,64 @@
-version: '3.9'
+# version: '3.9'
 
-services:  
+# services:
+#   app:
+#     build: .
+#     command: gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:443
+#     container_name: dockerfile
+#     env_file:
+#       - .env
+#     volumes:
+#       - ./app:/app
+#       - ./config/nginx/certs/:/etc/certs
+#     expose:
+#       - "443"
+
+#   # app1:
+#   #   build:
+#   #     context: .
+#   #     dockerfile: Dockerfile
+#   #   volumes:
+#   #     - ./app:/app
+#   #     - ./config/nginx/certs/:/etc/certs
+#   #   expose:
+#   #     - "443"
+#   #   env_file:
+#   #     - .env
+#   nginx:
+#     image: nginx:latest
+#     container_name: ng
+#     ports:
+#       - "443:443"
+#       - "80:80"
+#     volumes:
+#       - ./config/nginx/:/etc/nginx/conf.d
+#     depends_on:
+#       - app
+
+
+# volumes:
+#   .:
+#   static:
+
+# networks:
+#   default:
+#     external:
+#       name: delzam
+
+version: '3'
+
+services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
+    command: "gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key --chdir=siam siam.wsgi:application --bind 0.0.0.0:443"
+    container_name: apidelzam
+    env_file:
+      - .env
     volumes:
-      - ./app:/app
+      - ./code:/src
       - ./config/nginx/certs/:/etc/certs
     expose:
       - "443"
-    env_file:
-      - .env
   nginx:
     image: nginx:latest
     container_name: ng
@@ -22,13 +69,3 @@ services:
       - ./config/nginx/:/etc/nginx/conf.d
     depends_on:
       - app
-
-
-volumes:
-  .:
-  static:
-
-networks:
-  default:
-    external:
-      name: delzam

@@ -223,7 +223,7 @@ RUN apk add --virtual .build-deps \
 RUN geos-config --cflags
 
 RUN pip install --upgrade pip && \
-    pip install -r /requirements.txt
+    pip install --trusted-host pypy.org --trusted-host files.pythonhosted.org -r /requirements.txt
 
 COPY . /code
 WORKDIR /code
