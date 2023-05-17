@@ -45,27 +45,49 @@
 #     external:
 #       name: delzam
 
-version: '3'
+# version: '3'
 
+# services:
+#   api:
+#     build: .
+#     command: "gunicorn --certfile=/etc/certs/api.crt --keyfile=/etc/certs/api.key --chdir=siam siam.wsgi:application --bind 0.0.0.0:443"
+#     container_name: apidelzam
+#     env_file:
+#       - .env
+#     volumes:
+#       - ./code:/src
+#       - ./config/nginx/certs/:/etc/certs
+#     expose:
+#       - "443"
+#   nginx:
+#     image: nginx:latest
+#     container_name: ng
+#     ports:
+#       - "443:443"
+#       - "80:80"
+#     volumes:
+#       - ./config/nginx/:/etc/nginx/conf.d
+#     depends_on:
+#       - api
+
+version: '3.8'
 services:
-  api:
+  apidz:
     build: .
-    command: "gunicorn --certfile=/etc/certs/api.crt --keyfile=/etc/certs/api.key --chdir=siam siam.wsgi:application --bind 0.0.0.0:443"
-    container_name: apidelzam
-    env_file:
-      - .env
-    volumes:
-      - ./code:/src
-      - ./config/nginx/certs/:/etc/certs
-    expose:
-      - "443"
-  nginx:
-    image: nginx:latest
-    container_name: ng
-    ports:
-      - "443:443"
-      - "80:80"
-    volumes:
-      - ./config/nginx/:/etc/nginx/conf.d
-    depends_on:
-      - api
+    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
+    container_name: apidz
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.apidz.rule=Host(`delzam.local`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
+      - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
+      - "traefik.http.routers.apidz.tls=true"
+      - "traefik.http.routers.apidz.tls.certresolver=resolver"
+    expose:  # new
+      - 8000
+networks:
+  default:
+    external:
+      name: delzam
+
