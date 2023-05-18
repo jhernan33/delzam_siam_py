@@ -44,8 +44,7 @@ RUN if test "${OPENJPEG_VERSION}" != ""; then ( \
 RUN apk add --no-cache rsync ccache
 
 ARG PROJ_DATUMGRID_LATEST_LAST_MODIFIED
-RUN \
-    mkdir -p /build_projgrids/usr/share/proj \
+RUN mkdir -p /build_projgrids/usr/share/proj \
     && curl -LOs http://download.osgeo.org/proj/proj-datumgrid-latest.zip \
     && unzip -q -j -u -o proj-datumgrid-latest.zip  -d /build_projgrids/usr/share/proj \
     && rm -f *.zip
