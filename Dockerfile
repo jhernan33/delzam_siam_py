@@ -22,7 +22,7 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev libpng-dev libwebp-dev expat-dev postgresql-dev openjpeg-dev
 
 # Build openjpeg
-#ARG OPENJPEG_VERSION=2.3.1
+ARG OPENJPEG_VERSION=2.3.1
 RUN if test "${OPENJPEG_VERSION}" != ""; then ( \
     apk add --no-cache cmake \
     && wget -q https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.tar.gz \
