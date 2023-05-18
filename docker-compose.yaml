@@ -81,7 +81,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apidz.rule=Host(`delzam.local`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.rule=Host(`localhost`) && PathPrefix(`/apidz`)"
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.apidz.tls=true"
