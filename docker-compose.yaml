@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   apidz:
     build: .
@@ -7,17 +8,18 @@ services:
     env_file:
     - .env
     restart: always
+    volumes:
+      - ./code:/src
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apidz.rule=Host(`localhost`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.rule=Host(`delzam.com.ve`) && PathPrefix(`/apidz`)"
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.apidz.tls=true"
       - "traefik.http.routers.apidz.tls.certresolver=resolver"
-    expose:  # new
+    expose:
       - 8000
 networks:
   default:
     external:
       name: delzam
-
