@@ -12,7 +12,7 @@ services:
       - ./code:/src
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apidz.rule=Host(`159.223.168.118`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.rule=Host(`delzam.com.ve`) && PathPrefix(`/apidz`)"
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.apidz.tls=true"
