@@ -211,7 +211,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://159.223.168.118:8082"
+    "https://delzam.com.ve/apidz/"
 ]
 
 CORS_ORIGIN_WHITELIST = [] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
@@ -295,7 +295,7 @@ WEBSERVER_SELLER    = '/seller/'
 WEBSERVER_SUPPLIER  = '/supplier/'
 WEBSERVER_LEGAL     = '/legal/'
 WEBSERVER_PORT      =':8082'
-WEBSERVER_HOST      ='159.223.168.118'
-WEBSERVER_PROTOCOL='http://'
+WEBSERVER_HOST      ='delzam.com.ve/apidz'
+WEBSERVER_PROTOCOL='https://'
 WEBSERVER_API='/siam'
 WEBSERVER_IMAGES = WEBSERVER_PROTOCOL+WEBSERVER_HOST+WEBSERVER_PORT+WEBSERVER_API+MEDIA_URL
