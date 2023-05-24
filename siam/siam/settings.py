@@ -33,6 +33,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL',
+                                            'https')
 
 # Application definition
 
