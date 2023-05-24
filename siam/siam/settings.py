@@ -260,7 +260,9 @@ CORS_ALLOW_HEADERS = [
 #     r"^https://\w+\.example\.com$" ,
 #]
 
-CORS_ALLOWED_ORIGIN_REGEXES = []
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.delzam\.co.ve$",
+]
 
 DEFAULT_AUTO_FIELD =  'django.db.models.BigAutoField'
 
