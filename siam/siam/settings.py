@@ -35,8 +35,8 @@ ALLOWED_HOSTS = ['*']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
 
-# Add to project/settings.py
-SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+# # Add to project/settings.py
+# SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 # Application definition
 
@@ -215,6 +215,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
+    "https://delzam.com.ve/"
     "https://delzam.com.ve/apidz/"
 ]
 
@@ -259,7 +260,9 @@ CORS_ALLOW_HEADERS = [
 #     r"^https://\w+\.example\.com$" ,
 #]
 
-CORS_ALLOWED_ORIGIN_REGEXES = []
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.delzam\.co.ve$",
+]
 
 DEFAULT_AUTO_FIELD =  'django.db.models.BigAutoField'
 
