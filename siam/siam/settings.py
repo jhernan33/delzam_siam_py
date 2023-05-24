@@ -219,7 +219,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://delzam.com.ve/apidz/"
 ]
 
-CORS_ORIGIN_WHITELIST = [] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
+CORS_ORIGIN_WHITELIST = [
+    "https://delzam.com.ve/"
+    "https://delzam.com.ve/apidz/"
+] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
 
 CORS_TRUSTED_ORIGINS = []
 
