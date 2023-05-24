@@ -35,6 +35,9 @@ ALLOWED_HOSTS = ['*']
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
 
+# Add to project/settings.py
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
 # Application definition
 
 INSTALLED_APPS = [
