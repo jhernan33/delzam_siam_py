@@ -9,6 +9,6 @@ class SmallResultsSetPagination(PageNumberPagination):
     def get_paginated_response(self, data):
         response = Response(data)
         response['count'] = self.page.paginator.count
-        response['next'] = "apidz/"+self.get_next_link()
-        response['previous'] = "apidz/"+self.get_previous_link()
+        response['next'] = self.get_next_link()
+        response['previous'] = self.get_previous_link()
         return response
