@@ -215,13 +215,13 @@ CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://delzam.com.ve/"
-    "https://delzam.com.ve/apidz/"
+    # "https://delzam.com.ve/"
+    # "https://delzam.com.ve/apidz/"
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    "https://delzam.com.ve/"
-    "https://delzam.com.ve/apidz/"
+    # "https://delzam.com.ve/"
+    # "https://delzam.com.ve/apidz/"
 ] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
 
 CORS_TRUSTED_ORIGINS = []
@@ -264,7 +264,7 @@ CORS_ALLOW_HEADERS = [
 #]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.delzam\.co.ve$",
+    # r"^https://\w+\.delzam\.co.ve$",
 ]
 
 DEFAULT_AUTO_FIELD =  'django.db.models.BigAutoField'
