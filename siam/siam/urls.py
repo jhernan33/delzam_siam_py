@@ -20,7 +20,7 @@ from rest_framework.authtoken import views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('siam/' , include('asiam.urls')),
+    path('' , include('asiam.urls')),
     path('api_generate_token/', views.obtain_auth_token)
     # path('siam/o/',include('oauth2_provider.urls', namespace='oauth2_provider')),
 
