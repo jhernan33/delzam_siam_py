@@ -3,8 +3,8 @@ version: '3.8'
 services:
   apidz:
     build: .
-    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
-    container_name: apidz
+    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8082"
+    container_name: capidz
     env_file:
     - .env
     restart: always
@@ -19,19 +19,19 @@ services:
     #   - "traefik.http.routers.apidz.tls=true"
     #   - "traefik.http.routers.apidz.tls.certresolver=resolver"
     expose:
-      - 8000
+      - 8082
 
-  nginx:
-    image: nginx:1.13
-    container_name: nginx_api
-    restart: always
-    ports:
-      - 80:80
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static:/code/static
-    depends_on:
-      - apidz
+  # nginx:
+  #   image: nginx:1.13
+  #   container_name: nginx_api
+  #   restart: always
+  #   ports:
+  #     - 8082:80
+  #   volumes:
+  #     - ./config/nginx/conf.d:/etc/nginx/conf.d
+  #     - static:/code/static
+  #   depends_on:
+  #     - apidz
 
 volumes:
   .:
