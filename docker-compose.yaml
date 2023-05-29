@@ -19,6 +19,20 @@ services:
     #   - "traefik.http.routers.apidz.tls.certresolver=resolver"
     expose:
       - 8000
+  nginx:
+    image: nginx:1.13
+    ports:
+      - 8082:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/code/static
+    depends_on:
+      - apidz
+
+volumes:
+  .:
+  static:
+
 networks:
   default:
     external:
