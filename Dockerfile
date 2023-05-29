@@ -232,4 +232,5 @@ RUN adduser --disabled-password --no-create-home django
 
 USER django
 
-EXPOSE 8000
+CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8000", "--chdir", "api", "api.wsgi:application"]
+# EXPOSE 8000
