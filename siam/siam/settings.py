@@ -29,10 +29,11 @@ DIR = os.path.abspath(os.path.dirname(__file__))
 SECRET_KEY = '8+7n%x=8ccd(*e+nw5ms$6aek*ji1y81@30z#2**y$62!_cn^='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
 
 # # Add to project/settings.py
