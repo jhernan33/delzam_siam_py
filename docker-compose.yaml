@@ -19,7 +19,7 @@ services:
     #   - "traefik.http.routers.apidz.tls=true"
     #   - "traefik.http.routers.apidz.tls.certresolver=resolver"
     expose:
-      - 8000
+      - 8082
 
   nginx:
     image: nginx:1.13
