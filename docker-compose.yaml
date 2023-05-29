@@ -12,11 +12,7 @@ services:
       - ./code:/src
     labels:
       - "traefik.enable=true"
-<<<<<<< HEAD
       - "traefik.http.routers.apidz.rule=Host(`www.delzam.com.ve`) && PathPrefix(`/apidz`)"
-=======
-      - "traefik.http.routers.apidz.rule=Host(`localhost`) && PathPrefix(`/apidz`)"
->>>>>>> 9d5d2649 (change name docker-compose)
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.apidz.tls=true"
