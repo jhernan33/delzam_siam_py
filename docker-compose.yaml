@@ -21,6 +21,10 @@ services:
     expose:
       - 8082
 
+  volumes:
+  .:
+  static:
+
 networks:
   default:
     external:
