@@ -18,7 +18,7 @@ services:
     #   - "traefik.http.routers.apidz.tls=true"
     #   - "traefik.http.routers.apidz.tls.certresolver=resolver"
     expose:
-      - 8082
+      - 8000
 networks:
   default:
     external:
