@@ -3,7 +3,7 @@ version: '3.8'
 services:
   apidz:
     build: .
-    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8082"
+    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
     container_name: apidz
     env_file:
     - .env
@@ -11,27 +11,15 @@ services:
     volumes:
       - static:/code/static
       - ./code:/src
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.apidz.rule=Host(`localhost`) && PathPrefix(`/apidz`)"
-    #   - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
-    #   - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
-    #   - "traefik.http.routers.apidz.tls=true"
-    #   - "traefik.http.routers.apidz.tls.certresolver=resolver"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.apidz.rule=Host(`delzam.local`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
+      - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
+      - "traefik.http.routers.apidz.tls=true"
+      - "traefik.http.routers.apidz.tls.certresolver=resolver"
     expose:
       - 8000
-
-  nginx:
-    image: nginx:1.13
-    container_name: nginx_api
-    restart: always
-    ports:
-      - 8082:8000
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static:/code/static
-    depends_on:
-      - apidz
 
 volumes:
   .:

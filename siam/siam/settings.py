@@ -73,6 +73,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     # Para que CORS funcione bien debe estar lo mas alto, simpre sobre django.middleware.common.CommonMiddleware
+    'siam.middleware.PruebaMiddleware',
     'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
