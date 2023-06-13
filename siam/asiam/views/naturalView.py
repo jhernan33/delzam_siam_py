@@ -21,6 +21,7 @@ from asiam.views.baseMensajeView import BaseMessage
 from django.core.exceptions import ObjectDoesNotExist
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.conf import settings
 
 class NaturalListView(generics.ListAPIView):
     serializer_class = NaturalSerializer
@@ -36,6 +37,7 @@ class NaturalListView(generics.ListAPIView):
         show = self.request.query_params.get('show',None)
 
         queryset = Natural.objects.all()
+        
         if show =='true':
             queryset = queryset.filter(deleted__isnull=False)
         if show =='false' or show is None:

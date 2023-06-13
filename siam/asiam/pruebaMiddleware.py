@@ -10,5 +10,5 @@ class PruebaMiddleware:
         print("Hola Middleware")
         return response
     
-    def __process_view(self,request,view_func,view_args,view_kwargs):
-        pass
+    # def __process_view(self,request,view_func,view_args,view_kwargs):
+    #     print("Pruebaaaaaaaaaa")
