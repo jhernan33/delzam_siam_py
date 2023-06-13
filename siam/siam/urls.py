@@ -17,6 +17,7 @@ from django import views
 from django.urls import path
 from django.conf.urls import include
 from rest_framework.authtoken import views
+from django.conf.urls import include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),

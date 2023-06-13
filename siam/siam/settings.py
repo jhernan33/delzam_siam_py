@@ -33,8 +33,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-USE_X_FORWARDED_HOST = True
+# USE_X_FORWARDED_HOST = True
+# Add to project/settings.py
+SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO','https')
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+
+
+
+MY_PROTOCOL = "https"
 
 # # Add to project/settings.py
 # SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
@@ -73,6 +85,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     # Para que CORS funcione bien debe estar lo mas alto, simpre sobre django.middleware.common.CommonMiddleware
+    # 'asiam.middleware.PruebaMiddleware',
     'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -310,3 +323,4 @@ WEBSERVER_HOST      ='delzam.com.ve/apidz'
 WEBSERVER_PROTOCOL='https://'
 WEBSERVER_API='/siam'
 WEBSERVER_IMAGES = WEBSERVER_PROTOCOL+WEBSERVER_HOST+WEBSERVER_PORT+WEBSERVER_API+MEDIA_URL
+API_PREFIX ='apidz'
