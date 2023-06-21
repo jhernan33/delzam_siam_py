@@ -61,13 +61,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_framework_gis',
     'corsheaders',
     'asiam',
     # 'oauth2_provider',
     'django_extensions',
     'django_seed',
-    'rest_framework_gis',
-    'rest_framework.authtoken',
     'django_filters',
 ]
 
@@ -225,18 +225,18 @@ STATIC_URL = '/static/'
 # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
 # CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = [
-    # "https://delzam.com.ve/"
-    # "https://delzam.com.ve/apidz/"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     # "https://delzam.com.ve/"
+#     # "https://delzam.com.ve/apidz/"
+# ]
 
-CORS_ORIGIN_WHITELIST = [
-    # "https://delzam.com.ve/"
-    # "https://delzam.com.ve/apidz/"
-] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
+# CORS_ORIGIN_WHITELIST = [
+#     # "https://delzam.com.ve/"
+#     # "https://delzam.com.ve/apidz/"
+# ] # Es igual a CORS_ALLOWED_ORIGINS, pero tiene menos prioridad
 
 CORS_TRUSTED_ORIGINS = []
 
