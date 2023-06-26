@@ -21,7 +21,7 @@ from django.conf.urls import include
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('api/' , include('asiam.urls')),
+    path('' , include('asiam.urls')),
     path('api_generate_token/', views.obtain_auth_token)
     # path('siam/o/',include('oauth2_provider.urls', namespace='oauth2_provider')),
 
