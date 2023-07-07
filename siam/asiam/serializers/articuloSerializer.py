@@ -20,6 +20,12 @@ class JSONSerializerField(serializers.Field):
     def to_internal_value(self, data):
         return data
 
+class ArticuloComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Articulo
+        fields = ('id','desc_arti','codi_sufa')
+
+
 class ArticuloSerializer(serializers.ModelSerializer):
     family = serializers.ReadOnlyField(source='codi_sufa.codi_fami.id')
     subfamilia = serializers.ReadOnlyField(source='codi_sufa.desc_sufa')

@@ -10,4 +10,7 @@ class FamiliaSerializer(serializers.ModelSerializer):
         exclude =['created','updated','deleted','esta_ttus']
 
 
-    
+class FamiliaComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Familia
+        fields = ('id','desc_fami')

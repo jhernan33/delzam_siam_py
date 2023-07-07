@@ -14,4 +14,7 @@ class SubFamiliaSerializer(serializers.ModelSerializer):
         exclude =['created','updated','deleted','esta_ttus']
         extra_kwargs = {"desc_sufa": {"trim_whitespace" : False}}
     
-    
+class SubFamiliaComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubFamilia
+        fields = ('id','desc_sufa')

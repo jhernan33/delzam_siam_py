@@ -11,20 +11,20 @@ from .juridicaSerializer import JuridicaSerializer, JuridicaBasicSerializer
 from .accionistaSerializer import AccionistaSerializer
 from .sucursalSerializer import SucursalSerializer
 from .tipoClienteSerializer import TipoClienteSerializer
-from .familiaSerializer import FamiliaSerializer
-from .subFamiliaSerializer import SubFamiliaSerializer
+from .familiaSerializer import FamiliaSerializer, FamiliaComboSerializer
+from .subFamiliaSerializer import SubFamiliaSerializer, SubFamiliaComboSerializer
 from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
 from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
 from .rutaSerializer import RutaSerializer, RutaBasicSerializer, RutaClienteSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
-from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer
+from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteComboSerializer
 from .userSerializer import UserSerializer
 from .grupoSerializer import GrupoSerializer
 from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics
 from .ivaGeneralSerializer import IvaGeneralSerializer
-from .articuloSerializer import ArticuloSerializer
+from .articuloSerializer import ArticuloSerializer, ArticuloComboSerializer
 from .presentacionSerializer import PresentacionSerializer
 from .proveedorSerializer import ProveedorSerializer, ProveedorBasicSerializer
 from .articuloProveedorSerializer import ArticuloProveedorSerializer, ArticuloProveedorSerializerBasics

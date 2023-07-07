@@ -21,7 +21,7 @@ from rest_framework import status
 
 
 from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona
-from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer
+from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -249,13 +249,20 @@ class ClienteDestroyView(generics.DestroyAPIView):
             
 class ClienteComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = ClienteSerializer    
+    serializer_class = ClienteComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        estado_id = self.kwargs['id']
-        queryset = Cliente.objects.all().order_by('-id')
-        return queryset.filter(codi_esta_id = estado_id)    
+        # estado_id = self.kwargs['id']
+        queryset = Cliente.objects.all()
+        print(type(queryset))
+        list1 = list(queryset)
+        print(type(list1),'==',list1)
+        for k in list1:
+            print(k)
+        # for t in queryset:
+        #     print("=",t.description)
+        return queryset
 
 """
 Report Customer filter Zone, Route, Seller
