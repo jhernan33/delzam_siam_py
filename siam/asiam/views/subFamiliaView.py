@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
 from asiam.models import SubFamilia
-from asiam.serializers import SubFamiliaSerializer
+from asiam.serializers import SubFamiliaSerializer, SubFamiliaComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -95,11 +95,12 @@ class SubFamiliaDestroyView(generics.DestroyAPIView):
 
 class SubFamiliaComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = SubFamiliaSerializer
+    serializer_class = SubFamiliaComboSerializer
 
     def get_queryset(self):
-        if self.request.query_params.get('codi_fami') == None:
+        if self.request.query_params.get('id') == None:
             queryset = SubFamilia.get_queryset().order_by('desc_sufa')
         else:
-            queryset = SubFamilia.get_queryset().filter(codi_fami=self.request.query_params.get('codi_fami')).order_by('desc_sufa')
+            queryset = SubFamilia.get_queryset().filter(codi_fami=self.request.query_params.get('id')).order_by('desc_sufa')
         return queryset
+0

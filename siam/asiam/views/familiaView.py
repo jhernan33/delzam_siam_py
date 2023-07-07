@@ -19,7 +19,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from asiam.models import Familia
-from asiam.serializers import FamiliaSerializer
+from asiam.serializers import FamiliaSerializer, FamiliaComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -101,7 +101,7 @@ class FamiliaDestroyView(generics.DestroyAPIView):
 
 class FamiliaComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = FamiliaSerializer
+    serializer_class = FamiliaComboSerializer
     # lookup_field = 'id'
 
     def get_queryset(self):

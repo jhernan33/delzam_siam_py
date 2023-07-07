@@ -229,10 +229,10 @@ CORS_ALLOW_CREDENTIALS = True
 
 # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "https://delzam.com.ve/",
-    "https://delzam.com.ve/api/",
-    "https://159.223.168.118/api/",
-    "https://159.223.168.118:8083",
+    # "https://delzam.com.ve/",
+    # "https://delzam.com.ve/api/",
+    # "https://159.223.168.118/api/",
+    # "https://159.223.168.118:8083",
 ]
 
 # CORS_ORIGIN_WHITELIST = [

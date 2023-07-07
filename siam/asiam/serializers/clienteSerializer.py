@@ -65,6 +65,20 @@ class ClienteSerializer(serializers.ModelSerializer):
         else:
             return True
 
+class ClienteComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        field = ['id','description']
+        exclude = ['created','updated','esta_ttus','codi_natu','fein_clie','codi_ante','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie','location_clie','codi_juri','posi_clie']
+
+    def to_representation(self, instance):
+        data = super(ClienteComboSerializer, self).to_representation(instance=instance)
+        
+        # Add Description for Natural or Juridica
+        _description = Cliente.searchCustomerId(instance.id)
+        data["description"] = _description
+        return data
+    
 class ClienteBasicSerializer(serializers.ModelSerializer):
      class Meta:
         model = Cliente

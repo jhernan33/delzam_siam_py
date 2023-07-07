@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
 from asiam.models import Articulo
-from asiam.serializers import ArticuloSerializer
+from asiam.serializers import ArticuloSerializer, ArticuloComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -130,9 +130,16 @@ class ArticuloDestroyView(generics.DestroyAPIView):
 
 class ArticuloComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = ArticuloSerializer
+    serializer_class = ArticuloComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Articulo.get_queryset().order_by('-id')
+        queryset = Articulo.get_queryset().order_by('desc_arti')
+        return queryset
+    
+    def get_queryset(self):
+        if self.request.query_params.get('subfamily') == None:
+            queryset = Articulo.get_queryset().order_by('desc_arti')
+        else:
+            queryset = Articulo.get_queryset().filter(codi_sufa=self.request.query_params.get('subfamily')).order_by('desc_arti')
         return queryset
