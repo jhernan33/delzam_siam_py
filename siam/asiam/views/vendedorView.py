@@ -208,13 +208,18 @@ class VendedorComboView(generics.ListAPIView):
         if seller:
             # String to Array
             _array_seller = seller.split(',')
-            _array_customer = customer.split(',')
+            if customer is not None:
+                _array_customer = customer.split(',')
+                #   Queryset Get Sellers
+                querysetRoutes = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_customer).values('id')
+                querysetCustomer = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = querysetRoutes).values('ruta_detalle_vendedor_cliente')
+                querysetSeller = RutaDetalleVendedor.get_queryset().filter(id__in = querysetCustomer).filter(codi_vend__in = _array_seller).values('codi_vend')
+                queryset = queryset.filter(id__in = querysetSeller)
+                return queryset
 
-            #   Queryset Get Sellers
-            querysetRoutes = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_customer).values('id')
+            querysetRoutes = RutaDetalleVendedor.get_queryset().filter(codi_vend__in = _array_seller).values('id')
             querysetCustomer = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = querysetRoutes).values('ruta_detalle_vendedor_cliente')
             querysetSeller = RutaDetalleVendedor.get_queryset().filter(id__in = querysetCustomer).filter(codi_vend__in = _array_seller).values('codi_vend')
-            print(querysetSeller)
             queryset = queryset.filter(id__in = querysetSeller)
             return queryset
 
@@ -227,7 +232,7 @@ class VendedorComboView(generics.ListAPIView):
             # Queryset Old
             # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('codi_vend'))
             querysetdue = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('codi_vend')
-            queryset = queryset.get_queryset().filter(id__in = querysetdue)
+            queryset = queryset.filter(id__in = querysetdue)
             return queryset
 
         # Parameter Customer
