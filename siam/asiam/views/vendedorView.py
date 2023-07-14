@@ -230,9 +230,11 @@ class VendedorComboView(generics.ListAPIView):
             _array_route = route.split(',')
 
             # Queryset Old
-            # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = route).values('codi_vend'))
-            querysetdue = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('codi_vend')
-            queryset = queryset.filter(id__in = querysetdue)
+            # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = _array_route).values('codi_vend'))
+            
+            # querysetdue = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('codi_vend')
+            # queryset = queryset.filter(id__in = querysetdue)
+            queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('id','codi_vend')
             return queryset
 
         # Parameter Customer
