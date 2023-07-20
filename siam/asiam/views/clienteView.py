@@ -324,7 +324,6 @@ class ClienteReportView(generics.ListAPIView):
             _rutas = Ruta.getRouteFilterZone(zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
             queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
-            # print(queryset, "*******",type(queryset))
             return queryset
         
         # No Filter
@@ -403,11 +402,14 @@ class ClienteReportView(generics.ListAPIView):
             queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
             # Call method search Data Custom
             queryset = searchCustomNaturalJuridica(queryset)
-            for k in queryset:
-                #print(type(k.location_clie))
-                coordinates = k.location_clie
-                #coordinates = Point(k.location_clie)
-                print("************===>",coordinates)
+            # for k in queryset:
+            #     #print(type(k.location_clie))
+            #     coordinates = k.location_clie
+            #     #coordinates = Point(k.location_clie)
+            #     a = GEOSGeometry(coordinates)
+            #     b = a.ewkt
+            #     coordinates = b.replace('SRID=4326;POINT ','')
+            #     # print("************===>",coordinates)
             return queryset
         
         # No Filter
@@ -476,7 +478,6 @@ def ClienteExportFile(request):
     _date = datetime.now().date()
     # Get All Zonas
     _zonas = objectReportView.getZones(request)
-    
 
     # Create Context 
     context = {"data":result, "total":result.count, "Fecha":_date, "zonas":_zonas}
