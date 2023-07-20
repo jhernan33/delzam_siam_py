@@ -105,9 +105,9 @@ class ClienteRutaSerializer(serializers.ModelSerializer):
 class ClienteReportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        field = ('id','codi_ante','description','codi_natu','codi_juri')
-        exclude = ['created','updated','deleted','esta_ttus','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','location_clie','posi_clie']
-        
+        field = ('id','codi_ante','description','codi_natu','codi_juri','location_clie')
+        exclude = ['created','updated','deleted','esta_ttus','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','posi_clie']
+
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         
@@ -133,8 +133,8 @@ class ClienteReportSerializer(serializers.ModelSerializer):
 class ClienteReportExportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        field = ('id','codi_ante','description','ruta_detalle_vendedor_cliente')
-        exclude = ['created','updated','deleted','esta_ttus','codi_juri','codi_natu','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','location_clie','posi_clie']
+        field = ('id','codi_ante','description','ruta_detalle_vendedor_cliente','location_clie')
+        exclude = ['created','updated','deleted','esta_ttus','codi_juri','codi_natu','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','ptor_clie','posi_clie']
         
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -161,6 +161,5 @@ class ClienteReportExportSerializer(serializers.ModelSerializer):
                     for juridica in _resultQuerySet:
                         _descriptionCustomer = str(juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
             obj['description_customer'] = _description+" (Vend.) "+_descriptionCustomer
-
         
         return representation

@@ -28,6 +28,7 @@ from .serviceImageView import ServiceImageView
 
 from weasyprint import HTML
 from django.http.request import QueryDict
+from django.contrib.gis.geos import GEOSGeometry, Point
 
 
 class ClienteListView(generics.ListAPIView):
@@ -323,7 +324,6 @@ class ClienteReportView(generics.ListAPIView):
             _rutas = Ruta.getRouteFilterZone(zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
             queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
-            # print(queryset, "*******",type(queryset))
             return queryset
         
         # No Filter
@@ -340,6 +340,7 @@ class ClienteReportView(generics.ListAPIView):
         _route = request.GET.get("route",None)
         _seller = request.GET.get("seller",None)
         
+        queryset = []
         queryset = Cliente.get_queryset()
         
         # Check Parameter Seller
@@ -390,18 +391,25 @@ class ClienteReportView(generics.ListAPIView):
         if _zone is not None:
             # Call Filter Zonas
             # _result_zone = searchZone(_zone)
-            _zone = Zona.getZone(_zone)
-            #print(type(_zone), _zone)
-            from asiam.models import Ruta
-            _rutas = Zona.objects.filter(Ruta__codi_zona__in =_zone)
+            # _zone = Zona.getZone(_zone)
+            # print(type(_zone), _zone)
+            # from asiam.models import Ruta
+            # _rutas = Zona.objects.filter(Ruta__codi_zona__in =_zone)
             # _rutas = Ruta.get_queryset().select_related('Zona').filter(codi_zona__in = _zone).values('id','nomb_ruta','codi_zona')
-            print(type(_rutas),_rutas,"*****",_rutas.query)
-            # _rutas = Ruta.getRouteFilterZone(_zone)
-            # _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            # queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
-            # # Call method search Data Custom
-            # queryset = searchCustomNaturalJuridica(queryset)
-            queryset = []
+            # print(type(_rutas),_rutas,"*****",_rutas.query)
+            _rutas = Ruta.getRouteFilterZone(_zone)
+            _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            # Call method search Data Custom
+            queryset = searchCustomNaturalJuridica(queryset)
+            # for k in queryset:
+            #     #print(type(k.location_clie))
+            #     coordinates = k.location_clie
+            #     #coordinates = Point(k.location_clie)
+            #     a = GEOSGeometry(coordinates)
+            #     b = a.ewkt
+            #     coordinates = b.replace('SRID=4326;POINT ','')
+            #     # print("************===>",coordinates)
             return queryset
         
         # No Filter
@@ -470,7 +478,6 @@ def ClienteExportFile(request):
     _date = datetime.now().date()
     # Get All Zonas
     _zonas = objectReportView.getZones(request)
-    
 
     # Create Context 
     context = {"data":result, "total":result.count, "Fecha":_date, "zonas":_zonas}

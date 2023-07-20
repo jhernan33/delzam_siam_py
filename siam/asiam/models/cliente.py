@@ -100,3 +100,6 @@ class Cliente(Base):
                     ciudad = str(juridica.codi_ciud.nomb_ciud).strip().upper()
                     _addressCustomer = str(ciudad+" Sector: "+sector+" , "+juridica.dofi_peju).strip().upper()
             return _addressCustomer
+    
+    # # Get Coordinate of Customer
+    # def getCoordinateCustomer(_id):
