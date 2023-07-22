@@ -323,7 +323,7 @@ class ClienteReportView(generics.ListAPIView):
             # queryset = searchZone(zone)
             _rutas = Ruta.getRouteFilterZone(zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
             return queryset
         
         # No Filter
@@ -399,7 +399,7 @@ class ClienteReportView(generics.ListAPIView):
             # print(type(_rutas),_rutas,"*****",_rutas.query)
             _rutas = Ruta.getRouteFilterZone(_zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
             # Call method search Data Custom
             queryset = searchCustomNaturalJuridica(queryset)
             # for k in queryset:
@@ -490,4 +490,4 @@ def ClienteExportFile(request):
     HTML(string=html).write_pdf(response)
 
     return response
-
+        
