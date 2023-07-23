@@ -464,6 +464,13 @@ def searchCustomNaturalJuridica(_queryset):
         # Add Adress for Customer Contacto
         _address = Cliente.searchAddressCustomer(k.id)
         k.address = _address
+        
+        coordinates = k.location_clie
+        a = GEOSGeometry(coordinates)
+        b = a.ewkt
+        coordinates = b.replace('SRID=4326;POINT ','').replace('(','').replace(')','')
+        # Add Basic Coordinates
+        k.coordinates = coordinates
 
     return _queryset
 
