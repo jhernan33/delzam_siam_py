@@ -7,8 +7,6 @@ class PruebaMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        print("Hola Middleware")
         return response
     
     # def __process_view(self,request,view_func,view_args,view_kwargs):
-    #     print("Pruebaaaaaaaaaa")

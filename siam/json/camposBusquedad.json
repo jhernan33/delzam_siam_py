@@ -1,0 +1,80 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 1,
+      "nomb_camp": "codi_ante",
+      "titu_camp": "Codigo Anterior",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 2,
+      "nomb_camp": "fein_clie",
+      "titu_camp": "Fecha de Ingreso",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 3,
+      "nomb_camp": "codi_natu",
+      "titu_camp": "Codigo Natural",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 4,
+      "nomb_camp": "codi_juri",
+      "titu_camp": "Codigo Juridico",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 5,
+      "nomb_camp": "ptor_clie",
+      "titu_camp": "Punto de Referencia",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.configuracionbusquedad",
+    "fields": {
+      "id": 6,
+      "nomb_camp": "created",
+      "titu_camp": "Fecha de Creacion",
+      "busc_camp": "True",
+      "orde_camp": "False",
+      "codi_tabl": 1,
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  }
+]

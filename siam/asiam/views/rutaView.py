@@ -45,7 +45,6 @@ class RutaCreateView(generics.CreateAPIView):
             name_route = self.request.data.get("nomb_ruta").upper().strip()
             code_zone = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) 
             result_route = Ruta.objects.filter(nomb_ruta = name_route).filter(codi_zona_id = code_zone)
-            # print(self.request.data.get("codi_zona"))
             if result_route.count() <= 0:
                 try:
                     route = Ruta(
@@ -196,7 +195,6 @@ class RutaClienteRetrieveView(generics.RetrieveAPIView):
     def get_queryset(self):
         show = self.request.query_params.get('show')
         customer = self.request.query_params.get('customer')
-        print(self)
         queryset = Ruta.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)

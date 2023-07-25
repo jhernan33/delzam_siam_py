@@ -256,13 +256,7 @@ class ClienteComboView(generics.ListAPIView):
     def get_queryset(self):
         # estado_id = self.kwargs['id']
         queryset = Cliente.objects.all()
-        print(type(queryset))
         list1 = list(queryset)
-        print(type(list1),'==',list1)
-        for k in list1:
-            print(k)
-        # for t in queryset:
-        #     print("=",t.description)
         return queryset
 
 """
@@ -390,26 +384,11 @@ class ClienteReportView(generics.ListAPIView):
         # Check parameter zone
         if _zone is not None:
             # Call Filter Zonas
-            # _result_zone = searchZone(_zone)
-            # _zone = Zona.getZone(_zone)
-            # print(type(_zone), _zone)
-            # from asiam.models import Ruta
-            # _rutas = Zona.objects.filter(Ruta__codi_zona__in =_zone)
-            # _rutas = Ruta.get_queryset().select_related('Zona').filter(codi_zona__in = _zone).values('id','nomb_ruta','codi_zona')
-            # print(type(_rutas),_rutas,"*****",_rutas.query)
             _rutas = Ruta.getRouteFilterZone(_zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
             queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
             # Call method search Data Custom
             queryset = searchCustomNaturalJuridica(queryset)
-            # for k in queryset:
-            #     #print(type(k.location_clie))
-            #     coordinates = k.location_clie
-            #     #coordinates = Point(k.location_clie)
-            #     a = GEOSGeometry(coordinates)
-            #     b = a.ewkt
-            #     coordinates = b.replace('SRID=4326;POINT ','')
-            #     # print("************===>",coordinates)
             return queryset
         
         # No Filter
@@ -434,14 +413,6 @@ class ClienteReportView(generics.ListAPIView):
 """
 def searchZone(_arrayZone):
     _queryset = Ruta.searchRouteFilterZone(_arrayZone)
-    # for k  in _queryset:        
-    #     print(k)
-    # print(_queryset)
-    # for k in _queryset:
-    #     print(k)
-    # print(type(_queryset),"***",_queryset,"******")
-    # _queryset = searchCustomNaturalJuridica(_queryset)
-    # print(_queryset)
 
 """
 Search Data Custom
@@ -497,4 +468,3 @@ def ClienteExportFile(request):
     HTML(string=html).write_pdf(response)
 
     return response
-        
