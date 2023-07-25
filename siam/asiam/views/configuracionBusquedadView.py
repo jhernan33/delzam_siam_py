@@ -16,13 +16,14 @@ class ConfiguracionBusquedadListView(generics.ListAPIView):
     serializer_class = ConfiguracionBusquedadSerializer
     permission_classes = ()
     queryset = ConfiguracionBusquedad.get_queryset()
-    pagination_class = SmallResultsSetPagination
+    # pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_fields = ['id',]
     search_fields = ['id',]
     ordering_fields = ['id',]
 
     def get_queryset(self):
+        _field = None; _value = None
         show = self.request.query_params.get('show',None)
 
         queryset = ConfiguracionBusquedad.objects.all()
@@ -32,10 +33,11 @@ class ConfiguracionBusquedadListView(generics.ListAPIView):
         if show =='false' or show is None:
             queryset = queryset.filter(deleted__isnull=True)        
 
-        field = self.request.query_params.get('field',None)
-        value = self.request.query_params.get('value',None)
-        if field is not None and value is not None:
-            queryset = queryset.filter(field=value)
+        _field = self.request.query_params.get('field',None)
+        _value = self.request.query_params.get('value',None)
+        if _field is not None and _value is not None:
+            if _field=='codi_tabl':
+                queryset = queryset.filter(codi_tabl = _value).order_by('codi_tabl','id')
         
         return queryset
 
