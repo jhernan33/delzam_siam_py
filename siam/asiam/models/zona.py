@@ -75,13 +75,6 @@ class Zona(Base):
                 _zoneList.append(int(_zoneId[0:len(_zoneId)]))
 
             _result = Zona.get_queryset().filter(id__in = _zoneList).prefetch_related('Zona') #.values("id","desc_zona","orde_zona")
-            #_result = Zona.objects.prefetch_related('Zona').filter(id__in = _zoneList)
-            # print(_result.query)
-            # for zones in _result:
-            #     print(zones)
-            # all =""
-            # for k in _result:
-            #     all += ","+k["desc_zona"] if len(all) > 1 else k["desc_zona"]
             
             return _result
     

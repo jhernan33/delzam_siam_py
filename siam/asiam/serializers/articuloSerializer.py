@@ -55,8 +55,3 @@ class ArticuloSerializer(serializers.ModelSerializer):
         result = ArticuloProveedorSerializerBasics(queryset, many=True).data
         representation['supplier'] = {"data":result}
         return representation
-
-    # def get_totals_images(self,obj):
-    #     # return serializers.IntegerField(source='foto_arti.count',read_only=True)
-    #     print(obj.foto_arti.count())
-    #     return obj.foto_arti.count()

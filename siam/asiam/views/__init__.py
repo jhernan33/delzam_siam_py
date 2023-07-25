@@ -32,6 +32,8 @@ from .articuloProveedorView import ArticuloProveedorListView, ArticuloProveedorC
 from .categoriaContactoView import CategoriaContactoListView, CategoriaContactoCreateView, CategoriaContactoRetrieveView, CategoriaContactoUpdateView, CategoriaContactoDestroyView, CategoriaContactoComboView
 from .grupoCategoriaContactoView import GrupoCategoriaContactoListView, GrupoCategoriaContactoCreateView, GrupoCategoriaContactoRetrieveView, GrupoCategoriaContactoUpdateView, GrupoCategoriaContactoDestroyView, GrupoCategoriaContactoComboView
 from .exportView import export_pdf
+from .configuracionBusquedadView import ConfiguracionBusquedadListView
+
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage
 

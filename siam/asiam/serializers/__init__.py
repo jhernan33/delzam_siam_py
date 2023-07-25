@@ -31,6 +31,7 @@ from .articuloProveedorSerializer import ArticuloProveedorSerializer, ArticuloPr
 from .categoriaContactoSerializer import CategoriaContactoSerializer, CategoriaContactoBasicSerializer
 from .grupoCategoriaContactoSerializer import GrupoCategoriaContactoSerializer, GrupoCategoriaContactoBasicSerializer
 from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer
+from .configuracionBusquedadSerializer import ConfiguracionBusquedadSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

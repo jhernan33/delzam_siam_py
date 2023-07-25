@@ -80,30 +80,4 @@ class Ruta(Base):
             _result = Ruta.get_queryset().prefetch_related('rutadetallevendedor').filter(codi_zona__in = _zoneList).select_related('codi_zona')
             _result = Ruta.get_queryset().filter(codi_zona__in = _zoneList).select_related('codi_zona')
 
-            # use Raw
-            ## _result = Ruta.objects.raw("select zona.id,zona.desc_zona,zona.orde_zona,ruta.nomb_ruta,ruta.id,ruta.posi_ruta,deta_ruta.id,clie.codi_ante,clie.codi_natu_id,clie.codi_juri_id from empr.zona as zona join empr.ruta as ruta on ruta.codi_zona_id = zona.id join empr.ruta_detalle_vendedor as deta_ruta on deta_ruta.codi_ruta_id = ruta.id join empr.cliente as clie on ruta_detalle_vendedor_cliente_id = deta_ruta.id where zona.id in(%s) order by zona.orde_zona,ruta.posi_ruta",[_zoneList])
-            
-            # cursor = connection.cursor()
-            # cursor.execute('''select zona.id,zona.desc_zona,zona.orde_zona from empr.zona as zona order by zona.orde_zona''')
-            # _result = cursor.fetchall 
-
-            # _cad =""
-            # if isinstance(_zoneList,list):
-            #     for e in _zoneList:
-            #         if(len(_cad)==0):
-            #             _cad = _cad+""+str(e)
-            #         else:
-            #             _cad = _cad+","+str(e)
-
-            # # print(_cad, type(_cad))
-            # _stringQuery = 'select zona.id,zona.desc_zona,zona.orde_zona,ruta.nomb_ruta,ruta.id,ruta.posi_ruta,deta_ruta.id,clie.codi_ante,clie.codi_natu_id,clie.codi_juri_id from empr.zona as zona join empr.ruta as ruta on ruta.codi_zona_id = zona.id join empr.ruta_detalle_vendedor as deta_ruta on deta_ruta.codi_ruta_id = ruta.id join empr.cliente as clie on ruta_detalle_vendedor_cliente_id = deta_ruta.id where zona.id in(%s) order by zona.orde_zona,ruta.posi_ruta '%_cad
-            # #_result = Ruta.objects.raw(_stringQuery)
-            # cursor = connection.cursor()
-            # cursor.execute(_stringQuery)
-            # _result = cursor.fetchall()
-            
-            ## _result = Ruta.objects.raw('''select * from empr.ruta''')
-            # _result = Zona.get_queryset().filter(id__in = _zoneList).select_related('Ruta')
-            # _result = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = Ruta.get_queryset().filter(codi_zona__in = _zoneList).select_related('codi_zona').all())
-            # _result = Ruta.get_queryset().filter(codi_zona__in = _zoneList).select_related('codi_zona').all()
             return _result

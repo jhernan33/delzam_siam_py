@@ -47,7 +47,6 @@ class Cliente(Base):
         for customer in queryset:
             arrayCustomer.append(customer.id)
         _resultNatural = Natural.searchNaturalArray(arrayCustomer)
-        #print(_resultNatural)
         return _resultNatural
 
     """     Search Customer for Id     """

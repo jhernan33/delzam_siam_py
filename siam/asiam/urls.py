@@ -234,7 +234,7 @@ urlpatterns = [
     path('grupocc/combo/',                        views.GrupoCategoriaContactoComboView.as_view(),    name='grupoCategoriaContacto_combo'),
 
     # Search Filter by Field
-    # path('cliente/field/',                       views.ClienteSearchView(),                name='List Fields Customer'),
+     path('configuracion/busquedad/',             views.ConfiguracionBusquedadListView.as_view(),                name='List Fields Busquedad'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),

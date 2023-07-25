@@ -1,0 +1,102 @@
+[
+  {
+    "pk": 1,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 1,
+      "nomb_tabl": "cliente",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 2,
+      "nomb_tabl": "articulo",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 3,
+      "nomb_tabl": "familia",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 4,
+      "nomb_tabl": "sub_familia",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 5,
+      "nomb_tabl": "proveedor",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 6,
+      "nomb_tabl": "presentacion",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 7,
+      "nomb_tabl": "zona",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 8,
+      "nomb_tabl": "ruta",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 9,
+      "nomb_tabl": "vendedor",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asiam.configuraciontabla",
+    "fields": {
+      "id": 10,
+      "nomb_tabl": "ruta_detalle_vendedor",
+      "nomb_esqu": "empr",
+      "created": "2023-07-24T01:17:31.907851"
+    }
+  }
+]
