@@ -169,19 +169,31 @@ class RutaComboView(generics.ListAPIView):
         queryset = Ruta.objects.all()
 
         show = self.request.query_params.get('show',None)
-        zone = self.request.query_params.get('zone',None)
+        _only_zone = self.request.query_params.get('onlyzone',None)
+        _report_zone = self.request.query_params.get('zone',None)
         
-        # Parameter Zone
-        if zone:
-            if isinstance(zone,str):
-                _result = Ruta.getRouteFilterZone(zone)
+        if show =='true':
+            queryset.all()
+        if show =='false' or show is None:
+            queryset.filter(deleted__isnull=True)
+        
+        # Parameter Only Zone
+        if _report_zone:
+            if isinstance(_only_zone,str):
+                _zone = _only_zone.split()
+                _result = [eval(i) for i in _zone]
                 queryset = queryset.filter(codi_zona__in = _result).filter(deleted__isnull=True)
                 return queryset
             
-        if show =='true':
-            return queryset.all()
-        if show =='false' or show is None:
-            return queryset.filter(deleted__isnull=True)
+        # Parameter Zone Report Customer
+        if _report_zone:
+            if isinstance(_report_zone,str):
+                _result = Ruta.getRouteFilterZone(_report_zone)
+                queryset = queryset.filter(codi_zona__in = _result).filter(deleted__isnull=True)
+        
+        return queryset
+            
+        
         
 class RutaClienteRetrieveView(generics.RetrieveAPIView):
     serializer_class = RutaClienteSerializer
