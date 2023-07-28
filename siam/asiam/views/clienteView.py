@@ -281,7 +281,7 @@ class ClienteReportView(generics.ListAPIView):
             if _route is not None:
                 _route = _route.split(',')
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
                 return queryset
                 
 
@@ -308,7 +308,7 @@ class ClienteReportView(generics.ListAPIView):
 
             if _routeList is not None:
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
             return queryset
         
         # Check parameter zone
@@ -346,7 +346,7 @@ class ClienteReportView(generics.ListAPIView):
             if _route is not None:
                 _route = _route.split(',')
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
 
                 # Call method search Data Custom
                 queryset = searchCustomNaturalJuridica(queryset)
@@ -375,7 +375,7 @@ class ClienteReportView(generics.ListAPIView):
 
             if _routeList is not None:
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('id')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
                 # Call method search Data Custom
                 queryset = searchCustomNaturalJuridica(queryset)
 

@@ -130,11 +130,18 @@ class RutaUpdateView(generics.UpdateAPIView):
                 # Save Detail Sellers
                 is_many = isinstance(self.request.data.get("sellers"),list)
                 if is_many:
+                    # Search Routes
                     for l in self.request.data.get("sellers"):
                         _querysetSeller = RutaDetalleVendedor.objects.filter(codi_ruta_id = instance.id).filter(codi_vend_id = l['codi_vend'])
                         if _querysetSeller.count()>0:
                             # Check Id in use Cliente
                             Cliente.objects.filter(ruta_detalle_vendedor_cliente = _querysetSeller[0].id).update(updated = datetime.now())
+                        else:
+                            rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = instance.id,
+                                    codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
+                                    created =  datetime.now(),
+                                    )
+                            rutaDetalle.save()
                 
                 # Save Detail Customers
                 is_many_Customer = isinstance(self.request.data.get("customers"),list)
