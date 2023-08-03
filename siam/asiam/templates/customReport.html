@@ -17,9 +17,13 @@
             <th>Coordenadas</th>
             <th>Ciudad/Sector/Dirección</th>
             <th>Visita</th>
+            <th>Zona</th>
+            <th>Ruta</th>
         </tr>
     </thead>
-    {% for key in data %}
+    
+    {% for key in data|dictsort:"zona"|dictsort:"route" %}
+    {% regroup key.zona by zona as zona_list %}
         <tr>
             <td style="width:1%">{{ key.codi_ante }}</td>
             <td style="width:30%">{{ key.description_customer}}</td>
@@ -27,6 +31,8 @@
             <td style="width:10%">{{ key.coordinates}}</td>
             <td style="width:50%">{{ key.address}}</td>
             <td style="width:10%">{{ key.posi_clie}}</td>
+            <td style="width:15%">{{ key.zona}}</td>
+            <td style="width:15%">{{ key.route}}</td>
         </tr>
     {% endfor %}
     <tfoot>
