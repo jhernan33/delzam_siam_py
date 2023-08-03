@@ -439,7 +439,7 @@ def searchCustomNaturalJuridica(_queryset):
         # Add Route and Zone
         _route = RutaDetalleVendedor.searchRouteZone(k.ruta_detalle_vendedor_cliente)
         k.route = _route[0].nomb_ruta
-        k.zona = _route[0].codi_zona.desc_zona
+        k.zone = _route[0].codi_zona.desc_zona
         
         coordinates = k.location_clie
         a = GEOSGeometry(coordinates)
