@@ -280,14 +280,15 @@ class ClienteReportView(generics.ListAPIView):
             _route = self.request.query_params.get('route',None)
             if _route is not None:
                 _route = _route.split(',')
-                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
+                # _detail = Ruta.get_queryset().filter(id in _route).values("nomb_ruta","codi_zona").select_related(RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id"))
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id")
                 queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
                 return queryset
                 
 
         # Check Parameter Route
         _route = self.request.query_params.get('route',None)
-        if type(_route) == str:
+        if type(_route) == str and len(_route)>0:
             # Create List
             _routeList = []
             ocu_pri = 0
@@ -375,10 +376,9 @@ class ClienteReportView(generics.ListAPIView):
 
             if _routeList is not None:
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail)
                 # Call method search Data Custom
                 queryset = searchCustomNaturalJuridica(queryset)
-
             return queryset
         
         # Check parameter zone
@@ -435,6 +435,11 @@ def searchCustomNaturalJuridica(_queryset):
         # Add Adress for Customer Contacto
         _address = Cliente.searchAddressCustomer(k.id)
         k.address = _address
+
+        # Add Route and Zone
+        _route = RutaDetalleVendedor.searchRouteZone(k.ruta_detalle_vendedor_cliente)
+        k.route = _route[0].nomb_ruta
+        k.zona = _route[0].codi_zona.desc_zona
         
         coordinates = k.location_clie
         a = GEOSGeometry(coordinates)

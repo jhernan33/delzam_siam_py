@@ -36,6 +36,8 @@ class RutaDetalleVendedor(Base):
     # def __str__(self):
     #     return '%d: %d' % (self.codi_ruta, self.codi_vend)
 
+    
+
     """
     Search Seller
     """
@@ -44,3 +46,16 @@ class RutaDetalleVendedor(Base):
         _result_seller = Vendedor.objects.filter(id = _result_detail[0]['codi_vend']).values('codi_natu')
         _result_natural = Natural.objects.filter(id = _result_seller[0]['codi_natu'])
         return str(_result_natural[0].prno_pena[0]+"."+_result_natural[0].seno_pena[0]+"."+_result_natural[0].prap_pena[0]+"."+_result_natural[0].seap_pena[0]).strip().upper()
+
+    # Search Route and Zone
+    def searchRouteZone(self):
+        from asiam.models import Ruta
+        #_result_route = Ruta.get_queryset().filter(self.)
+        #for k in self:
+            #_ruta = k.get('codi_ruta')
+        # print(self.id)
+        _ruta = RutaDetalleVendedor.objects.filter(id = self.id).values("codi_ruta")
+        # print(_ruta[0]['codi_ruta'])
+        _querysetRoute = Ruta.objects.filter(id = _ruta[0]['codi_ruta']).select_related('codi_zona').all()  #.values('nomb_ruta','codi_zona','codi_zona.desc_zona')
+        # print(_querysetRoute[0].nomb_ruta,_querysetRoute[0].codi_zona.desc_zona)
+        return _querysetRoute
