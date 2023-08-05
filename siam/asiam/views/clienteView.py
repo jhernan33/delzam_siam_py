@@ -277,7 +277,6 @@ class ClienteReportView(generics.ListAPIView):
             # Convert Str to List
             #_seller_customer = _seller.split(',')
             _seller_customer = tuple(map(int, _seller.split(',')))
-            print(_seller_customer)
             #   Get Parameter Routes
             _route = self.request.query_params.get('route',None)
             if _route is not None:
@@ -286,7 +285,7 @@ class ClienteReportView(generics.ListAPIView):
 
                 # _detail = Ruta.get_queryset().filter(id in _route).values("nomb_ruta","codi_zona").select_related(RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id"))
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)    # .select_related(Ruta,"ruta__id")
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
                 return queryset
                 
 
@@ -313,7 +312,7 @@ class ClienteReportView(generics.ListAPIView):
 
             if _routeList is not None:
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _routeList)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
             return queryset
         
         # Check parameter zone
@@ -322,7 +321,7 @@ class ClienteReportView(generics.ListAPIView):
             # queryset = searchZone(zone)
             _rutas = Ruta.getRouteFilterZone(zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
             return queryset
         
         # No Filter
@@ -351,7 +350,7 @@ class ClienteReportView(generics.ListAPIView):
             if _route is not None:
                 _route = _route.split(',')
                 _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
 
                 # Call method search Data Custom
                 queryset = searchCustomNaturalJuridica(queryset)
@@ -390,7 +389,7 @@ class ClienteReportView(generics.ListAPIView):
             # Call Filter Zonas
             _rutas = Ruta.getRouteFilterZone(_zone)
             _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _rutas)
-            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
+            queryset = Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
             # Call method search Data Custom
             queryset = searchCustomNaturalJuridica(queryset)
             return queryset
@@ -444,6 +443,7 @@ def searchCustomNaturalJuridica(_queryset):
         _route = RutaDetalleVendedor.searchRouteZone(k.ruta_detalle_vendedor_cliente)
         k.route = _route[0].nomb_ruta
         k.zone = _route[0].codi_zona.desc_zona
+        k.orde_zone = _route[0].codi_zona.orde_zona
         
         coordinates = k.location_clie
         a = GEOSGeometry(coordinates)
