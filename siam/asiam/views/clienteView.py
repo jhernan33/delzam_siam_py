@@ -275,13 +275,17 @@ class ClienteReportView(generics.ListAPIView):
         _seller = self.request.query_params.get('seller',None)
         if type(_seller) == str:
             # Convert Str to List
-            _seller_customer = _seller.split(',')
+            #_seller_customer = _seller.split(',')
+            _seller_customer = tuple(map(int, _seller.split(',')))
+            print(_seller_customer)
             #   Get Parameter Routes
             _route = self.request.query_params.get('route',None)
             if _route is not None:
-                _route = _route.split(',')
+                #_route = _route.split(',')
+                _route = tuple(map(int, _route.split(',')))
+
                 # _detail = Ruta.get_queryset().filter(id in _route).values("nomb_ruta","codi_zona").select_related(RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id"))
-                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id")
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)    # .select_related(Ruta,"ruta__id")
                 queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail).order_by('codi_ante')
                 return queryset
                 
