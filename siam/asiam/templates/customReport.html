@@ -18,23 +18,32 @@
             <th>Ciudad/Sector/Dirección</th>
             <th>Visita</th>
             <th>Zona</th>
-            <th>Ruta</th>
         </tr>
     </thead>
     
-    {% for key in data|dictsort:"zone" %}
-    <!-- {% regroup key.zona by zona as zona_list %} -->
+    <!-- {% regroup data by zone as zone_list %} -->
+    <!-- {% for zone in zones_list%}
         <tr>
-            <td style="width:1%">{{ key.codi_ante }}</td>
-            <td style="width:30%">{{ key.description_customer}}</td>
-            <td style="width:10%">{{ key.contact}}</td>
-            <td style="width:10%">{{ key.coordinates}}</td>
-            <td style="width:50%">{{ key.address}}</td>
-            <td style="width:10%">{{ key.posi_clie}}</td>
-            <td style="width:15%">{{ key.zone}}</td>
-            <td style="width:15%">{{ key.route}}</td>
+            <td colspan="6">{{ zone.grouper}}</td>            
         </tr>
-    {% endfor %}
+    {% endfor %} -->
+            <!-- {% if key.zone %}
+                <tr>
+                    <td colspan="6">{{ key.zone}}</td>            
+                </tr>
+            {%endif%} -->
+        
+        {% for key in data|dictsort:"orde_zone"%}
+            <tr>
+                <td style="width:1%">{{ key.codi_ante }}</td>
+                <td style="width:30%">{{ key.description_customer}}</td>
+                <td style="width:10%">{{ key.contact}}</td>
+                <td style="width:10%">{{ key.coordinates}}</td>
+                <td style="width:50%">{{ key.address}}</td>
+                <td style="width:10%">{{ key.posi_clie}}</td>
+                <td style="width:10%">{{ key.zone}}</td>
+            </tr>
+        {% endfor %}
     <tfoot>
         <tr>
             <th>Total de Clientes:</th>
