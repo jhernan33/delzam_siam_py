@@ -33,7 +33,7 @@
                 </tr>
             {%endif%} -->
         
-        {% for key in data|dictsort:"orde_zone"%}
+        {% for key in data|dictsort:"orde_zone"|dictsort:"codi_ante"%}
             <tr>
                 <td style="width:1%">{{ key.codi_ante }}</td>
                 <td style="width:30%">{{ key.description_customer}}</td>
