@@ -187,8 +187,9 @@ class RutaComboView(generics.ListAPIView):
         # Parameter Only Zone
         if _only_zone:
             if isinstance(_only_zone,str):
-                _zone = _only_zone.split()
-                _result = [eval(i) for i in _zone]
+                _zone = _only_zone
+                # Convert Str to Tuple
+                _result = tuple(map(int, _zone.split(',')))
                 queryset = queryset.filter(codi_zona__in = _result).filter(deleted__isnull=True)
                 return queryset
             
@@ -196,7 +197,7 @@ class RutaComboView(generics.ListAPIView):
         if _report_zone:
             if isinstance(_report_zone,str):
                 _result = Ruta.getRouteFilterZone(_report_zone)
-                queryset = queryset.filter(codi_zona__in = _result).filter(deleted__isnull=True)
+                queryset = queryset.filter(codi_zona__in = [_result]).filter(deleted__isnull=True)
         
         return queryset
             
