@@ -26,9 +26,9 @@ class ArticuloListView(generics.ListAPIView):
     queryset = Articulo.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = ['id','desc_arti','idae_arti','codi_arti']
-    search_fields = ['id','desc_arti','idae_arti','codi_arti']
-    ordering_fields = ['id','desc_arti','idae_arti','codi_arti']
+    filterset_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
+    search_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
+    ordering_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
     ordering = ['-id']
 
     def get_queryset(self):
