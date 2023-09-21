@@ -33,6 +33,9 @@ from .categoriaContactoView import CategoriaContactoListView, CategoriaContactoC
 from .grupoCategoriaContactoView import GrupoCategoriaContactoListView, GrupoCategoriaContactoCreateView, GrupoCategoriaContactoRetrieveView, GrupoCategoriaContactoUpdateView, GrupoCategoriaContactoDestroyView, GrupoCategoriaContactoComboView
 from .exportView import export_pdf
 from .configuracionBusquedadView import ConfiguracionBusquedadListView
+from .pedidoTipoView import PedidoTipoListView, PedidoTipoCreateView, PedidoTipoUpdateView, PedidoTipoRetrieveView, PedidoTipoDestroyView, PedidoTipoComboView
+from .pedidoEstatusView import PedidoEstatusListView, PedidoEstatusCreateView, PedidoEstatusUpdateView, PedidoEstatusRetrieveView, PedidoEstatusDestroyView, PedidoEstatusComboView
+from .monedaView import MonedaListView, MonedaCreateView, MonedaUpdateView, MonedaRetrieveView, MonedaDestroyView, MonedaComboView
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage

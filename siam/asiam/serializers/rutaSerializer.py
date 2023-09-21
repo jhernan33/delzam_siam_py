@@ -62,6 +62,7 @@ class RutaSerializer(serializers.ModelSerializer):
         querysetDue = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = instance.id).values('id')).values('id','posi_clie').order_by('posi_clie')
         resultCustomer = ClienteRutaSerializer(querysetDue,many=True).data
         data['customer'] = {"data":resultCustomer}
+        data['customer_count'] = querysetDue.count()
         return data
         
 # Serialize Customer

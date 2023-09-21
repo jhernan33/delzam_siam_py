@@ -11,10 +11,26 @@ class Pedido(Base):
     feim_pedi = models.DateField('Fecha de Impresion del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
     fede_pedi = models.DateField('Fecha de Despacho del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
     feve_pedi = models.DateField('Fecha de Vencimiento del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
-    mont_pedi = models.DecimalField ('Monto del Pedido',max_digits=7,decimal_places=2,null=True, blank=True)
+    mont_pedi = models.DecimalField ('Monto del Pedido sin Descuento',max_digits=7,decimal_places=2,null=True, blank=True)
     desc_pedi = models.DecimalField ('Monto del Descuento del Pedido',max_digits=7,decimal_places=2,null=True, blank=True)
     tota_pedi = models.DecimalField ('Monto Total del Pedido',max_digits=7,decimal_places=2,null=True, blank=True)
     obse_pedi = models.TextField('Observaciones del Pedido')
+    orig_pedi = models.TextField('Origen de donde fue creado el Pedido')
+    codi_mone = models.ForeignKey(
+        'Moneda',
+        on_delete = models.CASCADE,
+        related_name="Moneda.codi_mone+",
+    )
+    codi_espe = models.ForeignKey(
+        'PedidoEstatus',
+        on_delete = models.CASCADE,
+        related_name='PedidoEstatus.codi_espe+'
+    )
+    codi_tipe = models.ForeignKey(
+        'PedidoTipo',
+        on_delete = models.CASCADE,
+        related_name='PedidoTipo.codi_tipe+'
+    )
 
     class Meta:
         ordering = ['-id']

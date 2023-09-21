@@ -32,6 +32,9 @@ from .categoriaContactoSerializer import CategoriaContactoSerializer, CategoriaC
 from .grupoCategoriaContactoSerializer import GrupoCategoriaContactoSerializer, GrupoCategoriaContactoBasicSerializer
 from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer
 from .configuracionBusquedadSerializer import ConfiguracionBusquedadSerializer
+from .pedidoTipoSerializer import PedidoTipoSerializer, PedidoTipoComboSerializer, PedidoTipoBasicSerializer
+from .pedidoEstatusSerializer import PedidoEstatusSerializer, PedidoEstatusComboSerializer, PedidoEstatusBasicSerializer
+from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

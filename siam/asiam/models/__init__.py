@@ -32,6 +32,12 @@ from .grupoCategoriaContacto import GrupoCategoriaContacto
 from .contacto import Contacto
 from .configuracionTabla import ConfiguracionTabla
 from .configuracionBusquedad import ConfiguracionBusquedad
+from .formaPago import FormaPago
+from .pedidoTipo import PedidoTipo
+from .pedidoEstatus import PedidoEstatus
+from .pedido import Pedido
+from .pedidoDetalle import PedidoDetalle
+from .pedidoPagoDetalle import PedidoPagoDetalle
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco

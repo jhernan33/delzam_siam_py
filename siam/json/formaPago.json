@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1,
+        "model": "asiam.formaPago",
+        "fields": {
+            "desc_fopa": "Efectivo",
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "asiam.formaPago",
+        "fields": {
+            "desc_fopa": "Transferencia",
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "asiam.formaPago",
+        "fields": {
+            "desc_fopa": "Deposito Bancario",
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "asiam.formaPago",
+        "fields": {
+            "desc_fopa": "Cheque",
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "asiam.formaPago",
+        "fields": {
+            "desc_fopa": "Saldo a Credito",
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    }
+]

@@ -88,7 +88,7 @@ class NaturalCreateView(generics.CreateAPIView):
                                 result_contact = Contacto.check_contact(contact['codi_cont'],contact['codi_grou'])
                                 if result_contact == False:
                                     contact = Contacto(
-                                         desc_cont      = contact['codi_cont']
+                                        desc_cont      = contact['codi_cont']
                                         ,codi_grco_id   = contact['codi_grou']
                                         ,codi_natu_id   = natural.id
                                         ,created        = datetime.now()

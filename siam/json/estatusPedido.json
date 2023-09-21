@@ -1,0 +1,29 @@
+[
+    {
+        "pk": 1,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Pendiente",
+            "orde_esta": 1,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Pagado",
+            "orde_esta": 2,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Anulado",
+            "orde_esta": 3,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    }
+]

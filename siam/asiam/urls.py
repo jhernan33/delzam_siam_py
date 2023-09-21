@@ -234,7 +234,31 @@ urlpatterns = [
     path('grupocc/combo/',                        views.GrupoCategoriaContactoComboView.as_view(),    name='grupoCategoriaContacto_combo'),
 
     # Search Filter by Field
-     path('configuracion/busquedad/',             views.ConfiguracionBusquedadListView.as_view(),                name='List Fields Busquedad'),
+    path('configuracion/busquedad/',             views.ConfiguracionBusquedadListView.as_view(),                name='List Fields Busquedad'),
+
+    # Type of Order
+    path('pedidotipo/',                              views.PedidoTipoListView.as_view(),     name='pedidotipo'),
+    path('pedidotipo/create/',                       views.PedidoTipoCreateView.as_view(),   name='pedidotipo_create'),
+    path('pedidotipo/<int:id>/',                     views.PedidoTipoRetrieveView.as_view(), name='pedidotipo_show'),
+    path('pedidotipo/update/<int:id>',               views.PedidoTipoUpdateView.as_view(),   name='pedidotipo_update'),
+    path('pedidotipo/delete/<int:id>',               views.PedidoTipoDestroyView.as_view(),  name='pedidotipo_delete'),
+    path('pedidotipo/combo/',                        views.PedidoTipoComboView.as_view(),    name='pedidotipo_combo'),
+
+    # Type of State Order
+    path('pedidoestatus/',                              views.PedidoEstatusListView.as_view(),     name='pedidoestatus'),
+    path('pedidoestatus/create/',                       views.PedidoEstatusCreateView.as_view(),   name='pedidoestatus_create'),
+    path('pedidoestatus/<int:id>/',                     views.PedidoEstatusRetrieveView.as_view(), name='pedidoestatus_show'),
+    path('pedidoestatus/update/<int:id>',               views.PedidoEstatusUpdateView.as_view(),   name='pedidoestatus_update'),
+    path('pedidoestatus/delete/<int:id>',               views.PedidoEstatusDestroyView.as_view(),  name='pedidoestatus_delete'),
+    path('pedidoestatus/combo/',                        views.PedidoEstatusComboView.as_view(),    name='pedidoestatus_combo'),
+
+    # Currency
+    path('moneda/',                                     views.MonedaListView.as_view(),     name='moneda'),
+    path('moneda/create/',                              views.MonedaCreateView.as_view(),   name='moneda_create'),
+    path('moneda/<int:id>/',                            views.MonedaRetrieveView.as_view(), name='moneda_show'),
+    path('moneda/<int:id>/update/',                     views.MonedaUpdateView.as_view(),   name='moneda_update'),
+    path('moneda/<int:id>/delete/',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
+    path('moneda/combo/',                               views.MonedaDestroyView.as_view(),  name='moneda_combo'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
@@ -279,11 +303,6 @@ urlpatterns = [
     # path('ginstruccion/<int:id>/update/',    views.GinstruccionUpdateView.as_view(),   name='ginstruccion_update'),
     # path('ginstruccion/<int:id>/delete/',    views.GinstruccionDestroyView.as_view(),  name='ginstruccion_delete'),
 
-    # path('monedas/',                         views.MonedasListView.as_view(),     name='monedas'),
-    # path('monedas/create/',                  views.MonedasCreateView.as_view(),   name='monedas_create'),
-    # path('monedas/<int:id>/',                views.MonedasRetrieveView.as_view(), name='monedas'),
-    # path('monedas/<int:id>/update/',         views.MonedasUpdateView.as_view(),   name='monedas_update'),
-    # path('monedas/<int:id>/delete/',         views.MonedasDestroyView.as_view(),  name='monedas_delete'),
 
     # path('profesiones/',                     views.ProfesionesListView.as_view(),     name='profesiones'),
     # path('profesiones/create/',              views.ProfesionesCreateView.as_view(),   name='profesiones_create'),

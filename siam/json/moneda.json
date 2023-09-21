@@ -1,0 +1,46 @@
+[
+    {
+        "pk": 1,
+        "model": "asiam.moneda",
+        "fields": {
+            "desc_mone": "Bolivar",
+            "codi_mone": "VEF",
+            "simb_mone": "Bs",
+            "codi_pais": 234,
+            "created": "2023-09-19 18:14:39.841629"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "asiam.moneda",
+        "fields": {
+            "desc_mone": "Dolar Estadounidense",
+            "codi_mone": "USD",
+            "simb_mone": "$",
+            "codi_pais": 230,
+            "created": "2023-09-19 18:14:39.841629"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "asiam.moneda",
+        "fields": {
+            "desc_mone": "Peso Colombiano",
+            "codi_mone": "COP",
+            "simb_mone": "$",
+            "codi_pais": 46,
+            "created": "2023-09-19 18:14:39.841629"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "asiam.moneda",
+        "fields": {
+            "desc_mone": "Euro",
+            "codi_mone": "EUR",
+            "simb_mone": "€",
+            "codi_pais": 202,
+            "created": "2023-09-19 18:14:39.841629"
+        }
+    }
+]
