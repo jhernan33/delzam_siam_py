@@ -8,3 +8,6 @@ class FormaPago(Base):
         ordering = ['desc_fopa']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"comun\".\"forma_pago"'
+
+    def get_queryset():
+        return FormaPago.objects.all().filter(deleted__isnull=True)

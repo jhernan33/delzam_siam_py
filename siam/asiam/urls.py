@@ -256,9 +256,9 @@ urlpatterns = [
     path('moneda/',                                     views.MonedaListView.as_view(),     name='moneda'),
     path('moneda/create/',                              views.MonedaCreateView.as_view(),   name='moneda_create'),
     path('moneda/<int:id>/',                            views.MonedaRetrieveView.as_view(), name='moneda_show'),
-    path('moneda/<int:id>/update/',                     views.MonedaUpdateView.as_view(),   name='moneda_update'),
-    path('moneda/<int:id>/delete/',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
-    path('moneda/combo/',                               views.MonedaDestroyView.as_view(),  name='moneda_combo'),
+    path('moneda/update/<int:id>',                     views.MonedaUpdateView.as_view(),   name='moneda_update'),
+    path('moneda/delete/<int:id>',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
+    path('moneda/combo/',                               views.MonedaComboView.as_view(),    name='moneda_combo'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),

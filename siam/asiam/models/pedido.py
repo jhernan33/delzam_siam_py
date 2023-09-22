@@ -39,8 +39,3 @@ class Pedido(Base):
     
     def get_queryset():
         return Pedido.objects.all().filter(deleted__isnull=True)
-
-    # Restore Id Deleted
-    def restoreNatural(key):
-        Pedido.objects.filter(id=key).update(deleted =None)
-    

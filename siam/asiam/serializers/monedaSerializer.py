@@ -4,18 +4,20 @@ from rest_framework import serializers
 from asiam.models import Moneda
 from django.conf import settings
 from django.conf.urls.static import static
+from asiam.serializers import PaisSerializer
 
 class MonedaSerializer(serializers.ModelSerializer):
-
+    # codi_pais = PaisSerializer()
     class Meta:
         model = Moneda
-        field = ('id','desc_mone','codi_pais','simb_mone','codi_mone')
-        exclude =['created','updated','esta_ttus']
+        field = ('id')
+        exclude =['created','updated','esta_ttus','desc_mone','simb_mone','codi_mone']
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['description'] = str(instance.desc_mone).upper()
-        representation['country'] = instance.codi_pais
+        codi_pais = PaisSerializer(instance.codi_pais).data
+        representation['country'] = codi_pais
         representation['symbol'] = instance.simb_mone
         representation['code'] = instance.codi_mone
         return representation

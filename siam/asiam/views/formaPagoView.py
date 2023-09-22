@@ -1,33 +1,45 @@
 from datetime import datetime
+from os import environ
+import os
+from django.conf import settings
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.db import transaction
-from rest_framework import generics
-from rest_framework import filters as df
-from rest_framework.permissions import IsAuthenticated
-
+from django.http.response import JsonResponse
+from django.http import HttpResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.core.exceptions import ObjectDoesNotExist
 
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework import filters as df
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import JSONParser 
+from rest_framework import status
 
-from asiam.models import Moneda, Pais
-from asiam.serializers import MonedaSerializer, MonedaBasicSerializer, MonedaComboSerializer
+
+from asiam.models import FormaPago
+from asiam.serializers import FormaPagoSerializer, FormaPagoComboSerializer, FormaPagoBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
-class MonedaListView(generics.ListAPIView):
-    serializer_class = MonedaSerializer
+from django.http.request import QueryDict
+
+
+class PedidoEstatusListView(generics.ListAPIView):
+    serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = Moneda.get_queryset()
+    queryset = PedidoEstatus.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','desc_mone']
-    ordering_fields = ['id','desc_mone']
+    search_fields = ['id','desc_esta']
+    ordering_fields = ['id','desc_esta']
     ordering = ['-id']
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = Moneda.objects.all()
+        queryset = PedidoEstatus.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         if show =='all':
@@ -41,42 +53,39 @@ class MonedaListView(generics.ListAPIView):
 
         return queryset.filter(deleted__isnull=True)
 
-
-class MonedaCreateView(generics.CreateAPIView):
+class PedidoEstatusCreateView(generics.CreateAPIView):
     permission_classes = []
-    serializer_class = MonedaSerializer
+    serializer_class = FormaPagoSerializer
     
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
             # Validate Description
-            result_description = MonedaSerializer.validate_desc_mone(request.data['description'],False,None)
+            result_description = FormaPagoSerializer.validate_desc_esta(request.data['description'],False,None)
             if result_description == False:
                 try:
-                    moneda = Moneda(
-                        desc_mone                           = self.request.data.get("description")
-                        ,codi_pais                          = Pais.get_queryset().get(id = self.request.data.get("country"))
-                        ,simb_mone                          = self.request.data.get("symbol")
-                        ,codi_mone                          = self.request.data.get("code")
+                    pedidoEstatus = PedidoEstatus(
+                        desc_esta                           = self.request.data.get("description")
+                        ,orde_esta                          = self.request.data.get("ordering")
                         ,created                            = datetime.now()
                     )
-                    moneda.save()
-                    return message.SaveMessage('Moneda guardado Exitosamente')
+                    pedidoEstatus.save()
+                    return message.SaveMessage('Estatus de Pedido guardado Exitosamente')
                 except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar Moneda: "+str(e))
+                    return message.ErrorMessage("Error al Intentar Guardar Estatus de Pedido: "+str(e))
             return message.ShowMessage("Descripcion ya Registrada")
-        except Moneda.DoesNotExist:
-            return message.NotFoundMessage("Id de Moneda no Registrado")
-
-class MonedaRetrieveView(generics.RetrieveAPIView):
-    serializer_class = MonedaSerializer
+        except PedidoEstatus.DoesNotExist:
+            return message.NotFoundMessage("Id de Estatus de Pedido no Registrado")
+            
+class PedidoEstatusRetrieveView(generics.RetrieveAPIView):
+    serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = Moneda.get_queryset()
+    queryset = PedidoEstatus.get_queryset()
     lookup_field = 'id'
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = Moneda.objects.all()
+        queryset = PedidoEstatus.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         
@@ -87,15 +96,15 @@ class MonedaRetrieveView(generics.RetrieveAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Moneda no Registrado")
+            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class MonedaUpdateView(generics.UpdateAPIView):
-    serializer_class = MonedaSerializer
+class PedidoEstatusUpdateView(generics.UpdateAPIView):
+    serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = Moneda.objects.all()
+    queryset = PedidoEstatus.objects.all()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -103,7 +112,7 @@ class MonedaUpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Moneda no Registrado")
+            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
         else:
             try:
                 # State Deleted
@@ -118,42 +127,42 @@ class MonedaUpdateView(generics.UpdateAPIView):
                     isdeleted = None
                 
                 # Validate Description
-                result_description = MonedaSerializer.validate_desc_mone(request.data['description'],state_deleted,instance.id)
+                result_description = FormaPagoSerializer.validate_desc_esta(request.data['description'],state_deleted,instance.id)
                 if result_description == True:
                     return message.ShowMessage("Descripcion ya se encuentra Registrada")
                 
-                instance.desc_mone                       = self.request.data.get("description")
+                instance.desc_esta                       = self.request.data.get("description")
                 instance.orde_esta                       = self.request.data.get("ordering")
                 instance.deleted                            = isdeleted
                 instance.updated                            = datetime.now()
                 instance.save()
                 
-                return message.UpdateMessage({"id":instance.id,"description":instance.desc_mone,"ordering":instance.orde_esta})
+                return message.UpdateMessage({"id":instance.id,"description":instance.desc_esta,"ordering":instance.orde_esta})
                 
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
-
-class MonedaDestroyView(generics.DestroyAPIView):
+class PedidoEstatusDestroyView(generics.DestroyAPIView):
     permission_classes = ()
-    lookup_field = 'id'
+    lookup_field = 'id' 
 
     def delete(self, request, *args, **kwargs):
         message = BaseMessage
         try:
             with transaction.atomic():
-                moneda = Moneda.objects.get(pk=kwargs['id'])
-                moneda.deleted = datetime.now()
-                moneda.save()
-                return message.DeleteMessage('Moneda '+str(moneda.id))
+                cliente = PedidoEstatus.objects.get(pk=kwargs['id'])
+                cliente.deleted = datetime.now()
+                cliente.save()
+                return message.DeleteMessage('Estatus de Pedido '+str(cliente.id))
         except ObjectDoesNotExist:
-            return message.NotFoundMessage("Id de Moneda no Registrado")
-
-class MonedaComboView(generics.ListAPIView):
+            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
+            
+class PedidoEstatusComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = MonedaComboSerializer
+    serializer_class = PedidoEstatusComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Moneda.get_queryset().order_by('desc_mone')
+        queryset = PedidoEstatus.get_queryset().order_by('orde_esta')
         return queryset
+
