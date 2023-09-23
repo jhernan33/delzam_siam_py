@@ -22,6 +22,9 @@ class MonedaSerializer(serializers.ModelSerializer):
         representation['code'] = instance.codi_mone
         return representation
     
+    """
+        Validate Description Currency
+    """    
     def validate_desc_mone(value,state, _id:None):
         if _id is not None:
             queryset = Moneda.objects.filter(desc_mone = str(value).lower().strip()) if state else Moneda.get_queryset().filter(desc_mone = str(value).lower().strip())
@@ -33,6 +36,20 @@ class MonedaSerializer(serializers.ModelSerializer):
         else:
             return True
     
+    """
+    Validate Id Currency
+
+    Returns:
+        _type_: True/False
+    """
+    def check_Currency_Id(_id:None):
+        resultSearchCurrrency = False
+        if _id is not None:
+            queryset = Moneda.get_queryset().filter(id = _id)
+            if queryset.count() > 0:
+                resultSearchCurrrency = True
+        
+        return resultSearchCurrrency
 
 class MonedaComboSerializer(serializers.ModelSerializer):
     class Meta:

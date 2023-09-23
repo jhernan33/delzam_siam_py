@@ -27,19 +27,19 @@ from asiam.views.baseMensajeView import BaseMessage
 from django.http.request import QueryDict
 
 
-class PedidoEstatusListView(generics.ListAPIView):
+class FormaPagoListView(generics.ListAPIView):
     serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = PedidoEstatus.get_queryset()
+    queryset = FormaPago.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','desc_esta']
-    ordering_fields = ['id','desc_esta']
+    search_fields = ['id','desc_fopa']
+    ordering_fields = ['id','desc_fopa']
     ordering = ['-id']
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = PedidoEstatus.objects.all()
+        queryset = FormaPago.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         if show =='all':
@@ -53,7 +53,7 @@ class PedidoEstatusListView(generics.ListAPIView):
 
         return queryset.filter(deleted__isnull=True)
 
-class PedidoEstatusCreateView(generics.CreateAPIView):
+class FormaPagoCreateView(generics.CreateAPIView):
     permission_classes = []
     serializer_class = FormaPagoSerializer
     
@@ -61,31 +61,30 @@ class PedidoEstatusCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Validate Description
-            result_description = FormaPagoSerializer.validate_desc_esta(request.data['description'],False,None)
+            result_description = FormaPagoSerializer.validate_desc_fopa(request.data['description'],False,None)
             if result_description == False:
                 try:
-                    pedidoEstatus = PedidoEstatus(
-                        desc_esta                           = self.request.data.get("description")
-                        ,orde_esta                          = self.request.data.get("ordering")
+                    formaPago = FormaPago(
+                        desc_fopa                           = self.request.data.get("description")
                         ,created                            = datetime.now()
                     )
-                    pedidoEstatus.save()
-                    return message.SaveMessage('Estatus de Pedido guardado Exitosamente')
+                    formaPago.save()
+                    return message.SaveMessage('Forma de Pago guardado Exitosamente')
                 except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar Estatus de Pedido: "+str(e))
-            return message.ShowMessage("Descripcion ya Registrada")
-        except PedidoEstatus.DoesNotExist:
-            return message.NotFoundMessage("Id de Estatus de Pedido no Registrado")
+                    return message.ErrorMessage("Error al Intentar Guardar Forma de Pago: "+str(e))
+            return message.ShowMessage("Descripcion Forma de Pago ya Registrada")
+        except FormaPago.DoesNotExist:
+            return message.NotFoundMessage("Id de Forma de Pago no Registrado")
             
-class PedidoEstatusRetrieveView(generics.RetrieveAPIView):
+class FormaPagoRetrieveView(generics.RetrieveAPIView):
     serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = PedidoEstatus.get_queryset()
+    queryset = FormaPago.get_queryset()
     lookup_field = 'id'
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = PedidoEstatus.objects.all()
+        queryset = FormaPago.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         
@@ -96,15 +95,15 @@ class PedidoEstatusRetrieveView(generics.RetrieveAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
+            return message.NotFoundMessage("Id de Forma de Pago no Registrado")
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class PedidoEstatusUpdateView(generics.UpdateAPIView):
+class FormaPagoUpdateView(generics.UpdateAPIView):
     serializer_class = FormaPagoSerializer
     permission_classes = ()
-    queryset = PedidoEstatus.objects.all()
+    queryset = FormaPago.objects.all()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -112,7 +111,7 @@ class PedidoEstatusUpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
+            return message.NotFoundMessage("Id de Forma de Pago no Registrado")
         else:
             try:
                 # State Deleted
@@ -127,22 +126,21 @@ class PedidoEstatusUpdateView(generics.UpdateAPIView):
                     isdeleted = None
                 
                 # Validate Description
-                result_description = FormaPagoSerializer.validate_desc_esta(request.data['description'],state_deleted,instance.id)
+                result_description = FormaPagoSerializer.validate_desc_fopa(request.data['description'],state_deleted,instance.id)
                 if result_description == True:
-                    return message.ShowMessage("Descripcion ya se encuentra Registrada")
+                    return message.ShowMessage("Descripcion de Forma de Pago ya se encuentra Registrada")
                 
-                instance.desc_esta                       = self.request.data.get("description")
-                instance.orde_esta                       = self.request.data.get("ordering")
+                instance.desc_fopa                       = self.request.data.get("description")
                 instance.deleted                            = isdeleted
                 instance.updated                            = datetime.now()
                 instance.save()
                 
-                return message.UpdateMessage({"id":instance.id,"description":instance.desc_esta,"ordering":instance.orde_esta})
+                return message.UpdateMessage({"id":instance.id,"description":instance.desc_fopa})
                 
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
-class PedidoEstatusDestroyView(generics.DestroyAPIView):
+class FormaPagoDestroyView(generics.DestroyAPIView):
     permission_classes = ()
     lookup_field = 'id' 
 
@@ -150,19 +148,19 @@ class PedidoEstatusDestroyView(generics.DestroyAPIView):
         message = BaseMessage
         try:
             with transaction.atomic():
-                cliente = PedidoEstatus.objects.get(pk=kwargs['id'])
-                cliente.deleted = datetime.now()
-                cliente.save()
-                return message.DeleteMessage('Estatus de Pedido '+str(cliente.id))
+                formaPago = FormaPago.objects.get(pk=kwargs['id'])
+                formaPago.deleted = datetime.now()
+                formaPago.save()
+                return message.DeleteMessage('Forma de Pago '+str(formaPago.id))
         except ObjectDoesNotExist:
-            return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
+            return message.NotFoundMessage("Id de Forma de Pago no Registrado")
             
-class PedidoEstatusComboView(generics.ListAPIView):
+class FormaPagoComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = PedidoEstatusComboSerializer
+    serializer_class = FormaPagoComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = PedidoEstatus.get_queryset().order_by('orde_esta')
+        queryset = FormaPago.get_queryset().order_by('orde_esta')
         return queryset
 
