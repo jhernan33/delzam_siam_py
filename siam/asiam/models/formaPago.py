@@ -2,7 +2,8 @@ from .base import Base
 from django.db import models
 #Forma de pago
 class FormaPago(Base):
-    desc_fopa=models.CharField    ('Descripcion de la Forma de Pago',    max_length=120, null=True, blank=True, default='', unique=True)
+    desc_fopa = models.CharField    ('Descripcion de la Forma de Pago',    max_length=120, null=True, blank=True, default='', unique=True)
+    orde_fopa = models.IntegerField ('Orden de la Forma de Pago', blank=True, null=True)
 
     class Meta:
         ordering = ['desc_fopa']

@@ -3,7 +3,8 @@
         "pk": 1,
         "model": "asiam.formaPago",
         "fields": {
-            "desc_fopa": "Efectivo",
+            "desc_fopa": "efectivo",
+            "orde_fopa": 1,
             "created": "2023-09-19 10:20:39.841629"
         }
     },
@@ -11,7 +12,8 @@
         "pk": 2,
         "model": "asiam.formaPago",
         "fields": {
-            "desc_fopa": "Transferencia",
+            "desc_fopa": "transferencia",
+            "orde_fopa": 2,
             "created": "2023-09-19 10:20:39.841629"
         }
     },
@@ -19,7 +21,8 @@
         "pk": 3,
         "model": "asiam.formaPago",
         "fields": {
-            "desc_fopa": "Deposito Bancario",
+            "desc_fopa": "deposito bancario",
+            "orde_fopa": 3,
             "created": "2023-09-19 10:20:39.841629"
         }
     },
@@ -27,7 +30,8 @@
         "pk": 4,
         "model": "asiam.formaPago",
         "fields": {
-            "desc_fopa": "Cheque",
+            "desc_fopa": "cheque",
+            "orde_fopa": 4,
             "created": "2023-09-19 10:20:39.841629"
         }
     },
@@ -35,7 +39,8 @@
         "pk": 5,
         "model": "asiam.formaPago",
         "fields": {
-            "desc_fopa": "Saldo a Credito",
+            "desc_fopa": "saldo a credito",
+            "orde_fopa": 5,
             "created": "2023-09-19 10:20:39.841629"
         }
     }

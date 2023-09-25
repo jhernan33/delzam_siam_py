@@ -10,11 +10,12 @@ class FormaPagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = FormaPago
         field = ('id',)
-        exclude =['created','updated','esta_ttus','desc_fopa']
+        exclude =['created','updated','esta_ttus','desc_fopa','orde_fopa']
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['description'] = str(instance.desc_fopa).upper()
+        representation['ordering'] = instance.orde_fopa
         return representation
     
     def validate_desc_fopa(value,state, _id:None):
@@ -33,7 +34,7 @@ class FormaPagoComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = FormaPago
         field = ['id','description']
-        exclude = ['created','updated','esta_ttus','desc_fopa','deleted']
+        exclude = ['created','updated','esta_ttus','desc_fopa','deleted','orde_fopa']
 
     def to_representation(self, instance):
         data = super(FormaPagoComboSerializer, self).to_representation(instance=instance)
@@ -46,4 +47,4 @@ class FormaPagoBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = FormaPago
         field = ('id','desc_fopa')
-        exclude = ['created','updated','esta_ttus']
+        exclude = ['created','updated','esta_ttus','orde_fopa']

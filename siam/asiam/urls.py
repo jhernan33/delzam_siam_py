@@ -260,6 +260,22 @@ urlpatterns = [
     path('moneda/delete/<int:id>',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
     path('moneda/combo/',                               views.MonedaComboView.as_view(),    name='moneda_combo'),
 
+    # Way to Pay
+    path('formapago/',                                      views.FormaPagoListView.as_view(),     name='formadepago'),
+    path('formapago/create/',                               views.FormaPagoCreateView.as_view(),   name='formadepago_create'),
+    path('formapago/<int:id>/',                             views.FormaPagoRetrieveView.as_view(), name='formadepago_show'),
+    path('formapago/update/<int:id>',                       views.FormaPagoUpdateView.as_view(),   name='formadepago_update'),
+    path('formapago/delete/<int:id>',                       views.FormaPagoDestroyView.as_view(),  name='formadepago_delete'),
+    path('formapago/combo/',                                views.FormaPagoComboView.as_view(),    name='formadepago_combo'),
+
+    # Orders
+    path('orders/',                                      views.FormaPagoListView.as_view(),     name='orders'),
+    path('orders/create/',                               views.FormaPagoCreateView.as_view(),   name='orders_create'),
+    path('orders/<int:id>/',                             views.FormaPagoRetrieveView.as_view(), name='orders_show'),
+    path('orders/update/<int:id>',                       views.FormaPagoUpdateView.as_view(),   name='orders_update'),
+    path('orders/delete/<int:id>',                       views.FormaPagoDestroyView.as_view(),  name='orders_delete'),
+    path('orders/combo/',                                views.FormaPagoComboView.as_view(),    name='orders_combo'),
+
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
     # path('banco/<int:id>/',        views.BancoRetrieveView.as_view(), name='banco'),

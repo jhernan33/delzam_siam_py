@@ -31,6 +31,7 @@ class Pedido(Base):
         on_delete = models.CASCADE,
         related_name='PedidoTipo.codi_tipe+'
     )
+    foto_pedi = models.JSONField  ('Foto del Pedido',null=True, blank=True)
 
     class Meta:
         ordering = ['-id']

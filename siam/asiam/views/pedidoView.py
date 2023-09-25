@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Pedido,Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona
+from asiam.models import Pedido, Cliente
 from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -37,8 +37,8 @@ class PedidoListView(generics.ListAPIView):
     queryset = Pedido.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','codi_natu__cedu_pena']
-    ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','ptor_clie','codi_natu__cedu_pena']
+    search_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
+    ordering_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -64,58 +64,43 @@ class PedidoCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            # Validate Id Natural
+            # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'],False)
             if result_customer == False:
-                return message.NotFoundMessage("Codigo de Cliente no Registrada")
+                return message.NotFoundMessage("Codigo de Cliente no Registrado")
                 
             # Validate Id Currency
             result_currency = MonedaSerializer.check_Currency_Id(request.data['currency'])
             if result_currency == False:
-                return message.NotFoundMessage("Codigo de Monenda no Registrada")
+                return message.NotFoundMessage("Codigo de Monenda no Registrado")
             
-            # Validate Id Vendedor
-            result_vendedor = PedidoSerializer.validate_codi_vend(request.data['codi_vend'])
-            if result_vendedor == False:
-                return message.NotFoundMessage("Codi_Vend de Vendedor no Registrado")
-
-            if result_vendedor and result_natural and result_juridica:
-                enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
-                ServiceImage = ServiceImageView()
-                try:
-                    json_foto_clie = None
-                    if request.data['foto_clie'] is not None:
-                        listImagesProv  = request.data['foto_clie']
-                        json_foto_clie  = ServiceImage.saveImag(listImagesProv,enviroment)
-                    cliente = Cliente(
-                        ruta_detalle_vendedor_cliente       = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
-                        ,codi_natu_id                       = self.request.data.get("codi_natu")
-                        ,codi_juri_id                       = self.request.data.get("codi_juri")
-                        ,fein_clie                          = self.request.data.get("fein_clie")
-                        ,codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
-                        ,cred_clie                          = True if self.request.data.get("cred_clie").lower()=="t" else False
-                        ,mocr_clie                          = self.request.data.get("mocr_clie")
-                        ,plcr_clie                          = self.request.data.get("plcr_clie")
-                        ,prde_clie                          = self.request.data.get("prde_clie")
-                        ,prau_clie                          = self.request.data.get("prau_clie")
-                        ,foto_clie                          = None if json_foto_clie is None else json_foto_clie
-                        ,obse_clie                          = self.request.data.get("obse_clie")
-                        ,location_clie                      = self.request.data.get("location_clie")
-                        ,ptor_clie                          = self.request.data.get("ptor_clie")
-                        ,created                            = datetime.now()
-                    )
-                    cliente.save()
-                    return message.SaveMessage('Cliente guardado Exitosamente')
-                except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar el Cliente: "+str(e))
-            elif result_vendedor.count()<=0:
-                return message.NotFoundMessage('Registro Vendedor no Registrado')
-            elif result_natural.count()<=0:
-                return message.NotFoundMessage('Persona Natural no Registrada')
-            elif result_juridica.count()<=0:
-                return message.NotFoundMessage('Registro Juridico no Registrado')    
-        except Cliente.DoesNotExist:
-            return message.NotFoundMessage("Id de Cliente no Registrado")
+            enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
+            ServiceImage = ServiceImageView()
+            json_foto_pedi = None
+            if request.data['photo'] is not None:
+                listImagesProv  = request.data['photo']
+                json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
+            cliente = Cliente(
+                ruta_detalle_vendedor_cliente       = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
+                ,codi_natu_id                       = self.request.data.get("codi_natu")
+                ,codi_juri_id                       = self.request.data.get("codi_juri")
+                ,fein_clie                          = self.request.data.get("fein_clie")
+                ,codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
+                ,cred_clie                          = True if self.request.data.get("cred_clie").lower()=="t" else False
+                ,mocr_clie                          = self.request.data.get("mocr_clie")
+                ,plcr_clie                          = self.request.data.get("plcr_clie")
+                ,prde_clie                          = self.request.data.get("prde_clie")
+                ,prau_clie                          = self.request.data.get("prau_clie")
+                ,foto_clie                          = None if json_foto_pedi is None else json_foto_pedi
+                ,obse_clie                          = self.request.data.get("obse_clie")
+                ,location_clie                      = self.request.data.get("location_clie")
+                ,ptor_clie                          = self.request.data.get("ptor_clie")
+                ,created                            = datetime.now()
+            )
+            cliente.save()
+            return message.SaveMessage('Cliente guardado Exitosamente')
+        except Exception as e:
+            return message.ErrorMessage("Error al Intentar Guardar el Cliente: "+str(e))
             
 class PedidoRetrieveView(generics.RetrieveAPIView):
     serializer_class = PedidoSerializer
@@ -184,11 +169,11 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 if result_vendedor and result_natural and result_juridica:
                     enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
                     ServiceImage = ServiceImageView()
-                    json_foto_clie = None
+                    json_foto_pedi = None
 
                     if request.data['foto_clie'] is not None:
                         listImagesProv  = request.data['foto_clie']
-                        json_foto_clie  = ServiceImage.updateImage(listImagesProv,enviroment)
+                        json_foto_pedi  = ServiceImage.updateImage(listImagesProv,enviroment)
                     
                     instance.ruta_detalle_vendedor_cliente      = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
                     instance.codi_natu_id                       = self.request.data.get("codi_natu")
@@ -200,7 +185,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     instance.plcr_clie                          = self.request.data.get("plcr_clie")
                     instance.prde_clie                          = self.request.data.get("prde_clie")
                     instance.prau_clie                          = self.request.data.get("prau_clie")
-                    instance.foto_clie                          = None if json_foto_clie is None else json_foto_clie
+                    instance.foto_clie                          = None if json_foto_pedi is None else json_foto_pedi
                     instance.obse_clie                          = self.request.data.get("obse_clie")
                     instance.location_clie                      = self.request.data.get("location_clie")
                     instance.ptor_clie                          = self.request.data.get("ptor_clie")

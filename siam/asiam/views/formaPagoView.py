@@ -66,6 +66,7 @@ class FormaPagoCreateView(generics.CreateAPIView):
                 try:
                     formaPago = FormaPago(
                         desc_fopa                           = self.request.data.get("description")
+                        ,orde_fopa                           = self.request.data.get("ordering")
                         ,created                            = datetime.now()
                     )
                     formaPago.save()
@@ -131,6 +132,7 @@ class FormaPagoUpdateView(generics.UpdateAPIView):
                     return message.ShowMessage("Descripcion de Forma de Pago ya se encuentra Registrada")
                 
                 instance.desc_fopa                       = self.request.data.get("description")
+                instance.orde_fopa                       = self.request.data.get("ordering")
                 instance.deleted                            = isdeleted
                 instance.updated                            = datetime.now()
                 instance.save()
@@ -161,6 +163,6 @@ class FormaPagoComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = FormaPago.get_queryset().order_by('orde_esta')
+        queryset = FormaPago.get_queryset().order_by('orde_fopa')
         return queryset
 
