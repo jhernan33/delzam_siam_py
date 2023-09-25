@@ -3,10 +3,10 @@
         "pk": 1,
         "model": "asiam.moneda",
         "fields": {
-            "desc_mone": "bolivar",
-            "codi_mone": "VEF",
-            "simb_mone": "Bs",
-            "codi_pais": 234,
+            "desc_mone": "dolar estadounidense",
+            "codi_mone": "USD",
+            "simb_mone": "$",
+            "codi_pais": 230,
             "created": "2023-09-19 18:14:39.841629"
         }
     },
@@ -14,10 +14,10 @@
         "pk": 2,
         "model": "asiam.moneda",
         "fields": {
-            "desc_mone": "dolar estadounidense",
-            "codi_mone": "USD",
-            "simb_mone": "$",
-            "codi_pais": 230,
+            "desc_mone": "bolivar",
+            "codi_mone": "VEF",
+            "simb_mone": "Bs",
+            "codi_pais": 234,
             "created": "2023-09-19 18:14:39.841629"
         }
     },

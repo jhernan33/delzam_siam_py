@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Pedido, Cliente
+from asiam.models import Pedido, PedidoDetalle, Cliente
 from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -74,33 +74,37 @@ class PedidoCreateView(generics.CreateAPIView):
             if result_currency == False:
                 return message.NotFoundMessage("Codigo de Monenda no Registrado")
             
+            # Check Details Orders
+            if request.data['details'] is None:
+                return message.NotFoundMessage("Items del Pedido es requerido")
+            
             enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
             ServiceImage = ServiceImageView()
             json_foto_pedi = None
             if request.data['photo'] is not None:
                 listImagesProv  = request.data['photo']
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
-            cliente = Cliente(
-                ruta_detalle_vendedor_cliente       = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
-                ,codi_natu_id                       = self.request.data.get("codi_natu")
-                ,codi_juri_id                       = self.request.data.get("codi_juri")
-                ,fein_clie                          = self.request.data.get("fein_clie")
-                ,codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
-                ,cred_clie                          = True if self.request.data.get("cred_clie").lower()=="t" else False
-                ,mocr_clie                          = self.request.data.get("mocr_clie")
-                ,plcr_clie                          = self.request.data.get("plcr_clie")
-                ,prde_clie                          = self.request.data.get("prde_clie")
-                ,prau_clie                          = self.request.data.get("prau_clie")
-                ,foto_clie                          = None if json_foto_pedi is None else json_foto_pedi
-                ,obse_clie                          = self.request.data.get("obse_clie")
-                ,location_clie                      = self.request.data.get("location_clie")
-                ,ptor_clie                          = self.request.data.get("ptor_clie")
-                ,created                            = datetime.now()
-            )
-            cliente.save()
-            return message.SaveMessage('Cliente guardado Exitosamente')
+                with transaction.atomic():
+                    order = Pedido(
+                        codi_clie                           = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                        ,fech_pedi                          = datetime.now() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
+                        ,mont_pedi                          = self.request.data.get("amount")
+                        ,desc_pedi                          = self.request.data.get("discount")
+                        ,tota_pedi                          = self.request.data.get("total")
+                        ,obse_pedi                          = self.request.data.get("observations")
+                        ,orig_pedi                          = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                        ,codi_mone                          = 1 if self.request.data.get("currency") is None else self.request.data.get("currency")
+                        ,codi_espe                          = 1 if self.request.data.get("order_state") is None else self.request.data.get("order_state")
+                        ,codi_tipe                          = 1 if self.request.data.get("order_type") is None else self.request.data.get("order_type")
+                        ,foto_pedi                          = None if json_foto_pedi is None else json_foto_pedi
+                        ,created                            = datetime.now()
+                    )
+                    order.save()
+                    # Save Details
+
+            return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
-            return message.ErrorMessage("Error al Intentar Guardar el Cliente: "+str(e))
+            return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
             
 class PedidoRetrieveView(generics.RetrieveAPIView):
     serializer_class = PedidoSerializer
@@ -219,7 +223,7 @@ class PedidoDestroyView(generics.DestroyAPIView):
                 cliente.deleted = datetime.now()
                 cliente.save()
                 # Deleted Natural
-                natural = Natural.objects.get(pk=cliente.codi_natu_id)
+                natural = Pedido.objects.get(pk=cliente.codi_natu_id)
                 natural.deleted = datetime.now()
                 natural.save()
                 # Deleted Legal

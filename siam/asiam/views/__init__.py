@@ -37,6 +37,7 @@ from .pedidoTipoView import PedidoTipoListView, PedidoTipoCreateView, PedidoTipo
 from .pedidoEstatusView import PedidoEstatusListView, PedidoEstatusCreateView, PedidoEstatusUpdateView, PedidoEstatusRetrieveView, PedidoEstatusDestroyView, PedidoEstatusComboView
 from .monedaView import MonedaListView, MonedaCreateView, MonedaUpdateView, MonedaRetrieveView, MonedaDestroyView, MonedaComboView
 from .formaPagoView import FormaPagoListView, FormaPagoCreateView, FormaPagoUpdateView, FormaPagoRetrieveView, FormaPagoDestroyView, FormaPagoComboView
+from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage

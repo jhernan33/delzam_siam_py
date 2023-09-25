@@ -269,12 +269,12 @@ urlpatterns = [
     path('formapago/combo/',                                views.FormaPagoComboView.as_view(),    name='formadepago_combo'),
 
     # Orders
-    path('orders/',                                      views.FormaPagoListView.as_view(),     name='orders'),
-    path('orders/create/',                               views.FormaPagoCreateView.as_view(),   name='orders_create'),
-    path('orders/<int:id>/',                             views.FormaPagoRetrieveView.as_view(), name='orders_show'),
-    path('orders/update/<int:id>',                       views.FormaPagoUpdateView.as_view(),   name='orders_update'),
-    path('orders/delete/<int:id>',                       views.FormaPagoDestroyView.as_view(),  name='orders_delete'),
-    path('orders/combo/',                                views.FormaPagoComboView.as_view(),    name='orders_combo'),
+    path('pedido/',                                      views.PedidoListView.as_view(),     name='pedido'),
+    path('pedido/create/',                               views.PedidoCreateView.as_view(),   name='pedido_create'),
+    path('pedido/<int:id>/',                             views.PedidoRetrieveView.as_view(), name='pedido_show'),
+    path('pedido/update/<int:id>',                       views.PedidoUpdateView.as_view(),   name='pedido_update'),
+    path('pedido/delete/<int:id>',                       views.PedidoDestroyView.as_view(),  name='pedido_delete'),
+    path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
 
     # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
     # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),

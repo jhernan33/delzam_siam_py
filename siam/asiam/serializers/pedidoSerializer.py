@@ -25,7 +25,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ('id',)
-        exclude =['created','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_mone','codi_espe','codi_tipe','foto_pedi']
+        exclude =['created','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_mone','codi_espe','codi_tipe']
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
