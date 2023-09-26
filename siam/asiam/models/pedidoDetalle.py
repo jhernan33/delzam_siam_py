@@ -1,6 +1,6 @@
 from .base import Base
 from django.db import models
-from asiam.models import Articulo
+from asiam.models import Articulo, Pedido
 class PedidoDetalle(Base):
     codi_pedi = models.ForeignKey(
         'Pedido',
@@ -24,3 +24,30 @@ class PedidoDetalle(Base):
     
     def get_queryset():
         return PedidoDetalle.objects.all().filter(deleted__isnull=True)
+    
+    '''
+        Check key Exists in Details Items
+    '''
+    def checkDetails(arg):
+        is_many = isinstance(arg,list)
+        if is_many:
+            for k in arg:
+                if k.get('article') is None:
+                    return False
+                if k.get('quantity') is None:
+                    return False
+        return True
+    
+    def saveDictionaryDetail(arg,Order,Customer):
+        is_many = isinstance(arg,list)
+        if is_many:
+            details = {}
+            # print("Customer==>",Customer)
+            for k in arg:
+                listDetail = {}
+                listDetail['codi_pedi'] = Pedido.get_queryset().get(id = Order)
+                listDetail['codi_arti'] = Articulo.get_queryset().get(id = k['article'])
+                listDetail['cant_pede'] = k['quantity']
+                details.update(listDetail)
+                print(details)
+        return details

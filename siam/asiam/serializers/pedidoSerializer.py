@@ -29,7 +29,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['description'] = instance.codi_clie
+        representation['description'] = instance.codi_clie.id
         return representation
     
     """

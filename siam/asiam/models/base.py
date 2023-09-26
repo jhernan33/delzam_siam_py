@@ -25,3 +25,9 @@ class Base(models.Model):
 
     def perform_create(self, serializer):
         serializer.save(created = datetime.now())
+
+    '''
+        Gettting Today Date in format ('Y-m-d')
+    '''
+    def gettingTodaysDate():
+        return datetime.today().strftime('%Y-%m-%d')

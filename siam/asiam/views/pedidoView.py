@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Pedido, PedidoDetalle, Cliente
+from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus
 from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -43,7 +43,7 @@ class PedidoListView(generics.ListAPIView):
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = Cliente.objects.all()
+        queryset = Pedido.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         if show =='all':
@@ -65,7 +65,7 @@ class PedidoCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Validate Customer Id
-            result_customer = PedidoSerializer.validate_customer(request.data['customer'],False)
+            result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
                 return message.NotFoundMessage("Codigo de Cliente no Registrado")
                 
@@ -77,8 +77,12 @@ class PedidoCreateView(generics.CreateAPIView):
             # Check Details Orders
             if request.data['details'] is None:
                 return message.NotFoundMessage("Items del Pedido es requerido")
+            else:
+                result_details = PedidoDetalle.checkDetails(self.request.data.get("details"))
+                if result_details == False:
+                    return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
             
-            enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
+            enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
             ServiceImage = ServiceImageView()
             json_foto_pedi = None
             if request.data['photo'] is not None:
@@ -86,22 +90,26 @@ class PedidoCreateView(generics.CreateAPIView):
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
                 with transaction.atomic():
                     order = Pedido(
-                        codi_clie                           = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
-                        ,fech_pedi                          = datetime.now() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
-                        ,mont_pedi                          = self.request.data.get("amount")
-                        ,desc_pedi                          = self.request.data.get("discount")
-                        ,tota_pedi                          = self.request.data.get("total")
-                        ,obse_pedi                          = self.request.data.get("observations")
-                        ,orig_pedi                          = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
-                        ,codi_mone                          = 1 if self.request.data.get("currency") is None else self.request.data.get("currency")
-                        ,codi_espe                          = 1 if self.request.data.get("order_state") is None else self.request.data.get("order_state")
-                        ,codi_tipe                          = 1 if self.request.data.get("order_type") is None else self.request.data.get("order_type")
-                        ,foto_pedi                          = None if json_foto_pedi is None else json_foto_pedi
-                        ,created                            = datetime.now()
+                        codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                        ,fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
+                        ,mont_pedi  = self.request.data.get("amount")
+                        ,desc_pedi  = self.request.data.get("discount")
+                        ,tota_pedi  = self.request.data.get("total")
+                        ,obse_pedi  = self.request.data.get("observations")
+                        ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                        ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                        ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                        ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                        ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                        ,created    = datetime.now()
                     )
                     order.save()
+                    
                     # Save Details
-
+                    result_detail_order = PedidoDetalle.saveDictionaryDetail(self.request.data.get("details"),order.id,self.request.data.get("customer"))
+                    detailOrder = PedidoDetalle(**result_detail_order)
+                    detailOrder.save()
+                    # print(result_detail_order)
             return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
@@ -109,12 +117,12 @@ class PedidoCreateView(generics.CreateAPIView):
 class PedidoRetrieveView(generics.RetrieveAPIView):
     serializer_class = PedidoSerializer
     permission_classes = ()
-    queryset = Cliente.get_queryset()
+    queryset = Pedido.get_queryset()
     lookup_field = 'id'
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = Cliente.objects.all()
+        queryset = Pedido.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         
@@ -125,7 +133,7 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Cliente no Registrado")
+            return message.NotFoundMessage("Id de Pedido no Registrado")
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
