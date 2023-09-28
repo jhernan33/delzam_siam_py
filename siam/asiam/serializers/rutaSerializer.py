@@ -15,7 +15,7 @@ class RutaBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ruta
         field = ('id')
-        exclude = ['nomb_ruta','codi_zona','deleted','created','updated','esta_ttus']
+        exclude = ['nomb_ruta','codi_zona','deleted','created','updated','esta_ttus','porc_ruta']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -45,7 +45,7 @@ class RutaSerializer(serializers.ModelSerializer):
     # zona = serializers.PrimaryKeyRelatedField(queryset = Zona.get_queryset())
     class Meta:
         model = Ruta
-        field = ('id','nomb_ruta','codi_zona','zona','Ruta','deleted')
+        field = ('id','nomb_ruta','codi_zona','zona','Ruta','deleted','porc_ruta')
         exclude =['created','updated','esta_ttus']
 
     def to_representation(self, instance):
@@ -53,6 +53,7 @@ class RutaSerializer(serializers.ModelSerializer):
         data['nomb_ruta'] = data['nomb_ruta'].upper().strip() if data['nomb_ruta'] else data['nomb_ruta']
         data['zona'] = data['zona'].upper().strip() if data['zona'] else data['zona']
         data['seller_count'] = RutaDetalleVendedor.objects.all().filter(codi_ruta=instance.id).count()
+        data['percentage'] = data['porc_ruta']
 
         queryset = RutaDetalleVendedor.objects.filter(codi_ruta=instance.id)
         result = RutaDetalleVendedorSerializerBasics(queryset, many=True).data
@@ -70,7 +71,7 @@ class RutaClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ruta
         field = ('id','nomb_ruta')
-        exclude =['created','updated','esta_ttus','deleted','posi_ruta','codi_zona']
+        exclude =['created','updated','esta_ttus','deleted','posi_ruta','codi_zona','porc_ruta']
     
     def to_representation(self, instance):
         data = super(RutaClienteSerializer, self).to_representation(instance=instance)

@@ -41,13 +41,32 @@ class PedidoDetalle(Base):
     def saveDictionaryDetail(arg,Order,Customer):
         is_many = isinstance(arg,list)
         if is_many:
-            details = {}
+            # Create Dictionary Details
+            details = dict()
             # print("Customer==>",Customer)
+            listDetail = dict()
+            # print(type(arg),arg)
+            #listDetail = dict(arg)
             for k in arg:
-                listDetail = {}
-                listDetail['codi_pedi'] = Pedido.get_queryset().get(id = Order)
-                listDetail['codi_arti'] = Articulo.get_queryset().get(id = k['article'])
-                listDetail['cant_pede'] = k['quantity']
-                details.update(listDetail)
-                print(details)
+                detail = dict()
+                # Create List
+                detail['codi_pedi'] = Pedido.get_queryset().get(id = Order)
+                detail['codi_arti'] = Articulo.get_queryset().get(id = k['article'])
+                detail['cant_pede'] = k['quantity']
+                
+
+                # listDetail.update(
+                #     {
+                #         'codi_pedi': Pedido.get_queryset().get(id = Order),
+                #         'codi_arti': Articulo.get_queryset().get(id = k['article']),
+                #         'cant_pede': k['quantity']
+                #     })
+                # item = {'codi_pedi': Pedido.get_queryset().get(id = Order),
+                #         'codi_arti': Articulo.get_queryset().get(id = k['article']),
+                #         'cant_pede': k['quantity']
+                # }
+                # listDetail= {**listDetail, **item}
+                #details.append(listDetail)
+                # print(listDetail,type(listDetail))
+            print("Diccionary==>",listDetail)
         return details

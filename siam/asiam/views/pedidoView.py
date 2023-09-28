@@ -20,7 +20,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 
 
-from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus
+from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo
 from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -106,10 +106,21 @@ class PedidoCreateView(generics.CreateAPIView):
                     order.save()
                     
                     # Save Details
-                    result_detail_order = PedidoDetalle.saveDictionaryDetail(self.request.data.get("details"),order.id,self.request.data.get("customer"))
-                    detailOrder = PedidoDetalle(**result_detail_order)
-                    detailOrder.save()
-                    # print(result_detail_order)
+                    if isinstance(self.request.data.get("details"),list):
+                        _total = 0
+                        for detail in self.request.data.get("details"):
+                            """ Buscar el Precio del Impuesto """
+                            # querysetPrecio = ImpuestoPrecio.searchImpuestoPrecio(detail['codi_impu'])
+                            # _total += querysetPrecio
+
+                            # Guardar el Detalle
+                            pedidoDetalle = PedidoDetalle(
+                                codi_pedi = Pedido.get_queryset().get(id = order.id),
+                                codi_arti = Articulo.get_queryset().get(id = detail['article']),
+                                cant_pede = detail['quantity'],
+                                created = Pedido.gettingTodaysDate(),
+                            )
+                            pedidoDetalle.save()
             return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))

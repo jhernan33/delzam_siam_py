@@ -12,6 +12,7 @@ class Ruta(Base):
     )
     nomb_ruta = models.CharField    ('Nombre de la Ruta', max_length=200, null=True, blank=True)
     posi_ruta = models.IntegerField('Posicion de la Ruta',null=True, blank=True)
+    porc_ruta = models.DecimalField ('Porcentaje del Descuento de la Ruta ',max_digits=7,decimal_places=2,null=True, blank=True)
 
     class Meta:
         ordering = ['-id']
