@@ -109,15 +109,14 @@ class PedidoCreateView(generics.CreateAPIView):
                     if isinstance(self.request.data.get("details"),list):
                         _total = 0
                         for detail in self.request.data.get("details"):
-                            """ Buscar el Precio del Impuesto """
-                            # querysetPrecio = ImpuestoPrecio.searchImpuestoPrecio(detail['codi_impu'])
-                            # _total += querysetPrecio
-
                             # Guardar el Detalle
                             pedidoDetalle = PedidoDetalle(
                                 codi_pedi = Pedido.get_queryset().get(id = order.id),
                                 codi_arti = Articulo.get_queryset().get(id = detail['article']),
                                 cant_pede = detail['quantity'],
+                                prec_pede = detail['price'],
+                                desc_pede = detail['discount'],
+                                moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
                                 created = Pedido.gettingTodaysDate(),
                             )
                             pedidoDetalle.save()

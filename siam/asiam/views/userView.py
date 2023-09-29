@@ -17,9 +17,11 @@ class LoginView(generics.CreateAPIView):
     # serializer_class = VendedorSerializer
     def post(self, request):
         # Recuperamos las credenciales y autenticamos al usuario
-        username = request.data.get('username', None)
+        username = request.data.get('user', None)
         password = request.data.get('password', None)
-        user = authenticate(username= username, password=password)
+        print(username,password)
+        user = authenticate(username=username,password=password)
+        print(user)
 
         # Si es correcto añadimos a la request la informacion de sesion
         if user:
@@ -34,7 +36,7 @@ class LoginView(generics.CreateAPIView):
             # return Response(UserSerializer(user).data,status=status.HTTP_200_OK)
         
         # si no es correcto devolvemos un error en la peticion
-        return Response({'result':'Datos Incorrectos, verifique e intenten de nuevo'},status=status.HTTP_404_NOT_FOUND)
+        return Response({'result':'Datos Incorrectos, verifique e intente de nuevo'},status=status.HTTP_401_UNAUTHORIZED)
 
 # Close Session
 class LogoutView(generics.CreateAPIView):

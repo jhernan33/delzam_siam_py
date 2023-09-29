@@ -53,7 +53,9 @@ class PedidoDetalle(Base):
                 detail['codi_pedi'] = Pedido.get_queryset().get(id = Order)
                 detail['codi_arti'] = Articulo.get_queryset().get(id = k['article'])
                 detail['cant_pede'] = k['quantity']
-                
+                detail['prec_pede'] = k['price']
+                detail['desc_pede'] = k['discount']
+                detail['moto_pede'] = (k['quantity'] * k['price']) - k['discount']
 
                 # listDetail.update(
                 #     {

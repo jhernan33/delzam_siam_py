@@ -6,9 +6,10 @@ from defer import return_value
 from httplib2 import Response
 from pkg_resources import require
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,authenticate
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from yaml import serialize
 
 class UserSerializer(serializers.ModelSerializer):
@@ -50,26 +51,27 @@ class UserSerializer(serializers.ModelSerializer):
         user.is_superuser = False if(self.data.get('is_superuser',None) == None) else True
         user.is_staff = False if(self.data.get('is_staff',None) == None) else True
         user.is_active = False if(self.data.get('is_active',None) == None) else True
+        print(user)
         user.save()
         return user
 
-# class UserLoginSerializer(serializers.Serializer):
-#     username = serializers.CharField(min_length= 3,max_length=150)
-#     password = serializers.CharField(min_length= 8,max_length=128)
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField(min_length= 3,max_length=150)
+    password = serializers.CharField(min_length= 8,max_length=128)
 
-#     # Primero validamos los datos
-#     def validate(self, data):
+    # Primero validamos los datos
+    def validate(self, data):
 
-#         # authenticate recibe las credenciales, si son válidas devuelve el objeto del usuario
-#         user = authenticate(username=data['email'], password=data['password'])
-#         if not user:
-#             raise serializers.ValidationError('Las credenciales no son válidas')
+        # authenticate recibe las credenciales, si son válidas devuelve el objeto del usuario
+        user = authenticate(username=data['username'], password=data['password'])
+        if not user:
+            raise serializers.ValidationError('Las credenciales no son válidas')
 
-#         # Guardamos el usuario en el contexto para posteriormente en create recuperar el token
-#         self.context['user'] = user
-#         return data
+        # Guardamos el usuario en el contexto para posteriormente en create recuperar el token
+        self.context['user'] = user
+        return data
 
-#     def create(self, data):
-#         """Generar o recuperar token."""
-#         token, created = Token.objects.get_or_create(user=self.context['user'])
-#         return self.context['user'], token.key
+    def create(self, data):
+        """Generar o recuperar token."""
+        token, created = Token.objects.get_or_create(user=self.context['user'])
+        return self.context['user'], token.key

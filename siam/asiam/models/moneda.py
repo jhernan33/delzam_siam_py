@@ -19,3 +19,11 @@ class Moneda(Base):
 
     def get_queryset():
         return Moneda.objects.all().filter(deleted__isnull=True)
+    
+    def searchCurrencyById(_id:None):
+        queryset_Currency = []
+        if _id is not None:
+            queryset = Moneda.get_queryset().filter(id = _id)
+            if queryset.count() > 0:
+                queryset_Currency = queryset
+        return queryset_Currency

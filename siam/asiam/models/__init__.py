@@ -38,6 +38,7 @@ from .pedidoEstatus import PedidoEstatus
 from .pedido import Pedido
 from .pedidoDetalle import PedidoDetalle
 from .pedidoPagoDetalle import PedidoPagoDetalle
+from .pedidoSeguimiento import PedidoSeguimiento
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco

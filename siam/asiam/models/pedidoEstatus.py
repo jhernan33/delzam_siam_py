@@ -13,3 +13,11 @@ class PedidoEstatus(Base):
 
     def get_queryset():
         return PedidoEstatus.objects.all().filter(deleted__isnull=True)
+    
+    def searchOrderStateById(_id:None):
+        queryset_order_state = []
+        if _id is not None:
+            queryset = PedidoEstatus.get_queryset().filter(id = _id)
+            if queryset.count() > 0:
+                queryset_order_state = queryset
+        return queryset_order_state

@@ -100,3 +100,15 @@ class Cliente(Base):
                     _addressCustomer = str(ciudad+" Sector: "+sector+" , "+juridica.dofi_peju).strip().upper()
             return _addressCustomer
 
+    """ Search Customer By Id 
+
+        Returns:
+            _type_: Queryset
+        """
+    def searchCustomerById(_id:None):
+        queryset_Customer = []
+        if _id is not None:
+            queryset = Cliente.get_queryset().filter(id = _id)
+            if queryset.count() > 0:
+                queryset_Customer = queryset
+        return queryset_Customer
