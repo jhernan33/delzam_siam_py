@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 class ArticuloListView(generics.ListAPIView):
     serializer_class = ArticuloSerializer
-    permission_classes = ()
+    permission_classes =  [ IsAuthenticated ]
     queryset = Articulo.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]

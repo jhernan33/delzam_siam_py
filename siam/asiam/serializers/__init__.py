@@ -20,7 +20,7 @@ from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
 from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteComboSerializer
-from .userSerializer import UserSerializer
+from .userSerializer import SignupSerializer, UserLoginSerializer
 from .grupoSerializer import GrupoSerializer
 from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics
 from .ivaGeneralSerializer import IvaGeneralSerializer
