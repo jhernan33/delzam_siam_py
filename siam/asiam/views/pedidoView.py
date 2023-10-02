@@ -33,7 +33,7 @@ from django.contrib.gis.geos import GEOSGeometry, Point
 
 class PedidoListView(generics.ListAPIView):
     serializer_class = PedidoSerializer
-    permission_classes = ()
+    permission_classes =  [ IsAuthenticated ]
     queryset = Pedido.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
