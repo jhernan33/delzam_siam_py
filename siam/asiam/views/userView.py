@@ -50,9 +50,7 @@ class LoginView(generics.CreateAPIView):
                 response = {
                     "status": status.HTTP_200_OK,
                     "message": "success",
-                    "data":{
-                        "Token": token.key
-                    }
+                    "Token": token.key
                 }
                 return Response(response,status=status.HTTP_200_OK)
             else:
