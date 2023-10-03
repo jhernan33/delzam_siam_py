@@ -23,7 +23,7 @@ class CustomAuthToken(ObtainAuthToken):
 
 class SignupView(generics.CreateAPIView):
     permission_classes = ()
-    # serializer_class = UserSerializer
+    
     """This api will handle signup"""
     def post(self,request):
             serializer = SignupSerializer(data = request.data)

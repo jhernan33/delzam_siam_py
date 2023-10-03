@@ -24,14 +24,15 @@ class GrupoCreateView(generics.CreateAPIView):
     serializer_class = GrupoSerializer    
 
     def create(self, request, *args, **kwargs):
+        # print(request.data['name'])
+        # self.name = str(request.data['name']).upper()
+        # print(self.name)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        # print(serializer)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(created = datetime.now())
 
 class GrupoRetrieveView(generics.RetrieveAPIView):
     serializer_class = GrupoSerializer
