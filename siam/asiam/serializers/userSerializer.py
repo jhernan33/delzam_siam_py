@@ -8,7 +8,7 @@ from pkg_resources import require
 from rest_framework import serializers
 from django.contrib.auth import get_user_model,authenticate
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group, Permission, GroupManager
 from rest_framework.authtoken.models import Token
 from yaml import serialize
 
@@ -17,9 +17,14 @@ class SignupSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
             validated_data["password"] = make_password(validated_data.get("password"))
             return super(SignupSerializer, self).create(validated_data)
+
+    def encrypt_password(_value):
+        return make_password(_value)
+    
     class Meta:
             model = User
             fields = ['username','password','is_superuser','first_name','last_name','email']
+    
 
 class UserLoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField()

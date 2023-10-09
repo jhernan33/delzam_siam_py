@@ -12,3 +12,8 @@ class GrupoSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['name'] = str(instance.name).upper()
         return representation
+
+class ArticuloComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('id','name','codi_sufa')

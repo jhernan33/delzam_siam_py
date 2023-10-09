@@ -10,11 +10,12 @@ urlpatterns = [
     path('logout/',                     views.LogoutView.as_view(), name='login'),
 
     # Grupos
-    path('grupo/',                 views.GrupoListView.as_view(),     name='grupo'),
-    path('grupo/create/',          views.GrupoCreateView.as_view(),   name='grupo_create'),
-    path('grupo/<int:id>/',        views.GrupoRetrieveView.as_view(), name='grupo'),
-    path('grupo/update/<int:id>',  views.GrupoUpdateView.as_view(),   name='grupo_update'),
-    path('grupo/delete/<int:id>', views.GrupoDestroyView.as_view(),  name='grupo_delete'),
+    path('grupo/',                  views.GrupoListView.as_view(),     name='grupo'),
+    path('grupo/create/',           views.GrupoCreateView.as_view(),   name='grupo_create'),
+    path('grupo/<int:id>/',         views.GrupoRetrieveView.as_view(), name='grupo'),
+    path('grupo/update/<int:id>',   views.GrupoUpdateView.as_view(),   name='grupo_update'),
+    path('grupo/delete/<int:id>',   views.GrupoDestroyView.as_view(),  name='grupo_delete'),
+    path('grupo/combo/',            views.GrupoComboView.as_view(),    name='grupo_combo'),
 
     # Grupo Usuario
     path('grupoUsuario/',                 views.GrupoListView.as_view(),     name='grupoUsuario'),
