@@ -37,6 +37,7 @@ from .pedidoEstatusSerializer import PedidoEstatusSerializer, PedidoEstatusCombo
 from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer
 from .formaPagoSerializer import FormaPagoSerializer, FormaPagoBasicSerializer, FormaPagoComboSerializer
 from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer
+from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

@@ -72,3 +72,14 @@ class PedidoDetalle(Base):
                 # print(listDetail,type(listDetail))
             print("Diccionary==>",listDetail)
         return details
+
+    '''
+        Search Detail Order By Id
+    '''
+    def searchDetailOrderById(_id:None):
+        queryset_detail = []
+        if _id is not None:
+            queryset = PedidoDetalle.get_queryset().filter(codi_pedi = _id)
+            if queryset.count() > 0:
+                queryset_detail = queryset
+        return queryset_detail

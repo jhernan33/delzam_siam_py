@@ -1,6 +1,8 @@
 from .base import Base
 from django.db import models
 from asiam.models import Cliente
+from django.contrib.auth.models import User
+
 class Pedido(Base):
     codi_clie = models.ForeignKey(
         'Cliente',
@@ -32,6 +34,7 @@ class Pedido(Base):
         related_name='PedidoTipo.codi_tipe+'
     )
     foto_pedi = models.JSONField  ('Foto del Pedido',null=True, blank=True)
+    codi_user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='PedidoUser.codi_user+',default=1)
 
     class Meta:
         ordering = ['-id']
@@ -40,3 +43,4 @@ class Pedido(Base):
     
     def get_queryset():
         return Pedido.objects.all().filter(deleted__isnull=True)
+    

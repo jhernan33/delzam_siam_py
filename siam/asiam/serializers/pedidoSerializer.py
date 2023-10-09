@@ -1,10 +1,11 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Pedido,Cliente, Moneda, PedidoEstatus
+from asiam.models import Pedido,Cliente, Moneda, PedidoEstatus, PedidoDetalle
 
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 class JSONSerializerField(serializers.Field):
     """Serializer for JSONField -- required to make field writable"""
@@ -29,6 +30,9 @@ class PedidoSerializer(serializers.ModelSerializer):
         exclude =['created','deleted','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe']
     
     def to_representation(self, instance):
+        # Call Serializers
+        from asiam.serializers import PedidoDetalleBasicSerializer, PedidoDetalleSerializer
+
         representation = super().to_representation(instance)
         representation['customer_id'] = instance.codi_clie.id
         representation['customer_all'] = Cliente.searchTypeCustomerId(instance.codi_clie.id)
@@ -46,6 +50,10 @@ class PedidoSerializer(serializers.ModelSerializer):
         # State
         representation['order_state_id'] = instance.codi_espe.id
         representation['order_state_all'] = PedidoEstatus.searchOrderStateById(instance.codi_espe.id).values()
+        # Detail
+        queryset = PedidoDetalle.searchDetailOrderById(instance.id)
+        result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
+        representation['detail'] = result_detail
         return representation
     
     """

@@ -18,6 +18,7 @@ from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo
@@ -58,12 +59,15 @@ class PedidoListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class PedidoCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes =  [ IsAuthenticated ]
     serializer_class = PedidoSerializer
     
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
+            # Get User
+            user_id = Token.objects.get(key= request.auth.key).user
+            print(user_id)
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -125,8 +129,8 @@ class PedidoCreateView(generics.CreateAPIView):
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
             
 class PedidoRetrieveView(generics.RetrieveAPIView):
+    permission_classes =  [ IsAuthenticated ]
     serializer_class = PedidoSerializer
-    permission_classes = ()
     queryset = Pedido.get_queryset()
     lookup_field = 'id'
 
