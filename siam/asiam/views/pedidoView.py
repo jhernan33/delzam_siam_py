@@ -19,9 +19,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
-
-from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo
+from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
 from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -67,7 +67,6 @@ class PedidoCreateView(generics.CreateAPIView):
         try:
             # Get User
             user_id = Token.objects.get(key= request.auth.key).user
-            print(user_id)
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -105,6 +104,7 @@ class PedidoCreateView(generics.CreateAPIView):
                         ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
                         ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                         ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                        ,codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
                         ,created    = datetime.now()
                     )
                     order.save()
@@ -121,7 +121,7 @@ class PedidoCreateView(generics.CreateAPIView):
                                 prec_pede = detail['price'],
                                 desc_pede = detail['discount'],
                                 moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
-                                created = Pedido.gettingTodaysDate(),
+                                created = datetime.now(),
                             )
                             pedidoDetalle.save()
             return message.SaveMessage('Pedido guardado Exitosamente')
@@ -241,22 +241,35 @@ class PedidoDestroyView(generics.DestroyAPIView):
         message = BaseMessage
         try:
             with transaction.atomic():
-                cliente = Cliente.objects.get(pk=kwargs['id'])
-                cliente.deleted = datetime.now()
-                cliente.save()
-                # Deleted Natural
-                natural = Pedido.objects.get(pk=cliente.codi_natu_id)
-                natural.deleted = datetime.now()
-                natural.save()
-                # Deleted Legal
-                if cliente.codi_juri_id != 1:
-                    juridica = Juridica.objects.get(pk=cliente.codi_juri_id)
-                    juridica.deleted = datetime.now()
-                    juridica.save()
+                # Instance Object
+                orderState = PedidoEstatus.get_queryset().get(id = 3)
+                orderId =  Pedido.get_queryset().get(pk=kwargs['id'])
+                order = orderId
+                order.deleted = datetime.now()
+                # Id Status Erased
+                order.codi_espe = orderState
+                order.save()
 
-                return message.DeleteMessage('Cliente '+str(cliente.id))
+                # Deleted Detail
+                updated_data = {
+                    "deleted" : datetime.now()
+                }
+                result_order_detail = PedidoDetalle.get_queryset().filter(codi_pedi = orderId).update(**updated_data)
+
+                # Register Tracking
+                orderTracking = PedidoSeguimiento(
+                    codi_pedi = orderId,
+                    codi_esta = orderState,
+                    codi_user = User.objects.get(id = request.user.id),
+                    fech_segu = datetime.now(),
+                    created   = datetime.now(),
+                    obse_segu = 'Borrado del Registro',
+                )
+                orderTracking.save()
+
+                return message.DeleteMessage('Pedido Anulado '+str(kwargs['id']))
         except ObjectDoesNotExist:
-            return message.NotFoundMessage("Id de Cliente no Registrado")
+            return message.NotFoundMessage("Id de Pedido no Registrado")
             
 class PedidoComboView(generics.ListAPIView):
     permission_classes = []

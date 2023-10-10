@@ -27,7 +27,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ('id','codi_mone')
-        exclude =['created','deleted','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe']
+        exclude =['created','deleted','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
     
     def to_representation(self, instance):
         # Call Serializers
@@ -57,9 +57,9 @@ class PedidoSerializer(serializers.ModelSerializer):
         result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
         representation['detail'] = result_detail
         # User Create
-        querysetUser = User.objects.filter(id = instance.codi_user)
-        # representation['user'] = UserBasicSerializer(querysetUser, many=True).data
-        print(querysetUser)
+        querysetUser = User.objects.filter(id = instance.codi_user.id)
+        representation['user'] = UserBasicSerializer(querysetUser, many=True).data
+        # print(querysetUser)
         return representation
     
     """

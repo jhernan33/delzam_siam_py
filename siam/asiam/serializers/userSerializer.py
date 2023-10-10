@@ -37,4 +37,4 @@ class UserBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         field = ('id','first_name','last_name')
-        exclude = ['created','updated','esta_ttus','deleted','password','is_superuser','email']
+        exclude = ['password','is_superuser','email','last_login']
