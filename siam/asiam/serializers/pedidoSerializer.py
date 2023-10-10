@@ -32,6 +32,8 @@ class PedidoSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         # Call Serializers
         from asiam.serializers import PedidoDetalleBasicSerializer, PedidoDetalleSerializer
+        from asiam.serializers import UserBasicSerializer
+        from django.contrib.auth.models import User
 
         representation = super().to_representation(instance)
         representation['customer_id'] = instance.codi_clie.id
@@ -54,6 +56,10 @@ class PedidoSerializer(serializers.ModelSerializer):
         queryset = PedidoDetalle.searchDetailOrderById(instance.id)
         result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
         representation['detail'] = result_detail
+        # User Create
+        querysetUser = User.objects.filter(id = instance.codi_user)
+        # representation['user'] = UserBasicSerializer(querysetUser, many=True).data
+        print(querysetUser)
         return representation
     
     """
