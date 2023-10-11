@@ -174,9 +174,29 @@ class PedidoUpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Cliente no Registrado")
+            return message.NotFoundMessage("Id de Pedido no Registrado")
         else:
             try:
+                # Get User
+                user_id = Token.objects.get(key= request.auth.key).user
+                # Validate Customer Id
+                result_customer = PedidoSerializer.validate_customer(request.data['customer'])
+                if result_customer == False:
+                    return message.NotFoundMessage("Codigo de Cliente no Registrado")
+                    
+                # Validate Id Currency
+                result_currency = MonedaSerializer.check_Currency_Id(request.data['currency'])
+                if result_currency == False:
+                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
+                
+                # Check Details Orders
+                if request.data['details'] is None:
+                    return message.NotFoundMessage("Items del Pedido es requerido")
+                else:
+                    result_details = PedidoDetalle.checkDetails(self.request.data.get("details"))
+                    if result_details == False:
+                        return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
+                
                 # State Deleted
                 state_deleted = None
                 if instance.deleted:
@@ -188,59 +208,58 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 else:    
                     isdeleted = None
                 
-                # Validate Id Natural
-                result_natural = PedidoSerializer.validate_codi_natu(request.data['codi_natu'],state_deleted)
-                if result_natural == False:
-                    return message.NotFoundMessage("Codi_Natu de Persona no Registrada")
-                    
-                # Validate Id Juridica
-                result_juridica = PedidoSerializer.validate_codi_juri(request.data['codi_juri'],state_deleted)
-                if result_juridica == False:
-                    return message.NotFoundMessage("Codi_Juri de Persona Juridica no Registrada")
-                
-                # Validate Id Vendedor
-                result_vendedor = PedidoSerializer.validate_codi_vend(request.data['codi_vend'])
-                if result_vendedor == False:
-                    return message.NotFoundMessage("Codi_Vend de Vendedor no Registrado")
-                
-                if result_vendedor and result_natural and result_juridica:
-                    enviroment = os.path.realpath(settings.WEBSERVER_CUSTOMER)
-                    ServiceImage = ServiceImageView()
-                    json_foto_pedi = None
 
-                    if request.data['foto_clie'] is not None:
-                        listImagesProv  = request.data['foto_clie']
-                        json_foto_pedi  = ServiceImage.updateImage(listImagesProv,enviroment)
+                enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
+                ServiceImage = ServiceImageView()
+                json_foto_pedi = None
+                if request.data['photo'] is not None:
+                    listImagesProv  = request.data['photo']
+                    json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
+                    with transaction.atomic():
                     
-                    instance.ruta_detalle_vendedor_cliente      = RutaDetalleVendedor.get_queryset().get(id = self.request.data.get("codi_vend")) 
-                    instance.codi_natu_id                       = self.request.data.get("codi_natu")
-                    instance.codi_juri_id                       = self.request.data.get("codi_juri")
-                    instance.fein_clie                          = self.request.data.get("fein_clie")
-                    instance.codi_ante                          = str(self.request.data.get("codi_ante")).strip().upper()
-                    instance.cred_clie                          = True if self.request.data.get("cred_clie").lower()=="t" else False
-                    instance.mocr_clie                          = self.request.data.get("mocr_clie")
-                    instance.plcr_clie                          = self.request.data.get("plcr_clie")
-                    instance.prde_clie                          = self.request.data.get("prde_clie")
-                    instance.prau_clie                          = self.request.data.get("prau_clie")
-                    instance.foto_clie                          = None if json_foto_pedi is None else json_foto_pedi
-                    instance.obse_clie                          = self.request.data.get("obse_clie")
-                    instance.location_clie                      = self.request.data.get("location_clie")
-                    instance.ptor_clie                          = self.request.data.get("ptor_clie")
-                    instance.deleted                            = isdeleted
-                    instance.updated                            = datetime.now()
-                    instance.save()
+                        instance.codi_clie  = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                        instance.fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
+                        instance.mont_pedi  = self.request.data.get("amount")
+                        instance.desc_pedi  = self.request.data.get("discount")
+                        instance.tota_pedi  = self.request.data.get("total")
+                        instance.obse_pedi  = self.request.data.get("observations")
+                        instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                        instance.codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                        instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                        instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                        instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                        instance.codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
+                        instance.deleted    = isdeleted
+                        instance.updated    = datetime.now()
+                        instance.save()
 
-                    # Check State Deleted
-                    if state_deleted:
-                        # Restore Natural Person
-                        natural = Natural.objects.get(pk=instance.codi_natu_id)
-                        natural.deleted = None
-                        natural.save()
-                        # Restore Legal Person
-                        legal = Juridica.objects.get(pk=instance.codi_juri_id)
-                        legal.deleted = None
-                        legal.save()
-                    return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
+                        # Save Details
+                        if isinstance(self.request.data.get("details"),list):
+                            _total = 0
+                            for detail in self.request.data.get("details"):
+                                # Guardar el Detalle
+                                pedidoDetalle = PedidoDetalle(
+                                    codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                                    codi_arti = Articulo.get_queryset().get(id = detail['article']),
+                                    cant_pede = detail['quantity'],
+                                    prec_pede = detail['price'],
+                                    desc_pede = detail['discount'],
+                                    moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                                    created = datetime.now(),
+                                )
+                                pedidoDetalle.save()
+                        
+                        # Register Tracking
+                        orderTracking = PedidoSeguimiento(
+                            codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                            codi_esta = PedidoEstatus.get_queryset().get(id = 1),
+                            codi_user = User.objects.get(id = request.user.id),
+                            fech_segu = datetime.now(),
+                            created   = datetime.now(),
+                            obse_segu = 'Creando el Pedido',
+                        )
+                        orderTracking.save()
+                        return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
