@@ -76,13 +76,15 @@ class PedidoComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ['id','description']
-        exclude = ['created','updated','esta_ttus','codi_clie','deleted']
+        exclude = ['created','updated','esta_ttus','codi_clie','deleted','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','foto_pedi','codi_mone','codi_espe','codi_tipe','codi_user']
 
     def to_representation(self, instance):
+        # Serializers
+        from asiam.serializers import ClienteComboSerializer
         data = super(PedidoComboSerializer, self).to_representation(instance=instance)
         
         # Upper Description
-        data["description"] = instance.codi_clie
+        data["customer"] = ClienteComboSerializer(Cliente.get_queryset().filter(id = instance.codi_clie.id), many=True).data
         return data
     
 class PedidoBasicSerializer(serializers.ModelSerializer):

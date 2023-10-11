@@ -22,7 +22,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
-from asiam.serializers import PedidoSerializer, PedidoSerializer, ClienteComboSerializer, MonedaSerializer
+from asiam.serializers import PedidoSerializer, PedidoSerializer, PedidoComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -124,6 +124,17 @@ class PedidoCreateView(generics.CreateAPIView):
                                 created = datetime.now(),
                             )
                             pedidoDetalle.save()
+                    
+                    # Register Tracking
+                    orderTracking = PedidoSeguimiento(
+                        codi_pedi = Pedido.get_queryset().get(id = order.id),
+                        codi_esta = PedidoEstatus.get_queryset().get(id = 1),
+                        codi_user = User.objects.get(id = request.user.id),
+                        fech_segu = datetime.now(),
+                        created   = datetime.now(),
+                        obse_segu = 'Creando el Pedido',
+                    )
+                    orderTracking.save()
             return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
@@ -273,11 +284,10 @@ class PedidoDestroyView(generics.DestroyAPIView):
             
 class PedidoComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = ClienteComboSerializer
+    serializer_class = PedidoComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        # estado_id = self.kwargs['id']
-        queryset = Cliente.objects.all()
+        queryset = Pedido.get_queryset()
         list1 = list(queryset)
         return queryset
