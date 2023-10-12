@@ -166,7 +166,7 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
 class PedidoUpdateView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
     permission_classes = ()
-    queryset = Cliente.objects.all()
+    queryset = Pedido.objects.all()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -236,8 +236,10 @@ class PedidoUpdateView(generics.UpdateAPIView):
                         # Save Details
                         if isinstance(self.request.data.get("details"),list):
                             _total = 0
+                            # Delete Items Order Detail
+                            PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
                             for detail in self.request.data.get("details"):
-                                # Guardar el Detalle
+                                # Save Order Detail
                                 pedidoDetalle = PedidoDetalle(
                                     codi_pedi = Pedido.get_queryset().get(id = instance.id),
                                     codi_arti = Articulo.get_queryset().get(id = detail['article']),
@@ -246,20 +248,20 @@ class PedidoUpdateView(generics.UpdateAPIView):
                                     desc_pede = detail['discount'],
                                     moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
                                     created = datetime.now(),
+                                    updated = datetime.now(),
                                 )
                                 pedidoDetalle.save()
-                        
                         # Register Tracking
                         orderTracking = PedidoSeguimiento(
                             codi_pedi = Pedido.get_queryset().get(id = instance.id),
-                            codi_esta = PedidoEstatus.get_queryset().get(id = 1),
+                            codi_esta = PedidoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
                             codi_user = User.objects.get(id = request.user.id),
                             fech_segu = datetime.now(),
                             created   = datetime.now(),
-                            obse_segu = 'Creando el Pedido',
+                            obse_segu = 'Actualizando el Pedido',
                         )
                         orderTracking.save()
-                        return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
+                        return message.UpdateMessage({"id":instance.id})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
