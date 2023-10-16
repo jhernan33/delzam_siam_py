@@ -65,7 +65,7 @@ class CuentaComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cuenta
         field = ['id','description']
-        exclude = ['created','updated','esta_ttus','deleted','fape_cuen','tipo_cuen','codi_banc']
+        exclude = ['created','updated','esta_ttus','deleted','fape_cuen','tipo_cuen','codi_banc','ncta_cuen']
 
     def to_representation(self, instance):
         data = super(CuentaComboSerializer, self).to_representation(instance=instance)

@@ -1,7 +1,7 @@
 from os import environ
 import os
 from django.conf import settings
-from datetime import datetime
+from datetime import datetime, date
 from django.shortcuts import render
 from django.db import transaction
 from rest_framework import generics
@@ -119,12 +119,14 @@ class CuentaUpdateView(generics.UpdateAPIView):
                 if result_account_number == True:
                     return message.ShowMessage("Numero de Cuenta ya Registrada en el Banco")
                 
+                _bank = Banco.getInstanceBank(self.request.data.get("bank"))
+                
                 instance.ncta_cuen = self.request.data.get("account_number")
-                instance.fape_cuen = self.request.data.get("date_create"),
-                instance.tipo_cuen = self.request.data.get("type"),
-                instance.codi_banc = Banco.objects.get(id=self.request.data.get("bank")),
-                instance.deleted   = isdeleted
-                instance.updated   = datetime.now()
+                instance.fape_cuen = date.fromisoformat(self.request.data.get("opening_date"))
+                instance.tipo_cuen = self.request.data.get("type")
+                instance.codi_banc = _bank
+                instance.deleted = isdeleted
+                instance.updated = datetime.now()
                 instance.save()
                 
                 return message.UpdateMessage({"id":instance.id,"Account Number":instance.ncta_cuen})
@@ -142,16 +144,14 @@ class CuentaDestroyView(generics.DestroyAPIView):
         message = BaseMessage
         try:
             with transaction.atomic():
-                # Delete Bank Account
-                cuenta = Cuenta.get_queryset().filter(codi_banc = kwargs['id'])
-                if cuenta.count()<=0:
-                    # Delete Bank
-                    cuenta = Cuenta.get_queryset().get(id=kwargs['id'])
+                # Delete Account Number
+                cuenta = Cuenta.get_queryset().get(id = kwargs['id'])
+                if cuenta:
                     cuenta.deleted = datetime.now()
                     cuenta.save()
                     return message.DeleteMessage('Cuenta '+str(cuenta.id))
                 else:
-                    return message.ShowMessage('Cuenta no se Puede Eliminar, porque tiene cuentas activas')
+                    return message.ShowMessage('Cuenta no Registrada')
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Cuenta no Registrado")
 

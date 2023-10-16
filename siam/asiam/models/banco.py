@@ -13,3 +13,7 @@ class Banco(Base):
     
     def get_queryset():
         return Banco.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance Bank """
+    def getInstanceBank(Id):
+        return Banco.objects.get(id = Id)

@@ -17,7 +17,7 @@ class BaseMessage:
 
     def ErrorMessage(self):
         error = {"message":"Error al Realizar la Operacion","status":status.HTTP_500_INTERNAL_SERVER_ERROR,"data":self}
-        return Response(error)
+        return Response(error,status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     def NotFoundMessage(self):
         message = {"message":"No se Encontro","status":status.HTTP_404_NOT_FOUND,"data":self}

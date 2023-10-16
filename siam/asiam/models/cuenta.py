@@ -8,7 +8,7 @@ class Cuenta(Base):
     codi_banc = models.ForeignKey(
         'Banco',
         on_delete=models.CASCADE,
-        related_name='cuenta.codi_banc+',
+        related_name='banco.codi_banc+',
     )
 
     class Meta:
