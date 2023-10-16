@@ -40,14 +40,4 @@ from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoCom
 from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
 from .userSerializer import UserBasicSerializer
 from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSerializer
-
-# from .banco import BancoSerializer
-# from .cuenta import CuentaSerializer
-# from .agencia import AgenciaSerializer
-# from .cmarco import CmarcoSerializer
-# from .cpago import CpagoSerializer
-# from .fpago import FpagoSerializer
-# from .ginstruccion import GinstruccionSerializer
-# from .monedas import MonedasSerializer
-# from .utributaria import UtributariaSerializer
-# from .waletr import WaletrSerializer
+from .cuentaSerializer import CuentaBasicSerializer, CuentaComboSerializer, CuentaSerializer

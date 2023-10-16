@@ -285,61 +285,13 @@ urlpatterns = [
     path('banco/delete/<int:id>',                        views.BancoDestroyView.as_view(),  name='banco_delete'),
     path('banco/combo/',                                 views.BancoComboView.as_view(),   name='banco_combo'),
 
-    # path('cuenta/',                 views.CuentaListView.as_view(),     name='cuenta'),
-    # path('cuenta/create/',          views.CuentaCreateView.as_view(),   name='cuenta_create'),
-    # path('cuenta/<int:id>/',        views.CuentaRetrieveView.as_view(), name='cuenta'),
-    # path('cuenta/<int:id>/update/', views.CuentaUpdateView.as_view(),   name='cuenta_update'),
-    # path('cuenta/<int:id>/delete/', views.CuentaDestroyView.as_view(),  name='cuenta_delete'),
-
-    # path('agencia/',                 views.AgenciaListView.as_view(),     name='agencia'),
-    # path('agencia/create/',          views.AgenciaCreateView.as_view(),   name='agencia_create'),
-    # path('agencia/<int:id>/',        views.AgenciaRetrieveView.as_view(), name='agencia'),
-    # path('agencia/<int:id>/update/', views.AgenciaUpdateView.as_view(),   name='agencia_update'),
-    # path('agencia/<int:id>/delete/', views.AgenciaDestroyView.as_view(),  name='agencia_delete'),
-
-
-    # path('cmarco/',                          views.CmarcoListView.as_view(),     name='cmarco'),
-    # path('cmarco/create/',                   views.CmarcoCreateView.as_view(),   name='cmarco_create'),
-    # path('cmarco/<int:id>/',                 views.CmarcoRetrieveView.as_view(), name='cmarco'),
-    # path('cmarco/<int:id>/update/',          views.CmarcoUpdateView.as_view(),   name='cmarco_update'),
-    # path('cmarco/<int:id>/delete/',          views.CmarcoDestroyView.as_view(),  name='cmarco_delete'),
-
-    # path('cpago/',                           views.CpagoListView.as_view(),     name='cpago'),
-    # path('cpago/create/',                    views.CpagoCreateView.as_view(),   name='cpago_create'),
-    # path('cpago/<int:id>/',                  views.CpagoRetrieveView.as_view(), name='cpago'),
-    # path('cpago/<int:id>/update/',           views.CpagoUpdateView.as_view(),   name='cpago_update'),
-    # path('cpago/<int:id>/delete/',           views.CpagoDestroyView.as_view(),  name='cpago_delete'),
-
-    # path('fpago/',                           views.FpagoListView.as_view(),     name='fpago'),
-    # path('fpago/create/',                    views.FpagoCreateView.as_view(),   name='fpago_create'),
-    # path('fpago/<int:id>/',                  views.FpagoRetrieveView.as_view(), name='fpago'),
-    # path('fpago/<int:id>/update/',           views.FpagoUpdateView.as_view(),   name='fpago_update'),
-    # path('fpago/<int:id>/delete/',           views.FpagoDestroyView.as_view(),  name='fpago_delete'),
-
-    # path('ginstruccion/',                    views.GinstruccionListView.as_view(),     name='ginstruccion'),
-    # path('ginstruccion/create/',             views.GinstruccionCreateView.as_view(),   name='ginstruccion_create'),
-    # path('ginstruccion/<int:id>/',           views.GinstruccionRetrieveView.as_view(), name='ginstruccion'),
-    # path('ginstruccion/<int:id>/update/',    views.GinstruccionUpdateView.as_view(),   name='ginstruccion_update'),
-    # path('ginstruccion/<int:id>/delete/',    views.GinstruccionDestroyView.as_view(),  name='ginstruccion_delete'),
-
-
-    # path('profesiones/',                     views.ProfesionesListView.as_view(),     name='profesiones'),
-    # path('profesiones/create/',              views.ProfesionesCreateView.as_view(),   name='profesiones_create'),
-    # path('profesiones/<int:id>/',            views.ProfesionesRetrieveView.as_view(), name='profesiones'),
-    # path('profesiones/<int:id>/update/',     views.ProfesionesUpdateView.as_view(),   name='profesiones_update'),
-    # path('profesiones/<int:id>/delete/',     views.ProfesionesDestroyView.as_view(),  name='profesiones_delete'),
-
-    # path('tclientes/',                       views.TclientesListView.as_view(),     name='tclientes'),
-    # path('tclientes/create/',                views.TclientesCreateView.as_view(),   name='tclientes_create'),
-    # path('tclientes/<int:id>/',              views.TclientesRetrieveView.as_view(), name='tclientes'),
-    # path('tclientes/<int:id>/update/',       views.TclientesUpdateView.as_view(),   name='tclientes_update'),
-    # path('tclientes/<int:id>/delete/',       views.TclientesDestroyView.as_view(),  name='tclientes_delete'),
-
-    # path('waletr/',                          views.WaletrListView.as_view(),     name='waletr'),
-    # path('waletr/create/',                   views.WaletrCreateView.as_view(),   name='waletr_create'),
-    # path('waletr/<int:id>/',                 views.WaletrRetrieveView.as_view(), name='waletr'),
-    # path('waletr/<int:id>/update/',          views.WaletrUpdateView.as_view(),   name='waletr_update'),
-    # path('waletr/<int:id>/delete/',          views.WaletrDestroyView.as_view(),  name='waletr_delete'),
+    # Bank Account Number
+    path('cuenta/',                                       views.CuentaListView.as_view(),     name='cuenta'),
+    path('cuenta/create/',                                views.CuentaCreateView.as_view(),   name='cuenta_create'),
+    path('cuenta/<int:id>/',                              views.CuentaRetrieveView.as_view(), name='cuenta'),
+    path('cuenta/update/<int:id>',                        views.CuentaUpdateView.as_view(),   name='cuenta_update'),
+    path('cuenta/delete/<int:id>',                        views.CuentaDestroyView.as_view(),  name='cuenta_delete'),
+    path('cuenta/combo/',                                 views.CuentaComboView.as_view(),    name='cuenta_combo'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

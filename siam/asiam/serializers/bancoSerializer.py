@@ -31,7 +31,7 @@ class BancoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banco
         field = ('id','desc_banc','logo_banc')
-        exclude =['created','updated','esta_ttus']
+        exclude =['created','updated','esta_ttus','deleted']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
