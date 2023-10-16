@@ -40,6 +40,9 @@ from .pedidoDetalle import PedidoDetalle
 from .pedidoPagoDetalle import PedidoPagoDetalle
 from .pedidoSeguimiento import PedidoSeguimiento
 from .profile import Profile
+from .banco import Banco
+from .cuenta import Cuenta
+from .tasaCambio import TasaCambio
 
 # # from .juridicaa import Juridicaa
 # from .banco import Banco

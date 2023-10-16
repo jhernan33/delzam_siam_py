@@ -215,53 +215,53 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 if request.data['photo'] is not None:
                     listImagesProv  = request.data['photo']
                     json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
-                    with transaction.atomic():
-                    
-                        instance.codi_clie  = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
-                        instance.fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
-                        instance.mont_pedi  = self.request.data.get("amount")
-                        instance.desc_pedi  = self.request.data.get("discount")
-                        instance.tota_pedi  = self.request.data.get("total")
-                        instance.obse_pedi  = self.request.data.get("observations")
-                        instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
-                        instance.codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
-                        instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
-                        instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
-                        instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
-                        instance.codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
-                        instance.deleted    = isdeleted
-                        instance.updated    = datetime.now()
-                        instance.save()
+                with transaction.atomic():
+                
+                    instance.codi_clie  = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                    instance.fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
+                    instance.mont_pedi  = self.request.data.get("amount")
+                    instance.desc_pedi  = self.request.data.get("discount")
+                    instance.tota_pedi  = self.request.data.get("total")
+                    instance.obse_pedi  = self.request.data.get("observations")
+                    instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                    instance.codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                    instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                    instance.codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
+                    instance.deleted    = isdeleted
+                    instance.updated    = datetime.now()
+                    instance.save()
 
-                        # Save Details
-                        if isinstance(self.request.data.get("details"),list):
-                            _total = 0
-                            # Delete Items Order Detail
-                            PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
-                            for detail in self.request.data.get("details"):
-                                # Save Order Detail
-                                pedidoDetalle = PedidoDetalle(
-                                    codi_pedi = Pedido.get_queryset().get(id = instance.id),
-                                    codi_arti = Articulo.get_queryset().get(id = detail['article']),
-                                    cant_pede = detail['quantity'],
-                                    prec_pede = detail['price'],
-                                    desc_pede = detail['discount'],
-                                    moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
-                                    created = datetime.now(),
-                                    updated = datetime.now(),
-                                )
-                                pedidoDetalle.save()
-                        # Register Tracking
-                        orderTracking = PedidoSeguimiento(
-                            codi_pedi = Pedido.get_queryset().get(id = instance.id),
-                            codi_esta = PedidoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
-                            codi_user = User.objects.get(id = request.user.id),
-                            fech_segu = datetime.now(),
-                            created   = datetime.now(),
-                            obse_segu = 'Actualizando el Pedido',
-                        )
-                        orderTracking.save()
-                        return message.UpdateMessage({"id":instance.id})
+                    # Save Details
+                    if isinstance(self.request.data.get("details"),list):
+                        _total = 0
+                        # Delete Items Order Detail
+                        PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
+                        for detail in self.request.data.get("details"):
+                            # Save Order Detail
+                            pedidoDetalle = PedidoDetalle(
+                                codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                                codi_arti = Articulo.get_queryset().get(id = detail['article']),
+                                cant_pede = detail['quantity'],
+                                prec_pede = detail['price'],
+                                desc_pede = detail['discount'],
+                                moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                                created = datetime.now(),
+                                updated = datetime.now(),
+                            )
+                            pedidoDetalle.save()
+                    # Register Tracking
+                    orderTracking = PedidoSeguimiento(
+                        codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                        codi_esta = PedidoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
+                        codi_user = User.objects.get(id = request.user.id),
+                        fech_segu = datetime.now(),
+                        created   = datetime.now(),
+                        obse_segu = 'Actualizando el Pedido',
+                    )
+                    orderTracking.save()
+                    return message.UpdateMessage({"id":instance.id})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 

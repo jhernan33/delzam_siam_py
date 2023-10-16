@@ -277,11 +277,13 @@ urlpatterns = [
     path('pedido/delete/<int:id>',                       views.PedidoDestroyView.as_view(),  name='pedido_delete'),
     path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
 
-    # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
-    # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
-    # path('banco/<int:id>/',        views.BancoRetrieveView.as_view(), name='banco'),
-    # path('banco/<int:id>/update/', views.BancoUpdateView.as_view(),   name='banco_update'),
-    # path('banco/<int:id>/delete/', views.BancoDestroyView.as_view(),  name='banco_delete'),
+    # Bank
+    path('banco/',                                       views.BancoListView.as_view(),     name='banco'),
+    path('banco/create/',                                views.BancoCreateView.as_view(),   name='banco_create'),
+    path('banco/<int:id>/',                              views.BancoRetrieveView.as_view(), name='banco'),
+    path('banco/update/<int:id>',                        views.BancoUpdateView.as_view(),   name='banco_update'),
+    path('banco/delete/<int:id>',                        views.BancoDestroyView.as_view(),  name='banco_delete'),
+    path('banco/combo/',                                 views.BancoComboView.as_view(),   name='banco_combo'),
 
     # path('cuenta/',                 views.CuentaListView.as_view(),     name='cuenta'),
     # path('cuenta/create/',          views.CuentaCreateView.as_view(),   name='cuenta_create'),

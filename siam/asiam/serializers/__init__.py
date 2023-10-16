@@ -39,6 +39,7 @@ from .formaPagoSerializer import FormaPagoSerializer, FormaPagoBasicSerializer, 
 from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer
 from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
 from .userSerializer import UserBasicSerializer
+from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSerializer
 
 # from .banco import BancoSerializer
 # from .cuenta import CuentaSerializer

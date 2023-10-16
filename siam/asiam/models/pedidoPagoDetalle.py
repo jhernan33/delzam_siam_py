@@ -24,9 +24,15 @@ class PedidoPagoDetalle(Base):
         on_delete=models.CASCADE,
         related_name='pedidoPago.codi_esta+'
     )
-    mont_fopa = models.DecimalField ('Monto de la Forma de Pago',max_digits=7,decimal_places=2,null=True, blank=True)
-    foto_fopa = models.JSONField  ('Foto del Cliente',null=True, blank=True)
-    obse_fopa = models.TextField('Observaciones de la Forma de Pago')
+    mont_pade = models.DecimalField ('Monto del Pago',max_digits=7,decimal_places=2,null=True, blank=True)
+    foto_pade = models.JSONField  ('Foto del Pago',null=True, blank=True)
+    obse_pade = models.TextField('Observaciones del Pago')
+    fech_page = models.DateField('Fecha del Pago',auto_now=False, auto_now_add=False,blank=True, null=True)
+    # codi_tasa = models.ForeignKey(
+    #     'Tasa',
+    #     on_delete=models.CASCADE,
+    #     related_name='pedidoPago.codi_tasa+'
+    # )
 
     
 

@@ -59,7 +59,6 @@ class PedidoSerializer(serializers.ModelSerializer):
         # User Create
         querysetUser = User.objects.filter(id = instance.codi_user.id)
         representation['user'] = UserBasicSerializer(querysetUser, many=True).data
-        # print(querysetUser)
         return representation
     
     """

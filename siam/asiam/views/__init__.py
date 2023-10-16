@@ -38,11 +38,11 @@ from .pedidoEstatusView import PedidoEstatusListView, PedidoEstatusCreateView, P
 from .monedaView import MonedaListView, MonedaCreateView, MonedaUpdateView, MonedaRetrieveView, MonedaDestroyView, MonedaComboView
 from .formaPagoView import FormaPagoListView, FormaPagoCreateView, FormaPagoUpdateView, FormaPagoRetrieveView, FormaPagoDestroyView, FormaPagoComboView
 from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView
+from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView, BancoComboView
 
 # from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
 # from .baseMensajeView import BaseMessage
 
-# from .banco import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView
 # from .cuenta import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView
 # from .agencia import AgenciaListView, AgenciaCreateView, AgenciaRetrieveView, AgenciaUpdateView, AgenciaDestroyView
 
