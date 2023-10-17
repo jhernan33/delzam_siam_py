@@ -41,4 +41,4 @@ from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, Pe
 from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView, BancoComboView
 from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView, CuentaComboView
 from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView
-from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserpdateView, ProfileUserDestroyView
+from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserUpdateView, ProfileUserDestroyView

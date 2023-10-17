@@ -302,11 +302,11 @@ urlpatterns = [
     path('tasa/combo/',                                   views.TasaCambioComboView.as_view(),    name='exchange_rate_combo'),
 
     # Profile
-    path('prefil/',                                       views.TasaCambioListView.as_view(),     name='profile'),
-    path('prefil/create/',                                views.TasaCambioCreateView.as_view(),   name='profile_create'),
-    path('prefil/<int:id>/',                              views.TasaCambioRetrieveView.as_view(), name='profile'),
-    path('prefil/update/<int:id>',                        views.TasaCambioUpdateView.as_view(),   name='profile_update'),
-    path('prefil/delete/<int:id>',                        views.TasaCambioDestroyView.as_view(),  name='profile_delete'),
+    path('perfil/',                                       views.ProfileUserListView.as_view(),     name='profile'),
+    path('perfil/create/',                                views.ProfileUserCreateView.as_view(),   name='profile_create'),
+    path('perfil/<int:id>/',                              views.ProfileUserRetrieveView.as_view(), name='profile'),
+    path('perfil/update/<int:id>',                        views.ProfileUserUpdateView.as_view(),   name='profile_update'),
+    path('perfil/delete/<int:id>',                        views.ProfileUserDestroyView.as_view(),  name='profile_delete'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

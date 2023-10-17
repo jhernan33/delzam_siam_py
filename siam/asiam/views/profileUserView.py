@@ -1,5 +1,7 @@
 from os import environ
+import base64
 import os
+from django.core.files import File 
 from django.conf import settings
 from datetime import datetime, date
 from django.shortcuts import render
@@ -18,6 +20,7 @@ from django.contrib.auth.models import User, Group, Permission, GroupManager
 from asiam.serializers import ProfileUserSerializer, ProfileUserBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from .serviceImageView import ServiceImageView
 
 class ProfileUserListView(generics.ListAPIView):
     serializer_class = ProfileUserSerializer
@@ -47,23 +50,25 @@ class ProfileUserCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Validate Profile
-            result_user_profile = ProfileUserSerializer.validate_currency_date(request.data['currency'],self.request.data.get("date"),False,None)
-            if result_user_profile == False:
+            result_user_profile = ProfileUserSerializer.validate_profile(False,self.request.data.get("user"))
+            if result_user_profile == True:
                 try:
-                    tasa = Profile(
-                        fech_taca   = self.request.data.get("date"),
-                        valo_taca   = self.request.data.get("value"),
-                        codi_mone   = Moneda.getInstanceCurrency(self.request.data.get("currency")),
-                        obse_taca   = self.request.data.get("observations"),
+                    profile = Profile(
+                        User    = User.objects.get(id = self.request.data.get("user")),
+                        biography   = self.request.data.get("biography"),
+                        location    = self.request.data.get("location"),
+                        birth_date  = self.request.data.get("birth_date"),
+                        profile_picture  = self.request.data.get("profile_picture"),
+                        phone_number = self.request.data.get("phone_number"),
                         created = datetime.now()
                     )
-                    tasa.save()
-                    return message.SaveMessage('Tasa de Cambio guardada Exitosamente')
+                    profile.save()
+                    return message.SaveMessage('Perfil guardado Exitosamente')
                 except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar la Tasa de Cambio: "+str(e))
-            return message.ShowMessage("Tasa de Cambio para la Moneda ya Registrada")
+                    return message.ErrorMessage("Error al Intentar Guardar el Perfil: "+str(e))
+            return message.ShowMessage("Perfil ya Registrada para el Usuario")
         except Profile.DoesNotExist:
-            return message.NotFoundMessage("Id de Tasa de Cambio no Registrado")
+            return message.NotFoundMessage("Id de Perfil no Registrado")
 
 class ProfileUserRetrieveView(generics.RetrieveAPIView):
     serializer_class = ProfileUserSerializer
@@ -89,7 +94,7 @@ class ProfileUserRetrieveView(generics.RetrieveAPIView):
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class ProfileUserpdateView(generics.UpdateAPIView):
+class ProfileUserUpdateView(generics.UpdateAPIView):
     serializer_class = ProfileUserSerializer
     permission_classes = ()
     queryset = Profile.objects.all()
@@ -100,7 +105,7 @@ class ProfileUserpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Tasa de Cambio no Registrada")
+            return message.NotFoundMessage("Id de Perfil no Registrado")
         else:
             try:
                 # State Deleted
@@ -114,22 +119,34 @@ class ProfileUserpdateView(generics.UpdateAPIView):
                 else:    
                     isdeleted = None
                 
-                # Validate Description
-                result_exchage_rate = ProfileUserSerializer.validate_currency_date(request.data['currency'],self.request.data.get("date"),state_deleted,instance.id)
-                if result_exchage_rate == True:
-                    return message.ShowMessage("Tasa de Cambio ya Registrada para una Moneda")
+                # Validate Profile
+                result_profile = ProfileUserSerializer.validate_profile(state_deleted,instance.id)
+                if result_profile == False:
+                    return message.NotFoundMessage("Id de Perfil no Registrado")
                 
-                _currency = Moneda.getInstanceCurrency(self.request.data.get("currency"))
+                # Save Profile Picture
+                enviroment = os.path.realpath(settings.WEBSERVER_USER)
+                ServiceImage = ServiceImageView()
+                json_profile_picture = None
+                if request.data['picture'] is not None:
+                    list_profile_picture  = request.data['picture']
+                    json_profile_picture  = ServiceImage.updateImage(list_profile_picture,enviroment)
+                    print("Perfillllllllllllll===>",json_profile_picture)
+
+                # Instance User
+                _user = User.objects.get(id = self.request.data.get("user"))
                 
-                instance.fech_taca = self.request.data.get("date")
-                instance.valo_taca = self.request.data.get("value")
-                instance.codi_mone = _currency
-                instance.obse_taca = self.request.data.get("observations")
+                instance.user = _user
+                instance.biography = self.request.data.get("biography")
+                instance.location = self.request.data.get("location")
+                instance.birth_date = self.request.data.get("birth_date")
+                instance.profile_picture = json_profile_picture
+                instance.phone_number = self.request.data.get("phone_number")
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
                 
-                return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})
+                return message.UpdateMessage({"id":instance.id})
                 
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))

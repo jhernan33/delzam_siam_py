@@ -22,7 +22,7 @@ class ProfileUserSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['user'] = str(instance.ncta_cuen).upper()
+        representation['user'] = instance.user.id
         representation['biography'] = instance.biography
         representation['birth_date'] = instance.birth_date
         representation['profile_picture'] = instance.profile_picture
@@ -30,19 +30,14 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         return representation
     
     """
-        Validate User
+        Validate Profile
     """    
-    def validate_currency_date(_currency,_date,state, _id:None):
+    def validate_profile(state, _id:None):
         queryset = []
         
-        # Instance of currency
-        _currency = Moneda.get_queryset().get(id = _currency)
-        # Check Id Tasa
+        # Check id
         if _id is not None:
-            queryset = TasaCambio.objects.filter(codi_mone = _currency).filter(fech_taca = _date).exclude(id=_id) if state else TasaCambio.get_queryset().filter(codi_mone = _currency).filter(fech_taca = _date).exclude(id=_id)
-        else:
-            queryset = TasaCambio.objects.filter(codi_mone = _currency).filter(fech_taca = _date) if state else TasaCambio.get_queryset().filter(codi_mone = _currency).filter(fech_taca = _date)
-        
+            queryset = Profile.objects.filter(id = _id) if state else Profile.objects.filter(id = _id)
         if queryset.count() == 0:
             return False
         else:
