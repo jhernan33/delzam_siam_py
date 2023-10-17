@@ -34,8 +34,6 @@ class PedidoPagoDetalle(Base):
     #     related_name='pedidoPago.codi_tasa+'
     # )
 
-    
-
     class Meta:
         ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
