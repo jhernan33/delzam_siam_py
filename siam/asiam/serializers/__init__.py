@@ -20,7 +20,7 @@ from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
 from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteComboSerializer
-from .userSerializer import UserSerializer
+from .userSerializer import SignupSerializer, UserLoginSerializer
 from .grupoSerializer import GrupoSerializer
 from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics
 from .ivaGeneralSerializer import IvaGeneralSerializer
@@ -32,14 +32,14 @@ from .categoriaContactoSerializer import CategoriaContactoSerializer, CategoriaC
 from .grupoCategoriaContactoSerializer import GrupoCategoriaContactoSerializer, GrupoCategoriaContactoBasicSerializer
 from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer
 from .configuracionBusquedadSerializer import ConfiguracionBusquedadSerializer
-
-# from .banco import BancoSerializer
-# from .cuenta import CuentaSerializer
-# from .agencia import AgenciaSerializer
-# from .cmarco import CmarcoSerializer
-# from .cpago import CpagoSerializer
-# from .fpago import FpagoSerializer
-# from .ginstruccion import GinstruccionSerializer
-# from .monedas import MonedasSerializer
-# from .utributaria import UtributariaSerializer
-# from .waletr import WaletrSerializer
+from .pedidoTipoSerializer import PedidoTipoSerializer, PedidoTipoComboSerializer, PedidoTipoBasicSerializer
+from .pedidoEstatusSerializer import PedidoEstatusSerializer, PedidoEstatusComboSerializer, PedidoEstatusBasicSerializer
+from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer
+from .formaPagoSerializer import FormaPagoSerializer, FormaPagoBasicSerializer, FormaPagoComboSerializer
+from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer
+from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
+from .userSerializer import UserBasicSerializer
+from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSerializer
+from .cuentaSerializer import CuentaBasicSerializer, CuentaComboSerializer, CuentaSerializer
+from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSerializer, TasaCambioSerializer
+from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerializer

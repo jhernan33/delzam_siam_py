@@ -6,4 +6,14 @@ class GrupoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('id','name')
-        read_only_fields = ('id', )
+        read_only_fields = ('id',)
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['name'] = str(instance.name).upper()
+        return representation
+
+class ArticuloComboSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ('id','name','codi_sufa')

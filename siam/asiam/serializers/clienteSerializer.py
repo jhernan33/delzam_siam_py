@@ -80,7 +80,7 @@ class ClienteComboSerializer(serializers.ModelSerializer):
         return data
     
 class ClienteBasicSerializer(serializers.ModelSerializer):
-     class Meta:
+    class Meta:
         model = Cliente
         field = ('id','codi_natu')
         exclude = ['created','updated','esta_ttus','fein_clie','codi_ante','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie','location_clie','codi_juri','posi_clie']

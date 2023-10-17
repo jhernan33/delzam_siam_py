@@ -21,7 +21,7 @@ from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaU
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
 from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView, ClienteReportView, ClienteExportFile, ClienteComboView
 from .userView          import SignupView, LoginView, LogoutView
-from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView
+from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView, GrupoComboView
 from .rutaDetalleVendedorView import RutaDetalleVendedorListView, RutaDetalleVendedorCreateView, RutaDetalleVendedorRetrieveView, RutaDetalleVendedorDestroyView, RutaDetalleVendedorUpdateView ,RutaDetalleVendedorComboView
 from .ivaGeneralView    import IvaGeneralListView, IvaGeneralCreateView, IvaGeneralRetrieveView, IvaGeneralUpdateView, IvaGeneralDestroyView, IvaGeneralComboView
 from .articuloView     import ArticuloListView, ArticuloCreateView, ArticuloRetrieveView, ArticuloUpdateView, ArticuloDestroyView, ArticuloComboView
@@ -33,24 +33,12 @@ from .categoriaContactoView import CategoriaContactoListView, CategoriaContactoC
 from .grupoCategoriaContactoView import GrupoCategoriaContactoListView, GrupoCategoriaContactoCreateView, GrupoCategoriaContactoRetrieveView, GrupoCategoriaContactoUpdateView, GrupoCategoriaContactoDestroyView, GrupoCategoriaContactoComboView
 from .exportView import export_pdf
 from .configuracionBusquedadView import ConfiguracionBusquedadListView
-
-# from .grupoUsuarioView  import GrupoUsuarioListView, GrupoUsuarioCreateView, GrupoUsuarioDestroyView, GrupoUsuarioRetrieveView, GrupoUsuarioUpdateView
-# from .baseMensajeView import BaseMessage
-
-# from .banco import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView
-# from .cuenta import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView
-# from .agencia import AgenciaListView, AgenciaCreateView, AgenciaRetrieveView, AgenciaUpdateView, AgenciaDestroyView
-
-# from .cmarco          import CmarcoListView, CmarcoCreateView, CmarcoRetrieveView, CmarcoUpdateView, CmarcoDestroyView
-# from .cpago           import CpagoListView, CpagoCreateView, CpagoRetrieveView, CpagoUpdateView, CpagoDestroyView
-# from .fpago           import FpagoListView, FpagoCreateView, FpagoRetrieveView, FpagoUpdateView, FpagoDestroyView
-# from .ginstruccion    import GinstruccionListView, GinstruccionCreateView, GinstruccionRetrieveView, GinstruccionUpdateView, GinstruccionDestroyView
-
-# from .monedas         import MonedasListView, MonedasCreateView, MonedasRetrieveView, MonedasUpdateView, MonedasDestroyView
-# from .pcontratacion   import PcontratacionListView, PcontratacionCreateView, PcontratacionRetrieveView, PcontratacionUpdateView, PcontratacionDestroyView
-# from .presupuesto     import PresupuestoListView, PresupuestoCreateView, PresupuestoRetrieveView, PresupuestoUpdateView, PresupuestoDestroyView
-# from .profesiones     import ProfesionesListView, ProfesionesCreateView, ProfesionesRetrieveView, ProfesionesUpdateView, ProfesionesDestroyView
-# from .tclientes       import TclientesListView, TclientesCreateView, TclientesRetrieveView, TclientesUpdateView, TclientesDestroyView
-# from .tcomunicaciones import TcomunicacionesListView, TcomunicacionesCreateView, TcomunicacionesRetrieveView, TcomunicacionesUpdateView, TcomunicacionesDestroyView
-
-# from .waletr          import WaletrListView, WaletrCreateView, WaletrRetrieveView, WaletrUpdateView, WaletrDestroyView
+from .pedidoTipoView import PedidoTipoListView, PedidoTipoCreateView, PedidoTipoUpdateView, PedidoTipoRetrieveView, PedidoTipoDestroyView, PedidoTipoComboView
+from .pedidoEstatusView import PedidoEstatusListView, PedidoEstatusCreateView, PedidoEstatusUpdateView, PedidoEstatusRetrieveView, PedidoEstatusDestroyView, PedidoEstatusComboView
+from .monedaView import MonedaListView, MonedaCreateView, MonedaUpdateView, MonedaRetrieveView, MonedaDestroyView, MonedaComboView
+from .formaPagoView import FormaPagoListView, FormaPagoCreateView, FormaPagoUpdateView, FormaPagoRetrieveView, FormaPagoDestroyView, FormaPagoComboView
+from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView
+from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView, BancoComboView
+from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView, CuentaComboView
+from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView
+from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserUpdateView, ProfileUserDestroyView

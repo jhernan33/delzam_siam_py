@@ -222,7 +222,7 @@ class ClienteUpdateView(generics.UpdateAPIView):
                     return message.UpdateMessage({"id":instance.id,"mocr_clie":instance.mocr_clie,"plcr_clie":instance.plcr_clie})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
-               
+
 class ClienteDestroyView(generics.DestroyAPIView):
     permission_classes = ()
     lookup_field = 'id' 

@@ -28,6 +28,7 @@ class ArticuloComboSerializer(serializers.ModelSerializer):
 
 class ArticuloSerializer(serializers.ModelSerializer):
     family = serializers.ReadOnlyField(source='codi_sufa.codi_fami.id')
+    familyDescription = serializers.ReadOnlyField(source='codi_sufa.codi_fami.desc_fami')
     subfamilia = serializers.ReadOnlyField(source='codi_sufa.desc_sufa')
     compraPresentacion = serializers.ReadOnlyField(source='codc_pres.desc_pres')
     ventaPresentacion = serializers.ReadOnlyField(source='codv_pres.desc_pres')

@@ -1,0 +1,29 @@
+[
+    {
+        "pk": 1,
+        "model": "asiam.pedidotipo",
+        "fields": {
+            "desc_tipe": "pedido",
+            "orde_tipe": 1,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "asiam.pedidotipo",
+        "fields": {
+            "desc_tipe": "factura",
+            "orde_tipe": 2,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "asiam.pedidotipo",
+        "fields": {
+            "desc_tipe": "nota de entrega",
+            "orde_tipe": 3,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    }
+]

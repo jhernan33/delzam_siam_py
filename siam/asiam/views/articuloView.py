@@ -22,13 +22,13 @@ from django.conf.urls.static import static
 
 class ArticuloListView(generics.ListAPIView):
     serializer_class = ArticuloSerializer
-    permission_classes = ()
+    permission_classes =  [ IsAuthenticated ]
     queryset = Articulo.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    filterset_fields = ['id','desc_arti','idae_arti','codi_arti']
-    search_fields = ['id','desc_arti','idae_arti','codi_arti']
-    ordering_fields = ['id','desc_arti','idae_arti','codi_arti']
+    filterset_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
+    search_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
+    ordering_fields = ['id','desc_arti','idae_arti','codi_arti','codi_sufa__desc_sufa','codi_sufa__abae_sufa','codi_sufa__codi_fami__desc_fami','codi_sufa__codi_fami__abae_fami']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -42,7 +42,7 @@ class ArticuloListView(generics.ListAPIView):
 
 class ArticuloCreateView(generics.CreateAPIView):
     serializer_class = ArticuloSerializer
-    permission_classes = []
+    permission_classes =  [ IsAuthenticated ]
     
     def create(self, request, *args, **kwargs):
         listImages = request.data['foto_arti']
@@ -61,7 +61,7 @@ class ArticuloCreateView(generics.CreateAPIView):
 
 class ArticuloRetrieveView(generics.RetrieveAPIView):
     serializer_class = ArticuloSerializer
-    permission_classes = ()
+    permission_classes =  [IsAuthenticated]
     queryset = Articulo.get_queryset()
     lookup_field = 'id'
     
@@ -86,7 +86,7 @@ class ArticuloRetrieveView(generics.RetrieveAPIView):
 
 class ArticuloUpdateView(generics.UpdateAPIView):
     serializer_class = ArticuloSerializer
-    permission_classes = ()
+    permission_classes =  [ IsAuthenticated ]
     queryset = Articulo.objects.all()
     lookup_field = 'id'
 
@@ -114,7 +114,7 @@ class ArticuloUpdateView(generics.UpdateAPIView):
                 return message.ErrorMessage("Error al Intentar Actualizar Articulo")
 
 class ArticuloDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
+    permission_classes =  [ IsAuthenticated ]
     queryset = Articulo.get_queryset()
     lookup_field = 'id'
 
@@ -129,7 +129,7 @@ class ArticuloDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Articulo no Registrado")
 
 class ArticuloComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes =  [ IsAuthenticated ]
     serializer_class = ArticuloComboSerializer
     lookup_field = 'id'
 

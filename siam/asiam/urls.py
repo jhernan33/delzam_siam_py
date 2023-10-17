@@ -10,11 +10,12 @@ urlpatterns = [
     path('logout/',                     views.LogoutView.as_view(), name='login'),
 
     # Grupos
-    path('grupo/',                 views.GrupoListView.as_view(),     name='grupo'),
-    path('grupo/create/',          views.GrupoCreateView.as_view(),   name='grupo_create'),
-    path('grupo/<int:id>/',        views.GrupoRetrieveView.as_view(), name='grupo'),
-    path('grupo/update/<int:id>',  views.GrupoUpdateView.as_view(),   name='grupo_update'),
-    path('grupo/delete/<int:id>', views.GrupoDestroyView.as_view(),  name='grupo_delete'),
+    path('grupo/',                  views.GrupoListView.as_view(),     name='grupo'),
+    path('grupo/create/',           views.GrupoCreateView.as_view(),   name='grupo_create'),
+    path('grupo/<int:id>/',         views.GrupoRetrieveView.as_view(), name='grupo'),
+    path('grupo/update/<int:id>',   views.GrupoUpdateView.as_view(),   name='grupo_update'),
+    path('grupo/delete/<int:id>',   views.GrupoDestroyView.as_view(),  name='grupo_delete'),
+    path('grupo/combo/',            views.GrupoComboView.as_view(),    name='grupo_combo'),
 
     # Grupo Usuario
     path('grupoUsuario/',                 views.GrupoListView.as_view(),     name='grupoUsuario'),
@@ -234,74 +235,78 @@ urlpatterns = [
     path('grupocc/combo/',                        views.GrupoCategoriaContactoComboView.as_view(),    name='grupoCategoriaContacto_combo'),
 
     # Search Filter by Field
-     path('configuracion/busquedad/',             views.ConfiguracionBusquedadListView.as_view(),                name='List Fields Busquedad'),
+    path('configuracion/busquedad/',             views.ConfiguracionBusquedadListView.as_view(),                name='List Fields Busquedad'),
 
-    # path('banco/',                 views.BancoListView.as_view(),     name='banco'),
-    # path('banco/create/',          views.BancoCreateView.as_view(),   name='banco_create'),
-    # path('banco/<int:id>/',        views.BancoRetrieveView.as_view(), name='banco'),
-    # path('banco/<int:id>/update/', views.BancoUpdateView.as_view(),   name='banco_update'),
-    # path('banco/<int:id>/delete/', views.BancoDestroyView.as_view(),  name='banco_delete'),
+    # Type of Order
+    path('pedidotipo/',                              views.PedidoTipoListView.as_view(),     name='pedidotipo'),
+    path('pedidotipo/create/',                       views.PedidoTipoCreateView.as_view(),   name='pedidotipo_create'),
+    path('pedidotipo/<int:id>/',                     views.PedidoTipoRetrieveView.as_view(), name='pedidotipo_show'),
+    path('pedidotipo/update/<int:id>',               views.PedidoTipoUpdateView.as_view(),   name='pedidotipo_update'),
+    path('pedidotipo/delete/<int:id>',               views.PedidoTipoDestroyView.as_view(),  name='pedidotipo_delete'),
+    path('pedidotipo/combo/',                        views.PedidoTipoComboView.as_view(),    name='pedidotipo_combo'),
 
-    # path('cuenta/',                 views.CuentaListView.as_view(),     name='cuenta'),
-    # path('cuenta/create/',          views.CuentaCreateView.as_view(),   name='cuenta_create'),
-    # path('cuenta/<int:id>/',        views.CuentaRetrieveView.as_view(), name='cuenta'),
-    # path('cuenta/<int:id>/update/', views.CuentaUpdateView.as_view(),   name='cuenta_update'),
-    # path('cuenta/<int:id>/delete/', views.CuentaDestroyView.as_view(),  name='cuenta_delete'),
+    # Type of State Order
+    path('pedidoestatus/',                              views.PedidoEstatusListView.as_view(),     name='pedidoestatus'),
+    path('pedidoestatus/create/',                       views.PedidoEstatusCreateView.as_view(),   name='pedidoestatus_create'),
+    path('pedidoestatus/<int:id>/',                     views.PedidoEstatusRetrieveView.as_view(), name='pedidoestatus_show'),
+    path('pedidoestatus/update/<int:id>',               views.PedidoEstatusUpdateView.as_view(),   name='pedidoestatus_update'),
+    path('pedidoestatus/delete/<int:id>',               views.PedidoEstatusDestroyView.as_view(),  name='pedidoestatus_delete'),
+    path('pedidoestatus/combo/',                        views.PedidoEstatusComboView.as_view(),    name='pedidoestatus_combo'),
 
-    # path('agencia/',                 views.AgenciaListView.as_view(),     name='agencia'),
-    # path('agencia/create/',          views.AgenciaCreateView.as_view(),   name='agencia_create'),
-    # path('agencia/<int:id>/',        views.AgenciaRetrieveView.as_view(), name='agencia'),
-    # path('agencia/<int:id>/update/', views.AgenciaUpdateView.as_view(),   name='agencia_update'),
-    # path('agencia/<int:id>/delete/', views.AgenciaDestroyView.as_view(),  name='agencia_delete'),
+    # Currency
+    path('moneda/',                                     views.MonedaListView.as_view(),     name='moneda'),
+    path('moneda/create/',                              views.MonedaCreateView.as_view(),   name='moneda_create'),
+    path('moneda/<int:id>/',                            views.MonedaRetrieveView.as_view(), name='moneda_show'),
+    path('moneda/update/<int:id>',                     views.MonedaUpdateView.as_view(),   name='moneda_update'),
+    path('moneda/delete/<int:id>',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
+    path('moneda/combo/',                               views.MonedaComboView.as_view(),    name='moneda_combo'),
 
+    # Way to Pay
+    path('formapago/',                                      views.FormaPagoListView.as_view(),     name='formadepago'),
+    path('formapago/create/',                               views.FormaPagoCreateView.as_view(),   name='formadepago_create'),
+    path('formapago/<int:id>/',                             views.FormaPagoRetrieveView.as_view(), name='formadepago_show'),
+    path('formapago/update/<int:id>',                       views.FormaPagoUpdateView.as_view(),   name='formadepago_update'),
+    path('formapago/delete/<int:id>',                       views.FormaPagoDestroyView.as_view(),  name='formadepago_delete'),
+    path('formapago/combo/',                                views.FormaPagoComboView.as_view(),    name='formadepago_combo'),
 
-    # path('cmarco/',                          views.CmarcoListView.as_view(),     name='cmarco'),
-    # path('cmarco/create/',                   views.CmarcoCreateView.as_view(),   name='cmarco_create'),
-    # path('cmarco/<int:id>/',                 views.CmarcoRetrieveView.as_view(), name='cmarco'),
-    # path('cmarco/<int:id>/update/',          views.CmarcoUpdateView.as_view(),   name='cmarco_update'),
-    # path('cmarco/<int:id>/delete/',          views.CmarcoDestroyView.as_view(),  name='cmarco_delete'),
+    # Orders
+    path('pedido/',                                      views.PedidoListView.as_view(),     name='pedido'),
+    path('pedido/create/',                               views.PedidoCreateView.as_view(),   name='pedido_create'),
+    path('pedido/<int:id>/',                             views.PedidoRetrieveView.as_view(), name='pedido_show'),
+    path('pedido/update/<int:id>',                       views.PedidoUpdateView.as_view(),   name='pedido_update'),
+    path('pedido/delete/<int:id>',                       views.PedidoDestroyView.as_view(),  name='pedido_delete'),
+    path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
 
-    # path('cpago/',                           views.CpagoListView.as_view(),     name='cpago'),
-    # path('cpago/create/',                    views.CpagoCreateView.as_view(),   name='cpago_create'),
-    # path('cpago/<int:id>/',                  views.CpagoRetrieveView.as_view(), name='cpago'),
-    # path('cpago/<int:id>/update/',           views.CpagoUpdateView.as_view(),   name='cpago_update'),
-    # path('cpago/<int:id>/delete/',           views.CpagoDestroyView.as_view(),  name='cpago_delete'),
+    # Bank
+    path('banco/',                                       views.BancoListView.as_view(),     name='banco'),
+    path('banco/create/',                                views.BancoCreateView.as_view(),   name='banco_create'),
+    path('banco/<int:id>/',                              views.BancoRetrieveView.as_view(), name='banco'),
+    path('banco/update/<int:id>',                        views.BancoUpdateView.as_view(),   name='banco_update'),
+    path('banco/delete/<int:id>',                        views.BancoDestroyView.as_view(),  name='banco_delete'),
+    path('banco/combo/',                                 views.BancoComboView.as_view(),   name='banco_combo'),
 
-    # path('fpago/',                           views.FpagoListView.as_view(),     name='fpago'),
-    # path('fpago/create/',                    views.FpagoCreateView.as_view(),   name='fpago_create'),
-    # path('fpago/<int:id>/',                  views.FpagoRetrieveView.as_view(), name='fpago'),
-    # path('fpago/<int:id>/update/',           views.FpagoUpdateView.as_view(),   name='fpago_update'),
-    # path('fpago/<int:id>/delete/',           views.FpagoDestroyView.as_view(),  name='fpago_delete'),
+    # Bank Account Number
+    path('cuenta/',                                       views.CuentaListView.as_view(),     name='cuenta'),
+    path('cuenta/create/',                                views.CuentaCreateView.as_view(),   name='cuenta_create'),
+    path('cuenta/<int:id>/',                              views.CuentaRetrieveView.as_view(), name='cuenta'),
+    path('cuenta/update/<int:id>',                        views.CuentaUpdateView.as_view(),   name='cuenta_update'),
+    path('cuenta/delete/<int:id>',                        views.CuentaDestroyView.as_view(),  name='cuenta_delete'),
+    path('cuenta/combo/',                                 views.CuentaComboView.as_view(),    name='cuenta_combo'),
 
-    # path('ginstruccion/',                    views.GinstruccionListView.as_view(),     name='ginstruccion'),
-    # path('ginstruccion/create/',             views.GinstruccionCreateView.as_view(),   name='ginstruccion_create'),
-    # path('ginstruccion/<int:id>/',           views.GinstruccionRetrieveView.as_view(), name='ginstruccion'),
-    # path('ginstruccion/<int:id>/update/',    views.GinstruccionUpdateView.as_view(),   name='ginstruccion_update'),
-    # path('ginstruccion/<int:id>/delete/',    views.GinstruccionDestroyView.as_view(),  name='ginstruccion_delete'),
+    # Exchange Rate
+    path('tasa/',                                         views.TasaCambioListView.as_view(),     name='exchange_rate'),
+    path('tasa/create/',                                  views.TasaCambioCreateView.as_view(),   name='exchange_rate_create'),
+    path('tasa/<int:id>/',                                views.TasaCambioRetrieveView.as_view(), name='exchange_rate'),
+    path('tasa/update/<int:id>',                          views.TasaCambioUpdateView.as_view(),   name='exchange_rate_update'),
+    path('tasa/delete/<int:id>',                          views.TasaCambioDestroyView.as_view(),  name='exchange_rate_delete'),
+    path('tasa/combo/',                                   views.TasaCambioComboView.as_view(),    name='exchange_rate_combo'),
 
-    # path('monedas/',                         views.MonedasListView.as_view(),     name='monedas'),
-    # path('monedas/create/',                  views.MonedasCreateView.as_view(),   name='monedas_create'),
-    # path('monedas/<int:id>/',                views.MonedasRetrieveView.as_view(), name='monedas'),
-    # path('monedas/<int:id>/update/',         views.MonedasUpdateView.as_view(),   name='monedas_update'),
-    # path('monedas/<int:id>/delete/',         views.MonedasDestroyView.as_view(),  name='monedas_delete'),
-
-    # path('profesiones/',                     views.ProfesionesListView.as_view(),     name='profesiones'),
-    # path('profesiones/create/',              views.ProfesionesCreateView.as_view(),   name='profesiones_create'),
-    # path('profesiones/<int:id>/',            views.ProfesionesRetrieveView.as_view(), name='profesiones'),
-    # path('profesiones/<int:id>/update/',     views.ProfesionesUpdateView.as_view(),   name='profesiones_update'),
-    # path('profesiones/<int:id>/delete/',     views.ProfesionesDestroyView.as_view(),  name='profesiones_delete'),
-
-    # path('tclientes/',                       views.TclientesListView.as_view(),     name='tclientes'),
-    # path('tclientes/create/',                views.TclientesCreateView.as_view(),   name='tclientes_create'),
-    # path('tclientes/<int:id>/',              views.TclientesRetrieveView.as_view(), name='tclientes'),
-    # path('tclientes/<int:id>/update/',       views.TclientesUpdateView.as_view(),   name='tclientes_update'),
-    # path('tclientes/<int:id>/delete/',       views.TclientesDestroyView.as_view(),  name='tclientes_delete'),
-
-    # path('waletr/',                          views.WaletrListView.as_view(),     name='waletr'),
-    # path('waletr/create/',                   views.WaletrCreateView.as_view(),   name='waletr_create'),
-    # path('waletr/<int:id>/',                 views.WaletrRetrieveView.as_view(), name='waletr'),
-    # path('waletr/<int:id>/update/',          views.WaletrUpdateView.as_view(),   name='waletr_update'),
-    # path('waletr/<int:id>/delete/',          views.WaletrDestroyView.as_view(),  name='waletr_delete'),
+    # Profile
+    path('perfil/',                                       views.ProfileUserListView.as_view(),     name='profile'),
+    path('perfil/create/',                                views.ProfileUserCreateView.as_view(),   name='profile_create'),
+    path('perfil/<int:id>/',                              views.ProfileUserRetrieveView.as_view(), name='profile'),
+    path('perfil/update/<int:id>',                        views.ProfileUserUpdateView.as_view(),   name='profile_update'),
+    path('perfil/delete/<int:id>',                        views.ProfileUserDestroyView.as_view(),  name='profile_delete'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

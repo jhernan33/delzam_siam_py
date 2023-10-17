@@ -1,0 +1,56 @@
+[
+    {
+        "pk": 1,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Pendiente",
+            "orde_esta": 1,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Pagado",
+            "orde_esta": 2,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Anulado",
+            "orde_esta": 3,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Pedido Actualizado",
+            "orde_esta": 4,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Cargando a Camion",
+            "orde_esta": 5,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "En Ruta",
+            "orde_esta": 6,
+            "created": "2023-09-19 10:20:39.841629"
+        }
+    }
+]

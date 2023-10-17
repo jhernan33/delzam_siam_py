@@ -77,8 +77,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-         # rest_framework.permissions.IsAuthenticated',
-         'rest_framework.permissions.IsAdminUser'
+        # rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAdminUser'
     ),
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
@@ -320,9 +321,12 @@ WEBSERVER_CUSTOMER  = '/customer/'
 WEBSERVER_SELLER    = '/seller/'
 WEBSERVER_SUPPLIER  = '/supplier/'
 WEBSERVER_LEGAL     = '/legal/'
-WEBSERVER_PORT      =':8083'
-WEBSERVER_HOST      ='api.delzam.local/api'
+WEBSERVER_ORDER     = '/order/'
+WEBSERVER_BANK      = '/bank/'
+WEBSERVER_USER      = '/user/'
+WEBSERVER_PORT      =':8081'
+WEBSERVER_HOST      ='192.168.1.33'
 WEBSERVER_PROTOCOL='https://'
-WEBSERVER_API='/siam'
+WEBSERVER_API='/api'
 WEBSERVER_IMAGES = WEBSERVER_PROTOCOL+WEBSERVER_HOST+WEBSERVER_PORT+WEBSERVER_API+MEDIA_URL
 API_PREFIX ='apidz'

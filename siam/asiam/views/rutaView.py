@@ -42,21 +42,24 @@ class RutaCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            name_route = self.request.data.get("nomb_ruta").upper().strip()
+            name_rout = self.request.data.get("nomb_ruta").upper().strip()
             code_zone = Zona.get_queryset().get(id=self.request.data.get("codi_zona")) 
-            result_route = Ruta.objects.filter(nomb_ruta = name_route).filter(codi_zona_id = code_zone)
+            porc_rout = self.request.data.get("porc_ruta")
+            result_route = Ruta.objects.filter(nomb_ruta = name_rout).filter(codi_zona_id = code_zone)
             if result_route.count() <= 0:
                 try:
                     route = Ruta(
-                        nomb_ruta = name_route,
+                        nomb_ruta = name_rout,
                         codi_zona = code_zone,
+                        porc_ruta = porc_rout,
                         created  = datetime.now()
                     )
                     route.save()
                     is_many = isinstance(self.request.data.get("sellers"),list)
                     if is_many:
                         for l in self.request.data.get("sellers"):
-                            rutaDetalle  = RutaDetalleVendedor(codi_ruta_id = route.id,
+                            rutaDetalle  = RutaDetalleVendedor(
+                                codi_ruta_id = route.id,
                                 codi_vend = Vendedor.get_queryset().get(id = l['codi_vend']),
                                 created =  datetime.now(),
                                 )
@@ -65,7 +68,7 @@ class RutaCreateView(generics.CreateAPIView):
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar La Ruta: "+str(e))
             elif result_route.count()>0:
-                return message.ShowMessage({'information':name_route+' con la Zona '+str(code_zone.id),'message':"Ya Registrada"})
+                return message.ShowMessage({'information':name_rout+' con la Zona '+str(code_zone.id),'message':"Ya Registrada"})
         except Zona.DoesNotExist:
             return message.NotFoundMessage("Id de Ruta no Registrado")
 
@@ -121,7 +124,8 @@ class RutaUpdateView(generics.UpdateAPIView):
                 else:
                     isdeleted = None
 
-                instance.nomb_ruta = request.data['nomb_ruta'].upper().strip()
+                instance.nomb_ruta = str(request.data['nomb_ruta']).upper().strip()
+                instance.porc_ruta = request.data['porc_ruta']
                 instance.codi_zona = _codi_zona
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
