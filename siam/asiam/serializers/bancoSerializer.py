@@ -35,7 +35,7 @@ class BancoSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['description'] = str(instance.desc_banc).upper()
+        representation['description'] = str(instance.desc_banc).strip().upper()
         return representation
     
     """

@@ -293,6 +293,15 @@ urlpatterns = [
     path('cuenta/delete/<int:id>',                        views.CuentaDestroyView.as_view(),  name='cuenta_delete'),
     path('cuenta/combo/',                                 views.CuentaComboView.as_view(),    name='cuenta_combo'),
 
+    # Exchange Rate
+    path('tasa/',                                       views.TasaCambioListView.as_view(),     name='exchange_rate'),
+    path('tasa/create/',                                views.TasaCambioCreateView.as_view(),   name='exchange_rate_create'),
+    path('tasa/<int:id>/',                              views.TasaCambioRetrieveView.as_view(), name='exchange_rate'),
+    path('tasa/update/<int:id>',                        views.TasaCambioUpdateView.as_view(),   name='exchange_rate_update'),
+    path('tasa/delete/<int:id>',                        views.TasaCambioDestroyView.as_view(),  name='exchange_rate_delete'),
+    path('tasa/combo/',                                 views.TasaCambioComboView.as_view(),    name='exchange_rate_combo'),
+
+
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),
     path('report/export',                       views.export_pdf,                       name="export-pdf"),

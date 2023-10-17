@@ -40,3 +40,4 @@ from .formaPagoView import FormaPagoListView, FormaPagoCreateView, FormaPagoUpda
 from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView
 from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView, BancoComboView
 from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView, CuentaComboView
+from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView

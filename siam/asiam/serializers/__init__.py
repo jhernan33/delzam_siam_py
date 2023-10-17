@@ -41,3 +41,4 @@ from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasic
 from .userSerializer import UserBasicSerializer
 from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSerializer
 from .cuentaSerializer import CuentaBasicSerializer, CuentaComboSerializer, CuentaSerializer
+from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSerializer, TasaCambioSerializer

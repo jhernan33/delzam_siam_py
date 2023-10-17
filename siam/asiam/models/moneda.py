@@ -27,3 +27,7 @@ class Moneda(Base):
             if queryset.count() > 0:
                 queryset_Currency = queryset
         return queryset_Currency
+
+    """ Get Instance Currency """
+    def getInstanceCurrency(Id):
+        return Moneda.objects.get(id = Id)

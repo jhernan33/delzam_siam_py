@@ -43,25 +43,3 @@ from .profile import Profile
 from .banco import Banco
 from .cuenta import Cuenta
 from .tasaCambio import TasaCambio
-
-# # from .juridicaa import Juridicaa
-# from .banco import Banco
-# from .cuenta import Cuenta
-# from .agencia import Agencia
-# from .cmarco import Cmarco
-# from .cpago import Cpago
-# from .fpago import Fpago
-# from .ginstruccion import Ginstruccion
-
-
-# from .profesiones import Profesiones
-# from .waletr import Waletr
-
-#from .cuen_rela import Cuen_rela
-#from .menu import Menu
-#from .menu_f import Menu_f
-
-#from .operador import Operador
-#from .operador_c import Operador_c
-#from .operador_f import Operador_f
-#from .organizacion import Organizacion
