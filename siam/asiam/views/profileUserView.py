@@ -131,7 +131,6 @@ class ProfileUserUpdateView(generics.UpdateAPIView):
                 if request.data['picture'] is not None:
                     list_profile_picture  = request.data['picture']
                     json_profile_picture  = ServiceImage.updateImage(list_profile_picture,enviroment)
-                    print("Perfillllllllllllll===>",json_profile_picture)
 
                 # Instance User
                 _user = User.objects.get(id = self.request.data.get("user"))
