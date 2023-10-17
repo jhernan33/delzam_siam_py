@@ -34,7 +34,7 @@ from django.contrib.gis.geos import GEOSGeometry, Point
 
 class PedidoListView(generics.ListAPIView):
     serializer_class = PedidoSerializer
-    permission_classes =  [ IsAuthenticated ]
+    permission_classes =  []
     queryset = Pedido.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -59,7 +59,7 @@ class PedidoListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class PedidoCreateView(generics.CreateAPIView):
-    permission_classes =  [ IsAuthenticated ]
+    permission_classes =  []
     serializer_class = PedidoSerializer
     
     def create(self, request, *args, **kwargs):
@@ -140,7 +140,7 @@ class PedidoCreateView(generics.CreateAPIView):
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
             
 class PedidoRetrieveView(generics.RetrieveAPIView):
-    permission_classes =  [ IsAuthenticated ]
+    permission_classes =  []
     serializer_class = PedidoSerializer
     queryset = Pedido.get_queryset()
     lookup_field = 'id'
