@@ -294,13 +294,19 @@ urlpatterns = [
     path('cuenta/combo/',                                 views.CuentaComboView.as_view(),    name='cuenta_combo'),
 
     # Exchange Rate
-    path('tasa/',                                       views.TasaCambioListView.as_view(),     name='exchange_rate'),
-    path('tasa/create/',                                views.TasaCambioCreateView.as_view(),   name='exchange_rate_create'),
-    path('tasa/<int:id>/',                              views.TasaCambioRetrieveView.as_view(), name='exchange_rate'),
-    path('tasa/update/<int:id>',                        views.TasaCambioUpdateView.as_view(),   name='exchange_rate_update'),
-    path('tasa/delete/<int:id>',                        views.TasaCambioDestroyView.as_view(),  name='exchange_rate_delete'),
-    path('tasa/combo/',                                 views.TasaCambioComboView.as_view(),    name='exchange_rate_combo'),
+    path('tasa/',                                         views.TasaCambioListView.as_view(),     name='exchange_rate'),
+    path('tasa/create/',                                  views.TasaCambioCreateView.as_view(),   name='exchange_rate_create'),
+    path('tasa/<int:id>/',                                views.TasaCambioRetrieveView.as_view(), name='exchange_rate'),
+    path('tasa/update/<int:id>',                          views.TasaCambioUpdateView.as_view(),   name='exchange_rate_update'),
+    path('tasa/delete/<int:id>',                          views.TasaCambioDestroyView.as_view(),  name='exchange_rate_delete'),
+    path('tasa/combo/',                                   views.TasaCambioComboView.as_view(),    name='exchange_rate_combo'),
 
+    # Profile
+    path('prefil/',                                       views.TasaCambioListView.as_view(),     name='profile'),
+    path('prefil/create/',                                views.TasaCambioCreateView.as_view(),   name='profile_create'),
+    path('prefil/<int:id>/',                              views.TasaCambioRetrieveView.as_view(), name='profile'),
+    path('prefil/update/<int:id>',                        views.TasaCambioUpdateView.as_view(),   name='profile_update'),
+    path('prefil/delete/<int:id>',                        views.TasaCambioDestroyView.as_view(),  name='profile_delete'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

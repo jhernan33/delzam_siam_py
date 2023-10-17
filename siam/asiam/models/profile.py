@@ -23,3 +23,7 @@ class Profile(Base):
             return self.profile_picture.url
         else:
             return None
+    
+    """ Get Instance Profile """
+    def getInstanceProfile(Id):
+        return Profile.objects.get(id = Id)
