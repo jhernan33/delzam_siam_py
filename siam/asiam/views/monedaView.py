@@ -21,8 +21,8 @@ class MonedaListView(generics.ListAPIView):
     queryset = Moneda.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','desc_mone']
-    ordering_fields = ['id','desc_mone']
+    search_fields = ['id','desc_mone','simb_mone','codi_mone','codi_pais__nomb_pais']
+    ordering_fields = ['id','desc_mone','simb_mone','codi_mone','codi_pais__nomb_pais']
     ordering = ['-id']
 
     def get_queryset(self):
@@ -122,13 +122,15 @@ class MonedaUpdateView(generics.UpdateAPIView):
                 if result_description == True:
                     return message.ShowMessage("Descripcion ya se encuentra Registrada")
                 
-                instance.desc_mone                       = self.request.data.get("description")
-                instance.orde_esta                       = self.request.data.get("ordering")
-                instance.deleted                            = isdeleted
-                instance.updated                            = datetime.now()
+                instance.desc_mone = self.request.data.get("description")
+                instance.codi_pais = Pais.get_queryset().get(id = self.request.data.get("country"))
+                instance.simb_mone = self.request.data.get("symbol")
+                instance.codi_mone = self.request.data.get("code")
+                instance.deleted   = isdeleted
+                instance.updated   = datetime.now()
                 instance.save()
                 
-                return message.UpdateMessage({"id":instance.id,"description":instance.desc_mone,"ordering":instance.orde_esta})
+                return message.UpdateMessage({"id":instance.id,"description":instance.desc_mone})
                 
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
