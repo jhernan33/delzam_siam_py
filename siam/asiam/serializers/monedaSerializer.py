@@ -27,9 +27,9 @@ class MonedaSerializer(serializers.ModelSerializer):
     """    
     def validate_desc_mone(value,state, _id:None):
         if _id is not None:
-            queryset = Moneda.objects.filter(desc_mone = str(value).lower().strip()) if state else Moneda.get_queryset().filter(desc_mone = str(value).lower().strip())
+            queryset = Moneda.objects.filter(desc_mone = str(value).lower().strip()).exclude(id = _id) if state else Moneda.get_queryset().filter(desc_mone = str(value).lower().strip()).exclude(id = _id)
         else:
-            queryset = Moneda.objects.filter(desc_mone = str(value).lower().strip()).filter(id) if state else Moneda.get_queryset().filter(desc_mone = str(value).lower().strip())
+            queryset = Moneda.objects.filter(desc_mone = str(value).lower().strip()) if state else Moneda.get_queryset().filter(desc_mone = str(value).lower().strip())
         
         if queryset.count() == 0:
             return False
