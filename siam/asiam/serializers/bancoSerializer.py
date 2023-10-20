@@ -28,10 +28,11 @@ class BancoBasicSerializer(serializers.ModelSerializer):
         exclude = ['created','updated','esta_ttus','logo_banc']
 
 class BancoSerializer(serializers.ModelSerializer):
+    logo_banc = JSONSerializerField()
     class Meta:
         model = Banco
-        field = ('id','desc_banc','logo_banc')
-        exclude =['created','updated','esta_ttus','deleted']
+        field = ('id','logo_banc')
+        exclude =['created','updated','esta_ttus','deleted','desc_banc']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
