@@ -17,8 +17,8 @@ class CuentaSerializer(serializers.ModelSerializer):
     codi_banc = BancoSerializer()
     class Meta:
         model = Cuenta
-        field = ('id','codi_banc')
-        exclude =['created','updated','esta_ttus','deleted','ncta_cuen','fape_cuen','tipo_cuen']
+        field = ('id','codi_banc','deleted')
+        exclude =['created','updated','esta_ttus','ncta_cuen','fape_cuen','tipo_cuen']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
