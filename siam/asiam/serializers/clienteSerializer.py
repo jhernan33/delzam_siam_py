@@ -1,7 +1,7 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Contacto
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Contacto, Pedido
 from asiam.serializers import NaturalSerializer,JuridicaSerializer,VendedorSerializer
 from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer
 from django.conf import settings
@@ -42,6 +42,8 @@ class ClienteSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['codi_ante'] = str(instance.codi_ante).upper()
+        representation['number_of_orders'] = Pedido.get_queryset().filter(codi_clie = instance.id).count()
+        representation['debt'] = Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 1).values('mont_pedi')
         return representation
     
     def validate_codi_vend(value):

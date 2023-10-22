@@ -66,7 +66,9 @@ class PedidoCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Get User
-            user_id = Token.objects.get(key= request.auth.key).user
+            # user_id = Token.objects.get(key= request.auth.key).user
+            user_id = User.objects.get(username = self.request.data.get("user")).id
+            print("iddd==",user_id)
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -91,50 +93,51 @@ class PedidoCreateView(generics.CreateAPIView):
             if request.data['photo'] is not None:
                 listImagesProv  = request.data['photo']
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
-                with transaction.atomic():
-                    order = Pedido(
-                        codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
-                        ,fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
-                        ,mont_pedi  = self.request.data.get("amount")
-                        ,desc_pedi  = self.request.data.get("discount")
-                        ,tota_pedi  = self.request.data.get("total")
-                        ,obse_pedi  = self.request.data.get("observations")
-                        ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
-                        ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
-                        ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
-                        ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
-                        ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
-                        ,codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
-                        ,created    = datetime.now()
-                    )
-                    order.save()
-                    
-                    # Save Details
-                    if isinstance(self.request.data.get("details"),list):
-                        _total = 0
-                        for detail in self.request.data.get("details"):
-                            # Guardar el Detalle
-                            pedidoDetalle = PedidoDetalle(
-                                codi_pedi = Pedido.get_queryset().get(id = order.id),
-                                codi_arti = Articulo.get_queryset().get(id = detail['article']),
-                                cant_pede = detail['quantity'],
-                                prec_pede = detail['price'],
-                                desc_pede = detail['discount'],
-                                moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
-                                created = datetime.now(),
-                            )
-                            pedidoDetalle.save()
-                    
-                    # Register Tracking
-                    orderTracking = PedidoSeguimiento(
-                        codi_pedi = Pedido.get_queryset().get(id = order.id),
-                        codi_esta = PedidoEstatus.get_queryset().get(id = 1),
-                        codi_user = User.objects.get(id = request.user.id),
-                        fech_segu = datetime.now(),
-                        created   = datetime.now(),
-                        obse_segu = 'Creando el Pedido',
-                    )
-                    orderTracking.save()
+            
+            with transaction.atomic():
+                order = Pedido(
+                    codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                    ,fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
+                    ,mont_pedi  = self.request.data.get("amount")
+                    ,desc_pedi  = self.request.data.get("discount")
+                    ,tota_pedi  = self.request.data.get("total")
+                    ,obse_pedi  = self.request.data.get("observations")
+                    ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                    ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                    ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                    ,codi_user  = User.objects.get(id=user_id)
+                    ,created    = datetime.now()
+                )
+                order.save()
+                
+                # Save Details
+                if isinstance(self.request.data.get("details"),list):
+                    _total = 0
+                    for detail in self.request.data.get("details"):
+                        # Guardar el Detalle
+                        pedidoDetalle = PedidoDetalle(
+                            codi_pedi = Pedido.get_queryset().get(id = order.id),
+                            codi_arti = Articulo.get_queryset().get(id = detail['article']),
+                            cant_pede = detail['quantity'],
+                            prec_pede = detail['price'],
+                            desc_pede = detail['discount'],
+                            moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                            created = datetime.now(),
+                        )
+                        pedidoDetalle.save()
+                
+                # Register Tracking
+                orderTracking = PedidoSeguimiento(
+                    codi_pedi = Pedido.get_queryset().get(id = order.id),
+                    codi_esta = PedidoEstatus.get_queryset().get(id = 1),
+                    codi_user = User.objects.get(id = request.user.id),
+                    fech_segu = datetime.now(),
+                    created   = datetime.now(),
+                    obse_segu = 'Creando el Pedido',
+                )
+                orderTracking.save()
             return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
