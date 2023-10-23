@@ -8,8 +8,9 @@
     <style>
         @page {
             size: "Letter";
-            margin: 1.0cm 1.0cm 1.0cm 1.0cm;
+            margin: 4.9cm 1.0cm 1.0cm 1.0cm;
             @bottom-right {
+                margin-top: -3.0cm;
                 content: "Página " counter(page) " de " counter(pages);
             }
         }
@@ -17,11 +18,11 @@
             
         } */
 
-        @page :first {
+        /* @page :first {
             @bottom-right {
                 content: "Página " counter(page) " de " counter(pages);
             }
-        }
+        } */
 
         
         body {
