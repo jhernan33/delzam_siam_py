@@ -90,8 +90,8 @@ class ClienteBasicSerializer(serializers.ModelSerializer):
 class ClienteRutaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        field = ('id','posi_clie','description')
-        exclude = ['created','updated','esta_ttus','fein_clie','codi_ante','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie','location_clie','codi_juri','codi_natu']
+        field = ('posi_clie','codi_ante','description')
+        exclude = ['id','created','updated','esta_ttus','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','deleted','ruta_detalle_vendedor_cliente','ptor_clie','location_clie','codi_juri','codi_natu']
     
     def to_representation(self, instance):
         representation = super().to_representation(instance)

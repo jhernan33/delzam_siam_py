@@ -46,9 +46,16 @@
         {% endfor %}
     <tfoot>
         <tr>
-            <th>Total de Clientes:</th>
-            <th colspan="4">{{ total}}</th>
-          </tr>
+            <th colspan="1">Total de Clientes:</th>
+            <th colspan="1">{{ total}}</th>
+            <th colspan="1">
+                <style>
+                    @page {
+                        content: "Página " counter(page) " de " counter(pages);
+                    }
+                </style>
+            </th>
+        </tr>
     </tfoot>
 </table>
 {% endblock %}

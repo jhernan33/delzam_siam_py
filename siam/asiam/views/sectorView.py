@@ -44,11 +44,11 @@ class SectorCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_sector = Sector.get_queryset().filter(nomb_sect = str(self.request.data.get("nomb_sect")).strip().upper())
-            if result_sector.count() == 0:
+            #result_sector = Sector.get_queryset().filter(nomb_sect = str(self.request.data.get("nomb_sect")).strip().upper())
+            #if result_sector.count() == 0:
                 try:
                     sector = Sector(
-                         nomb_sect      = str(self.request.data.get("nomb_sect")).strip().upper()
+                        nomb_sect      = str(self.request.data.get("nomb_sect")).strip().upper()
                         ,codi_ciud      = Ciudad.get_queryset().get(id = self.request.data.get("codi_ciud"))
                         ,created        = datetime.now()
                     )
@@ -56,8 +56,8 @@ class SectorCreateView(generics.CreateAPIView):
                     return message.SaveMessage('Registro de Sector guardado Exitosamente')
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar la Sector: "+str(e))
-            elif result_sector.count()>0:
-                return message.ShowMessage('Nombre de Sector ya Registrado')
+            #elif result_sector.count()>0:
+            #    return message.ShowMessage('Nombre de Sector ya Registrado')
         except Sector.DoesNotExist:
             return message.NotFoundMessage("Id de Sector no Registrado")
 
@@ -100,9 +100,9 @@ class SectorUpdateView(generics.UpdateAPIView):
         else:
             try:
                 # Validate Name Sector
-                result_name_sector = SectorSerializer.validate_nomb_sect(str(request.data['nomb_sect']).upper().strip(),instance.id)
-                if result_name_sector == True:
-                    return message.ShowMessage("Nombre de Sector ya Registrado")
+                #result_name_sector = SectorSerializer.validate_nomb_sect(str(request.data['nomb_sect']).upper().strip(),instance.id)
+                #if result_name_sector == True:
+                #    return message.ShowMessage("Nombre de Sector ya Registrado")
 
                 # Validate Id City
                 result_city = CiudadSerializer.validate_codi_cuid(request.data['codi_ciud'])

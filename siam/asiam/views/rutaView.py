@@ -177,7 +177,7 @@ class RutaComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Ruta.objects.all()
+        queryset = Ruta.objects.all().order_by('nomb_ruta')
 
         show = self.request.query_params.get('show',None)
         _only_zone = self.request.query_params.get('onlyzone',None)
