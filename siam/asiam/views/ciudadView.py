@@ -53,11 +53,11 @@ class CiudadCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            result_city = Ciudad.get_queryset().filter(nomb_ciud = str(self.request.data.get("nomb_ciud")).strip().upper())
-            if result_city.count() == 0:
+            #result_city = Ciudad.get_queryset().filter(nomb_ciud = str(self.request.data.get("nomb_ciud")).strip().upper())
+            #if result_city.count() == 0:
                 try:
                     city = Ciudad(
-                         nomb_ciud      = str(self.request.data.get("nomb_ciud")).strip().upper()
+                        nomb_ciud      = str(self.request.data.get("nomb_ciud")).strip().upper()
                         ,codi_esta      = Estado.get_queryset().get(id = self.request.data.get("codi_esta"))
                         ,created        = datetime.now()
                     )
@@ -65,8 +65,8 @@ class CiudadCreateView(generics.CreateAPIView):
                     return message.SaveMessage('Registro de Ciudad guardado Exitosamente')
                 except Exception as e:
                     return message.ErrorMessage("Error al Intentar Guardar la Ciudad: "+str(e))
-            elif result_city.count()>0:
-                return message.ShowMessage('Nombre de Ciudad ya Registrada')
+            #elif result_city.count()>0:
+            #    return message.ShowMessage('Nombre de Ciudad ya Registrada')
         except Ciudad.DoesNotExist:
             return message.NotFoundMessage("Id de Ciudad no Registrado")
             
@@ -110,9 +110,9 @@ class CiudadUpdateView(generics.UpdateAPIView):
         else:
             try:
                 # Validate Name City
-                result_name_city = CiudadSerializer.validate_nomb_ciud(str(request.data['nomb_ciud']).upper().strip(),instance.id)
-                if result_name_city == True:
-                    return message.ShowMessage("Nombre de Ciudad ya Registrado")
+                #result_name_city = CiudadSerializer.validate_nomb_ciud(str(request.data['nomb_ciud']).upper().strip(),instance.id)
+                #if result_name_city == True:
+                #    return message.ShowMessage("Nombre de Ciudad ya Registrado")
 
                 # Validate Id State
                 result_state = EstadoSerializer.validate_codi_esta(request.data['codi_esta'])
