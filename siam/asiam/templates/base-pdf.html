@@ -8,9 +8,13 @@
     <style>
         @page {
             size: "Letter";
-            margin: 4.9cm 1.0cm 1.0cm 1.0cm;
+            /*width: 1000px;
+            transform: scale(0.66); 
+            transform-origin: 0 0;*/
+            margin: 1.0cm 1.0cm 1.0cm 1.0cm;
             @bottom-right {
-                margin-top: -3.0cm;
+                margin-top: -4.7cm;
+                margin-right: 1.0cm;
                 content: "Página " counter(page) " de " counter(pages);
             }
         }
@@ -28,6 +32,8 @@
         body {
             width: 100% !important;
             height: 100%;
+            margin-top: 4.9cm;
+            margin-bottom: 1.0cm;
             background: #fff;
             color: rgb(1, 81, 230);
             font-size: 70%;
@@ -38,7 +44,7 @@
         }
         
         
-        .titleCentro     {float: left; margin-left: 20px; }
+        .titleCentro { float: left; margin-left: 20px; }
         .derecha   { float: right; }
         .izquierda { float: left;  }
 

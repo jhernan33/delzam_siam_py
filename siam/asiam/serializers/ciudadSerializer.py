@@ -23,8 +23,8 @@ class CiudadSerializer(serializers.ModelSerializer):
         data['nomb_ciud'] = data['nomb_ciud'].upper().strip() if data['nomb_ciud'] else data['nomb_ciud']
         return data
     
-    def validate_nomb_ciud(value,id):
-        queryset = Ciudad.get_queryset().filter(nomb_ciud = value).exclude(id=id)
+    def validate_nomb_ciud(value,id,state):
+        queryset = Ciudad.get_queryset().filter(nomb_ciud = value).exclude(id=id).exclude(codi_esta = state)
         if queryset.count() == 0:
             return False
         else:
