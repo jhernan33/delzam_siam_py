@@ -1,0 +1,30 @@
+[
+    {
+        "pk": 99999,
+        "model": "asiam.articulo",
+        "fields": {
+            "codi_arti": 99999,
+            "idae_arti": "SINCODIGO",
+            "desc_arti": "CODIGO PARA CARGA HISTORICO",
+            "coba_arti": "",
+            "cmin_arti": 0,
+            "cmax_arti": 0,
+            "por1_arti": 0,
+            "por2_arti": 0,
+            "por3_arti": 0,
+            "ppre_arti": 0,
+            "foto_arti": "",
+            "exgr_arti": "X",
+            "codc_pres_id": 1,
+            "codv_pres_id": 1,
+            "capc_arti": 0,
+            "capv_arti": 0,
+            "proc_arti": "N",
+            "codi_ivti_id": 1,
+            "codi_sufa_id": 1,
+            "esta_ttus": "E",
+            "deleted": "2023-10-25T12:43:11.649195",
+            "created": "2023-10-25T12:43:11.649195"
+        }
+    }
+]

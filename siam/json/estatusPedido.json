@@ -52,5 +52,14 @@
             "orde_esta": 6,
             "created": "2023-09-19 10:20:39.841629"
         }
+    },
+    {
+        "pk": 7,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Historico",
+            "orde_esta": 7,
+            "created": "2023-09-19 10:20:39.841629"
+        }
     }
 ]

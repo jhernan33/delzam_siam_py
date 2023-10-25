@@ -40,6 +40,7 @@ class Pedido(Base):
         related_name='PedidoUser.codi_user+',
         default=1
     )
+    nufa_pedi = models.CharField('Numero de Factura del Pedido', max_length=75, null=True, blank=True)
 
     class Meta:
         ordering = ['-id']

@@ -276,6 +276,7 @@ urlpatterns = [
     path('pedido/update/<int:id>',                       views.PedidoUpdateView.as_view(),   name='pedido_update'),
     path('pedido/delete/<int:id>',                       views.PedidoDestroyView.as_view(),  name='pedido_delete'),
     path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
+    path('pedido/historico/',                            views.PedidoHistorico.as_view(),   name='pedido_historico'),
 
     # Bank
     path('banco/',                                       views.BancoListView.as_view(),     name='banco'),
