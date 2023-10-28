@@ -27,7 +27,7 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ('id','codi_mone')
-        exclude =['created','deleted','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
+        exclude =['created','deleted','updated','esta_ttus','nufa_pedi','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
     
     def to_representation(self, instance):
         # Call Serializers
@@ -38,6 +38,7 @@ class PedidoSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['customer_id'] = instance.codi_clie.id
         representation['customer_all'] = Cliente.searchTypeCustomerId(instance.codi_clie.id)
+        representation['invoice_number'] = instance.nufa_pedi
         representation['order_date'] = instance.fech_pedi
         representation['print_date'] = instance.feim_pedi
         representation['shipping_date'] = instance.fede_pedi

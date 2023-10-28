@@ -20,9 +20,10 @@ from rest_framework.parsers import JSONParser
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
-from asiam.serializers import PedidoSerializer, PedidoSerializer, PedidoComboSerializer, MonedaSerializer
+from asiam.serializers import PedidoSerializer, PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -34,7 +35,7 @@ from django.contrib.gis.geos import GEOSGeometry, Point
 
 class PedidoListView(generics.ListAPIView):
     serializer_class = PedidoSerializer
-    permission_classes =  []
+    permission_classes = [IsAuthenticated]
     queryset = Pedido.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -66,9 +67,8 @@ class PedidoCreateView(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Get User
-            # user_id = Token.objects.get(key= request.auth.key).user
-            user_id = User.objects.get(username = self.request.data.get("user")).id
-            print("iddd==",user_id)
+            user_id = Token.objects.get(key= request.auth.key).user
+            # user_id = User.objects.get(username = self.request.data.get("user")).id
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -143,7 +143,7 @@ class PedidoCreateView(generics.CreateAPIView):
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
             
 class PedidoRetrieveView(generics.RetrieveAPIView):
-    permission_classes =  []
+    permission_classes =  [IsAuthenticated]
     serializer_class = PedidoSerializer
     queryset = Pedido.get_queryset()
     lookup_field = 'id'
@@ -168,7 +168,7 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
 
 class PedidoUpdateView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
-    permission_classes = ()
+    permission_classes = (IsAuthenticated)
     queryset = Pedido.objects.all()
     lookup_field = 'id'
 
@@ -269,7 +269,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class PedidoDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id' 
 
     def delete(self, request, *args, **kwargs):
@@ -307,7 +307,7 @@ class PedidoDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Pedido no Registrado")
             
 class PedidoComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = PedidoComboSerializer
     lookup_field = 'id'
 
@@ -317,15 +317,14 @@ class PedidoComboView(generics.ListAPIView):
         return queryset
 
 class PedidoHistorico(generics.CreateAPIView):
-    permission_classes =  []
-    serializer_class = PedidoSerializer
+    permission_classes =  [IsAuthenticated]
+    serializer_class = PedidoHistoricoSerializer
     
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
             # Get User
-            user_id = Token.objects.get(key= request.auth.key).user
-            # user_id = User.objects.get(username = self.request.data.get("user")).id
+            # user_id = Token.objects.get(key= request.auth.key).user
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -357,7 +356,7 @@ class PedidoHistorico(generics.CreateAPIView):
                     ,feim_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_printer") is None else self.request.data.get("date_printer")
                     ,mont_pedi  = None if self.request.data.get("amount") is None else self.request.data.get("amount")
                     ,desc_pedi  = None if self.request.data.get("discount") is None else self.request.data.get("discount")
-                    ,tota_pedi  = self.request.data.get("total")
+                    ,tota_pedi  = (self.request.data.get("total")*0.20)+self.request.data.get("total")
                     ,obse_pedi  = None if self.request.data.get("observations") is None else self.request.data.get("observations")
                     ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
                     ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
@@ -365,7 +364,7 @@ class PedidoHistorico(generics.CreateAPIView):
                     ,codi_tipe  = 2 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
                     ,nufa_pedi  = None if self.request.data.get("invoice_number") is None else self.request.data.get("invoice_number")
-                    ,codi_user  = User.objects.get(id=user_id)
+                    ,codi_user  = self.request.user
                     ,created    = datetime.now()
                 )
                 order.save()
@@ -390,10 +389,10 @@ class PedidoHistorico(generics.CreateAPIView):
                 orderTracking = PedidoSeguimiento(
                     codi_pedi = Pedido.get_queryset().get(id = order.id),
                     codi_esta = PedidoEstatus.get_queryset().get(id = 7),
-                    codi_user = User.objects.get(id = request.user.id),
+                    codi_user = self.request.user,
                     fech_segu = datetime.now(),
                     created   = datetime.now(),
-                    obse_segu = 'Registrando el Pedido Historico',
+                    obse_segu = 'Registrando el Pedido Historico en fecha de: '+ datetime.now().strftime('%Y-%m-%d, %H:%M:%S') + ' por el Usuario: '+ str(self.request.user),
                 )
                 orderTracking.save()
             return message.SaveMessage('Pedido guardado Exitosamente')

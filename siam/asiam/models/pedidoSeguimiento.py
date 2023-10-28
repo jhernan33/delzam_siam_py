@@ -19,7 +19,8 @@ class PedidoSeguimiento(Base):
     codi_user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='pedidoPago.codi_user+'
+        related_name='PedidoPagoUser.codi_user+',
+        default=1
     )
     fech_segu = models.DateField('Fecha del Seguimiento del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
     foto_segu = models.JSONField  ('Foto del Seguimiento del Pedido',null=True, blank=True)
