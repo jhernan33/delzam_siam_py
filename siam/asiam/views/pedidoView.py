@@ -71,7 +71,6 @@ class PedidoCreateView(generics.CreateAPIView):
         try:
             # Get User
             user_id = Token.objects.get(key= request.auth.key).user
-            # user_id = User.objects.get(username = self.request.data.get("user")).id
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -110,7 +109,7 @@ class PedidoCreateView(generics.CreateAPIView):
                     ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
                     ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
-                    ,codi_user  = User.objects.get(id=user_id)
+                    ,codi_user  = user_id
                     ,created    = datetime.now()
                 )
                 order.save()
@@ -135,7 +134,7 @@ class PedidoCreateView(generics.CreateAPIView):
                 orderTracking = PedidoSeguimiento(
                     codi_pedi = Pedido.get_queryset().get(id = order.id),
                     codi_esta = PedidoEstatus.get_queryset().get(id = 1),
-                    codi_user = User.objects.get(id = request.user.id),
+                    codi_user = user_id,
                     fech_segu = datetime.now(),
                     created   = datetime.now(),
                     obse_segu = 'Creando el Pedido',
