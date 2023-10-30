@@ -39,7 +39,10 @@ class PedidoListView(generics.ListAPIView):
     queryset = Pedido.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
+    search_fields = [
+        'id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi'
+        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena','codi_clie__codi_natu__seap_pena'
+        ]
     ordering_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
     ordering = ['-id']
 
@@ -54,8 +57,8 @@ class PedidoListView(generics.ListAPIView):
         field = self.request.query_params.get('field',None)
         value = self.request.query_params.get('value',None)
         if field is not None and value is not None:
-            if field=='codi_natu':
-                queryset = queryset.filter(codi_natu=value)
+            if field=='state':
+                queryset = queryset.filter(codi_espe=value)
 
         return queryset.filter(deleted__isnull=True)
 
@@ -324,7 +327,7 @@ class PedidoHistorico(generics.CreateAPIView):
         message = BaseMessage
         try:
             # Get User
-            # user_id = Token.objects.get(key= request.auth.key).user
+            user_id = Token.objects.get(key= request.auth.key).user
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -350,13 +353,14 @@ class PedidoHistorico(generics.CreateAPIView):
                 listImagesProv  = request.data['photo']
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
             
+            amount = float(self.request.data.get("total"))
             with transaction.atomic():
                 order = Pedido(
                     codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
                     ,feim_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_printer") is None else self.request.data.get("date_printer")
                     ,mont_pedi  = None if self.request.data.get("amount") is None else self.request.data.get("amount")
                     ,desc_pedi  = None if self.request.data.get("discount") is None else self.request.data.get("discount")
-                    ,tota_pedi  = (self.request.data.get("total")*0.20)+self.request.data.get("total")
+                    ,tota_pedi  = amount - (amount*0.20)
                     ,obse_pedi  = None if self.request.data.get("observations") is None else self.request.data.get("observations")
                     ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
                     ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
@@ -364,7 +368,7 @@ class PedidoHistorico(generics.CreateAPIView):
                     ,codi_tipe  = 2 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
                     ,nufa_pedi  = None if self.request.data.get("invoice_number") is None else self.request.data.get("invoice_number")
-                    ,codi_user  = self.request.user
+                    ,codi_user  = user_id
                     ,created    = datetime.now()
                 )
                 order.save()
@@ -389,7 +393,7 @@ class PedidoHistorico(generics.CreateAPIView):
                 orderTracking = PedidoSeguimiento(
                     codi_pedi = Pedido.get_queryset().get(id = order.id),
                     codi_esta = PedidoEstatus.get_queryset().get(id = 7),
-                    codi_user = self.request.user,
+                    codi_user = user_id,
                     fech_segu = datetime.now(),
                     created   = datetime.now(),
                     obse_segu = 'Registrando el Pedido Historico en fecha de: '+ datetime.now().strftime('%Y-%m-%d, %H:%M:%S') + ' por el Usuario: '+ str(self.request.user),
