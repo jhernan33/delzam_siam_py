@@ -9,8 +9,11 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from django.views.generic.list import ListView  
 
-from asiam.serializers import SignupSerializer, UserLoginSerializer
+from asiam.serializers import SignupSerializer, UserLoginSerializer, UserSerializer
 from asiam.views.baseMensajeView import BaseMessage
 from asiam.models import Profile
 
@@ -45,6 +48,7 @@ class SignupView(generics.CreateAPIView):
                         user.first_name = self.request.data.get('first_name')
                         user.last_name = self.request.data.get('last_name')
                         user.email = self.request.data.get('email')
+                        user.group = 4 if self.request.data.get('gruop') is None else self.request.data.get('gruop')
                         user.save()
                         # Save Group
                         user.groups.add(self.request.data.get('group'))
@@ -53,7 +57,12 @@ class SignupView(generics.CreateAPIView):
                             user = User.objects.get(id = user.id)
                         )
                         profile.save()
-                        return message.SaveMessage("Creado Exitosamente el Usuario")
+                        # Generate Token
+                        token, created = Token.objects.get_or_create(user=user)
+                        data = {
+                            "token": token.key
+                        }
+                        return message.SaveMessage(data)
                 except ObjectDoesNotExist:
                     return message.NotFoundMessage("Error al Guardar el usuario")
         res = { 'status' : status.HTTP_400_BAD_REQUEST, 'data' : serializer.errors }
@@ -74,7 +83,7 @@ class LoginView(generics.CreateAPIView):
                 response = {
                     "status": status.HTTP_200_OK,
                     "message": "success",
-                    "Token": token.key
+                    "token": token.key
                 }
                 return Response(response,status=status.HTTP_200_OK)
             else:
@@ -92,10 +101,19 @@ class LoginView(generics.CreateAPIView):
 
 # Close Session
 class LogoutView(generics.CreateAPIView):
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     def post(self, request):
-        # Borramos de la request la informacion de sesion
-        logout(request)
+        try:
+            # Delete the user's token to logout
+            request.user.auth_token.delete()
+            # Devolvemos la respuesta al cliente
+            return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # Devolvemos la respuesta al cliente
-        return Response(status=status.HTTP_200_OK)
+class UserView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user

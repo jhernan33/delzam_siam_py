@@ -8,6 +8,7 @@ urlpatterns = [
     path('signup/',                     views.SignupView.as_view(), name='signup'),
     path('login/',                      views.LoginView.as_view(), name='login'),
     path('logout/',                     views.LogoutView.as_view(), name='login'),
+    path('user/',                       views.UserView.as_view(), name='user'),
 
     # Grupos
     path('grupo/',                  views.GrupoListView.as_view(),     name='grupo'),
@@ -308,6 +309,9 @@ urlpatterns = [
     path('perfil/<int:id>/',                              views.ProfileUserRetrieveView.as_view(), name='profile'),
     path('perfil/update/<int:id>',                        views.ProfileUserUpdateView.as_view(),   name='profile_update'),
     path('perfil/delete/<int:id>',                        views.ProfileUserDestroyView.as_view(),  name='profile_delete'),
+
+    # Date
+    path('date/', views.DateRetrieveView.as_view(), name='date_get'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

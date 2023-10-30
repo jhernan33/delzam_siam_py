@@ -38,3 +38,10 @@ class UserBasicSerializer(serializers.ModelSerializer):
         model = User
         field = ('id','first_name','last_name')
         exclude = ['password','is_superuser','email','last_login']
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        field = ('username','first_name','last_name','password')
+        exclude = ['is_superuser','email','last_login','password']

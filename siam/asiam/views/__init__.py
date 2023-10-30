@@ -20,7 +20,7 @@ from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, Uni
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
 from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView, ClienteReportView, ClienteExportFile, ClienteComboView
-from .userView          import SignupView, LoginView, LogoutView
+from .userView          import SignupView, LoginView, LogoutView, UserView
 from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView, GrupoComboView
 from .rutaDetalleVendedorView import RutaDetalleVendedorListView, RutaDetalleVendedorCreateView, RutaDetalleVendedorRetrieveView, RutaDetalleVendedorDestroyView, RutaDetalleVendedorUpdateView ,RutaDetalleVendedorComboView
 from .ivaGeneralView    import IvaGeneralListView, IvaGeneralCreateView, IvaGeneralRetrieveView, IvaGeneralUpdateView, IvaGeneralDestroyView, IvaGeneralComboView
@@ -42,3 +42,4 @@ from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoU
 from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView, CuentaComboView
 from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView
 from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserUpdateView, ProfileUserDestroyView
+from .dateView import DateRetrieveView

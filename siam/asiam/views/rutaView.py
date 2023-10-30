@@ -21,8 +21,8 @@ class RutaListView(generics.ListAPIView):
     queryset = Ruta.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ('id','nomb_ruta')
-    ordering_fields = ('id', 'nomb_ruta')
+    search_fields = ('id','nomb_ruta','codi_zona__desc_zona')
+    ordering_fields = ('id', 'nomb_ruta','codi_zona__desc_zona')
     ordering = ['-id']
 
     def get_queryset(self):
@@ -205,8 +205,6 @@ class RutaComboView(generics.ListAPIView):
         
         return queryset
             
-        
-        
 class RutaClienteRetrieveView(generics.RetrieveAPIView):
     serializer_class = RutaClienteSerializer
     permission_classes = ()

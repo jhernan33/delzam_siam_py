@@ -7,6 +7,7 @@ from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorS
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_gis.serializers import GeoFeatureModelListSerializer
+from django.db.models import Sum
 
 
 class JSONSerializerField(serializers.Field):
@@ -42,8 +43,10 @@ class ClienteSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['codi_ante'] = str(instance.codi_ante).upper()
-        representation['number_of_orders'] = Pedido.get_queryset().filter(codi_clie = instance.id).count()
-        representation['debt'] = Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 1).values('mont_pedi')
+        representation['record'] = {
+            'number_of_orders' : Pedido.get_queryset().filter(codi_clie = instance.id).count(),
+            'debt' : Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 7).aggregate(tota_pedi=Sum('tota_pedi'))
+        }
         return representation
     
     def validate_codi_vend(value):
