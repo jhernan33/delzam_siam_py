@@ -330,7 +330,7 @@ class PedidoHistorico(generics.CreateAPIView):
         try:
             # Get User
 
-            # user_id = Token.objects.get(key= request.auth.key).user
+            user_id = Token.objects.get(key= request.auth.key).user
             # Validate Customer and Invoice Number
             result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'])
             if result_invoice == True:
@@ -364,23 +364,22 @@ class PedidoHistorico(generics.CreateAPIView):
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
             
             amount = float(self.request.data.get("total"))
+            invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
             with transaction.atomic():
                 order = Pedido(
                     codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
                     ,feim_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_printer") is None else self.request.data.get("date_printer")
                     ,mont_pedi  = None if self.request.data.get("amount") is None else self.request.data.get("amount")
                     ,desc_pedi  = None if self.request.data.get("discount") is None else self.request.data.get("discount")
-                    ,tota_pedi  = (self.request.data.get("total")*(self.request.data.get("porcentage")/100))-self.request.data.get("total")
+                    ,tota_pedi  = self.request.data.get("total") - (self.request.data.get("total")*(self.request.data.get("porcentage")/100))
                     ,obse_pedi  = None if self.request.data.get("observations") is None else self.request.data.get("observations")
                     ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
                     ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
                     ,codi_espe  = PedidoEstatus.get_queryset().get(id = 7)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
                     ,codi_tipe  = 2 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
-                    ,nufa_pedi  = None if self.request.data.get("invoice_number") is None else str(self.request.data.get("invoice_number")).strip().upper()
+                    ,nufa_pedi  = None if invoice_number is None else invoice_number
                     ,mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage")
-                    ,codi_user  = self.request.user
-                    ,nufa_pedi  = None if self.request.data.get("invoice_number") is None else self.request.data.get("invoice_number")
                     ,codi_user  = user_id
                     ,created    = datetime.now()
                 )
