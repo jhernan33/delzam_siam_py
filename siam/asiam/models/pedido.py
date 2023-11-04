@@ -41,6 +41,7 @@ class Pedido(Base):
         default=1
     )
     nufa_pedi = models.CharField('Numero de Factura del Pedido', max_length=75, null=True, blank=True)
+    mopo_pedi = models.DecimalField ('Monto Porcentaje del Descuento del Pronto Pago Pedido',max_digits=7,decimal_places=2,null=True, blank=True,default=20)
 
     class Meta:
         ordering = ['-id']

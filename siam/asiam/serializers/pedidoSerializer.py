@@ -72,6 +72,16 @@ class PedidoSerializer(serializers.ModelSerializer):
         else:
             return True
     
+    '''
+        Validate Customer and Invoice Number
+    '''
+    def validate_customer_invoice_number(customerId,invoiceNumber):
+        queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi = str(invoiceNumber).split().upper())
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
+    
 class PedidoComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
