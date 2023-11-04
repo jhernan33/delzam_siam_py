@@ -40,8 +40,10 @@ class PedidoListView(generics.ListAPIView):
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     search_fields = [
-        'id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi'
-        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena','codi_clie__codi_natu__seap_pena'
+        'id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi'
+        ,'obse_pedi','orig_pedi'
+        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena'
+        ,'codi_clie__codi_natu__seap_pena'
         ]
     ordering_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
     ordering = ['-id']
