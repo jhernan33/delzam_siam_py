@@ -40,6 +40,10 @@ class ProfileUserSerializer(serializers.ModelSerializer):
         representation['biography'] = instance.biography
         representation['birth_date'] = instance.birth_date
         representation['phone_number'] = instance.phone_number
+        if instance.profile_picture is None:
+            place = settings.WEBSERVER_IMAGES
+            enviromentArticle = os.path.realpath(settings.WEBSERVER_USER)[1:]+'/'
+            representation['profile_picture'] = place+enviromentArticle+'base.jpeg'
         return representation
     
     """

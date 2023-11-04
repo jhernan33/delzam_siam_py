@@ -9,6 +9,9 @@ from django.conf.urls.static import static
 from rest_framework_gis.serializers import GeoFeatureModelListSerializer
 from django.db.models import Sum
 
+# import datetime module
+from datetime import datetime
+
 
 class JSONSerializerField(serializers.Field):
     """Serializer for JSONField -- required to make field writable"""
@@ -43,9 +46,19 @@ class ClienteSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['codi_ante'] = str(instance.codi_ante).upper()
-        representation['record'] = {
-            'number_of_orders' : Pedido.get_queryset().filter(codi_clie = instance.id).count(),
-            'debt' : Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 7).aggregate(tota_pedi=Sum('tota_pedi'))
+        # Detail Orders
+        from asiam.serializers import PedidoSerializer
+        queryset_details = Pedido.get_queryset().filter(codi_clie = instance.id)
+        result_details = PedidoSerializer(queryset_details, many=True).data
+        representation['customer_sales_history'] = {
+            'total_orders' : Pedido.get_queryset().filter(codi_clie = instance.id).count(),
+            # State 2 and 7 
+            'total_paid_orders': Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe__in = (2,7)).count(),
+            'total_outstanding_orders': Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 1).count(),
+            'total_debt' : Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 7).aggregate(tota_pedi=Sum('tota_pedi'))['tota_pedi'] if Pedido.get_queryset().filter(codi_clie = instance.id).filter(codi_espe = 7).count()>0 else 0,
+            # Date of last sale
+            'date_of_last_sale': datetime.strftime(Pedido.get_queryset().filter(codi_clie = instance.id).order_by('-created').values('created')[:1][0]['created'],"%d-%m-%Y %H:%M:%S")  if Pedido.get_queryset().filter(codi_clie = instance.id).count() > 0 else '',
+            'Details' : {"data":result_details}  # Return Dictionary
         }
         return representation
     
