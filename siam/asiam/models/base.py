@@ -29,5 +29,7 @@ class Base(models.Model):
     '''
         Gettting Today Date in format ('Y-m-d')
     '''
-    def gettingTodaysDate():
+    def gettingTodaysDate(language=None):
+        if language is not None:
+            return datetime.today().strftime('%d-%m-%Y')
         return datetime.today().strftime('%Y-%m-%d')

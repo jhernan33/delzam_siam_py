@@ -310,6 +310,9 @@ urlpatterns = [
     path('perfil/update/<int:id>',                        views.ProfileUserUpdateView.as_view(),   name='profile_update'),
     path('perfil/delete/<int:id>',                        views.ProfileUserDestroyView.as_view(),  name='profile_delete'),
 
+    # Date
+    path('date/', views.DateRetrieveView.as_view(), name='date_get'),
+
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),
     path('report/export',                       views.export_pdf,                       name="export-pdf"),
