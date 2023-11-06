@@ -50,6 +50,7 @@ class PedidoSerializer(serializers.ModelSerializer):
         representation['amount'] = instance.mont_pedi
         representation['discount'] = instance.desc_pedi
         representation['total_amount'] = instance.tota_pedi
+        representation['pourcentage'] = instance.mopo_pedi
         # State
         representation['order_state_id'] = instance.codi_espe.id
         representation['order_state_all'] = PedidoEstatus.searchOrderStateById(instance.codi_espe.id).values()
@@ -67,6 +68,17 @@ class PedidoSerializer(serializers.ModelSerializer):
     """    
     def validate_customer(value):
         queryset = Cliente.get_queryset().filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
+    
+    '''
+        Validate Customer and Invoice Number
+    '''
+    def validate_customer_invoice_number(customerId,invoiceNumber):
+        invoiceNumber =  str(invoiceNumber).upper().split()
+        queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
         if queryset.count() == 0:
             return False
         else:
