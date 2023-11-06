@@ -76,7 +76,7 @@ class Cliente(Base):
             else:
                 _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
                 for juridica in _resultQuerySet:
-                    _descriptionCustomer = str(customer['codi_ante']+" / "juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
+                    _descriptionCustomer = str(customer['codi_ante']+" / "+juridica.riff_peju+" / "+juridica.raso_peju).strip().upper()+" (J)"
             return _descriptionCustomer
 
     # Search Adress of Customer
