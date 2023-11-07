@@ -235,9 +235,10 @@ class ClienteDestroyView(generics.DestroyAPIView):
                 cliente.deleted = datetime.now()
                 cliente.save()
                 # Deleted Natural
-                natural = Natural.objects.get(pk=cliente.codi_natu_id)
-                natural.deleted = datetime.now()
-                natural.save()
+                if cliente.codi_natu_id != 1:
+                    natural = Natural.objects.get(pk=cliente.codi_natu_id)
+                    natural.deleted = datetime.now()
+                    natural.save()
                 # Deleted Legal
                 if cliente.codi_juri_id != 1:
                     juridica = Juridica.objects.get(pk=cliente.codi_juri_id)
