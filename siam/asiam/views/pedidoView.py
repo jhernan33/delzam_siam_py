@@ -73,6 +73,12 @@ class PedidoCreateView(generics.CreateAPIView):
         try:
             # Get User
             user_id = Token.objects.get(key= request.auth.key).user
+            
+            # Validate Customer and Invoice Number
+            result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'])
+            if result_invoice == True:
+                return message.ShowMessage("Número de factura ya registrada al Cliente")
+            
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
@@ -97,7 +103,7 @@ class PedidoCreateView(generics.CreateAPIView):
             if request.data['photo'] is not None:
                 listImagesProv  = request.data['photo']
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
-            
+            invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
             with transaction.atomic():
                 order = Pedido(
                     codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
@@ -112,6 +118,7 @@ class PedidoCreateView(generics.CreateAPIView):
                     ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage") 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                    ,nufa_pedi  = None if invoice_number is None else invoice_number
                     ,codi_user  = user_id
                     ,created    = datetime.now()
                 )
@@ -336,8 +343,6 @@ class PedidoHistorico(generics.CreateAPIView):
             if result_invoice == True:
                 return message.ShowMessage("Número de factura ya registrada al Cliente")
             
-            user_id = Token.objects.get(key= request.auth.key).user
-
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
