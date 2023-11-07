@@ -38,6 +38,8 @@ class PedidoSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['customer_id'] = instance.codi_clie.id
         representation['customer_all'] = Cliente.searchTypeCustomerId(instance.codi_clie.id)
+        representation['customer_without_rif'] = Cliente.searchTypeCustomerIdWithoutRIF(instance.codi_clie.id)
+        representation['customer_city'] = Cliente.searchCityCustomerId(instance.codi_clie.id)
         representation['invoice_number'] = instance.nufa_pedi
         representation['order_date'] = instance.fech_pedi
         representation['print_date'] = instance.feim_pedi
@@ -77,7 +79,8 @@ class PedidoSerializer(serializers.ModelSerializer):
         Validate Customer and Invoice Number
     '''
     def validate_customer_invoice_number(customerId,invoiceNumber):
-        invoiceNumber =  str(invoiceNumber).upper().split()
+        if isinstance(invoiceNumber,str) is None:
+            invoiceNumber =  str(invoiceNumber).upper().split()
         queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
         if queryset.count() == 0:
             return False
