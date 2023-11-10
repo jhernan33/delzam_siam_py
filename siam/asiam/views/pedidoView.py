@@ -350,7 +350,7 @@ class PedidoHistorico(generics.CreateAPIView):
 
             user_id = Token.objects.get(key= request.auth.key).user
             # Validate Customer and Invoice Number
-            result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'])
+            result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'],None)
             if result_invoice == True:
                 return message.ShowMessage("Número de factura ya registrada al Cliente")
             
@@ -542,38 +542,38 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar: "+str(e))
 
-class PedidoSearchView(django_filters.FilterSet):
-    q = django_filters.CharFilter(method='my_custom_filter', label="Search")
+# class PedidoSearchView(django_filters.FilterSet):
+#     q = django_filters.CharFilter(method='my_custom_filter', label="Search")
 
-    # serializer_class = PedidoSerializer
-    # permission_classes = [IsAuthenticated]
-    # queryset = Pedido.get_queryset()
-    # pagination_class = SmallResultsSetPagination
-    # ordering = ['-id']
-    class Meta:
-        model = Cliente
-        fields = ['q']
+#     # serializer_class = PedidoSerializer
+#     # permission_classes = [IsAuthenticated]
+#     # queryset = Pedido.get_queryset()
+#     # pagination_class = SmallResultsSetPagination
+#     # ordering = ['-id']
+#     class Meta:
+#         model = Cliente
+#         fields = ['q']
 
-    def my_custom_filter(self, queryset, name, value):
-        result = queryset.filter(
-            Q(loc__icontains=value) |
-            Q(loc_codi_ante__icontains=value) | 
-            Q(loc_codi_natu__prno_pena__icontains=value) | 
-            Q(loc_codi_natu__seno_pena__icontains=value) | 
-            Q(loc_codi_natu__prap_pena__icontains=value) | 
-            Q(loc_codi_natu__seap_pena__icontains=value) | 
-            Q(loc_codi_juri__riff_peju__icontains=value) |
-            Q(loc_codi_juri__raso_peju__icontains=value) |
-            Q(loc_codi_juri__dofi_peju__icontains=value) |
-            Q(loc_codi_natu__cedu_pena__icontains=value) |
-            Q(loc_codi_natu__razo_natu__icontains=value) |
-            Q(loc_codi_natu__codi_ciud__nomb_ciud__icontains=value) |
-            Q(loc_codi_natu__codi_sect__nomb_sect__icontains=value) |
-            Q(loc_codi_juri__codi_ciud__nomb_ciud__icontains=value) |
-            Q(loc_codi_juri__codi_sect__nomb_sect__icontains=value)
-        )
-        print("Result====",result)
-        return result
+#     def my_custom_filter(self, queryset, name, value):
+#         result = queryset.filter(
+#             Q(loc__icontains=value) |
+#             Q(loc_codi_ante__icontains=value) | 
+#             Q(loc_codi_natu__prno_pena__icontains=value) | 
+#             Q(loc_codi_natu__seno_pena__icontains=value) | 
+#             Q(loc_codi_natu__prap_pena__icontains=value) | 
+#             Q(loc_codi_natu__seap_pena__icontains=value) | 
+#             Q(loc_codi_juri__riff_peju__icontains=value) |
+#             Q(loc_codi_juri__raso_peju__icontains=value) |
+#             Q(loc_codi_juri__dofi_peju__icontains=value) |
+#             Q(loc_codi_natu__cedu_pena__icontains=value) |
+#             Q(loc_codi_natu__razo_natu__icontains=value) |
+#             Q(loc_codi_natu__codi_ciud__nomb_ciud__icontains=value) |
+#             Q(loc_codi_natu__codi_sect__nomb_sect__icontains=value) |
+#             Q(loc_codi_juri__codi_ciud__nomb_ciud__icontains=value) |
+#             Q(loc_codi_juri__codi_sect__nomb_sect__icontains=value)
+#         )
+#         # print("Result====",result)
+#         return result
 
     # def get_queryset(self):
     #     queryset = None

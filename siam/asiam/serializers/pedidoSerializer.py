@@ -79,13 +79,11 @@ class PedidoSerializer(serializers.ModelSerializer):
         Validate Customer and Invoice Number
     '''
     def validate_customer_invoice_number(customerId,invoiceNumber,_id:None):
+        invoiceNumber = str(invoiceNumber).upper().split()
         if _id is not None:
-            invoiceNumber =  str(invoiceNumber).upper().split()
             queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber).exclude(id=_id)
         else:
-            if isinstance(invoiceNumber,str) is None:
-                invoiceNumber =  str(invoiceNumber).upper().split()
-                queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
+            queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
 
         if queryset.count() == 0:
             return False
