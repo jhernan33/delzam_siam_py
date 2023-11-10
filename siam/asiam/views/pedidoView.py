@@ -21,6 +21,8 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.db.models import Q
+import django_filters
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
 from asiam.serializers import PedidoSerializer, PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer
@@ -31,7 +33,6 @@ from .serviceImageView import ServiceImageView
 from weasyprint import HTML
 from django.http.request import QueryDict
 from django.contrib.gis.geos import GEOSGeometry, Point
-
 
 class PedidoListView(generics.ListAPIView):
     serializer_class = PedidoSerializer
@@ -49,8 +50,16 @@ class PedidoListView(generics.ListAPIView):
     ordering = ['-id']
 
     def get_queryset(self):
-        show = self.request.query_params.get('show')
+        # Filter Except orders history
         queryset = Pedido.objects.all()
+
+        history = self.request.query_params.get('history')
+        if history =='true':
+            queryset = queryset.filter(codi_espe=7)
+        else:
+            queryset = queryset.exclude(codi_espe=7)
+
+        show = self.request.query_params.get('show')
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         if show =='all':
@@ -65,7 +74,7 @@ class PedidoListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class PedidoCreateView(generics.CreateAPIView):
-    permission_classes =  []
+    permission_classes =  [IsAuthenticated]
     serializer_class = PedidoSerializer
     
     def create(self, request, *args, **kwargs):
@@ -163,6 +172,7 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
     def get_queryset(self):
         show = self.request.query_params.get('show')
         queryset = Pedido.objects.all()
+        
         if show =='true':
             return queryset.filter(deleted__isnull=False)
         
@@ -180,7 +190,7 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
 
 class PedidoUpdateView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
-    permission_classes = (IsAuthenticated)
+    permission_classes = [IsAuthenticated]
     queryset = Pedido.objects.all()
     lookup_field = 'id'
 
@@ -194,6 +204,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
             try:
                 # Get User
                 user_id = Token.objects.get(key= request.auth.key).user
+
                 # Validate Customer Id
                 result_customer = PedidoSerializer.validate_customer(request.data['customer'])
                 if result_customer == False:
@@ -243,7 +254,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
                     instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
-                    instance.codi_user  = 1 if self.request.data.get("user") is None else User.objects.get(id = self.request.data.get("user")) 
+                    instance.codi_user  = user_id
                     instance.deleted    = isdeleted
                     instance.updated    = datetime.now()
                     instance.save()
@@ -270,7 +281,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     orderTracking = PedidoSeguimiento(
                         codi_pedi = Pedido.get_queryset().get(id = instance.id),
                         codi_esta = PedidoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
-                        codi_user = User.objects.get(id = request.user.id),
+                        codi_user = user_id,
                         fech_segu = datetime.now(),
                         created   = datetime.now(),
                         obse_segu = 'Actualizando el Pedido',
@@ -419,3 +430,156 @@ class PedidoHistorico(generics.CreateAPIView):
             return message.SaveMessage('Pedido guardado Exitosamente')
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
+
+class PedidoHistoricoUpdateView(generics.UpdateAPIView):
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Pedido.objects.all()
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Pedido Historico no Registrado")
+        else:
+            try:
+                # Get User
+                user_id = Token.objects.get(key= request.auth.key).user
+                
+                # Validate Customer Id
+                result_customer = PedidoSerializer.validate_customer(request.data['customer'])
+                if result_customer == False:
+                    return message.NotFoundMessage("Codigo de Cliente no Registrado")
+                
+                # Validate Customer and Invoice Number
+                result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'],instance.id)
+                if result_invoice == True:
+                    return message.ShowMessage("Número de factura ya registrada al Cliente")
+                
+                # Validate Id Currency
+                result_currency = MonedaSerializer.check_Currency_Id(request.data['currency'])
+                if result_currency == False:
+                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
+                
+                # Check Details Orders
+                if request.data['details'] is None:
+                    return message.NotFoundMessage("Items del Pedido es requerido")
+                else:
+                    result_details = PedidoDetalle.checkDetails(self.request.data.get("details"))
+                    if result_details == False:
+                        return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
+                
+                # State Deleted
+                state_deleted = None
+                if instance.deleted:
+                    state_deleted = True
+                
+                Deleted = request.data['erased']
+                if Deleted:                    
+                    isdeleted = datetime.now()
+                else:    
+                    isdeleted = None
+                
+                enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
+                ServiceImage = ServiceImageView()
+                json_foto_pedi = None
+                if request.data['photo'] is not None:
+                    listImagesProv  = request.data['photo']
+                    json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
+
+                invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
+                with transaction.atomic():
+                
+                    instance.codi_clie  = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
+                    instance.feim_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_printer") is None else self.request.data.get("date_printer")
+                    instance.mont_pedi  = self.request.data.get("amount")
+                    instance.desc_pedi  = None if self.request.data.get("discount") is None else self.request.data.get("discount")
+                    instance.tota_pedi  = self.request.data.get("total") - (self.request.data.get("total")*(self.request.data.get("porcentage")/100))
+                    instance.obse_pedi  = None if self.request.data.get("observations") is None else self.request.data.get("observations")
+                    instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
+                    instance.codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                    instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 7)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    instance.codi_tipe  = 2 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                    instance.nufa_pedi  = None if invoice_number is None else invoice_number
+                    instance.mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage")
+                    instance.codi_user  = user_id
+                    instance.deleted    = isdeleted
+                    instance.updated    = datetime.now()
+                    instance.save()
+
+                    # Save Details
+                    if isinstance(self.request.data.get("details"),list):
+                        _total = 0
+                        # Delete Items Order Detail
+                        PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
+                        for detail in self.request.data.get("details"):
+                            # Save Order Detail
+                            pedidoDetalle = PedidoDetalle(
+                                codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                                codi_arti = Articulo.get_queryset().get(id = detail['article']),
+                                cant_pede = detail['quantity'],
+                                prec_pede = detail['price'],
+                                desc_pede = detail['discount'],
+                                moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                                created = datetime.now(),
+                                updated = datetime.now(),
+                            )
+                            pedidoDetalle.save()
+                    # Register Tracking
+                    orderTracking = PedidoSeguimiento(
+                        codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                        codi_esta = PedidoEstatus.get_queryset().get(id = 7),
+                        codi_user = user_id,
+                        fech_segu = datetime.now(),
+                        created   = datetime.now(),
+                        obse_segu = 'Actualizando el Pedido Historico',
+                    )
+                    orderTracking.save()
+                    return message.UpdateMessage({"id":instance.id})
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Actualizar: "+str(e))
+
+class PedidoSearchView(django_filters.FilterSet):
+    q = django_filters.CharFilter(method='my_custom_filter', label="Search")
+
+    # serializer_class = PedidoSerializer
+    # permission_classes = [IsAuthenticated]
+    # queryset = Pedido.get_queryset()
+    # pagination_class = SmallResultsSetPagination
+    # ordering = ['-id']
+    class Meta:
+        model = Cliente
+        fields = ['q']
+
+    def my_custom_filter(self, queryset, name, value):
+        result = queryset.filter(
+            Q(loc__icontains=value) |
+            Q(loc_codi_ante__icontains=value) | 
+            Q(loc_codi_natu__prno_pena__icontains=value) | 
+            Q(loc_codi_natu__seno_pena__icontains=value) | 
+            Q(loc_codi_natu__prap_pena__icontains=value) | 
+            Q(loc_codi_natu__seap_pena__icontains=value) | 
+            Q(loc_codi_juri__riff_peju__icontains=value) |
+            Q(loc_codi_juri__raso_peju__icontains=value) |
+            Q(loc_codi_juri__dofi_peju__icontains=value) |
+            Q(loc_codi_natu__cedu_pena__icontains=value) |
+            Q(loc_codi_natu__razo_natu__icontains=value) |
+            Q(loc_codi_natu__codi_ciud__nomb_ciud__icontains=value) |
+            Q(loc_codi_natu__codi_sect__nomb_sect__icontains=value) |
+            Q(loc_codi_juri__codi_ciud__nomb_ciud__icontains=value) |
+            Q(loc_codi_juri__codi_sect__nomb_sect__icontains=value)
+        )
+        print("Result====",result)
+        return result
+
+    # def get_queryset(self):
+    #     queryset = None
+
+    #     _search = self.request.query_params.get("search",None)
+    #     if _search is not None:
+    #         _result_customer = Cliente.get_queryset().filter()
+    #         queryset = Pedido.filter(codi_clie__in = _result_customer)
+    #     return queryset
