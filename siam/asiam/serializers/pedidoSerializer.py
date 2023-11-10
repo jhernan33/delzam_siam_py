@@ -26,8 +26,8 @@ class PedidoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pedido
-        field = ('id','codi_mone')
-        exclude =['created','deleted','updated','esta_ttus','nufa_pedi','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
+        field = ('id','codi_mone','deleted')
+        exclude =['created','updated','esta_ttus','nufa_pedi','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
     
     def to_representation(self, instance):
         # Call Serializers
@@ -78,15 +78,20 @@ class PedidoSerializer(serializers.ModelSerializer):
     '''
         Validate Customer and Invoice Number
     '''
-    def validate_customer_invoice_number(customerId,invoiceNumber):
-        if isinstance(invoiceNumber,str) is None:
+    def validate_customer_invoice_number(customerId,invoiceNumber,_id:None):
+        if _id is not None:
             invoiceNumber =  str(invoiceNumber).upper().split()
-        queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
+            queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber).exclude(id=_id)
+        else:
+            if isinstance(invoiceNumber,str) is None:
+                invoiceNumber =  str(invoiceNumber).upper().split()
+                queryset = Pedido.get_queryset().filter(codi_clie = customerId).filter(nufa_pedi =invoiceNumber)
+
         if queryset.count() == 0:
             return False
         else:
             return True
-    
+        
 class PedidoComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
