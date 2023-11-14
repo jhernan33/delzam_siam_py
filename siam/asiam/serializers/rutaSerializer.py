@@ -21,6 +21,7 @@ class RutaBasicSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         route = Ruta.objects.filter(id=instance.id).values('nomb_ruta')
         
+        representation['id'] = instance.id
         representation['description'] = (route[0]['nomb_ruta']).strip().upper()
         return representation
 
