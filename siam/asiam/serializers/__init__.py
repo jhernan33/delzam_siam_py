@@ -13,7 +13,7 @@ from .sucursalSerializer import SucursalSerializer
 from .tipoClienteSerializer import TipoClienteSerializer
 from .familiaSerializer import FamiliaSerializer, FamiliaComboSerializer
 from .subFamiliaSerializer import SubFamiliaSerializer, SubFamiliaComboSerializer
-from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer
+from .zonaSerializer import ZonaSerializer, ZonaBasicSerializer, ZonaComboSerializer
 from .vendedorSerializer import VendedorSerializer, VendedorBasicSerializer
 from .rutaSerializer import RutaSerializer, RutaBasicSerializer, RutaClienteSerializer
 from .unidadMedidaSerializer import UnidadMedidaSerializer

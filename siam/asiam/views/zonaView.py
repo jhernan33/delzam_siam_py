@@ -7,8 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-from asiam.models import Zona
-from asiam.serializers import ZonaSerializer, ZonaBasicSerializer
+from asiam.models import Zona, Ruta
+from asiam.serializers import ZonaSerializer, ZonaBasicSerializer, ZonaComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
@@ -61,7 +61,7 @@ class ZonaCreateView(generics.CreateAPIView):
 
 
 class ZonaRetrieveView(generics.RetrieveAPIView):
-    serializer_class = ZonaSerializer
+    serializer_class = ZonaBasicSerializer
     permission_classes = ()
     queryset = Zona.get_queryset()
     lookup_field = 'id'
@@ -115,6 +115,15 @@ class ZonaUpdateView(generics.UpdateAPIView):
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
                 instance.save()
+
+                # Save Detail Routes
+                is_many = isinstance(self.request.data.get("route"),list)
+                if is_many:
+                    # Search Routes
+                    for k in self.request.data.get("route"):
+                        # Update Position Route
+                        Ruta.get_queryset().filter(id = k['id']).update(posi_ruta = k['posi_rout'], updated = datetime.now())
+                            
                 return message.UpdateMessage({"id":instance.id,"desc_zona":instance.desc_zona})
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
@@ -135,7 +144,7 @@ class ZonaDestroyView(generics.DestroyAPIView):
 
 class ZonaComboView(generics.ListAPIView):
     permission_classes = []
-    serializer_class = ZonaBasicSerializer
+    serializer_class = ZonaComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
