@@ -25,6 +25,7 @@ class FileUploadAPIView(APIView):
             serializer.save(created = datetime.now())
             # Run Migration from dbf to Postgresql MEDIA_URL
             enviroment = os.path.realpath(settings.MEDIA_URL)
+            # Place Enviroment
             place = enviroment+'/INRA05.DBF'
             ImportDataArticle(place)
             # Remove File
