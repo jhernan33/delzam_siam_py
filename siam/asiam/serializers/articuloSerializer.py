@@ -51,7 +51,7 @@ class ArticuloSerializer(serializers.ModelSerializer):
         representation['cos2_arti'] = 0 if instance.por2_arti is None  else instance.ppre_arti*(instance.por2_arti/100)+instance.ppre_arti
         representation['cos3_arti'] = 0 if instance.por3_arti is None  else instance.ppre_arti*(instance.por3_arti/100)+instance.ppre_arti
         representation['cos4_arti'] = 0 if instance.por4_arti is None  else instance.ppre_arti*(instance.por4_arti/100)+instance.ppre_arti
-
+        representation['quantity_on_hand'] = 0 if instance.exis_arti is None else instance.exis_arti
         queryset = ArticuloProveedor.objects.filter(codi_arti=instance.id)
         result = ArticuloProveedorSerializerBasics(queryset, many=True).data
         representation['supplier'] = {"data":result}
