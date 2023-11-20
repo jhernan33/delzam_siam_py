@@ -1,0 +1,8 @@
+from rest_framework import serializers
+from asiam.models import UploadedFile
+
+class FileUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedFile
+        fields = ('file','uploaded_on',)
+        

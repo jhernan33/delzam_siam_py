@@ -43,3 +43,4 @@ from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSe
 from .cuentaSerializer import CuentaBasicSerializer, CuentaComboSerializer, CuentaSerializer
 from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSerializer, TasaCambioSerializer
 from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerializer
+from .fileUploadSerializer import FileUploadSerializer
