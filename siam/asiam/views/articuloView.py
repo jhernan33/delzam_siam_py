@@ -7,6 +7,8 @@ from requests import delete
 from rest_framework import generics
 from rest_framework import filters as df
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.parsers import FormParser,MultiPartParser
 from django.core.exceptions import ObjectDoesNotExist
 
 from asiam.models import Articulo
@@ -18,6 +20,8 @@ from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
 from django.conf import settings
 from django.conf.urls.static import static
+import dbf
+from datetime import datetime, timezone
 
 
 class ArticuloListView(generics.ListAPIView):
@@ -83,7 +87,6 @@ class ArticuloRetrieveView(generics.RetrieveAPIView):
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-
 class ArticuloUpdateView(generics.UpdateAPIView):
     serializer_class = ArticuloSerializer
     permission_classes =  []
@@ -143,3 +146,42 @@ class ArticuloComboView(generics.ListAPIView):
         else:
             queryset = Articulo.get_queryset().filter(codi_sufa=self.request.query_params.get('subfamily')).order_by('desc_arti')
         return queryset
+
+'''
+    Import data from system clipper
+'''
+def ImportDataArticle(_source):
+    import math
+
+    table = dbf.Table(_source)
+    table.open(dbf.READ_WRITE)
+    for record in table:
+        # print([record.A05REF, record.COD_ANT, record.A05DES])
+        article_code = str(record.COD_ANT).strip().upper()
+        article_quantity_min = record.A05MIN
+        article_quantity_max = record.A05MAX
+        article_porcentague_one = record.A05POR1
+        article_porcentague_two = record.A05POR2
+        article_porcentague_three = record.A05POR3
+        article_porcentague_four = record.A05POR4
+        article_existence = record.A05EXI
+        article_cost = record.A05COS
+        article_reference = str(record.A05REF1).strip().upper()
+        if article_cost is not None:
+            # article_cost = float("{:.2f}",format(record.A05COS))
+            # article_cost = round(float(record.A05COS),2)
+            my_formatter = "{0000:.2f}"
+            article_cost = my_formatter.format(record.A05COS)
+            #article_cost = float(format(record.A05COS, '.2f'))
+            result = Articulo.objects.filter(codi_arti = article_reference).update(
+                updated = datetime.now()
+                , ppre_arti = article_cost
+                , cmin_arti = article_quantity_min
+                , cmax_arti = article_quantity_max
+                , por1_arti = article_porcentague_one
+                , por2_arti = article_porcentague_two
+                , por3_arti = article_porcentague_three
+                , por4_arti = article_porcentague_four
+                , exis_arti = article_existence
+                )
+    table.close()

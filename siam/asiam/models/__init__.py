@@ -44,3 +44,4 @@ from .banco import Banco
 from .cuenta import Cuenta
 from .tasaCambio import TasaCambio
 from .base import Base
+from .upload import UploadedFile

@@ -2,7 +2,7 @@ from .base import Base
 from django.db import models
 
 class Articulo(Base):
-    codi_arti = models.CharField    ('Codigo del Articulo SIAE',max_length=50, null=True, blank=True, default='', unique=True)
+    codi_arti = models.CharField    ('Codigo del Articulo',max_length=50, null=True, blank=True, default='', unique=True)
     idae_arti = models.CharField    ('Codigo del Articulo SIAE',max_length=15, null=True, blank=True)
     desc_arti = models.CharField    ('Nombre del Articulo',    max_length=250, null=True, blank=True, default='', unique=False)
     coba_arti = models.CharField    ('Codigo de Barras del Articulo',    max_length=30, null=True, blank=True, default='')
@@ -12,7 +12,7 @@ class Articulo(Base):
     por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
     por4_arti = models.DecimalField ('Porcentaje de Utilidad 4 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
-    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
+    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=20,decimal_places=2,null=True, blank=True)
     codi_sufa = models.ForeignKey(
         'SubFamilia',
         on_delete=models.CASCADE,
@@ -39,6 +39,7 @@ class Articulo(Base):
         related_name='ivti_general',
         blank=True, null=True
     )
+    exis_arti = models.IntegerField('Existencia del Articulo',null=True, blank=True)
 
     class Meta:
         ordering = ['desc_arti']
