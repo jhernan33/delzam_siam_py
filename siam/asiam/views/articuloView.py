@@ -165,14 +165,14 @@ def ImportDataArticle(_source):
         article_porcentague_three = record.A05POR3
         article_porcentague_four = record.A05POR4
         article_existence = record.A05EXI
-        article_cost = record.A05COS
+        article_cost = record.A05NUE
         article_description = str(record.A05DES).strip().upper()
         article_reference = str(record.A05REF1).strip().upper()
         if article_cost is not None:
             # article_cost = float("{:.2f}",format(record.A05COS))
             # article_cost = round(float(record.A05COS),2)
             my_formatter = "{0000:.2f}"
-            article_cost = my_formatter.format(record.A05COS)
+            article_cost = my_formatter.format(record.A05NUE)
             #article_cost = float(format(record.A05COS, '.2f'))
             result = Articulo.objects.filter(codi_arti = article_reference).update(
                 updated = datetime.now()
