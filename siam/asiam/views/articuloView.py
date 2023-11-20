@@ -157,7 +157,7 @@ def ImportDataArticle(_source):
     table.open(dbf.READ_WRITE)
     for record in table:
         # print([record.A05REF, record.COD_ANT, record.A05DES])
-        article_code = str(record.COD_ANT).strip().upper()
+        article_code = str(record.A05REF).strip().upper()
         article_quantity_min = record.A05MIN
         article_quantity_max = record.A05MAX
         article_porcentague_one = record.A05POR1
