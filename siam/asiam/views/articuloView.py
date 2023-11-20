@@ -166,6 +166,7 @@ def ImportDataArticle(_source):
         article_porcentague_four = record.A05POR4
         article_existence = record.A05EXI
         article_cost = record.A05COS
+        article_description = str(record.A05DES).strip().upper()
         article_reference = str(record.A05REF1).strip().upper()
         if article_cost is not None:
             # article_cost = float("{:.2f}",format(record.A05COS))
@@ -183,5 +184,6 @@ def ImportDataArticle(_source):
                 , por3_arti = article_porcentague_three
                 , por4_arti = article_porcentague_four
                 , exis_arti = article_existence
+                , desc_arti = article_description
                 )
     table.close()
