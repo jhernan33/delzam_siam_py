@@ -185,5 +185,7 @@ def ImportDataArticle(_source):
                 , por4_arti = article_porcentague_four
                 , exis_arti = article_existence
                 , desc_arti = article_description
+                # Code Old
+                , idae_arti = article_code
                 )
     table.close()
