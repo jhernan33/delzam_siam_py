@@ -49,6 +49,8 @@ coverage.xml
 .venv/
 env
 ../../env/
+../.env
+
 
 # Developers
 *.sw*
