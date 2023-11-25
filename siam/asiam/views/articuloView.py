@@ -235,17 +235,18 @@ def ImportDataArticleSiae(_source):
                     )
                 object_article.save()
             else:
-                result_article.updated = datetime.now()
-                result_article.ppre_arti = article_cost
-                #, cmin_arti = article_quantity_min
-                #, cmax_arti = article_quantity_max
-                result_article.por1_arti = article_porcentague_one
-                result_article.por2_arti = article_porcentague_two
-                result_article.por3_arti = article_porcentague_three
-                #, por4_arti = article_porcentague_four
-                # , exis_arti = article_existence
-                result_article.desc_arti = article_description
-                # Code Old
-                result_article.idae_arti = article_code
-                result_article.save()
+                result_article.update(
+                    updated = datetime.now()
+                    ,ppre_arti = article_cost
+                    #, cmin_arti = article_quantity_min
+                    #, cmax_arti = article_quantity_max
+                    ,por1_arti = article_porcentague_one
+                    ,por2_arti = article_porcentague_two
+                    ,por3_arti = article_porcentague_three
+                    #, por4_arti = article_porcentague_four
+                    # , exis_arti = article_existence
+                    ,desc_arti = article_description
+                    # Code Old
+                    ,idae_arti = article_code
+                )
     
