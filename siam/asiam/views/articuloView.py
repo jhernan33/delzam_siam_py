@@ -157,7 +157,7 @@ def ImportDataArticle(_source):
     table.open(dbf.READ_WRITE)
     for record in table:
         # print([record.A05REF, record.COD_ANT, record.A05DES])
-        article_code = str(record.COD_ANT).strip().upper()
+        article_code = str(record.A05REF).strip().upper()
         article_quantity_min = record.A05MIN
         article_quantity_max = record.A05MAX
         article_porcentague_one = record.A05POR1
@@ -165,13 +165,14 @@ def ImportDataArticle(_source):
         article_porcentague_three = record.A05POR3
         article_porcentague_four = record.A05POR4
         article_existence = record.A05EXI
-        article_cost = record.A05COS
+        article_cost = record.A05NUE
+        article_description = str(record.A05DES).strip().upper()
         article_reference = str(record.A05REF1).strip().upper()
         if article_cost is not None:
             # article_cost = float("{:.2f}",format(record.A05COS))
             # article_cost = round(float(record.A05COS),2)
             my_formatter = "{0000:.2f}"
-            article_cost = my_formatter.format(record.A05COS)
+            article_cost = my_formatter.format(record.A05NUE)
             #article_cost = float(format(record.A05COS, '.2f'))
             result = Articulo.objects.filter(codi_arti = article_reference).update(
                 updated = datetime.now()
@@ -183,5 +184,68 @@ def ImportDataArticle(_source):
                 , por3_arti = article_porcentague_three
                 , por4_arti = article_porcentague_four
                 , exis_arti = article_existence
+                , desc_arti = article_description
+                # Code Old
+                , idae_arti = article_code
                 )
     table.close()
+
+'''
+    Import Data From CSV SIAE
+'''
+def ImportDataArticleSiae(_source):
+    import os
+    import pandas as pd
+    enviroment = os.path.realpath(settings.UPLOAD_FILES)
+
+    df = pd.read_csv(enviroment+_source)
+
+    # print(df.to_string())
+    frame = pd.DataFrame(df,columns=['codi_arti','desc_arti','por1_arti','por2_arti','por3_arti','ppre_arti','exgr_arti','dire_foto','idae_arti','esta__tus'])
+
+    for k in frame.index:
+        article_code = str(frame['idae_arti'][k]).strip().upper()
+        # article_quantity_min = record.A05MIN
+        # article_quantity_max = record.A05MAX
+        article_porcentague_one = frame['por1_arti'][k]
+        article_porcentague_two = frame['por2_arti'][k]
+        article_porcentague_three = frame['por3_arti'][k]
+        # article_porcentague_four = record.A05POR4
+        # article_existence = frame['codi_arti'][k]
+        article_cost = frame['ppre_arti'][k]
+        article_description = str(frame['desc_arti'][k]).strip().upper()
+        article_reference = str(frame['codi_arti'][k]).strip().upper()
+        if article_cost is not None:
+            # article_cost = float("{:.2f}",format(record.A05COS))
+            # article_cost = round(float(record.A05COS),2)
+            my_formatter = "{0000:.2f}"
+            article_cost = my_formatter.format(article_cost)
+            result_article = Articulo.objects.filter(codi_arti = article_reference)
+            if result_article.count() <= 0:
+                # Save Article
+                object_article = Articulo(
+                    created  = datetime.now()
+                    , ppre_arti = article_cost
+                    , por1_arti = article_porcentague_one
+                    , por2_arti = article_porcentague_two
+                    , por3_arti = article_porcentague_three
+                    , desc_arti = article_description
+                    # Code Old
+                    , idae_arti = article_code
+                    )
+                object_article.save()
+            else:
+                result_article.updated = datetime.now()
+                result_article.ppre_arti = article_cost
+                #, cmin_arti = article_quantity_min
+                #, cmax_arti = article_quantity_max
+                result_article.por1_arti = article_porcentague_one
+                result_article.por2_arti = article_porcentague_two
+                result_article.por3_arti = article_porcentague_three
+                #, por4_arti = article_porcentague_four
+                # , exis_arti = article_existence
+                result_article.desc_arti = article_description
+                # Code Old
+                result_article.idae_arti = article_code
+                result_article.save()
+    

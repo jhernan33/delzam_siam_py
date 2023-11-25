@@ -317,8 +317,10 @@ urlpatterns = [
     # Date
     path('date/', views.DateRetrieveView.as_view(), name='date_get'),
 
-    # Upload File
+    # Upload File Dbf
     path('upload/', views.FileUploadAPIView.as_view(), name='upload_article'),
+    # Upload File CSV
+    path('importSiae/',views.FileUploadSiaeView.as_view(), name='upload_siae_article'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),

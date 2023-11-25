@@ -80,13 +80,22 @@ class PedidoCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
+            invoice_number = None
+            currency_id = None
+            json_foto_pedi = None
+            discount = 0
+            _amount = 0
+
             # Get User
             user_id = Token.objects.get(key= request.auth.key).user
             
             # Validate Customer and Invoice Number
-            result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],request.data['invoice_number'])
-            if result_invoice == True:
-                return message.ShowMessage("Número de factura ya registrada al Cliente")
+            if 'invoice_number' in request.data:
+                invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
+                result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],invoice_number)
+                if result_invoice == True:
+                    return message.ShowMessage("Número de factura ya registrada al Cliente")
+            
             
             # Validate Customer Id
             result_customer = PedidoSerializer.validate_customer(request.data['customer'])
@@ -94,9 +103,11 @@ class PedidoCreateView(generics.CreateAPIView):
                 return message.NotFoundMessage("Codigo de Cliente no Registrado")
                 
             # Validate Id Currency
-            result_currency = MonedaSerializer.check_Currency_Id(request.data['currency'])
-            if result_currency == False:
-                return message.NotFoundMessage("Codigo de Monenda no Registrado")
+            if 'currency' in request.data:
+                currency_id = request.data['currency']
+                result_currency = MonedaSerializer.check_Currency_Id(currency_id)
+                if result_currency == False:
+                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
             
             # Check Details Orders
             if request.data['details'] is None:
@@ -108,23 +119,30 @@ class PedidoCreateView(generics.CreateAPIView):
             
             enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
             ServiceImage = ServiceImageView()
-            json_foto_pedi = None
-            if request.data['photo'] is not None:
+            
+            if 'photo' in request.data:
                 listImagesProv  = request.data['photo']
                 json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
-            invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
+            
+            # Velidate Discount
+            if 'discount' in request.data:
+                try:
+                    discount = 0 if self.request.data.get("discount") is None else float(self.request.data.get("discount"))
+                except ValueError:
+                    discount = 0
+
             with transaction.atomic():
                 order = Pedido(
                     codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
                     ,fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
-                    ,mont_pedi  = self.request.data.get("amount")
-                    ,desc_pedi  = self.request.data.get("discount")
-                    ,tota_pedi  = self.request.data.get("total")
+                    #,mont_pedi  = self.request.data.get("amount")
+                    #,desc_pedi  = self.request.data.get("discount")
+                    #,tota_pedi  = self.request.data.get("total")
                     ,obse_pedi  = self.request.data.get("observations")
                     ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
-                    ,codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
+                    ,codi_mone  = Moneda.get_queryset().get(id = 1) if currency_id is None else Moneda.get_queryset().get(id = currency_id)
                     ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
-                    ,codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    ,codi_tipe  = PedidoTipo.get_queryset().get(id = 1)  if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage") 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
                     ,nufa_pedi  = None if invoice_number is None else invoice_number
@@ -135,20 +153,31 @@ class PedidoCreateView(generics.CreateAPIView):
                 
                 # Save Details
                 if isinstance(self.request.data.get("details"),list):
-                    _total = 0
                     for detail in self.request.data.get("details"):
+                        detail_quantity = int(detail['quantity'])
+                        detail_discount = float(detail['discount'])
+                        detail_price = float(detail['price'])
                         # Guardar el Detalle
                         pedidoDetalle = PedidoDetalle(
                             codi_pedi = Pedido.get_queryset().get(id = order.id),
                             codi_arti = Articulo.get_queryset().get(id = detail['article']),
-                            cant_pede = detail['quantity'],
-                            prec_pede = detail['price'],
-                            desc_pede = detail['discount'],
-                            moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                            cant_pede = detail_quantity,
+                            prec_pede = detail_price,
+                            desc_pede = detail_discount,
+                            moto_pede = (detail_quantity * detail_price) - detail_discount,
                             created = datetime.now(),
                         )
                         pedidoDetalle.save()
-                
+                        _amount = _amount + ((detail_quantity * detail_price) - detail_discount)
+
+                # Update total in Order
+                    Pedido.objects.filter(id = order.id).update(
+                        mont_pedi = _amount
+                        , desc_pedi = discount
+                        , tota_pedi = _amount - (_amount * (discount / 100))
+                        , updated = datetime.now()
+                    )
+
                 # Register Tracking
                 orderTracking = PedidoSeguimiento(
                     codi_pedi = Pedido.get_queryset().get(id = order.id),
@@ -159,7 +188,7 @@ class PedidoCreateView(generics.CreateAPIView):
                     obse_segu = 'Creando el Pedido',
                 )
                 orderTracking.save()
-            return message.SaveMessage('Pedido guardado Exitosamente')
+            return message.SaveMessage({'message':'Pedido guardado exitosamente','id':order.id})
         except Exception as e:
             return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
             

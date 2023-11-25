@@ -43,4 +43,4 @@ from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, Cu
 from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView
 from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserUpdateView, ProfileUserDestroyView
 from .dateView import DateRetrieveView
-from .fileUploadView import FileUploadAPIView
+from .fileUploadView import FileUploadAPIView, FileUploadSiaeView

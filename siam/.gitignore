@@ -48,6 +48,10 @@ coverage.xml
 ../.env
 .env/
 .venv/
+env
+../../env/
+../.env
+
 
 # Developers
 *.sw*
@@ -59,3 +63,5 @@ coverage.xml
 
 media/
 *.log
+
+*/__pycache__/*
