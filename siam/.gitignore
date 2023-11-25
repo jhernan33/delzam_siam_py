@@ -62,3 +62,5 @@ env
 
 media/
 *.log
+
+*/__pycache__/*
