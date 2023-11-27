@@ -24,3 +24,7 @@ class SubFamilia(Base):
 
     def get_queryset():
         return SubFamilia.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance SubFamilia """
+    def getInstanceSubFamily(Id):
+        return SubFamilia.objects.get(id = Id)

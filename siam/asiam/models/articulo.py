@@ -49,7 +49,7 @@ class Articulo(Base):
     def save(self, **kwargs):
         self.idae_arti = self.idae_arti.upper().strip()
         self.desc_arti = self.desc_arti.upper().strip()
-        self.exgr_arti = self.exgr_arti.upper().strip()
+        self.exgr_arti = self.exgr_arti.upper().strip() if isinstance(self.exgr_arti, str) else self.exgr_arti 
         return super(Articulo,self).save(**kwargs)
 
     def get_queryset():
