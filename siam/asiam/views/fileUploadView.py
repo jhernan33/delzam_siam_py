@@ -46,10 +46,10 @@ class FileUploadSiaeView(APIView):
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid():
             serializer.save(created = datetime.now())
-            # Run Migration from csv to Postgresql MEDIA_URL
-            # enviroment = os.path.realpath(settings.MEDIA_URL)
+            # Run Migration from dbf to Postgresql MEDIA_URL
+            enviroment = os.path.realpath(settings.MEDIA_URL)
             # Place Enviroment
-            place = '/article.csv'
+            place = enviroment+'/article.csv'
             ImportDataArticleSiae(place)
             # Remove File
             pathlib.Path(place).unlink(missing_ok=True)
