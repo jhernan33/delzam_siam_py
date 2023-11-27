@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import FormParser,MultiPartParser
 from django.core.exceptions import ObjectDoesNotExist
 
-from asiam.models import Articulo
+from asiam.models import Articulo, Presentacion, SubFamilia
 from asiam.serializers import ArticuloSerializer, ArticuloComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -201,7 +201,7 @@ def ImportDataArticleSiae(_source):
     df = pd.read_csv(enviroment+_source)
 
     # print(df.to_string())
-    frame = pd.DataFrame(df,columns=['codi_arti','desc_arti','por1_arti','por2_arti','por3_arti','ppre_arti','exgr_arti','dire_foto','idae_arti','esta__tus'])
+    frame = pd.DataFrame(df,columns=['codi_arti','desc_arti','por1_arti','por2_arti','por3_arti','ppre_arti','exgr_arti','dire_foto','idae_arti','codi_sufa','esta__tus'])
 
     for k in frame.index:
         article_code = str(frame['idae_arti'][k]).strip().upper()
@@ -215,6 +215,7 @@ def ImportDataArticleSiae(_source):
         article_cost = frame['ppre_arti'][k]
         article_description = str(frame['desc_arti'][k]).strip().upper()
         article_reference = str(frame['codi_arti'][k]).strip().upper()
+        article_subfamily = frame['codi_sufa'][k]
         if article_cost is not None:
             # article_cost = float("{:.2f}",format(record.A05COS))
             # article_cost = round(float(record.A05COS),2)
@@ -232,6 +233,10 @@ def ImportDataArticleSiae(_source):
                     , desc_arti = article_description
                     # Code Old
                     , idae_arti = article_code
+                    , codc_pres = Presentacion.getInstancePresentacion(1)
+                    , codv_pres = Presentacion.getInstancePresentacion(1)
+                    , codi_sufa = SubFamilia.getInstanceSubFamily(article_subfamily)
+                    , codi_arti = article_reference
                     )
                 object_article.save()
             else:

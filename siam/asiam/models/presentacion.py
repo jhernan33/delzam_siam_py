@@ -19,3 +19,7 @@ class Presentacion(Base):
 
     def get_queryset():
         return Presentacion.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance Presentacion """
+    def getInstancePresentacion(Id):
+        return Presentacion.objects.get(id = Id)
