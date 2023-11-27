@@ -50,6 +50,8 @@ coverage.xml
 env
 ../../env/
 ../.env
+../env/
+
 
 
 # Developers
