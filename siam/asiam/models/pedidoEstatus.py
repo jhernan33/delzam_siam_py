@@ -21,3 +21,7 @@ class PedidoEstatus(Base):
             if queryset.count() > 0:
                 queryset_order_state = queryset
         return queryset_order_state
+    
+    """ Get Instance Pedido Estatus """
+    def getInstanceOrderState(Id):
+        return PedidoEstatus.objects.get(id = Id)

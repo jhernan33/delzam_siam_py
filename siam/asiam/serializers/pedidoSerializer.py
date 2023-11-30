@@ -1,7 +1,7 @@
 import os
 from typing import List
 from rest_framework import serializers
-from asiam.models import Pedido,Cliente, Moneda, PedidoEstatus, PedidoDetalle
+from asiam.models import Pedido,Cliente, Moneda, PedidoEstatus, PedidoDetalle, PedidoTipo
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -53,9 +53,12 @@ class PedidoSerializer(serializers.ModelSerializer):
         representation['discount'] = instance.desc_pedi
         representation['total_amount'] = instance.tota_pedi
         representation['pourcentage'] = instance.mopo_pedi
-        # State
+        # State Order
         representation['order_state_id'] = instance.codi_espe.id
         representation['order_state_all'] = PedidoEstatus.searchOrderStateById(instance.codi_espe.id).values()
+        # Type Order
+        representation['type_order_id'] = instance.codi_tipe.id
+        representation['type_order_all'] = PedidoTipo.searchOrderTypeById(instance.codi_tipe.id).values()
         # Detail
         queryset = PedidoDetalle.searchDetailOrderById(instance.id)
         result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data

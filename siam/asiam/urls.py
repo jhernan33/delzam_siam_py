@@ -281,6 +281,7 @@ urlpatterns = [
     path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
     path('pedido/historico/',                            views.PedidoHistorico.as_view(),   name='pedido_historico'),
     path('pedido/historico/update/<int:id>',             views.PedidoHistoricoUpdateView.as_view(),   name='pedido_historico_update'),
+    path('pedido/state/update/<int:id>',                 views.PedidoUpdateStatusView.as_view(),   name='pedido_update_status'),
     # path('pedido/historico/search/',                     views.PedidoSearchView,   name='pedido_search'),
 
     # Bank
