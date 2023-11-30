@@ -27,12 +27,24 @@ class FileUploadAPIView(APIView):
         if serializer.is_valid():
             serializer.save(created = datetime.now())
             # Run Migration from dbf to Postgresql MEDIA_URL
-            enviroment = os.path.realpath(settings.MEDIA_URL)
+            enviroment = os.path.realpath(settings.UPLOAD_FILES)+'/'
             # Place Enviroment
-            place = enviroment+'/INRA05.DBF'
-            ImportDataArticle(place)
+            ext = '.'+'dbf'
+            nameFile = str(uuid.uuid4())[:12]
+            file_name_new = enviroment + nameFile+str(ext)
+            file_name_old = request.FILES['file']
+            serializer.save(created = datetime.now(),)
+            file_name_old = enviroment + str(file_name_old)
+
+            try:
+                os.rename(file_name_old,file_name_new)
+            except FileExistsError:
+                os.remove(file_name_new)
+                # rename it
+                os.rename(file_name_old, file_name_new)
+            ImportDataArticle(file_name_new)
             # Remove File
-            pathlib.Path(place).unlink(missing_ok=True)
+            pathlib.Path(file_name_new).unlink(missing_ok=True)
 
             return message.SaveMessage('Importacion realizado Exitosamente')
 
@@ -49,12 +61,24 @@ class FileUploadSiaeView(APIView):
         if serializer.is_valid():
             serializer.save(created = datetime.now())
             # Run Migration from dbf to Postgresql MEDIA_URL
-            enviroment = os.path.realpath(settings.MEDIA_URL)
+            enviroment = os.path.realpath(settings.UPLOAD_FILES)+'/'
             # Place Enviroment
-            place = enviroment+'/article.csv'
-            ImportDataArticleSiae(place)
+            ext = '.'+'csv'
+            nameFile = str(uuid.uuid4())[:12]
+            file_name_new = enviroment + nameFile+str(ext)
+            file_name_old = request.FILES['file']
+            serializer.save(created = datetime.now(),)
+            file_name_old = enviroment + str(file_name_old)
+
+            try:
+                os.rename(file_name_old,file_name_new)
+            except FileExistsError:
+                os.remove(file_name_new)
+                # rename it
+                os.rename(file_name_old, file_name_new)
+            ImportDataArticleSiae(file_name_new)
             # Remove File
-            pathlib.Path(place).unlink(missing_ok=True)
+            pathlib.Path(file_name_new).unlink(missing_ok=True)
 
             return message.SaveMessage('Importacion realizado exitosamente')
 
