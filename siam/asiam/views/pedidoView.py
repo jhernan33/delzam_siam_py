@@ -647,7 +647,10 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
     #         _result_customer = Cliente.get_queryset().filter()
     #         queryset = Pedido.filter(codi_clie__in = _result_customer)
     #     return queryset
-    
+
+'''
+    Change Order Type
+'''
 class PedidoUpdateStatusView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
     permission_classes = [IsAuthenticated]
