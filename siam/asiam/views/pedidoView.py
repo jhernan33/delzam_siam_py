@@ -651,7 +651,7 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
 '''
     Change Order Type
 '''
-class PedidoUpdateStatusView(generics.UpdateAPIView):
+class PedidoUpdateStatusView(generics.RetrieveAPIView):
     serializer_class = PedidoSerializer
     permission_classes = [IsAuthenticated]
     queryset = Pedido.objects.all()
@@ -698,3 +698,29 @@ class PedidoUpdateStatusView(generics.UpdateAPIView):
                     return message.UpdateMessage("Estatus actualizado exitosamente")
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
+
+class PedidoReportView(generics.ListAPIView):
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Pedido.get_queryset()
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        queryset = None
+        
+        # Check Parameter Seller
+        _seller = self.request.query_params.get('seller',None)
+        if type(_seller) == str:
+            # Convert Str to List
+            #_seller_customer = _seller.split(',')
+            _seller_customer = tuple(map(int, _seller.split(',')))
+            #   Get Parameter Routes
+            _route = self.request.query_params.get('route',None)
+            if _route is not None:
+                #_route = _route.split(',')
+                _route = tuple(map(int, _route.split(',')))
+
+                # _detail = Ruta.get_queryset().filter(id in _route).values("nomb_ruta","codi_zona").select_related(RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id"))
+                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)    # .select_related(Ruta,"ruta__id")
+                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
+                return queryset
