@@ -692,6 +692,6 @@ class PedidoUpdateStatusView(generics.UpdateAPIView):
                         obse_segu = 'Cambiando el Estatus de Pedido al de: ',
                     )
                     orderTracking.save()
-                    return message.UpdateMessage("Pedido actualizado exitosamente")
+                    return message.UpdateMessage("Estatus actualizado exitosamente")
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
