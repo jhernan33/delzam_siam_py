@@ -37,7 +37,7 @@ from .pedidoTipoView import PedidoTipoListView, PedidoTipoCreateView, PedidoTipo
 from .pedidoEstatusView import PedidoEstatusListView, PedidoEstatusCreateView, PedidoEstatusUpdateView, PedidoEstatusRetrieveView, PedidoEstatusDestroyView, PedidoEstatusComboView
 from .monedaView import MonedaListView, MonedaCreateView, MonedaUpdateView, MonedaRetrieveView, MonedaDestroyView, MonedaComboView
 from .formaPagoView import FormaPagoListView, FormaPagoCreateView, FormaPagoUpdateView, FormaPagoRetrieveView, FormaPagoDestroyView, FormaPagoComboView
-from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView, PedidoHistorico, PedidoHistoricoUpdateView # , PedidoSearchView
+from .pedidoView import PedidoListView, PedidoCreateView, PedidoRetrieveView, PedidoUpdateView, PedidoDestroyView, PedidoComboView, PedidoHistorico, PedidoHistoricoUpdateView, PedidoUpdateStatusView # , PedidoSearchView
 from .bancoView import BancoListView, BancoCreateView, BancoRetrieveView, BancoUpdateView, BancoDestroyView, BancoComboView
 from .cuentaView import CuentaListView, CuentaCreateView, CuentaRetrieveView, CuentaUpdateView, CuentaDestroyView, CuentaComboView
 from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambioRetrieveView, TasaCambioUpdateView, TasaCambioDestroyView, TasaCambioComboView

@@ -54,7 +54,8 @@ env
 ../env
 .env
 .venv
-env/
+../env/
+../env
 venv/
 ENV/
 env.bak/

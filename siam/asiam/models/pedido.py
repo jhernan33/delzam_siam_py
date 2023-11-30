@@ -51,3 +51,7 @@ class Pedido(Base):
     def get_queryset():
         return Pedido.objects.all().filter(deleted__isnull=True)
     
+    """ Get Instance Pedido """
+    def getInstanceOrder(Id):
+        return Pedido.objects.get(id = Id)
+    

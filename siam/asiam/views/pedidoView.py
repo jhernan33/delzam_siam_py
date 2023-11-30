@@ -25,7 +25,7 @@ from django.db.models import Q
 import django_filters
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
-from asiam.serializers import PedidoSerializer, PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer
+from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -647,3 +647,51 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
     #         _result_customer = Cliente.get_queryset().filter()
     #         queryset = Pedido.filter(codi_clie__in = _result_customer)
     #     return queryset
+    
+class PedidoUpdateStatusView(generics.UpdateAPIView):
+    serializer_class = PedidoSerializer
+    permission_classes = [IsAuthenticated]
+    queryset = Pedido.objects.all()
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        message = BaseMessage
+        try:
+            instance = self.get_object()
+        except Exception as e:
+            return message.NotFoundMessage("Id de Pedido no Registrado")
+        else:
+            try:
+                state_id = None
+
+                # Get User
+                user_id = Token.objects.get(key= request.auth.key).user
+
+                # Validate Customer and Invoice Number
+                if 'state' in request.data:
+                    state_id = self.request.data.get("state")
+                    result_state = PedidoTipoSerializer.validate_codi_tipe(state_id)
+                    if result_state == False:
+                        return message.NotFoundMessage("Id de Estatus no Registrado")
+                    
+                    state_id = PedidoTipo.getInstanceOrderType(state_id)
+                # Update Order
+                with transaction.atomic():
+                    instance.codi_tipe  = state_id
+                    instance.codi_user  = user_id
+                    instance.updated    = datetime.now()
+                    instance.save()
+
+                    # Register Tracking
+                    orderTracking = PedidoSeguimiento(
+                        codi_pedi = Pedido.getInstanceOrder(instance.id),
+                        codi_esta = PedidoEstatus.getInstanceOrderState(4),
+                        codi_user = user_id,
+                        fech_segu = datetime.now(),
+                        created   = datetime.now(),
+                        obse_segu = 'Cambiando el Estatus de Pedido al de: ',
+                    )
+                    orderTracking.save()
+                    return message.UpdateMessage("Pedido actualizado exitosamente")
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))

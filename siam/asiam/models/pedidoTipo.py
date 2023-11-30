@@ -24,3 +24,18 @@ class PedidoTipo(Base):
             return False
         else:
             return True
+    
+    """ Get Instance Tipo Pedido """
+    def getInstanceOrderType(Id):
+        return PedidoTipo.objects.get(id = Id)
+    
+    '''
+        Search Order Type by Id
+    '''
+    def searchOrderTypeById(_id:None):
+        queryset_order_type = []
+        if _id is not None:
+            queryset = PedidoTipo.get_queryset().filter(id = _id)
+            if queryset.count() > 0:
+                queryset_order_type = queryset
+        return queryset_order_type

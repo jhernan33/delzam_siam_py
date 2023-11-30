@@ -29,6 +29,16 @@ class PedidoTipoSerializer(serializers.ModelSerializer):
         else:
             return True
     
+    '''
+        Validate State Id 
+    '''
+    def validate_codi_tipe(value):
+        queryset = PedidoTipo.get_queryset().filter(id = value)
+        if queryset.count() == 0:
+            return False
+        else:
+            return True
+    
 
 class PedidoTipoComboSerializer(serializers.ModelSerializer):
     class Meta:
