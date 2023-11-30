@@ -22,6 +22,7 @@ from asiam.models import Familia
 from asiam.serializers import FamiliaSerializer, FamiliaComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from django.conf import settings
 
 
 class FamiliaListView(generics.ListAPIView):
@@ -127,3 +128,44 @@ class FamiliaRestore(generics.UpdateAPIView):
                 return message.RestoreMessage(serializer.data)
             else:
                 return message.ErrorMessage("Error al Intentar Restaurar Familia")
+
+'''
+    Import Data From CSV Family
+'''
+def ImportDataFamily(_source):
+    import os
+    import pandas as pd
+    # enviroment = os.path.realpath(settings.UPLOAD_FILES)
+
+    df = pd.read_csv(_source)
+
+    frame = pd.DataFrame(df,columns=['codi_fami','desc_fami','abae_fami','agru_fami','esta__tus'])
+
+    for k in frame.index:
+        family_code = frame['codi_fami'][k]
+        family_description = str(frame['desc_fami'][k]).strip().upper()
+        family_abreviation = str(frame['abae_fami'][k]).strip().upper()
+        family_group = frame['agru_fami'][k]
+        family_status = None if frame['esta__tus'][k]!='E' else datetime.now()
+
+        result_family = Familia.objects.filter(id = family_code)
+        if result_family.count() <= 0:
+            # Save Family
+            object_family = Familia(
+                created  = datetime.now()
+                , id = family_code
+                , desc_fami = family_description
+                , abae_fami = family_abreviation
+                , agru_fami = family_group
+                , deleted = family_status
+                )
+            object_family.save()
+        else:
+            result_family.update(
+                updated = datetime.now()
+                , desc_fami = family_description
+                , abae_fami = family_abreviation
+                , agru_fami = family_group
+                , deleted = family_status
+            )
+    

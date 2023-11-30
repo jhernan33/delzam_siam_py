@@ -19,3 +19,7 @@ class Familia(Base):
 
     def get_queryset():
         return Familia.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance Family """
+    def getInstanceFamily(Id):
+        return Familia.objects.get(id = Id)

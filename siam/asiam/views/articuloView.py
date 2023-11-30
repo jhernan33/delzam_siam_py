@@ -216,6 +216,8 @@ def ImportDataArticleSiae(_source):
         article_description = str(frame['desc_arti'][k]).strip().upper()
         article_reference = str(frame['codi_arti'][k]).strip().upper()
         article_subfamily = frame['codi_sufa'][k]
+        article_status = None if frame['esta__tus'][k]!='E' else datetime.now()
+
         if article_cost is not None:
             # article_cost = float("{:.2f}",format(record.A05COS))
             # article_cost = round(float(record.A05COS),2)
@@ -237,6 +239,7 @@ def ImportDataArticleSiae(_source):
                     , codv_pres = Presentacion.getInstancePresentacion(1)
                     , codi_sufa = SubFamilia.getInstanceSubFamily(article_subfamily)
                     , codi_arti = article_reference
+                    , deleted = article_status
                     )
                 object_article.save()
             else:
@@ -253,5 +256,6 @@ def ImportDataArticleSiae(_source):
                     ,desc_arti = article_description
                     # Code Old
                     ,idae_arti = article_code
+                    ,deleted = article_status
                 )
     

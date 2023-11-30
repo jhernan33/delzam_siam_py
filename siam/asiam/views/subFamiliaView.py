@@ -12,7 +12,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 
-from asiam.models import SubFamilia
+from asiam.models import SubFamilia, Familia
 from asiam.serializers import SubFamiliaSerializer, SubFamiliaComboSerializer
 from asiam.paginations import SmallResultsSetPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -101,6 +101,46 @@ class SubFamiliaComboView(generics.ListAPIView):
         if self.request.query_params.get('id') == None:
             queryset = SubFamilia.get_queryset().order_by('desc_sufa')
         else:
-            queryset = SubFamilia.get_queryset().filter(codi_fami=self.request.query_params.get('id')).order_by('desc_sufa')
+            queryset = SubFamilia.get_queryset().filter(codi_sufa=self.request.query_params.get('id')).order_by('desc_sufa')
         return queryset
-0
+'''
+    Import Data SubFamily
+'''
+def ImportDataSubFamily(_source):
+    import os
+    import pandas as pd
+
+    df = pd.read_csv(_source)
+
+    frame = pd.DataFrame(df,columns=['codi_sufa','codi_fami','desc_sufa','abae_sufa','agru_sufa','esta__tus'])
+
+    for k in frame.index:
+        subfamily_code = frame['codi_sufa'][k]
+        family_code = Familia.getInstanceFamily(frame['codi_fami'][k])
+        subfamily_description = str(frame['desc_sufa'][k]).strip().upper()
+        subfamily_abreviation = str(frame['abae_sufa'][k]).strip().upper()
+        subfamily_group = 'N' if len(str(frame['agru_sufa'][k]).strip())>1 else str(frame['agru_sufa'][k]).strip().upper()
+        subfamily_status = None if frame['esta__tus'][k]!='E' else datetime.now()
+        result_subfamily = SubFamilia.objects.filter(id = subfamily_code)
+        if result_subfamily.count() <= 0:
+            # Save subFamily
+            object_subfamily = SubFamilia(
+                created  = datetime.now()
+                , id = subfamily_code
+                , codi_fami = family_code
+                , desc_sufa = subfamily_description
+                , abae_sufa = subfamily_abreviation
+                , agru_sufa = subfamily_group
+                , deleted = subfamily_status
+                )
+            object_subfamily.save()
+        else:
+            result_subfamily.update(
+                updated = datetime.now()
+                , codi_fami = family_code
+                , desc_sufa = subfamily_description
+                , abae_sufa = subfamily_abreviation
+                , agru_sufa = subfamily_group
+                , deleted = subfamily_status
+            )
+    

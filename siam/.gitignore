@@ -52,7 +52,7 @@ env
 ../../env/
 ../.env
 ../env/
-
+../env
 
 
 # Developers
