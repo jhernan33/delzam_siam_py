@@ -321,6 +321,10 @@ urlpatterns = [
     path('upload/', views.FileUploadAPIView.as_view(), name='upload_article'),
     # Upload File CSV
     path('importSiae/',views.FileUploadSiaeView.as_view(), name='upload_siae_article'),
+    # Upload File CSV Family
+    path('importFamily/',views.FileUploadFamily.as_view(), name='upload_family'),
+    # Upload File CSV SubFamily
+    path('importSubFamily/',views.FileUploadSubFamily.as_view(), name='upload_sub_family'),
 
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),
