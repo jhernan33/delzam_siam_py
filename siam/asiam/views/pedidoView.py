@@ -231,18 +231,33 @@ class PedidoUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Pedido no Registrado")
         else:
             try:
+                invoice_number = None
+                currency_id = None
+                json_foto_pedi = None
+                discount = 0
+                _amount = 0
+
                 # Get User
                 user_id = Token.objects.get(key= request.auth.key).user
 
+                # Validate Customer and Invoice Number
+                if 'invoice_number' in request.data:
+                    invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
+                    result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],invoice_number)
+                    if result_invoice == True:
+                        return message.ShowMessage("Número de factura ya registrada al Cliente")
+                
                 # Validate Customer Id
                 result_customer = PedidoSerializer.validate_customer(request.data['customer'])
                 if result_customer == False:
                     return message.NotFoundMessage("Codigo de Cliente no Registrado")
                     
                 # Validate Id Currency
-                result_currency = MonedaSerializer.check_Currency_Id(request.data['currency'])
-                if result_currency == False:
-                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
+                if 'currency' in request.data:
+                    currency_id = request.data['currency']
+                    result_currency = MonedaSerializer.check_Currency_Id(currency_id)
+                    if result_currency == False:
+                        return message.NotFoundMessage("Codigo de Monenda no Registrado")
                 
                 # Check Details Orders
                 if request.data['details'] is None:
@@ -252,6 +267,13 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     if result_details == False:
                         return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
                 
+                # Velidate Discount
+                if 'discount' in request.data:
+                    try:
+                        discount = 0 if self.request.data.get("discount") is None else float(self.request.data.get("discount"))
+                    except ValueError:
+                        discount = 0
+
                 # State Deleted
                 state_deleted = None
                 if instance.deleted:
@@ -262,7 +284,6 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     isdeleted = datetime.now()
                 else:    
                     isdeleted = None
-                
 
                 enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
                 ServiceImage = ServiceImageView()
@@ -270,19 +291,22 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 if request.data['photo'] is not None:
                     listImagesProv  = request.data['photo']
                     json_foto_pedi  = ServiceImage.saveImag(listImagesProv,enviroment)
+
+                # Update Order
                 with transaction.atomic():
-                
                     instance.codi_clie  = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
                     instance.fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
-                    instance.mont_pedi  = self.request.data.get("amount")
-                    instance.desc_pedi  = self.request.data.get("discount")
-                    instance.tota_pedi  = self.request.data.get("total")
+                    # instance.mont_pedi  = self.request.data.get("amount")
+                    # instance.desc_pedi  = self.request.data.get("discount")
+                    # instance.tota_pedi  = self.request.data.get("total")
                     instance.obse_pedi  = self.request.data.get("observations")
                     instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
-                    instance.codi_mone  = 1 if self.request.data.get("currency") is None else Moneda.get_queryset().get(id =self.request.data.get("currency"))
-                    instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    instance.codi_mone  = Moneda.get_queryset().get(id = 1) if currency_id is None else Moneda.get_queryset().get(id = currency_id)
+                    instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 4)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
                     instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    instance.mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage") 
                     instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
+                    instance.nufa_pedi  = None if invoice_number is None else invoice_number
                     instance.codi_user  = user_id
                     instance.deleted    = isdeleted
                     instance.updated    = datetime.now()
@@ -294,18 +318,29 @@ class PedidoUpdateView(generics.UpdateAPIView):
                         # Delete Items Order Detail
                         PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
                         for detail in self.request.data.get("details"):
+                            detail_quantity = int(detail['quantity'])
+                            detail_discount = float(detail['discount'])
+                            detail_price = float(detail['price'])
                             # Save Order Detail
                             pedidoDetalle = PedidoDetalle(
                                 codi_pedi = Pedido.get_queryset().get(id = instance.id),
                                 codi_arti = Articulo.get_queryset().get(id = detail['article']),
-                                cant_pede = detail['quantity'],
-                                prec_pede = detail['price'],
-                                desc_pede = detail['discount'],
-                                moto_pede = (detail['quantity'] * detail['price']) - detail['discount'],
+                                cant_pede = detail_quantity,
+                                prec_pede = detail_price,
+                                desc_pede = detail_discount,
+                                moto_pede = (detail_quantity * detail_price) - detail_discount,
                                 created = datetime.now(),
                                 updated = datetime.now(),
                             )
                             pedidoDetalle.save()
+                            _amount = _amount + ((detail_quantity * detail_price) - detail_discount)
+                        # Update total in Order
+                        Pedido.objects.filter(id = instance.id).update(
+                            mont_pedi = _amount
+                            , desc_pedi = discount
+                            , tota_pedi = _amount - (_amount * (discount / 100))
+                            , updated = datetime.now()
+                        )
                     # Register Tracking
                     orderTracking = PedidoSeguimiento(
                         codi_pedi = Pedido.get_queryset().get(id = instance.id),
@@ -316,7 +351,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                         obse_segu = 'Actualizando el Pedido',
                     )
                     orderTracking.save()
-                    return message.UpdateMessage({"id":instance.id})
+                    return message.UpdateMessage("Pedido actualizado exitosamente")
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
