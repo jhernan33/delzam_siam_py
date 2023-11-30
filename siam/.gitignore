@@ -52,7 +52,13 @@ env
 ../.env
 ../env/
 ../env
-
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Developers
 *.sw*
