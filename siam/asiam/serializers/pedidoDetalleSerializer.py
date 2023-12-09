@@ -46,7 +46,12 @@ class PedidoDetalleComboSerializer(serializers.ModelSerializer):
     
 class PedidoDetalleBasicSerializer(serializers.ModelSerializer):
     codi_arti = ArticuloSerializer()
+    total = serializers.SerializerMethodField(method_name='total_general')
+
     class Meta:
         model = PedidoDetalle
-        field = ('id','codi_pedi','codi_arti','cant_pede','prec_pede','desc_pede','moto_pede')
+        field = ('id','codi_pedi','codi_arti','cant_pede','prec_pede','desc_pede','moto_pede','total','count')
         exclude = ['created','updated','esta_ttus','deleted']
+
+    def total_general(self, instance):
+        return instance.moto_pede - instance.desc_pede

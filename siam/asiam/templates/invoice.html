@@ -1,0 +1,86 @@
+{% extends "base-only-pdf.html" %}
+{% block content %}
+<div>
+  <span class="derecha"><h6 >Serie Número: {{ invoice_number }}</h6></span>
+  <br/><br/>
+  <span class="derecha"><h6 >Fecha Emisión: {{ fecha|date:"d/m/Y"}}</h6></span>
+</div>
+<br/><br/>
+
+    <aside>
+      <address id="customer">
+        <span class="textTitle">CLIENTE:</span><span class="textNormal">{{ customer }}</span>
+      </address>
+      <address id="address">
+        <span class="textTitle">DIRECCIÓN:</span><span class="textNormal">{{ customer_address }}</span>
+      </address>
+      <address id="phone">
+        <span class="textTitle">TELÉFONOS:</span><span class="textNormal">{{ customer_phone }}</span>
+      </address>
+    </aside>
+    <table class="table">
+      <thead class="thead">
+        <tr>
+          <th>N</t  h>
+          <th>DESCRIPCION</th>
+          <th>CANTIDAD</th>
+          <th>PRECIO</th>
+          <th>SUBTOTAL</th>
+          <th>DESCUENTO</th>
+          <th>TOTAL</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key in data.detail %}
+          <tr>
+            <td style="width:2%">{{ forloop.counter }}</td>
+            <td style="width: 100%;">{{ key.codi_arti.desc_arti}}</td>
+            <td class="numbers">{{ key.cant_pede}}</td>
+            <td class="numbers">{{ key.prec_pede}}</td>
+            <td class="numbers">{{ key.moto_pede}}</td>
+            <td class="numbers">{{ key.desc_pede}}</td>
+            <td class="numbers">{{ key.total }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6">TOTAL</td>
+          <!-- <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td> -->
+          <td class="numbers">{{ total }}</td>
+        </tr>
+      </tfoot>
+  </table>
+  <!--
+  <footer>
+    <table id="total">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Due by</th>
+          <th>Account number</th>
+          <th style="width:100%; text-align: end;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="width:3.5%"></td>
+          <td style="width:47%"></td>
+          <td style="width:10%"></td>
+          <td style="width:13%"></td> 
+          <td style="width:10%">May 10, 2018</td>
+          <td style="width:10%">132 456 789 012</td>
+          <td style="width:100% ; text-align: end;">{{ total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </footer>
+-->
+{% endblock %}

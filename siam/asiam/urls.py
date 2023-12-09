@@ -332,6 +332,6 @@ urlpatterns = [
     path('report/export',                       views.export_pdf,                       name="export-pdf"),
     path('report/export/customer',              views.ClienteExportFile,                name='Report Pdf Customer'),
     # Report Order
-    path('report/order/',                       views.PedidoReportView.as_view(),      name='Report_order'),
+    path('report/order/',                       views.PedidoReport,      name='Report_order'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

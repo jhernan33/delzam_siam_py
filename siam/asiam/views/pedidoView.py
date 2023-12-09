@@ -25,7 +25,7 @@ from django.db.models import Q
 import django_filters
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
-from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer
+from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -651,7 +651,7 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
 '''
     Change Order Type
 '''
-class PedidoUpdateStatusView(generics.RetrieveAPIView):
+class PedidoUpdateStatusView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
     permission_classes = [IsAuthenticated]
     queryset = Pedido.objects.all()
@@ -699,28 +699,38 @@ class PedidoUpdateStatusView(generics.RetrieveAPIView):
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
-class PedidoReportView(generics.ListAPIView):
-    serializer_class = PedidoSerializer
-    permission_classes = [IsAuthenticated]
-    queryset = Pedido.get_queryset()
-    lookup_field = 'id'
+def PedidoReport(request):
+    if request.headers.get('Authorization') is not None:
+        show = request.GET.get('show',None)
+        _id = request.GET.get('id',None)
+        if _id is not None:
+            customer_all = None
+            queryset = Pedido.getOrderFilterById(_id,show)
+            customer_all = queryset.get('customer_all')
+            customer_address = queryset.get('customer_address')
+            customer_phone = queryset.get('customer_phone')
+            invoice_number = queryset.get('invoice_number')
+            total_amount = queryset.get('total_amount')
+        # result = queryset
+        _date = datetime.now().date()
+        # Create Context 
+        context = {
+                "data":queryset
+                , "invoice_number": invoice_number
+                , "customer":customer_all
+                , 'customer_address':customer_address
+                , 'customer_phone': customer_phone
+                , "total":total_amount
+                , "fecha":_date
+                }
+        html = render_to_string("invoice.html", context)
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = "inline; report.pdf"
 
-    def get_queryset(self):
-        queryset = None
-        
-        # Check Parameter Seller
-        _seller = self.request.query_params.get('seller',None)
-        if type(_seller) == str:
-            # Convert Str to List
-            #_seller_customer = _seller.split(',')
-            _seller_customer = tuple(map(int, _seller.split(',')))
-            #   Get Parameter Routes
-            _route = self.request.query_params.get('route',None)
-            if _route is not None:
-                #_route = _route.split(',')
-                _route = tuple(map(int, _route.split(',')))
+        # font_config = FontConfiguration()
+        HTML(string=html).write_pdf(response)
 
-                # _detail = Ruta.get_queryset().filter(id in _route).values("nomb_ruta","codi_zona").select_related(RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer).select_related(Ruta,"ruta__id"))
-                _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _route).filter(codi_vend__in = _seller_customer)    # .select_related(Ruta,"ruta__id")
-                queryset = Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail) # .order_by('codi_ante')
-                return queryset
+        return response
+    else:
+        message = BaseMessage
+        return message.UnauthorizedMessage("para ver el Reporte")

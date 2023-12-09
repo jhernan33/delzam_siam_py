@@ -30,42 +30,40 @@ class PedidoSerializer(serializers.ModelSerializer):
         exclude =['created','updated','esta_ttus','nufa_pedi','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
     
     def to_representation(self, instance):
-        # Call Serializers
-        from asiam.serializers import PedidoDetalleBasicSerializer, PedidoDetalleSerializer
-        from asiam.serializers import UserBasicSerializer
-        from django.contrib.auth.models import User
 
         representation = super().to_representation(instance)
-        representation['customer_id'] = instance.codi_clie.id
-        representation['customer_all'] = Cliente.searchTypeCustomerId(instance.codi_clie.id)
-        representation['customer_without_rif'] = Cliente.searchTypeCustomerIdWithoutRIF(instance.codi_clie.id)
-        representation['customer_city'] = Cliente.searchCityCustomerId(instance.codi_clie.id)
-        representation['invoice_number'] = instance.nufa_pedi
-        representation['order_date'] = instance.fech_pedi
-        representation['print_date'] = instance.feim_pedi
-        representation['shipping_date'] = instance.fede_pedi
-        representation['expiration_date'] = instance.feve_pedi
-        representation['observations'] = instance.obse_pedi
-        representation['currency_id'] = instance.codi_mone.id
-        # All Currency
-        representation['currency_all'] = Moneda.searchCurrencyById(instance.codi_mone.id).values()
-        representation['amount'] = instance.mont_pedi
-        representation['discount'] = instance.desc_pedi
-        representation['total_amount'] = instance.tota_pedi
-        representation['pourcentage'] = instance.mopo_pedi
-        # State Order
-        representation['order_state_id'] = instance.codi_espe.id
-        representation['order_state_all'] = PedidoEstatus.searchOrderStateById(instance.codi_espe.id).values()
-        # Type Order
-        representation['type_order_id'] = instance.codi_tipe.id
-        representation['type_order_all'] = PedidoTipo.searchOrderTypeById(instance.codi_tipe.id).values()
-        # Detail
-        queryset = PedidoDetalle.searchDetailOrderById(instance.id)
-        result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
-        representation['detail'] = result_detail
-        # User Create
-        querysetUser = User.objects.filter(id = instance.codi_user.id)
-        representation['user'] = UserBasicSerializer(querysetUser, many=True).data
+        querysetPedido = {}
+        # Method Search Get Order By Id
+        querysetPedido = Pedido.getOrderFilterById(instance.id,False if instance.deleted is None else True)
+        if len(querysetPedido) > 0:
+            representation['customer_id'] = querysetPedido.get('customer_id').id
+            representation['customer_all'] = querysetPedido.get('customer_all')
+            representation['customer_without_rif'] = querysetPedido.get('customer_without_rif')
+            representation['customer_city'] = querysetPedido.get('customer_city')
+            representation['invoice_number'] = querysetPedido.get('invoice_number')
+            representation['order_date'] = querysetPedido.get('order_date')
+            representation['print_date'] = querysetPedido.get('print_date')
+            representation['shipping_date'] = querysetPedido.get('shipping_date')
+            representation['expiration_date'] = querysetPedido.get('expiration_date')
+            representation['observations'] = querysetPedido.get('observations')
+            representation['currency_id'] = querysetPedido.get('currency_id')
+            # All Currency
+            representation['currency_all'] = querysetPedido.get('currency_all')
+            representation['amount'] = querysetPedido.get('amount')
+            representation['discount'] = querysetPedido.get('discount')
+            representation['total_amount'] = querysetPedido.get('total_amount')
+            representation['pourcentage'] = querysetPedido.get('pourcentage')
+            # State Order
+            representation['order_state_id'] = querysetPedido.get('order_state_id')
+            representation['order_state_all'] = querysetPedido.get('order_state_all')
+            # Type Order
+            representation['type_order_id'] = querysetPedido.get('type_order_id')
+            representation['type_order_all'] = querysetPedido.get('type_order_all')
+            # Detail
+            representation['detail'] = querysetPedido.get('detail')
+            # User Create
+            representation['user'] = querysetPedido.get('user')
+
         return representation
     
     """
@@ -128,33 +126,49 @@ class PedidoHistoricoSerializer(serializers.ModelSerializer):
         exclude =['created','deleted','updated','esta_ttus','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user']
     
     def to_representation(self, instance):
-        # Call Serializers
-        from asiam.serializers import PedidoDetalleBasicSerializer, PedidoDetalleSerializer
-        from asiam.serializers import UserBasicSerializer
-        from django.contrib.auth.models import User
-
         representation = super().to_representation(instance)
-        representation['customer_id'] = instance.codi_clie.id
-        representation['customer_all'] = Cliente.searchTypeCustomerId(instance.codi_clie.id)
-        representation['order_date'] = instance.fech_pedi
-        representation['print_date'] = instance.feim_pedi
-        representation['shipping_date'] = instance.fede_pedi
-        representation['expiration_date'] = instance.feve_pedi
-        representation['observations'] = instance.obse_pedi
-        representation['currency_id'] = instance.codi_mone.id
-        # All Currency
-        representation['currency_all'] = Moneda.searchCurrencyById(instance.codi_mone.id).values()
-        representation['amount'] = instance.mont_pedi
-        representation['discount'] = instance.desc_pedi
-        representation['total_amount'] = instance.tota_pedi
-        # State
-        representation['order_state_id'] = instance.codi_espe.id
-        representation['order_state_all'] = PedidoEstatus.searchOrderStateById(instance.codi_espe.id).values()
-        # Detail
-        queryset = PedidoDetalle.searchDetailOrderById(instance.id)
-        result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
-        representation['detail'] = result_detail
-        # User Create
-        querysetUser = User.objects.filter(id = instance.codi_user.id)
-        representation['user'] = UserBasicSerializer(querysetUser, many=True).data
+        querysetPedido = {}
+        # Method Search Get Order By Id
+        querysetPedido = Pedido.getOrderFilterById(instance.id,False if instance.deleted is None else True)
+        if len(querysetPedido) > 0:
+            representation['customer_id'] = querysetPedido.get('customer_id').id
+            representation['customer_all'] = querysetPedido.get('customer_all')
+            representation['customer_without_rif'] = querysetPedido.get('customer_without_rif')
+            representation['customer_city'] = querysetPedido.get('customer_city')
+            representation['invoice_number'] = querysetPedido.get('invoice_number')
+            representation['order_date'] = querysetPedido.get('order_date')
+            representation['print_date'] = querysetPedido.get('print_date')
+            representation['shipping_date'] = querysetPedido.get('shipping_date')
+            representation['expiration_date'] = querysetPedido.get('expiration_date')
+            representation['observations'] = querysetPedido.get('observations')
+            representation['currency_id'] = querysetPedido.get('currency_id')
+            # All Currency
+            representation['currency_all'] = querysetPedido.get('currency_all')
+            representation['amount'] = querysetPedido.get('amount')
+            representation['discount'] = querysetPedido.get('discount')
+            representation['total_amount'] = querysetPedido.get('total_amount')
+            representation['pourcentage'] = querysetPedido.get('pourcentage')
+            # State Order
+            representation['order_state_id'] = querysetPedido.get('order_state_id')
+            representation['order_state_all'] = querysetPedido.get('order_state_all')
+            # Type Order
+            representation['type_order_id'] = querysetPedido.get('type_order_id')
+            representation['type_order_all'] = querysetPedido.get('type_order_all')
+            # Detail
+            representation['detail'] = querysetPedido.get('detail')
+            # User Create
+            representation['user'] = querysetPedido.get('user')
         return representation
+
+class PedidoReportSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Pedido
+        field = ('id')
+        exclude =['created','deleted','updated','esta_ttus'
+                ,'codi_mone','codi_clie','fech_pedi','feim_pedi'
+                ,'fede_pedi','feve_pedi','mont_pedi','desc_pedi'
+                ,'tota_pedi','obse_pedi','orig_pedi','codi_espe'
+                ,'codi_tipe','codi_user','foto_pedi','nufa_pedi'
+                ,'mopo_pedi'
+                ]

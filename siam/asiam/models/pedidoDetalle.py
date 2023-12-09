@@ -16,7 +16,7 @@ class PedidoDetalle(Base):
     prec_pede = models.DecimalField ('Precio del Articulo del Pedido Detalle',max_digits=7,decimal_places=2,null=True, blank=True)
     desc_pede = models.DecimalField ('Descuento del Articulo del Pedido Detalle',max_digits=7,decimal_places=2,null=True, blank=True)
     moto_pede = models.DecimalField ('Monto Total del Pedido Detalle',max_digits=7,decimal_places=2,null=True, blank=True)
-
+    
     class Meta:
         ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
@@ -25,6 +25,7 @@ class PedidoDetalle(Base):
     def get_queryset():
         return PedidoDetalle.objects.all().filter(deleted__isnull=True)
     
+
     '''
         Check key Exists in Details Items
     '''
