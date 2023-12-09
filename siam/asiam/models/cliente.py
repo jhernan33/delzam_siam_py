@@ -115,6 +115,32 @@ class Cliente(Base):
                     _addressCustomer = str(ciudad+" Sector: "+sector+" , "+juridica.dofi_peju).strip().upper()
             return _addressCustomer
     
+    # Search Numbers of Phone Customer
+    def searchPhoneCustomer(_id):
+        from asiam.models import Contacto, CategoriaContacto
+        from asiam.serializers import ContactoSoloNumeroSerializer
+        result_contact = []
+        contacts = ''
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')
+        for customer in _resultClient:
+            if customer['codi_natu'] != 1:
+                _filter = 'codi_natu'
+                _value = customer['codi_natu']
+            else:
+                _filter = 'codi_juri'
+                _value = customer['codi_juri']
+            # search Contact
+            _resultQueryContact = Contacto.get_queryset().filter(**{_filter:_value})
+            result_contact = ContactoSoloNumeroSerializer(_resultQueryContact, many=True).data
+            count = 1
+            for k in result_contact:
+                if count ==1:
+                    contacts+= str(k['desc_cont'])
+                else:
+                    contacts+= ' / '+str(k['desc_cont'])
+                count= count+1
+            return contacts
+    
     # Search City of Customer
     def searchCityCustomerId(_id):
         _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri')

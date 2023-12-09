@@ -55,3 +55,46 @@ class Pedido(Base):
     def getInstanceOrder(Id):
         return Pedido.objects.get(id = Id)
     
+    """ Get Data Order Filter By Id """
+    def getOrderFilterById(Id:int,show:bool):
+        from asiam.models import Moneda, PedidoEstatus, PedidoTipo, PedidoDetalle
+        from asiam.serializers import PedidoDetalleBasicSerializer, UserBasicSerializer
+        #   Declarate Dict
+        result_order = {}
+        queryset = Pedido.objects.filter(id = Id) if show == True else Pedido.get_queryset().filter(id = Id)
+        if queryset.count() > 0 :
+            for k in queryset.iterator():
+                result_order['customer_id'] = k.codi_clie
+                result_order['customer_all'] = Cliente.searchTypeCustomerId(k.codi_clie.id)
+                result_order['customer_without_rif'] = Cliente.searchTypeCustomerIdWithoutRIF(k.codi_clie.id)
+                result_order['customer_address'] = Cliente.searchAddressCustomer(k.codi_clie.id)
+                result_order['customer_city'] = Cliente.searchCityCustomerId(k.codi_clie.id)
+                # Search Contact Customer
+                result_order['customer_phone'] = Cliente.searchPhoneCustomer(k.codi_clie.id)
+                result_order['invoice_number'] = 'S/N' if k.nufa_pedi is None else k.nufa_pedi
+                result_order['order_date'] = k.fech_pedi
+                result_order['print_date'] = k.feim_pedi
+                result_order['shipping_date'] = k.fede_pedi
+                result_order['expiration_date'] = k.feve_pedi
+                result_order['observations'] = k.obse_pedi
+                result_order['currency_id'] = k.codi_mone.id
+                # All Currency
+                result_order['currency_all'] = Moneda.searchCurrencyById(k.codi_mone.id).values()
+                result_order['amount'] = k.mont_pedi
+                result_order['discount'] = k.desc_pedi
+                result_order['total_amount'] = k.tota_pedi
+                result_order['pourcentage'] = k.mopo_pedi
+                # State Order
+                result_order['order_state_id'] = k.codi_espe.id
+                result_order['order_state_all'] = PedidoEstatus.searchOrderStateById(k.codi_espe.id).values()
+                # Type Order
+                result_order['type_order_id'] = k.codi_tipe.id
+                result_order['type_order_all'] = PedidoTipo.searchOrderTypeById(k.codi_tipe.id).values()
+                # Detail
+                queryset = PedidoDetalle.searchDetailOrderById(k.id)
+                result_detail = PedidoDetalleBasicSerializer(queryset, many=True).data
+                result_order['detail'] = result_detail
+                # User Create
+                querysetUser = User.objects.filter(id = k.codi_user.id)
+                result_order['user'] = UserBasicSerializer(querysetUser, many=True).data
+        return result_order

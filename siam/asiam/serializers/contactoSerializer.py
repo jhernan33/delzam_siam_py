@@ -5,6 +5,12 @@ from rest_framework import serializers
 from asiam.models import Contacto
 from asiam.serializers import CategoriaContactoSerializer, ClienteSerializer, ProveedorSerializer, VendedorSerializer, NaturalSerializer, JuridicaSerializer, AccionistaSerializer
 
+class ContactoSoloNumeroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contacto
+        field = ('desc_cont')
+        exclude = ['id','codi_grco','codi_clie','codi_prov','codi_vend','codi_natu','codi_juri','codi_acci','deleted','created','updated','esta_ttus']
+
 class ContactoBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contacto

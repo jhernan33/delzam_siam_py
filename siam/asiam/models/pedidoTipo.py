@@ -39,3 +39,6 @@ class PedidoTipo(Base):
             if queryset.count() > 0:
                 queryset_order_type = queryset
         return queryset_order_type
+
+    def __str__(self): # new
+        return str(self.desc_tipe).upper().strip()

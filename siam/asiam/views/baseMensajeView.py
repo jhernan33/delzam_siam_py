@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
+from django.http import HttpResponse, JsonResponse
 
 class BaseMessage:
 
@@ -30,3 +31,10 @@ class BaseMessage:
     def RestoreMessage(self):
         update = {"message":"Restaurado Exitosamente","status":status.HTTP_200_OK,"data":self}
         return Response(update)
+
+    def UnauthorizedMessage(self):
+        data = {
+            'message': "No Autorizado, "+self,
+            'state': status.HTTP_401_UNAUTHORIZED
+        }
+        return JsonResponse(data)

@@ -25,7 +25,7 @@ from django.db.models import Q
 import django_filters
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
-from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer
+from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -698,3 +698,39 @@ class PedidoUpdateStatusView(generics.UpdateAPIView):
                     return message.UpdateMessage("Estatus actualizado exitosamente")
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
+
+def PedidoReport(request):
+    if request.headers.get('Authorization') is not None:
+        show = request.GET.get('show',None)
+        _id = request.GET.get('id',None)
+        if _id is not None:
+            customer_all = None
+            queryset = Pedido.getOrderFilterById(_id,show)
+            customer_all = queryset.get('customer_all')
+            customer_address = queryset.get('customer_address')
+            customer_phone = queryset.get('customer_phone')
+            invoice_number = queryset.get('invoice_number')
+            total_amount = queryset.get('total_amount')
+        # result = queryset
+        _date = datetime.now().date()
+        # Create Context 
+        context = {
+                "data":queryset
+                , "invoice_number": invoice_number
+                , "customer":customer_all
+                , 'customer_address':customer_address
+                , 'customer_phone': customer_phone
+                , "total":total_amount
+                , "fecha":_date
+                }
+        html = render_to_string("invoice.html", context)
+        response = HttpResponse(content_type="application/pdf")
+        response["Content-Disposition"] = "inline; report.pdf"
+
+        # font_config = FontConfiguration()
+        HTML(string=html).write_pdf(response)
+
+        return response
+    else:
+        message = BaseMessage
+        return message.UnauthorizedMessage("para ver el Reporte")
