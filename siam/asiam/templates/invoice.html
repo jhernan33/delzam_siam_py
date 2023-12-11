@@ -21,12 +21,13 @@
     <table class="table">
       <thead class="thead">
         <tr>
-          <th>N</t  h>
+          <th>N</th>
+          <th>COD.</th>
           <th>DESCRIPCION</th>
-          <th>CANTIDAD</th>
-          <th>PRECIO</th>
+          <th>CANT.</th>
+          <th>PRECIO UNIT.</th>
           <th>SUBTOTAL</th>
-          <th>DESCUENTO</th>
+          <th>DTO.</th>
           <th>TOTAL</th>
         </tr>
       </thead>
@@ -34,6 +35,7 @@
         {% for key in data.detail %}
           <tr>
             <td style="width:2%">{{ forloop.counter }}</td>
+            <td style="width: 10%;">{{ key.codi_arti.codi_arti}}</td>
             <td style="width: 100%;">{{ key.codi_arti.desc_arti}}</td>
             <td class="numbers">{{ key.cant_pede}}</td>
             <td class="numbers">{{ key.prec_pede}}</td>
@@ -45,12 +47,14 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="6">TOTAL</td>
+          <td colspan="4">RECBIE / FECHA</td>
+          <td colspan="4">TOTAL</td>
           <!-- <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td> -->
+          <td></td>
           <td class="numbers">{{ total }}</td>
         </tr>
       </tfoot>
