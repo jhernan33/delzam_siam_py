@@ -21,7 +21,7 @@
       <thead class="thead">
         <tr>
           <th style="width:2%">N</th>
-          <th style="width:7%;">COD.</th>
+          <th style="width:9%;">COD.</th>
           <th style="width:100%;">DESCRIPCION</th>
           <th>CANT.</th>
           <th>PRECIO UNIT.</th>
@@ -34,7 +34,7 @@
         {% for key in data.detail %}
           <tr>
             <td style="width:2%">{{ forloop.counter }}</td>
-            <td style="width:7%;">{{ key.codi_arti.idae_arti}}</td>
+            <td style="width:9%;">{{ key.codi_arti.idae_arti}}</td>
             <td class="textDescription">{{ key.codi_arti.desc_arti}}</td>
             <td class="numbers">{{ key.cant_pede}}</td>
             <td class="numbers">{{ key.prec_pede}}</td>
