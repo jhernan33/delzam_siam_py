@@ -34,7 +34,7 @@
         {% for key in data.detail %}
           <tr>
             <td style="width:2%">{{ forloop.counter }}</td>
-            <td style="width: 10%;">{{ key.codi_arti.codi_arti}}</td>
+            <td style="width: 7%;">{{ key.codi_arti.codi_arti}}</td>
             <td style="width: 100%;">{{ key.codi_arti.desc_arti}}</td>
             <td class="numbers">{{ key.cant_pede}}</td>
             <td class="numbers">{{ key.prec_pede}}</td>
@@ -47,13 +47,13 @@
       <tfoot>
         <tr>
           <td colspan="3">RECIBE</td>
-          <td colspan="1">FECHA</td>
+          <td colspan="2">FECHA</td>
           <!-- <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td> -->
-          <td colspan="3">TOTAL</td>
+          <td colspan="2">TOTAL</td>
           <td class="numbers">{{ total }}</td>
         </tr>
       </tfoot>
