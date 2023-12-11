@@ -27,6 +27,14 @@
                 content: "Página " counter(page) " de " counter(pages);
             }
         } */
+        footer {
+            /* subtract @page margin */
+            bottom: 2.5cm;
+            height: 2.5cm;
+            position: fixed;
+            left: 0;
+            right: 0;
+        }
 
         
         body {
@@ -56,6 +64,12 @@
             border-spacing: 0;
             /* width: 100%; */
             border: 1px solid #ddd;
+            padding: 1px;
+        }
+        .textDescription {
+            font-size: 1.4em;
+            font-weight: normal;
+            margin-left: 5px;
         }
         .textNormal { 
             font-size: 1.3em;
