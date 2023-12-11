@@ -1,9 +1,8 @@
 {% extends "base-only-pdf.html" %}
 {% block content %}
 <div>
-  <span class="derecha"><h6 >Serie Número: {{ invoice_number }}</h6></span>
-  <br/><br/>
-  <span class="derecha"><h6 >Fecha Emisión: {{ fecha|date:"d/m/Y"}}</h6></span>
+  <span class="izquierda"><h6 >FECHA: {{ fecha|date:"d/m/Y"}}</h6></span>
+  <span class="derecha"><h6 >N°: {{ invoice_number }}</h6></span>
 </div>
 <br/><br/>
 
@@ -47,14 +46,13 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="4">RECBIE / FECHA</td>
-          <td colspan="4">TOTAL</td>
+          <td colspan="4">RECIBE / FECHA</td>
           <!-- <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td>
           <td>&nbsp;</td> -->
-          <td></td>
+          <td colspan="4">TOTAL</td>
           <td class="numbers">{{ total }}</td>
         </tr>
       </tfoot>
