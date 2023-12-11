@@ -5,3 +5,4 @@ git:
 	git checkout Qa
 	git merge Dev
 	git push -u origin Qa
+	git checkout Dev
