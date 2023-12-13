@@ -2,7 +2,7 @@ from .base import Base
 from django.db import models
 
 class PedidoMensaje(Base):
-    desc_mens = models.CharField('Descripcion del Mensaje', max_length=200, null=True, blank=True)
+    desc_mens = models.CharField('Descripcion del Mensaje', max_length=254, null=True, blank=True)
     # Pedido, Factura, Proforma, Nota de Credito
     codi_tipe = models.ForeignKey(
         'PedidoTipo',
@@ -20,11 +20,11 @@ class PedidoMensaje(Base):
         return PedidoMensaje.objects.all().filter(deleted__isnull=True)
     
     def save(self, **kwargs):
-        self.desc_tipe = self.desc_tipe.lower().strip()
+        self.desc_mens = self.desc_mens.lower().strip()
         return super(PedidoMensaje,self).save(**kwargs)
     
-    def validate_desc_tipe(value):
-        queryset = PedidoMensaje.objects.filter(desc_tipe = value)
+    def validate_desc_mens(value):
+        queryset = PedidoMensaje.objects.filter(desc_mens = value)
         if queryset.count() == 0:
             return False
         else:

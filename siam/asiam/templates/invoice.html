@@ -17,7 +17,7 @@
         <span class="textTitle">TELÉFONOS:</span><span class="textNormal">{{ customer_phone }}</span>
       </address>
     </aside>
-    <table class="table">
+    <table class="customTable">
       <thead class="thead">
         <tr>
           <th style="width:2%">N</th>
@@ -44,46 +44,26 @@
           </tr>
         {% endfor %}
       </tbody>
-      <tfoot>
+      
+  </table>
+  
+  <footer>
+    <table class="customTable" id="total">
+      <thead class="thead">
         <tr>
           <td colspan="3">RECIBE:</td>
           <td colspan="3">FECHA:</td>
-          <!-- <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td> -->
-          <td colspan="1">TOTAL</td>
-          <td class="numbers">{{ total }}</td>
-        </tr>
-      </tfoot>
-  </table>
-  <!--
-  <footer>
-    <table id="total">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>Due by</th>
-          <th>Account number</th>
-          <th style="width:100%; text-align: end;">Total</th>
+          <td colspan="2">TOTAL</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="width:3.5%"></td>
-          <td style="width:47%"></td>
-          <td style="width:10%"></td>
-          <td style="width:13%"></td> 
-          <td style="width:10%">May 10, 2018</td>
-          <td style="width:10%">132 456 789 012</td>
-          <td style="width:100% ; text-align: end;">{{ total }}</td>
+          <td colspan="3"></td>
+          <td colspan="3"></td>
+          <td style="text-align: end;  font-size: 1.3em;" colspan="2">{{ total }}</td>
         </tr>
       </tbody>
     </table>
   </footer>
--->
+
 {% endblock %}

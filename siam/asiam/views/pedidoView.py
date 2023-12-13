@@ -107,7 +107,7 @@ class PedidoCreateView(generics.CreateAPIView):
                 currency_id = request.data['currency']
                 result_currency = MonedaSerializer.check_Currency_Id(currency_id)
                 if result_currency == False:
-                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
+                    return message.NotFoundMessage("Codigo de Moneda no Registrado")
             
             # Check Details Orders
             if request.data['details'] is None:

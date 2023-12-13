@@ -44,3 +44,4 @@ from .cuentaSerializer import CuentaBasicSerializer, CuentaComboSerializer, Cuen
 from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSerializer, TasaCambioSerializer
 from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerializer
 from .fileUploadSerializer import FileUploadSerializer
+from .pedidoMensajeSerializer import PedidoMensajeBasicSerializer, PedidoMensajeComboSerializer, PedidoMensajeSerializer

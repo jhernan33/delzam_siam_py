@@ -284,6 +284,15 @@ urlpatterns = [
     path('pedido/state/update/<int:id>',                 views.PedidoUpdateStatusView.as_view(),   name='pedido_update_status'),
     # path('pedido/historico/search/',                     views.PedidoSearchView,   name='pedido_search'),
 
+    # Order Message
+    path('pedidomensaje/',                              views.PedidoMensajeListView.as_view(),     name='pedidoMensaje'),
+    path('pedidomensaje/create/',                       views.PedidoMensajeCreateView.as_view(),   name='pedidoMensaje_create'),
+    path('pedidomensaje/<int:id>/',                     views.PedidoMensajeRetrieveView.as_view(), name='pedidoMensaje_show'),
+    path('pedidomensaje/update/<int:id>',               views.PedidoMensajeUpdateView.as_view(),   name='pedidoMensaje_update'),
+    path('pedidomensaje/delete/<int:id>',               views.PedidoMensajeDestroyView.as_view(),  name='pedidoMensaje_delete'),
+    path('pedidomensaje/combo/',                        views.PedidoMensajeComboView.as_view(),    name='pedidoMensaje_combo'),
+
+
     # Bank
     path('banco/',                                       views.BancoListView.as_view(),     name='banco'),
     path('banco/create/',                                views.BancoCreateView.as_view(),   name='banco_create'),
