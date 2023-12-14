@@ -44,3 +44,4 @@ from .tasaCambioView import TasaCambioListView, TasaCambioCreateView, TasaCambio
 from .profileUserView import ProfileUserListView, ProfileUserCreateView, ProfileUserRetrieveView, ProfileUserUpdateView, ProfileUserDestroyView
 from .dateView import DateRetrieveView
 from .fileUploadView import FileUploadAPIView, FileUploadSiaeView, FileUploadSubFamily, FileUploadFamily
+from .pedidoMensajeView import PedidoMensajeListView, PedidoMensajeCreateView, PedidoMensajeDestroyView, PedidoMensajeRetrieveView, PedidoMensajeUpdateView, PedidoMensajeComboView

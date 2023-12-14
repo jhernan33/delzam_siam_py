@@ -38,3 +38,7 @@ class BaseMessage:
             'state': status.HTTP_401_UNAUTHORIZED
         }
         return JsonResponse(data)
+    
+    def RequiredMessage(self):
+        message = {"message":"Campo "+self+" es requerido","status":status.HTTP_400_BAD_REQUEST,"data":"Campo "+self+" es requerido"}
+        return Response(message,status.HTTP_400_BAD_REQUEST)

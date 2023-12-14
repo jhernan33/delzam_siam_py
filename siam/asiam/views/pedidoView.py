@@ -24,7 +24,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 import django_filters
 
-from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento
+from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento, PedidoMensaje
 from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -107,7 +107,7 @@ class PedidoCreateView(generics.CreateAPIView):
                 currency_id = request.data['currency']
                 result_currency = MonedaSerializer.check_Currency_Id(currency_id)
                 if result_currency == False:
-                    return message.NotFoundMessage("Codigo de Monenda no Registrado")
+                    return message.NotFoundMessage("Codigo de Moneda no Registrado")
             
             # Check Details Orders
             if request.data['details'] is None:
@@ -704,6 +704,7 @@ def PedidoReport(request):
         show = request.GET.get('show',None)
         _id = request.GET.get('id',None)
         if _id is not None:
+            message = ''
             customer_all = None
             queryset = Pedido.getOrderFilterById(_id,show)
             customer_all = queryset.get('customer_all')
@@ -711,6 +712,11 @@ def PedidoReport(request):
             customer_phone = queryset.get('customer_phone')
             invoice_number = queryset.get('invoice_number')
             total_amount = queryset.get('total_amount')
+            result_message = PedidoMensaje.filterByCodiTipe(queryset.get('type_order_id'))
+            if result_message.count()> 0 :
+                for k in result_message:
+                    message = k
+
         # result = queryset
         _date = datetime.now().date()
         # Create Context 
@@ -722,6 +728,7 @@ def PedidoReport(request):
                 , 'customer_phone': customer_phone
                 , "total":total_amount
                 , "fecha":_date
+                , "message": message
                 }
         html = render_to_string("invoice.html", context)
         response = HttpResponse(content_type="application/pdf")

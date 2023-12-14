@@ -27,12 +27,20 @@
                 content: "Página " counter(page) " de " counter(pages);
             }
         } */
+        footer {
+            /* subtract @page margin */
+            bottom: 2.5cm;
+            height: 2.5cm;
+            position: fixed;
+            left: 0;
+            right: 0;
+        }
 
         
         body {
             width: 100% !important;
             height: 100%;
-            margin-top: 4.9cm;
+            margin-top: 4.0cm;
             margin-bottom: 1.0cm;
             background: #fff;
             color: rgb(0, 0, 0);
@@ -47,15 +55,52 @@
         .titleCentro { float: left; margin-left: 20px; }
         .derecha   { float: right; }
         .izquierda { float: left;  }
-        .table, th, td, tr {
+        /* .table, th, td, tr { */
             /* border: 2px black;
             border-collapse: collapse;
             border-style: solid; */
+            /* width: 100%; */
+            /* table-layout: fixed; */
+
+            
+            /* 
             box-sizing: border-box;
             border-collapse: collapse;
-            border-spacing: 0;
-            /* width: 100%; */
-            border: 1px solid #ddd;
+            border-spacing: 0; */
+            /* display: block;
+            border-spacing: 20px 0;
+            border: solid #ddd; */
+            /* padding: 0;
+            
+            
+             */
+        /* } */
+        table.customTable {
+            width: 100%;
+            background-color: #FFFFFF;
+            border-collapse: collapse;
+            border-width: 1px;
+            border-color: #7EA8F8;
+            border-style: solid;
+            color: #000000;
+        }
+
+        table.customTable td, table.customTable th {
+            border-width: 1px;
+            border-color: #7EA8F8;
+            border-style: solid;
+            /* top | right | bottom | left */
+            padding: 1px 5px 1px 0;
+            /* padding: 1px; */
+        }
+
+        table.customTable thead {
+            background-color: #7EA8F8;
+        }
+        .textDescription {
+            width: 100%;
+            font-size: 0.8rem;
+            font-weight: normal;
         }
         .textNormal { 
             font-size: 1.3em;
@@ -75,10 +120,7 @@
             display:table-row;
         }
         tr:nth-child(even) {
-            background-color: #7c7878;
-        }
-        .thead {
-            background-image: url('../../siam/media/logo.png');
+            background-color: #cac2c2;
         }
     </style>
 </head>
