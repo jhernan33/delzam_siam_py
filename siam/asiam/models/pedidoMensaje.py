@@ -47,3 +47,6 @@ class PedidoMensaje(Base):
 
     def __str__(self): # new
         return str(self.desc_mens).upper().strip()
+    
+    def filterByCodiTipe(_id: int):
+        return PedidoMensaje.get_queryset().filter(codi_tipe = _id).filter(pred_mens = True)

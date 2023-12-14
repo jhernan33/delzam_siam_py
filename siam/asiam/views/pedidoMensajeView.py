@@ -30,6 +30,11 @@ class PedidoMensajeListView(generics.ListAPIView):
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
+        order_type = self.request.query_params.get('orderType')
+
+        if order_type is not None:
+            return PedidoMensaje.get_queryset().filter(codi_tipe = order_type).filter(pred_mens = True)
+        
         queryset = PedidoMensaje.objects.all()
         if show =='true':
             return queryset.filter(deleted__isnull=False)
@@ -68,6 +73,7 @@ class PedidoMensajeCreateView(generics.CreateAPIView):
                         created   = datetime.now()
                     )
                     pedidomensaje.save()
+                    
                     # Check Menssage Predetermined
                     if eval(str(self.request.data.get("predetermined"))) is True:
                         PedidoMensaje.get_queryset().exclude(id = pedidomensaje.id).update(pred_mens = False)
@@ -129,7 +135,7 @@ class PedidoMensajeUpdateView(generics.UpdateAPIView):
                 if instance.deleted:
                     state_deleted = True
                 
-                Deleted = request.data['erased']
+                Deleted = eval(str(request.data['erased']))
                 if Deleted:                    
                     isdeleted = datetime.now()
                 else:    
@@ -139,12 +145,17 @@ class PedidoMensajeUpdateView(generics.UpdateAPIView):
                 result_description = PedidoMensajeSerializer.validate_desc_mens(request.data['description'],state_deleted,instance.id)
                 if result_description == True:
                     return message.ShowMessage("Descripcion ya se encuentra Registrada")
+                
                 instance.desc_mens = self.request.data.get("description")
-                instance.codi_tipe = orderType_id
-                instance.pred_mens = False if self.request.data.get("predetermined") is None else True,
+                instance.codi_tipe = PedidoTipo.getInstanceOrderType(orderType_id)
+                instance.pred_mens = False if eval(str(self.request.data.get("predetermined"))) is False else True
                 instance.deleted   = isdeleted
                 instance.updated   = datetime.now()
                 instance.save()
+
+                # Check Menssage Predetermined
+                if eval(str(self.request.data.get("predetermined"))) is True:
+                    PedidoMensaje.get_queryset().exclude(id = instance.id).update(pred_mens = False)
                 
                 return message.UpdateMessage({"id":instance.id,"description":instance.desc_mens})
                 
@@ -165,7 +176,7 @@ class PedidoMensajeDestroyView(generics.DestroyAPIView):
                 orderMessage = PedidoMensaje.get_queryset().get(id=kwargs['id'])
                 orderMessage.deleted = datetime.now()
                 orderMessage.save()
-                return message.DeleteMessage('Mensaje '+str(PedidoMensaje.id))
+                return message.DeleteMessage('Borrado Exitosamente el Mensaje con el id: '+str(kwargs['id']))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Mensaje no Registrado")
 
