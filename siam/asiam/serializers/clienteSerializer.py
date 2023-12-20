@@ -46,6 +46,9 @@ class ClienteSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['codi_ante'] = str(instance.codi_ante).upper()
+        # Customer all
+        representation['customer_all'] = Cliente.searchTypeCustomerId(instance.id)
+        representation['customer_address'] = Cliente.searchAddressCustomer(instance.id)
         # Detail Orders
         from asiam.serializers import PedidoSerializer
         queryset_details = Pedido.get_queryset().filter(codi_clie = instance.id)
