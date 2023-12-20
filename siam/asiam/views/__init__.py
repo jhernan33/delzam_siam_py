@@ -24,7 +24,7 @@ from .userView          import SignupView, LoginView, LogoutView, UserView
 from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView, GrupoComboView
 from .rutaDetalleVendedorView import RutaDetalleVendedorListView, RutaDetalleVendedorCreateView, RutaDetalleVendedorRetrieveView, RutaDetalleVendedorDestroyView, RutaDetalleVendedorUpdateView ,RutaDetalleVendedorComboView
 from .ivaGeneralView    import IvaGeneralListView, IvaGeneralCreateView, IvaGeneralRetrieveView, IvaGeneralUpdateView, IvaGeneralDestroyView, IvaGeneralComboView
-from .articuloView     import ArticuloListView, ArticuloCreateView, ArticuloRetrieveView, ArticuloUpdateView, ArticuloDestroyView, ArticuloComboView, ImportDataArticle
+from .articuloView     import ArticuloListView, ArticuloCreateView, ArticuloRetrieveView, ArticuloUpdateView, ArticuloDestroyView, ArticuloComboView, ImportDataArticle, ArticleFilter, ArticuloSearch
 from .presentacionView import PresentacionListView, PresentacionCreateView, PresentacionRetrieveView, PresentacionUpdateView, PresentacionDestroyView, PresentacionComboView, PresentacionRestore
 from .serviceImageView import ServiceImageView
 from .proveedorView    import ProveedorListView, ProveedorCreateView, ProveedorRetrieveView, ProveedorUpdateView, ProveedorDestroyView, ProveedorComboView, ProveedorRestore

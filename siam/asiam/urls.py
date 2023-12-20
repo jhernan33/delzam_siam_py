@@ -158,6 +158,7 @@ urlpatterns = [
     path('articulo/update/<int:id>',             views.ArticuloUpdateView.as_view(),              name='articulo_update'),
     path('articulo/delete/<int:id>',             views.ArticuloDestroyView.as_view(),             name='articulo_delete'),
     path('articulo/combo/',                      views.ArticuloComboView.as_view(),               name='articulo_combo'),
+    path('articulo/buscar/',                     views.ArticuloSearch,                            name='articulo_search'),
     # Upload File DBF
     path('articulo/upload/',                     views.ArticuloComboView.as_view(),               name='articulo_upload'),
 

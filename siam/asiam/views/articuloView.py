@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.parsers import FormParser,MultiPartParser
 from django.core.exceptions import ObjectDoesNotExist
+import django_filters
 
 from asiam.models import Articulo, Presentacion, SubFamilia
 from asiam.serializers import ArticuloSerializer, ArticuloComboSerializer
@@ -146,6 +147,23 @@ class ArticuloComboView(generics.ListAPIView):
         else:
             queryset = Articulo.get_queryset().filter(codi_sufa=self.request.query_params.get('subfamily')).order_by('desc_arti')
         return queryset
+
+'''
+    Class Filter Article
+'''
+class ArticleFilter(django_filters.FilterSet):
+    class Meta:
+        model = Articulo
+        fields = ['codi_arti','desc_arti','idae_arti']
+        
+        # def get_queryset(self):
+
+
+def ArticuloSearch(request):
+    # article_list = Articulo.objects.all()
+    # article_filter = ArticleFilter(request.GET, queryset=article_list)
+    article_filter = ArticleFilter(request.GET, queryset=Articulo.objects.all())
+    return article_filter
 
 '''
     Import data from system clipper
