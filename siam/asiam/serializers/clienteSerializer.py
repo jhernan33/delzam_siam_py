@@ -184,3 +184,18 @@ class ClienteReportExportSerializer(serializers.ModelSerializer):
             obj['description_customer'] = _description+" (Vend.) "+_descriptionCustomer
         
         return representation
+
+class ClienteBuscarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        field = ['id','codi_ante','ptor_clie','ruta_detalle_vendedor_cliente']
+        exclude =['created','updated','esta_ttus','location_clie','fein_clie','cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie','obse_clie','codi_natu','codi_juri','deleted','posi_clie']
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['codi_ante'] = str(instance.codi_ante).upper()
+        # Customer all
+        representation['customer_all'] = Cliente.searchTypeCustomerId(instance.id)
+        # representation['route'] = instance.ruta_detalle_vendedor_cliente
+        # representation['customer_address'] = Cliente.searchAddressCustomer(instance.id)
+        return representation
