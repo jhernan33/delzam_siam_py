@@ -196,6 +196,4 @@ class ClienteBuscarSerializer(serializers.ModelSerializer):
         representation['codi_ante'] = str(instance.codi_ante).upper()
         # Customer all
         representation['customer_all'] = Cliente.searchTypeCustomerId(instance.id)
-        # representation['route'] = instance.ruta_detalle_vendedor_cliente
-        # representation['customer_address'] = Cliente.searchAddressCustomer(instance.id)
         return representation
