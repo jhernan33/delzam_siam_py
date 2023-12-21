@@ -416,7 +416,7 @@ Find Customer by Code, Id, Natural, Juridic
 '''
 class ClienteBuscarView(generics.ListAPIView):
     serializer_class = ClienteBuscarSerializer
-    permission_classes = () # [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Cliente.get_queryset()
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     # Filtering by several fields
