@@ -163,6 +163,7 @@ def ArticuloSearch(request):
     # article_list = Articulo.objects.all()
     # article_filter = ArticleFilter(request.GET, queryset=article_list)
     article_filter = ArticleFilter(request.GET, queryset=Articulo.objects.all())
+    print(article_filter)
     return article_filter
 
 '''

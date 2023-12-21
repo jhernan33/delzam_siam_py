@@ -21,7 +21,7 @@ from rest_framework import status
 
 
 from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona
-from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer
+from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer, ClienteBuscarSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -410,6 +410,29 @@ class ClienteReportView(generics.ListAPIView):
         if _zones is not None:
             _allDescriptionZones = Zona.getZoneFilterArray(_zones)
         return _allDescriptionZones
+
+'''
+Find Customer by Code, Id, Natural, Juridic
+'''
+class ClienteBuscarView(generics.ListAPIView):
+    serializer_class = ClienteBuscarSerializer
+    permission_classes = () # [IsAuthenticated]
+    queryset = Cliente.get_queryset()
+    filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
+    # Filtering by several fields
+    search_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju','ptor_clie','codi_natu__cedu_pena','codi_natu__razo_natu','codi_natu__codi_ciud__nomb_ciud','codi_natu__codi_sect__nomb_sect','codi_juri__codi_ciud__nomb_ciud','codi_juri__codi_sect__nomb_sect']
+    ordering_fields = ['id','fein_clie','codi_ante','codi_natu__prno_pena','codi_natu__seno_pena','codi_natu__prap_pena','codi_natu__seap_pena','codi_juri__riff_peju','codi_juri__raso_peju','codi_juri__dofi_peju','ptor_clie','codi_natu__cedu_pena','codi_natu__razo_natu','codi_natu__codi_ciud__nomb_ciud','codi_natu__codi_sect__nomb_sect','codi_juri__codi_ciud__nomb_ciud','codi_juri__codi_sect__nomb_sect']
+    ordering = ['-id']
+
+    def get_queryset(self):
+        show = self.request.query_params.get('show')
+        queryset = Cliente.objects.all()
+        if show =='true':
+            return queryset.filter(deleted__isnull=False)
+        if show =='all':
+            return queryset
+
+        return queryset.filter(deleted__isnull=True)
 
 
 """
