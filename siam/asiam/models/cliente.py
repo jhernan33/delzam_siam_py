@@ -66,13 +66,13 @@ class Cliente(Base):
 
     # Search Type of Customer
     def searchTypeCustomerId(_id):
-        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri','codi_ante')
+        _resultClient = Cliente.objects.filter(id = _id).values('id','codi_natu','codi_juri','codi_ante','ptor_clie')
         _descriptionCustomer = ""
         for customer in _resultClient:
             if customer['codi_natu'] != 1:
                 _resultQuerySet = Natural.objects.filter(id = customer['codi_natu'])
                 for natural in _resultQuerySet:
-                    _descriptionCustomer = str(customer['codi_ante']+" / "+natural.riff_pena+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"
+                    _descriptionCustomer = str(customer['codi_ante']+" / "+natural.riff_pena+" / "+natural.prno_pena+ ' '+natural.seno_pena+' '+natural.prap_pena+' '+ natural.seap_pena).strip().upper()+" (N)"+ " Firma Personal: "+str(natural.razo_natu).strip().upper()
             else:
                 _resultQuerySet = Juridica.objects.filter(id = customer['codi_juri'])
                 for juridica in _resultQuerySet:
