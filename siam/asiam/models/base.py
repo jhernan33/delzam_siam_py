@@ -33,3 +33,6 @@ class Base(models.Model):
         if language is not None:
             return datetime.today().strftime('%d-%m-%Y')
         return datetime.today().strftime('%Y-%m-%d')
+    
+    def roundNumber(_number):
+        return round(_number,4)

@@ -8,11 +8,11 @@ class Articulo(Base):
     coba_arti = models.CharField    ('Codigo de Barras del Articulo',    max_length=30, null=True, blank=True, default='')
     cmin_arti = models.DecimalField ('Cantidad Minima',max_digits=6,decimal_places=0,null=True, blank=True)
     cmax_arti = models.DecimalField ('Cantidad Maxima',max_digits=6,decimal_places=0,null=True, blank=True)
-    por1_arti = models.DecimalField ('Porcentaje de Utilidad 1 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
-    por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
-    por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
-    por4_arti = models.DecimalField ('Porcentaje de Utilidad 4 Por Articulo',max_digits=7,decimal_places=2,null=True, blank=True)
-    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=20,decimal_places=2,null=True, blank=True)
+    por1_arti = models.DecimalField ('Porcentaje de Utilidad 1 Por Articulo',max_digits=7,decimal_places=2, blank=True,default=0)
+    por2_arti = models.DecimalField ('Porcentaje de Utilidad 2 Por Articulo',max_digits=7,decimal_places=2, blank=True,default=0)
+    por3_arti = models.DecimalField ('Porcentaje de Utilidad 3 Por Articulo',max_digits=7,decimal_places=2, blank=True,default=0)
+    por4_arti = models.DecimalField ('Porcentaje de Utilidad 4 Por Articulo',max_digits=7,decimal_places=2, blank=True,default=0)
+    ppre_arti = models.DecimalField ('Porcentaje Preferido Por Articulo',max_digits=20,decimal_places=2, blank=True, default=0)
     codi_sufa = models.ForeignKey(
         'SubFamilia',
         on_delete=models.CASCADE,
@@ -54,3 +54,39 @@ class Articulo(Base):
 
     def get_queryset():
         return Articulo.objects.all().filter(deleted__isnull=True)
+    
+    """ Get Instance Article """
+    def getInstanceArticle(Id:int):
+        return Articulo.objects.get(id = Id)
+    
+    '''
+        Calculate Price by Code Article
+    '''
+    def toPriceTheProduct(code_article:int, route:int):
+        _porcentage = None
+        _prices = 0
+        from asiam.models import Ruta
+        if route is not None:
+            result_route = Ruta.get_queryset().get(id = route)
+            _porcentage = result_route.porc_ruta
+
+        if code_article is not None:
+            result_article = Articulo.getInstanceArticle(code_article)
+            if result_article is None:
+                return False
+            
+            if result_article is not None:
+                if _porcentage is not None:
+                    match _porcentage:
+                        case 1:
+                            _porcentage = result_article.por1_arti
+                        case 2:
+                            _porcentage = result_article.por2_arti
+                        case 3:
+                            _porcentage = result_article.por3_arti
+                        case 4:
+                            _porcentage = result_article.por4_arti
+                
+                _prices = Base.roundNumber(((result_article.ppre_arti * _porcentage)/100) + result_article.ppre_arti) if _porcentage is not None else Base.roundNumber(((result_article.ppre_arti * result_article.por1_arti)/100) + result_article.ppre_arti)
+                
+            return _prices
