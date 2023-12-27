@@ -82,3 +82,7 @@ class Ruta(Base):
             _result = Ruta.get_queryset().filter(codi_zona__in = _zoneList).select_related('codi_zona')
 
             return _result
+    
+    """ Get Instance Route """
+    def getInstanceRoute(Id:int):
+        return Ruta.objects.get(id = Id)

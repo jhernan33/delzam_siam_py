@@ -234,7 +234,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 invoice_number = None
                 currency_id = None
                 json_foto_pedi = None
-                discount = 0
+                _discount = 0
                 _amount = 0
 
                 # Get User
@@ -270,9 +270,9 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 # Velidate Discount
                 if 'discount' in request.data:
                     try:
-                        discount = 0 if self.request.data.get("discount") is None else float(self.request.data.get("discount"))
+                        _discount = 0 if self.request.data.get("discount") is None else float(self.request.data.get("discount"))
                     except ValueError:
-                        discount = 0
+                        _discount = 0
 
                 # State Deleted
                 state_deleted = None
@@ -334,11 +334,12 @@ class PedidoUpdateView(generics.UpdateAPIView):
                             )
                             pedidoDetalle.save()
                             _amount = _amount + ((detail_quantity * detail_price) - detail_discount)
+                            _discount = _discount + detail_discount
                         # Update total in Order
                         Pedido.objects.filter(id = instance.id).update(
                             mont_pedi = _amount
-                            , desc_pedi = discount
-                            , tota_pedi = _amount - (_amount * (discount / 100))
+                            , desc_pedi = _discount
+                            , tota_pedi = _amount - (_amount * (_discount / 100))
                             , updated = datetime.now()
                         )
                     # Register Tracking
