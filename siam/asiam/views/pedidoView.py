@@ -59,7 +59,7 @@ class PedidoListView(generics.ListAPIView):
         else:
             queryset = queryset.exclude(codi_espe=7)
         
-        # Filter Code Type # Notas
+        # Filter Code Type # Note
         order = self.request.query_params.get('order')
         if order =='true':
             queryset = queryset.filter(codi_tipe=3)
