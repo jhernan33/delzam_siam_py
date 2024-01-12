@@ -20,7 +20,7 @@ from .unidadMedidaView  import UnidadMedidaListView, UnidadMedidaCreateView, Uni
 from .ivaView           import IvaListView, IvaCreateView, IvaRetrieveView, IvaUpdateView, IvaDestroyView
 from .unidadTributariaView import UnidadTributariaListView, UnidadTributariaCreateView, UnidadTributariaRetrieveView, UnidadTributariaUpdateView, UnidadTributariaDestroyView
 from .clienteView       import ClienteListView, ClienteCreateView, ClienteRetrieveView, ClienteUpdateView, ClienteDestroyView, ClienteReportView, ClienteExportFile, ClienteComboView, ClienteBuscarView
-from .userView          import SignupView, LoginView, LogoutView, UserView
+from .userView          import SignupView, LoginView, LogoutView, UserView, ResetPasswordView
 from .grupoView         import GrupoListView, GrupoCreateView, GrupoDestroyView, GrupoRetrieveView, GrupoUpdateView, GrupoComboView
 from .rutaDetalleVendedorView import RutaDetalleVendedorListView, RutaDetalleVendedorCreateView, RutaDetalleVendedorRetrieveView, RutaDetalleVendedorDestroyView, RutaDetalleVendedorUpdateView ,RutaDetalleVendedorComboView
 from .ivaGeneralView    import IvaGeneralListView, IvaGeneralCreateView, IvaGeneralRetrieveView, IvaGeneralUpdateView, IvaGeneralDestroyView, IvaGeneralComboView

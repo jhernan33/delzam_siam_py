@@ -13,7 +13,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.views.generic.list import ListView  
 
-from asiam.serializers import SignupSerializer, UserLoginSerializer, UserSerializer
+from asiam.serializers import SignupSerializer, UserLoginSerializer, UserSerializer, UserResetPasswordSerializer
 from asiam.views.baseMensajeView import BaseMessage
 from asiam.models import Profile
 
@@ -117,3 +117,24 @@ class UserView(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class ResetPasswordView(generics.CreateAPIView):
+    permission_classes = ()
+
+    """This Endpoint Reset Password"""
+    def post(self,request):
+        message = BaseMessage
+        serializer = UserResetPasswordSerializer(data = request.data)
+        username = self.request.data.get("username")
+        password = SignupSerializer.encrypt_password(self.request.data.get('password'))
+        if User.objects.filter(username=username).exists():
+            user = User.objects.get(username=username)
+            user.password = password
+            user.save()
+
+            data = {
+                "user": "Reseteada exitosamente la data"
+            }
+            return message.SaveMessage(data)
+        res = { 'status' : status.HTTP_400_BAD_REQUEST, 'data' : serializer.errors }
+        return Response(res, status = status.HTTP_400_BAD_REQUEST)
