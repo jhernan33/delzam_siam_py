@@ -27,18 +27,18 @@ class TasaCambioSerializer(serializers.ModelSerializer):
         return representation
     
     """
-        Validate Currency and date
+        Validate Exchange Rate
     """    
-    def validate_currency_date(_currency,_date,state, _id:None):
+    def validate_exchange_rate(_currency,_date,state, _id:None):
         queryset = []
         
         # Instance of currency
         _currency = Moneda.get_queryset().get(id = _currency)
         # Check Id Tasa
         if _id is not None:
-            queryset = TasaCambio.objects.filter(codi_mone = _currency).filter(fech_taca = _date).exclude(id=_id) if state else TasaCambio.get_queryset().filter(codi_mone = _currency).filter(fech_taca = _date).exclude(id=_id)
+            queryset = TasaCambio.objects.exclude(id=_id) if state else TasaCambio.get_queryset().exclude(id=_id)
         else:
-            queryset = TasaCambio.objects.filter(codi_mone = _currency).filter(fech_taca = _date) if state else TasaCambio.get_queryset().filter(codi_mone = _currency).filter(fech_taca = _date)
+            queryset = TasaCambio.objects if state else TasaCambio.get_queryset()
         
         if queryset.count() == 0:
             return False

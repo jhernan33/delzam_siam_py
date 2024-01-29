@@ -7,6 +7,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+class PedidoFilterSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Pedido
+        field = ('id','codi_mone','deleted','codi_clie')
+        exclude =['created','updated','esta_ttus','nufa_pedi','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user','foto_pedi']
+
 class JSONSerializerField(serializers.Field):
     """Serializer for JSONField -- required to make field writable"""
 

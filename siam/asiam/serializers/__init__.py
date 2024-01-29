@@ -36,7 +36,7 @@ from .pedidoTipoSerializer import PedidoTipoSerializer, PedidoTipoComboSerialize
 from .pedidoEstatusSerializer import PedidoEstatusSerializer, PedidoEstatusComboSerializer, PedidoEstatusBasicSerializer
 from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer
 from .formaPagoSerializer import FormaPagoSerializer, FormaPagoBasicSerializer, FormaPagoComboSerializer
-from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer, PedidoHistoricoSerializer, PedidoReportSerializer
+from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer, PedidoHistoricoSerializer, PedidoReportSerializer, PedidoFilterSerializer
 from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
 from .userSerializer import UserBasicSerializer, UserSerializer, UserResetPasswordSerializer
 from .bancoSerializer import BancoSerializer, BancoBasicSerializer, BancoComboSerializer
