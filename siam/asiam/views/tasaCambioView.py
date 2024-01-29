@@ -18,6 +18,8 @@ from asiam.serializers import TasaCambioBasicSerializer, TasaCambioComboSerializ
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 
+from datetime import datetime
+
 class TasaCambioListView(generics.ListAPIView):
     serializer_class = TasaCambioSerializer
     permission_classes = ()
@@ -45,24 +47,18 @@ class TasaCambioCreateView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            # Validate Exchange Rate
-            result_exchage_rate = TasaCambioSerializer.validate_currency_date(request.data['currency'],self.request.data.get("date"),False,None)
-            if result_exchage_rate == False:
-                try:
-                    tasa = TasaCambio(
-                        fech_taca   = self.request.data.get("date"),
-                        valo_taca   = self.request.data.get("value"),
-                        codi_mone   = Moneda.getInstanceCurrency(self.request.data.get("currency")),
-                        obse_taca   = self.request.data.get("observations"),
-                        created = datetime.now()
-                    )
-                    tasa.save()
-                    return message.SaveMessage('Tasa de Cambio guardada Exitosamente')
-                except Exception as e:
-                    return message.ErrorMessage("Error al Intentar Guardar la Tasa de Cambio: "+str(e))
-            return message.ShowMessage("Tasa de Cambio para la Moneda ya Registrada")
-        except TasaCambio.DoesNotExist:
-            return message.NotFoundMessage("Id de Tasa de Cambio no Registrado")
+            date_format = '%Y-%m-%d %H:%M:%S'
+            tasa = TasaCambio(
+                fech_taca   = datetime.strptime( self.request.data.get("date"),date_format),
+                valo_taca   = self.request.data.get("value"),
+                codi_mone   = Moneda.getInstanceCurrency(self.request.data.get("currency")),
+                obse_taca   = self.request.data.get("observations"),
+                created = datetime.now()
+            )
+            tasa.save()
+            return message.SaveMessage('Tasa de Cambio guardada Exitosamente')
+        except Exception as e:
+            return message.ErrorMessage("Error al Intentar Guardar la Tasa de Cambio: "+str(e))
 
 class TasaCambioRetrieveView(generics.RetrieveAPIView):
     serializer_class = TasaCambioSerializer
@@ -102,6 +98,7 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Tasa de Cambio no Registrada")
         else:
             try:
+                date_format = '%Y-%m-%d %H:%M:%S'
                 # State Deleted
                 state_deleted = None
                 if instance.deleted:
@@ -113,19 +110,15 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
                 else:    
                     isdeleted = None
                 
-                # Validate Description
-                result_exchage_rate = TasaCambioSerializer.validate_currency_date(request.data['currency'],self.request.data.get("date"),state_deleted,instance.id)
-                if result_exchage_rate == True:
-                    return message.ShowMessage("Tasa de Cambio ya Registrada para una Moneda")
-                
                 _currency = Moneda.getInstanceCurrency(self.request.data.get("currency"))
                 
-                instance.fech_taca = self.request.data.get("date")
+                instance.fech_taca = datetime.strptime( self.request.data.get("date"),date_format)
                 instance.valo_taca = self.request.data.get("value")
                 instance.codi_mone = _currency
                 instance.obse_taca = self.request.data.get("observations")
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
+                print(instance.fech_taca)
                 instance.save()
                 
                 return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})

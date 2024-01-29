@@ -25,9 +25,10 @@ from django.db.models import Q
 import django_filters
 
 from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento, PedidoMensaje
-from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer
+from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer, PedidoFilterSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from asiam.filters import PedidoFilter
 from .serviceImageView import ServiceImageView
 
 from weasyprint import HTML
@@ -614,38 +615,47 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar: "+str(e))
 
-# class PedidoSearchView(django_filters.FilterSet):
-#     q = django_filters.CharFilter(method='my_custom_filter', label="Search")
+class PedidoSearchView(generics.ListAPIView):
+    permission_classes = []
+    serializer_class = PedidoFilterSerializer
+    queryset = Pedido.get_queryset()
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = PedidoFilter
+    filterset_fields = ('codi_clie__codi_natu__prno_pena'
+                ,'codi_clie__codi_natu__seno_pena'
+                ,'codi_clie__codi_natu__prap_pena'
+                ,'codi_clie__codi_natu__seap_pena'
+                ,'fech_pedi','codi_espe','codi_tipe','codi_mone')
+        
+    # q = django_filters.CharFilter(method='my_custom_filter', label="Search")
 
-#     # serializer_class = PedidoSerializer
-#     # permission_classes = [IsAuthenticated]
-#     # queryset = Pedido.get_queryset()
-#     # pagination_class = SmallResultsSetPagination
-#     # ordering = ['-id']
-#     class Meta:
-#         model = Cliente
-#         fields = ['q']
+    # # queryset = Pedido.get_queryset()
+    # # pagination_class = SmallResultsSetPagination
+    # # ordering = ['-id']
+    # class Meta:
+    #     model = Cliente
+    #     fields = ['q']
 
-#     def my_custom_filter(self, queryset, name, value):
-#         result = queryset.filter(
-#             Q(loc__icontains=value) |
-#             Q(loc_codi_ante__icontains=value) | 
-#             Q(loc_codi_natu__prno_pena__icontains=value) | 
-#             Q(loc_codi_natu__seno_pena__icontains=value) | 
-#             Q(loc_codi_natu__prap_pena__icontains=value) | 
-#             Q(loc_codi_natu__seap_pena__icontains=value) | 
-#             Q(loc_codi_juri__riff_peju__icontains=value) |
-#             Q(loc_codi_juri__raso_peju__icontains=value) |
-#             Q(loc_codi_juri__dofi_peju__icontains=value) |
-#             Q(loc_codi_natu__cedu_pena__icontains=value) |
-#             Q(loc_codi_natu__razo_natu__icontains=value) |
-#             Q(loc_codi_natu__codi_ciud__nomb_ciud__icontains=value) |
-#             Q(loc_codi_natu__codi_sect__nomb_sect__icontains=value) |
-#             Q(loc_codi_juri__codi_ciud__nomb_ciud__icontains=value) |
-#             Q(loc_codi_juri__codi_sect__nomb_sect__icontains=value)
-#         )
-#         # print("Result====",result)
-#         return result
+    # def my_custom_filter(self, queryset, name, value):
+    #     result = queryset.filter(
+    #         Q(loc__icontains=value) |
+    #         Q(loc_codi_ante__icontains=value) | 
+    #         Q(loc_codi_natu__prno_pena__icontains=value) | 
+    #         Q(loc_codi_natu__seno_pena__icontains=value) | 
+    #         Q(loc_codi_natu__prap_pena__icontains=value) | 
+    #         Q(loc_codi_natu__seap_pena__icontains=value) | 
+    #         Q(loc_codi_juri__riff_peju__icontains=value) |
+    #         Q(loc_codi_juri__raso_peju__icontains=value) |
+    #         Q(loc_codi_juri__dofi_peju__icontains=value) |
+    #         Q(loc_codi_natu__cedu_pena__icontains=value) |
+    #         Q(loc_codi_natu__razo_natu__icontains=value) |
+    #         Q(loc_codi_natu__codi_ciud__nomb_ciud__icontains=value) |
+    #         Q(loc_codi_natu__codi_sect__nomb_sect__icontains=value) |
+    #         Q(loc_codi_juri__codi_ciud__nomb_ciud__icontains=value) |
+    #         Q(loc_codi_juri__codi_sect__nomb_sect__icontains=value)
+    #     )
+    #     print("Result====",result)
+    #     return result
 
     # def get_queryset(self):
     #     queryset = None
@@ -659,7 +669,7 @@ class PedidoHistoricoUpdateView(generics.UpdateAPIView):
 '''
     Change Order Type
 '''
-class PedidoUpdateStatusView(generics.UpdateAPIView):
+class   PedidoUpdateStatusView(generics.UpdateAPIView):
     serializer_class = PedidoSerializer
     permission_classes = [IsAuthenticated]
     queryset = Pedido.objects.all()
