@@ -68,3 +68,7 @@ class Natural(Base):
     def searchNaturalArray(_arrayNatural):
         queryset = Natural.objects.filter(id__in = _arrayNatural).values('id','prno_pena','seno_pena','prap_pena','seap_pena')
         return queryset
+    
+    """ Get Instance Natural """
+    def getInstanceNatural(Id):
+        return Natural.objects.get(id = Id)

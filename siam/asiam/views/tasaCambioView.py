@@ -118,7 +118,6 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
                 instance.obse_taca = self.request.data.get("observations")
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
-                print(instance.fech_taca)
                 instance.save()
                 
                 return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})

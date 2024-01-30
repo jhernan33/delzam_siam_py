@@ -3,36 +3,45 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField
 
 class PedidoPagoDetalle(Base):
-    # Forma de Pago, Moneda,
-    codi_pedi = models.ForeignKey(
-        'Pedido',
+    # Codigo del Pago
+    codi_pago = models.ForeignKey(
+        'PedidoPago',
         on_delete=models.CASCADE,
-        related_name='pedidoPago.codi_pedi+'
+        related_name='pedidoPagoDetalle.codi_pago+'
     )
+    # Forma de Pago
     codi_fopa = models.ForeignKey(
         'FormaPago',
         on_delete=models.CASCADE,
-        related_name='pedidoPago.codi_fopa+'
+        related_name='pedidoPagoDetalle.codi_fopa+'
     )
-    codi_mone = models.ForeignKey(
-        'Moneda',
-        on_delete=models.CASCADE,
-        related_name='pedidoPago.codi_mone+'
-    )
+    # Estatus del Pago (Pagado, Pendiente)
     codi_esta = models.ForeignKey(
         'PedidoEstatus',
         on_delete=models.CASCADE,
-        related_name='pedidoPago.codi_esta+'
+        related_name='pedidoPagoDetalle.codi_esta+'
+    )
+    # Codigo de la Moneda
+    codi_mone = models.ForeignKey(
+        'Moneda',
+        on_delete=models.CASCADE,
+        related_name='pedidoPagoDetalle.codi_mone+'
+    )
+    # Tasa de Cambio de la Moneda
+    codi_tasa = models.ForeignKey(
+        'TasaCambio',
+        on_delete=models.CASCADE,
+        related_name='pedidoPagoDetalle.codi_tasa+'
+    )
+    # Cobrador
+    codi_cobr = models.ForeignKey(
+        'Cobrador',
+        on_delete=models.CASCADE,
+        related_name='pedidoPagoDetalle.codi_cobr+'
     )
     mont_pade = models.DecimalField ('Monto del Pago',max_digits=7,decimal_places=2,null=True, blank=True)
     foto_pade = models.JSONField  ('Foto del Pago',null=True, blank=True)
-    obse_pade = models.TextField('Observaciones del Pago')
-    fech_page = models.DateField('Fecha del Pago',auto_now=False, auto_now_add=False,blank=True, null=True)
-    # codi_tasa = models.ForeignKey(
-    #     'Tasa',
-    #     on_delete=models.CASCADE,
-    #     related_name='pedidoPago.codi_tasa+'
-    # )
+    obse_pade = models.TextField('Observaciones del Detalle Pago',null=True, blank=True)
 
     class Meta:
         ordering = ['-id']

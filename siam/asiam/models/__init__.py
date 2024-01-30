@@ -37,7 +37,6 @@ from .pedidoTipo import PedidoTipo
 from .pedidoEstatus import PedidoEstatus
 from .pedido import Pedido
 from .pedidoDetalle import PedidoDetalle
-# from .pedidoPagoDetalle import PedidoPagoDetalle
 from .pedidoSeguimiento import PedidoSeguimiento
 from .profile import Profile
 from .banco import Banco
@@ -46,3 +45,6 @@ from .tasaCambio import TasaCambio
 from .base import Base
 from .upload import UploadedFile
 from .pedidoMensaje import PedidoMensaje
+from .cobrador import Cobrador
+from .pedidoPago import PedidoPago
+from .pedidoPagoDetalle import PedidoPagoDetalle

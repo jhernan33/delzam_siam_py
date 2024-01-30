@@ -45,3 +45,4 @@ from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSeri
 from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerializer
 from .fileUploadSerializer import FileUploadSerializer
 from .pedidoMensajeSerializer import PedidoMensajeBasicSerializer, PedidoMensajeComboSerializer, PedidoMensajeSerializer
+from .cobradorSerializer import CobradorBasicSerializer, CobradorComboSerializer, CobradorSerializer
