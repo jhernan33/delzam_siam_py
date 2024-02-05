@@ -18,3 +18,7 @@ class Cuenta(Base):
 
     def get_queryset():
         return Cuenta.objects.all().filter(deleted__isnull=True)
+    
+    # Filter Account number by bank
+    def filterByBankId(BankId):
+        return Cuenta.get_queryset().filter(codi_banc = BankId)

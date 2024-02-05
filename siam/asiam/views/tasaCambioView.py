@@ -22,7 +22,7 @@ from datetime import datetime
 
 class TasaCambioListView(generics.ListAPIView):
     serializer_class = TasaCambioSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = TasaCambio.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -41,7 +41,7 @@ class TasaCambioListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class TasaCambioCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = TasaCambioSerializer
     
     def create(self, request, *args, **kwargs):
@@ -62,7 +62,7 @@ class TasaCambioCreateView(generics.CreateAPIView):
 
 class TasaCambioRetrieveView(generics.RetrieveAPIView):
     serializer_class = TasaCambioSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = TasaCambio.get_queryset()
     lookup_field = 'id'
 
@@ -86,7 +86,7 @@ class TasaCambioRetrieveView(generics.RetrieveAPIView):
 
 class TasaCambioUpdateView(generics.UpdateAPIView):
     serializer_class = TasaCambioSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = TasaCambio.objects.all()
     lookup_field = 'id'
 
@@ -118,7 +118,6 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
                 instance.obse_taca = self.request.data.get("observations")
                 instance.deleted = isdeleted
                 instance.updated = datetime.now()
-                print(instance.fech_taca)
                 instance.save()
                 
                 return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})
@@ -128,7 +127,7 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
 
 class TasaCambioDestroyView(generics.DestroyAPIView):
     serializer_class = TasaCambioSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = TasaCambio.get_queryset()
     lookup_field = 'id'
 
@@ -148,7 +147,7 @@ class TasaCambioDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Tasa de Cambio no Registrado")
 
 class TasaCambioComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = TasaCambioComboSerializer
     lookup_field = 'id'
 

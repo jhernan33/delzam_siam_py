@@ -1,5 +1,6 @@
 from .base import Base
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 class Moneda(Base):
     desc_mone = models.CharField  ('Descripcion de la Moneda', max_length=120, null=False, blank=False, default='', unique=True)
@@ -9,8 +10,9 @@ class Moneda(Base):
         related_name='Pais.codi_pais+',
         default='234'
     )
-    simb_mone = models.CharField  ('Simbolo de la Moneda', max_length=120, null=False, blank=True)
+    simb_mone = models.CharField  ('Simbolo o Abreviatura de la Moneda', max_length=120, null=False, blank=True)
     codi_mone = models.CharField  ('Codigo de la Moneda', max_length=50, null=False, blank=True)
+    logo_mone = models.JSONField  ('Logo de la Moneda',null=True, blank=True)
 
     class Meta:
         ordering = ['desc_mone']

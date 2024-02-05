@@ -327,6 +327,14 @@ urlpatterns = [
     path('perfil/update/<int:id>',                        views.ProfileUserUpdateView.as_view(),   name='profile_update'),
     path('perfil/delete/<int:id>',                        views.ProfileUserDestroyView.as_view(),  name='profile_delete'),
 
+    # Collector
+    path('cobrador/',                                     views.CobradorListView.as_view(),     name='collector'),
+    path('cobrador/create/',                              views.CobradorCreateView.as_view(),   name='collector_create'),
+    path('cobrador/<int:id>/',                            views.CobradorRetrieveView.as_view(), name='collector'),
+    path('cobrador/update/<int:id>',                      views.CobradorUpdateView.as_view(),   name='collector_update'),
+    path('cobrador/delete/<int:id>',                      views.CobradorDestroyView.as_view(),  name='collector_delete'),
+    path('cobrador/combo/',                               views.CobradorComboView.as_view(),    name='collector_combo'),
+
     # Date
     path('date/', views.DateRetrieveView.as_view(), name='date_get'),
 

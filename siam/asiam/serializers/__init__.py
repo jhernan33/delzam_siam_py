@@ -34,7 +34,7 @@ from .contactoSerializer import ContactoSerializer, ContactoBasicSerializer, Con
 from .configuracionBusquedadSerializer import ConfiguracionBusquedadSerializer
 from .pedidoTipoSerializer import PedidoTipoSerializer, PedidoTipoComboSerializer, PedidoTipoBasicSerializer
 from .pedidoEstatusSerializer import PedidoEstatusSerializer, PedidoEstatusComboSerializer, PedidoEstatusBasicSerializer
-from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer
+from .monedaSerializer import MonedaBasicSerializer, MonedaComboSerializer, MonedaSerializer, MonedaTasaSerializer
 from .formaPagoSerializer import FormaPagoSerializer, FormaPagoBasicSerializer, FormaPagoComboSerializer
 from .pedidoSerializer import PedidoSerializer, PedidoBasicSerializer, PedidoComboSerializer, PedidoHistoricoSerializer, PedidoReportSerializer, PedidoFilterSerializer
 from .pedidoDetalleSerializer import PedidoDetalleSerializer, PedidoDetalleBasicSerializer, PedidoDetalleComboSerializer
@@ -45,3 +45,4 @@ from .tasaCambioSerializer import TasaCambioBasicSerializer, TasaCambioComboSeri
 from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerializer
 from .fileUploadSerializer import FileUploadSerializer
 from .pedidoMensajeSerializer import PedidoMensajeBasicSerializer, PedidoMensajeComboSerializer, PedidoMensajeSerializer
+from .cobradorSerializer import CobradorBasicSerializer, CobradorComboSerializer, CobradorSerializer

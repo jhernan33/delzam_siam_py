@@ -20,7 +20,7 @@ from asiam.views.baseMensajeView import BaseMessage
 
 class CuentaListView(generics.ListAPIView):
     serializer_class = CuentaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cuenta.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -39,7 +39,7 @@ class CuentaListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class CuentaCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = CuentaSerializer
     
     def create(self, request, *args, **kwargs):
@@ -67,7 +67,7 @@ class CuentaCreateView(generics.CreateAPIView):
 
 class CuentaRetrieveView(generics.RetrieveAPIView):
     serializer_class = CuentaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cuenta.get_queryset()
     lookup_field = 'id'
 
@@ -91,7 +91,7 @@ class CuentaRetrieveView(generics.RetrieveAPIView):
 
 class CuentaUpdateView(generics.UpdateAPIView):
     serializer_class = CuentaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cuenta.objects.all()
     lookup_field = 'id'
 
@@ -136,7 +136,7 @@ class CuentaUpdateView(generics.UpdateAPIView):
 
 class CuentaDestroyView(generics.DestroyAPIView):
     serializer_class = CuentaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cuenta.get_queryset()
     lookup_field = 'id'
 
@@ -156,7 +156,7 @@ class CuentaDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Cuenta no Registrado")
 
 class CuentaComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = CuentaComboSerializer
     lookup_field = 'id'
 

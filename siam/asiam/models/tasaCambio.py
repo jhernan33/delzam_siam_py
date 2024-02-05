@@ -22,3 +22,7 @@ class TasaCambio(Base):
     """ Get Instance Exchange Rate """
     def getInstanceExchangeRate(Id):
         return TasaCambio.objects.get(id = Id)
+
+    # Filter Exchange Rate by Currency Id
+    def filterByCurrencyId(CurrencyId):
+        return TasaCambio.get_queryset().filter(codi_mone = CurrencyId)
