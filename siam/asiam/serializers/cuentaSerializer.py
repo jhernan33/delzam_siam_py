@@ -10,8 +10,8 @@ from asiam.serializers.bancoSerializer import BancoComboSerializer, BancoBasicSe
 class CuentaBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cuenta
-        field = ('id','ncta_cuen')
-        exclude = ['created','updated','esta_ttus','fape_cuen','tipo_cuen','codi_banc']
+        field = ('id','ncta_cuen','tipo_cuen')
+        exclude = ['created','updated','esta_ttus','fape_cuen','codi_banc']
 
 class CuentaSerializer(serializers.ModelSerializer):
     codi_banc = BancoSerializer()

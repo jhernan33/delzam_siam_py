@@ -35,12 +35,16 @@ class CobradorComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cobrador
         field = ['id','description']
-        exclude = ['created','updated','esta_ttus','fein_cobr','foto_cobr','lice_cobr','feli_cobr','fvli_cobr','tili_cobr']
+        exclude = ['created','updated','deleted','esta_ttus','codi_natu','fein_cobr','foto_cobr','lice_cobr','feli_cobr','fvli_cobr','tili_cobr']
 
     def to_representation(self, instance):
         data = super(CobradorComboSerializer, self).to_representation(instance=instance)
-        
+        description = None
+
+        natural =  Natural.get_queryset().filter(id =instance.codi_natu.id)
+        if natural.count()>0:
+            description = str(natural[0].prno_pena+' '+natural[0].seno_pena +' '+natural[0].prap_pena+' '+natural[0].seap_pena).upper()
         # Description
-        data["description"] = instance.codi_natu
+        data["description"] = description
         return data
     

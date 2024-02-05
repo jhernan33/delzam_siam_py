@@ -6,7 +6,7 @@ from django.conf import settings
 from PIL import Image
 
 class ServiceImageView():
-    
+
     @staticmethod
     def saveImag(arg,argDue):
         is_many = isinstance(arg,list)
@@ -28,7 +28,7 @@ class ServiceImageView():
             return obj_json
     
     @staticmethod
-    def updateImage(arg,argDue):
+    def updateImage(arg,argDue,nameOfImageOld = None):
         is_many = isinstance(arg,list)
         if is_many:
             listImages = arg
@@ -48,6 +48,18 @@ class ServiceImageView():
                     imagePath = place +argDue+"/"+fileName
                     img.save(imagePath)
                     obj_json.append({'id':ite, 'image':fileName})
+                    
+                    # Remove Image Old
+                    if nameOfImageOld is not None:
+                        place = os.path.realpath(settings.MEDIA_ROOT)
+                        cadena_image = nameOfImageOld
+                        enviroment_string = argDue+'/'
+                        length_enviroment = len(enviroment_string)
+                        position_initial = cadena_image.find(enviroment_string)
+                        image = cadena_image[position_initial +length_enviroment:len(cadena_image)]
+                        recurso = place + enviroment_string + cadena_image
+                        if os.path.exists(recurso):
+                            os.remove(recurso)
                 else:
                     cadena_image = l['image']
                     enviroment_string = argDue+'/'
@@ -63,3 +75,18 @@ class ServiceImageView():
                     else:
                         obj_json.append({'id':ite, 'image':image})
             return obj_json
+        
+    @staticmethod
+    def removeImage(enviroment,image):
+        place = os.path.realpath(settings.MEDIA_ROOT)
+        cadena_image = image
+        enviroment_string = enviroment+'/'
+        length_enviroment = len(enviroment_string)
+        position_initial = cadena_image.find(enviroment_string)
+        image = cadena_image[position_initial +length_enviroment:len(cadena_image)]
+        recurso = place + enviroment_string + image
+        if os.path.exists(recurso):
+            os.remove(recurso)
+            return True
+        else:
+            return False

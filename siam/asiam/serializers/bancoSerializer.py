@@ -3,7 +3,7 @@ import os
 from rest_framework.response import Response
 from rest_framework import serializers
 
-from asiam.models import Banco
+from asiam.models import Banco, Cuenta
 from asiam.serializers.rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer, RutaDetalleVendedorSerializerBasics
 from asiam.serializers.clienteSerializer import ClienteBasicSerializer, ClienteRutaSerializer
 
@@ -37,6 +37,12 @@ class BancoSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['description'] = str(instance.desc_banc).strip().upper()
+        from asiam.serializers.cuentaSerializer import CuentaBasicSerializer
+
+        # Search Account of Bank
+        querysetAccountOfBank = Cuenta.filterByBankId(instance.id)
+        resultAccountOfBank = CuentaBasicSerializer(querysetAccountOfBank, many=True).data
+        representation['account_number'] = {"data":resultAccountOfBank}
         return representation
     
     """

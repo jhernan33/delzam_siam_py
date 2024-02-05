@@ -29,7 +29,7 @@ from django.http.request import QueryDict
 
 class FormaPagoListView(generics.ListAPIView):
     serializer_class = FormaPagoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = FormaPago.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -54,7 +54,7 @@ class FormaPagoListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class FormaPagoCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = FormaPagoSerializer
     
     def create(self, request, *args, **kwargs):
@@ -79,7 +79,7 @@ class FormaPagoCreateView(generics.CreateAPIView):
             
 class FormaPagoRetrieveView(generics.RetrieveAPIView):
     serializer_class = FormaPagoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = FormaPago.get_queryset()
     lookup_field = 'id'
 
@@ -103,7 +103,7 @@ class FormaPagoRetrieveView(generics.RetrieveAPIView):
 
 class FormaPagoUpdateView(generics.UpdateAPIView):
     serializer_class = FormaPagoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = FormaPago.objects.all()
     lookup_field = 'id'
 
@@ -143,7 +143,7 @@ class FormaPagoUpdateView(generics.UpdateAPIView):
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class FormaPagoDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id' 
 
     def delete(self, request, *args, **kwargs):
@@ -158,7 +158,7 @@ class FormaPagoDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Forma de Pago no Registrado")
             
 class FormaPagoComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = FormaPagoComboSerializer
     lookup_field = 'id'
 

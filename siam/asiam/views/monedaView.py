@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from django.shortcuts import render
 from django.db import transaction
@@ -11,13 +12,15 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 from asiam.models import Moneda, Pais
-from asiam.serializers import MonedaSerializer, MonedaBasicSerializer, MonedaComboSerializer
+from asiam.serializers import MonedaSerializer, MonedaBasicSerializer, MonedaComboSerializer, MonedaTasaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
+from django.conf import settings
+from .serviceImageView import ServiceImageView
 
 class MonedaListView(generics.ListAPIView):
     serializer_class = MonedaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Moneda.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -41,9 +44,8 @@ class MonedaListView(generics.ListAPIView):
 
         return queryset.filter(deleted__isnull=True)
 
-
 class MonedaCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = MonedaSerializer
     
     def create(self, request, *args, **kwargs):
@@ -52,13 +54,22 @@ class MonedaCreateView(generics.CreateAPIView):
             # Validate Description
             result_description = MonedaSerializer.validate_desc_mone(request.data['description'],False,None)
             if result_description == False:
+
+                enviroment = os.path.realpath(settings.WEBSERVER_CURRENCY)
+                ServiceImage = ServiceImageView()
+                # Logo
+                json_photo_currency = None
+                if request.data['logo'] is not None:
+                    listImagesCurrency  = request.data['logo']
+                    json_photo_currency  = ServiceImage.saveImag(listImagesCurrency,enviroment)
                 try:
                     moneda = Moneda(
-                        desc_mone                           = self.request.data.get("description")
-                        ,codi_pais                          = Pais.get_queryset().get(id = self.request.data.get("country"))
-                        ,simb_mone                          = self.request.data.get("symbol")
-                        ,codi_mone                          = self.request.data.get("code")
-                        ,created                            = datetime.now()
+                        desc_mone   = self.request.data.get("description")
+                        ,codi_pais  = Pais.get_queryset().get(id = self.request.data.get("country"))
+                        ,simb_mone  = self.request.data.get("symbol")
+                        ,codi_mone  = self.request.data.get("code")
+                        ,logo_mone  = None if json_photo_currency is None else json_photo_currency
+                        ,created    = datetime.now()
                     )
                     moneda.save()
                     return message.SaveMessage('Moneda guardado Exitosamente')
@@ -69,8 +80,8 @@ class MonedaCreateView(generics.CreateAPIView):
             return message.NotFoundMessage("Id de Moneda no Registrado")
 
 class MonedaRetrieveView(generics.RetrieveAPIView):
-    serializer_class = MonedaSerializer
-    permission_classes = ()
+    serializer_class = MonedaTasaSerializer
+    permission_classes = [IsAuthenticated]
     queryset = Moneda.get_queryset()
     lookup_field = 'id'
 
@@ -94,7 +105,7 @@ class MonedaRetrieveView(generics.RetrieveAPIView):
 
 class MonedaUpdateView(generics.UpdateAPIView):
     serializer_class = MonedaSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Moneda.objects.all()
     lookup_field = 'id'
 
@@ -121,11 +132,17 @@ class MonedaUpdateView(generics.UpdateAPIView):
                 result_description = MonedaSerializer.validate_desc_mone(request.data['description'],state_deleted,instance.id)
                 if result_description == True:
                     return message.ShowMessage("Descripcion ya se encuentra Registrada")
+            
+                listImages = request.data['logo']
+                enviroment = os.path.realpath(settings.WEBSERVER_CURRENCY)
+                ServiceImage = ServiceImageView()
+                json_photo_currency = ServiceImage.updateImage(listImages,enviroment)
                 
                 instance.desc_mone = self.request.data.get("description")
                 instance.codi_pais = Pais.get_queryset().get(id = self.request.data.get("country"))
                 instance.simb_mone = self.request.data.get("symbol")
                 instance.codi_mone = self.request.data.get("code")
+                instance.logo_mone = json_photo_currency
                 instance.deleted   = isdeleted
                 instance.updated   = datetime.now()
                 instance.save()
@@ -135,9 +152,8 @@ class MonedaUpdateView(generics.UpdateAPIView):
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
-
 class MonedaDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id'
 
     def delete(self, request, *args, **kwargs):
@@ -152,7 +168,7 @@ class MonedaDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Moneda no Registrado")
 
 class MonedaComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = MonedaComboSerializer
     lookup_field = 'id'
 

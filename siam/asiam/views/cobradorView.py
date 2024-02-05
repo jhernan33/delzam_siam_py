@@ -20,10 +20,9 @@ from .serviceImageView import ServiceImageView
 
 from datetime import datetime
 
-
 class CobradorListView(generics.ListAPIView):
     serializer_class = CobradorSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cobrador.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -42,7 +41,7 @@ class CobradorListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class CobradorCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = CobradorSerializer
     
     def create(self, request, *args, **kwargs):
@@ -60,10 +59,10 @@ class CobradorCreateView(generics.CreateAPIView):
 
             collector = Cobrador(
                 codi_natu = Natural.getInstanceNatural(self.request.data.get("natural")),
-                fein_cobr = datetime.strptime( self.request.data.get("dateOfEntry"),date_format),
+                fein_cobr = datetime.strptime(self.request.data.get("dateOfEntry"),date_format),
                 foto_cobr = None if json_photo_collector is None else json_photo_collector,
                 lice_cobr = self.request.data.get("licence"),
-                feli_cobr = datetime.strptime(self.request.data.get("expeditionDate",date_format)),
+                feli_cobr = datetime.strptime(self.request.data.get("expeditionDate"),date_format),
                 fvli_cobr = datetime.strptime(self.request.data.get("dueDate"),date_format),
                 tili_cobr = self.request.data.get("typeLicence"),
                 created = datetime.now()
@@ -75,7 +74,7 @@ class CobradorCreateView(generics.CreateAPIView):
 
 class CobradorRetrieveView(generics.RetrieveAPIView):
     serializer_class = CobradorSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cobrador.get_queryset()
     lookup_field = 'id'
 
@@ -99,7 +98,7 @@ class CobradorRetrieveView(generics.RetrieveAPIView):
 
 class CobradorUpdateView(generics.UpdateAPIView):
     serializer_class = CobradorSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cobrador.objects.all()
     lookup_field = 'id'
 
@@ -111,7 +110,7 @@ class CobradorUpdateView(generics.UpdateAPIView):
             return message.NotFoundMessage("Id de Cobrador no Registrado")
         else:
             try:
-                enviroment = os.path.realpath(settings.WEBSERVER_SELLER)
+                enviroment = os.path.realpath(settings.WEBSERVER_COLLECTOR)
                 ServiceImage = ServiceImageView()
 
                 date_format = '%Y-%m-%d'
@@ -131,13 +130,18 @@ class CobradorUpdateView(generics.UpdateAPIView):
                 json_photo_collector = None
                 if request.data['photo'] is not None:
                     listImagesCollector  = request.data['photo']
-                    json_photo_collector  = ServiceImage.saveImag(listImagesCollector,enviroment)
+                    oldImage = None
+                    
+                    for obj in instance.foto_cobr:
+                        oldImage = obj['image']
+                        
+                    json_photo_collector  = ServiceImage.updateImage(listImagesCollector,enviroment,oldImage)
                 
                 instance.codi_natu = _natural
                 instance.fein_cobr = datetime.strptime( self.request.data.get("dateOfEntry"),date_format)
                 instance.foto_cobr = json_photo_collector
                 instance.lice_cobr = self.request.data.get("licence")
-                instance.feli_cobr = datetime.strptime(self.request.data.get("expeditionDate",date_format))
+                instance.feli_cobr = datetime.strptime(self.request.data.get("expeditionDate"),date_format)
                 instance.fvli_cobr = datetime.strptime(self.request.data.get("dueDate"),date_format)
                 instance.tili_cobr = self.request.data.get("typeLicence")
                 instance.deleted = isdeleted
@@ -151,7 +155,7 @@ class CobradorUpdateView(generics.UpdateAPIView):
 
 class CobradorDestroyView(generics.DestroyAPIView):
     serializer_class = CobradorSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Cobrador.get_queryset()
     lookup_field = 'id'
 
@@ -171,10 +175,10 @@ class CobradorDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Cobrador no Registrado")
 
 class CobradorComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = CobradorComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Cobrador.get_queryset().order_by('valo_taca')
+        queryset = Cobrador.get_queryset().order_by('created')
         return queryset

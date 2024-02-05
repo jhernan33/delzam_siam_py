@@ -21,7 +21,7 @@ from .serviceImageView import ServiceImageView
 
 class BancoListView(generics.ListAPIView):
     serializer_class = BancoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Banco.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -40,7 +40,7 @@ class BancoListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class BancoCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = BancoSerializer
     
     def create(self, request, *args, **kwargs):
@@ -72,7 +72,7 @@ class BancoCreateView(generics.CreateAPIView):
 
 class BancoRetrieveView(generics.RetrieveAPIView):
     serializer_class = BancoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Banco.get_queryset()
     lookup_field = 'id'
 
@@ -96,7 +96,7 @@ class BancoRetrieveView(generics.RetrieveAPIView):
 
 class BancoUpdateView(generics.UpdateAPIView):
     serializer_class = BancoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Banco.objects.all()
     lookup_field = 'id'
 
@@ -143,7 +143,7 @@ class BancoUpdateView(generics.UpdateAPIView):
 
 class BancoDestroyView(generics.DestroyAPIView):
     serializer_class = BancoSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = Banco.get_queryset()
     lookup_field = 'id'
 
@@ -165,7 +165,7 @@ class BancoDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id de Banco no Registrado")
 
 class BancoComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = BancoComboSerializer
     lookup_field = 'id'
 
