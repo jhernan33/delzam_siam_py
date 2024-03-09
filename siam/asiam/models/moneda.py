@@ -13,10 +13,11 @@ class Moneda(Base):
     simb_mone = models.CharField  ('Simbolo o Abreviatura de la Moneda', max_length=120, null=False, blank=True)
     codi_mone = models.CharField  ('Codigo de la Moneda', max_length=50, null=False, blank=True)
     logo_mone = models.JSONField  ('Logo de la Moneda',null=True, blank=True)
+    orde_mone = models.IntegerField('Indice de Ordenamiento de la Moneda',default=1)
 
     class Meta:
         ordering = ['desc_mone']
-        indexes  = [models.Index(fields=['id',])] 
+        indexes  = [models.Index(fields=['id',])]
         db_table = u'"comun\".\"moneda"'
 
     def get_queryset():
@@ -33,3 +34,7 @@ class Moneda(Base):
     """ Get Instance Currency """
     def getInstanceCurrency(Id):
         return Moneda.objects.get(id = Id)
+    
+    """ Check Exists Currency """
+    def checkCurrency(id):
+        return True if Moneda.get_queryset().filter(id = id).count() > 0 else False 

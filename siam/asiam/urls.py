@@ -267,6 +267,14 @@ urlpatterns = [
     path('moneda/delete/<int:id>',                     views.MonedaDestroyView.as_view(),  name='moneda_delete'),
     path('moneda/combo/',                               views.MonedaComboView.as_view(),    name='moneda_combo'),
 
+    # Currency Denomination
+    path('denominacion/',                               views.MonedaDenominacionListView.as_view(),     name='denominacion'),
+    path('denominacion/create/',                        views.MonedaDenominacionCreateView.as_view(),   name='denominacion_create'),
+    path('denominacion/<int:id>/',                      views.MonedaDenominacionRetrieveView.as_view(), name='denominacion_show'),
+    path('denominacion/update/<int:id>',                views.MonedaDenominacionUpdateView.as_view(),   name='denominacion_update'),
+    path('denominacion/delete/<int:id>',                views.MonedaDenominacionDestroyView.as_view(),  name='denominacion_delete'),
+    path('denominacion/combo/',                         views.MonedaDenominacionComboView.as_view(),    name='denominacion_combo'),
+
     # Way to Pay
     path('formapago/',                                      views.FormaPagoListView.as_view(),     name='formadepago'),
     path('formapago/create/',                               views.FormaPagoCreateView.as_view(),   name='formadepago_create'),
@@ -294,6 +302,14 @@ urlpatterns = [
     path('pedidomensaje/update/<int:id>',               views.PedidoMensajeUpdateView.as_view(),   name='pedidoMensaje_update'),
     path('pedidomensaje/delete/<int:id>',               views.PedidoMensajeDestroyView.as_view(),  name='pedidoMensaje_delete'),
     path('pedidomensaje/combo/',                        views.PedidoMensajeComboView.as_view(),    name='pedidoMensaje_combo'),
+
+    # Pay 
+    path('pago/',                                       views.PedidoPagoListView.as_view(),     name='pay'),
+    path('pago/create/',                                views.PedidoPagoCreateView.as_view(),   name='pay_create'),
+    path('pago/<int:id>/',                              views.PedidoPagoRetrieveView.as_view(), name='pay_show'),
+    path('pago/update/<int:id>',                        views.PedidoPagoUpdateView.as_view(),   name='pay_update'),
+    path('pago/delete/<int:id>',                        views.PedidoPagoDestroyView.as_view(),  name='pay_delete'),
+    path('pago/combo/',                                 views.PedidoPagoComboView.as_view(),    name='pay_combo'), 
 
 
     # Bank

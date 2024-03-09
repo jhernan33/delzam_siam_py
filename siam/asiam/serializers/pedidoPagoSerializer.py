@@ -7,7 +7,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-class PedidoFilterSerializer(serializers.ModelSerializer):
+class PedidoPagoFilterSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pedido
@@ -28,20 +28,20 @@ class JSONSerializerField(serializers.Field):
     def to_internal_value(self, data):
         return data
     
-class PedidoSerializer(serializers.ModelSerializer):
+class PedidoPagoSerializer(serializers.ModelSerializer):
     foto_pedi = JSONSerializerField()
     
     class Meta:
         model = Pedido
-        field = ('id','codi_mone','deleted','codi_clie','nufa_pedi','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi','codi_espe','codi_tipe','codi_user')
-        exclude =['created','updated','esta_ttus']
+        field = ('id','deleted')
+        exclude =['created','updated','esta_ttus','codi_pedi','codi_esta','mont_pago','obse_pago','fech_pago','topa_pago']
     
     def to_representation(self, instance):
 
         representation = super().to_representation(instance)
         querysetPedido = {}
         # Method Search Get Order By Id
-        querysetPedido = Pedido.getOrderFilterById(instance.id,False if instance.deleted is None else True)
+        querysetPedido = Pedido.getOrderFilterById(instance.codi_pedi,False if instance.deleted is None else True)
         if len(querysetPedido) > 0:
             representation['customer_id'] = querysetPedido.get('customer_id').id
             representation['customer_all'] = querysetPedido.get('customer_all')
@@ -98,7 +98,7 @@ class PedidoSerializer(serializers.ModelSerializer):
         else:
             return True
         
-class PedidoComboSerializer(serializers.ModelSerializer):
+class PedidoPagoComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ['id','description']
@@ -113,13 +113,13 @@ class PedidoComboSerializer(serializers.ModelSerializer):
         data["customer"] = ClienteComboSerializer(Cliente.get_queryset().filter(id = instance.codi_clie.id), many=True).data
         return data
     
-class PedidoBasicSerializer(serializers.ModelSerializer):
+class PedidoPagoBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         field = ('id','codi_clie')
         exclude = ['created','updated','esta_ttus']
 
-class PedidoHistoricoSerializer(serializers.ModelSerializer):
+class PedidoPagoHistoricoSerializer(serializers.ModelSerializer):
     tota_pedi = serializers.DecimalField(max_digits=7, decimal_places=2)
     
     def validate(self, data):
@@ -167,7 +167,7 @@ class PedidoHistoricoSerializer(serializers.ModelSerializer):
             representation['user'] = querysetPedido.get('user')
         return representation
 
-class PedidoReportSerializer(serializers.ModelSerializer):
+class PedidoPagoReportSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pedido

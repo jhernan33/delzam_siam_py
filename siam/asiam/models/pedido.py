@@ -7,7 +7,7 @@ class Pedido(Base):
     codi_clie = models.ForeignKey(
         'Cliente',
         on_delete=models.CASCADE,
-        related_name='Cliente.codi_clie+'
+        related_name='cliente.codi_clie+'
     )
     fech_pedi = models.DateField('Fecha de creacion del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
     feim_pedi = models.DateField('Fecha de Impresion del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
@@ -51,6 +51,15 @@ class Pedido(Base):
     def get_queryset():
         return Pedido.objects.all().filter(deleted__isnull=True)
     
+    """ Check Order Exist """
+    def checkOrder(orderId):
+        querysetOrder = []
+        if orderId is not None:
+            queryset = Pedido.get_queryset().filter(id = orderId)
+            if queryset.count() > 0:
+                querysetOrder = queryset
+        return querysetOrder
+
     """ Get Instance Pedido """
     def getInstanceOrder(Id):
         return Pedido.objects.get(id = Id)
