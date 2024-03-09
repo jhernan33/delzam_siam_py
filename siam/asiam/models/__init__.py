@@ -48,3 +48,4 @@ from .pedidoMensaje import PedidoMensaje
 from .cobrador import Cobrador
 from .pedidoPago import PedidoPago
 from .pedidoPagoDetalle import PedidoPagoDetalle
+from .monedaDenominacion import MonedaDenominacion

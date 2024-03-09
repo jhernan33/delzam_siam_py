@@ -26,9 +26,9 @@ class TasaCambioListView(generics.ListAPIView):
     queryset = TasaCambio.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
-    search_fields = ['id','valo_taca']
-    ordering_fields = ['id','valo_taca']
-    ordering = ['-id']
+    search_fields = ['id','valo_taca','fech_taca']
+    ordering_fields = ['id','valo_taca','fech_taca']
+    ordering = ['-fech_taca']
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
@@ -46,19 +46,25 @@ class TasaCambioCreateView(generics.CreateAPIView):
     
     def create(self, request, *args, **kwargs):
         message = BaseMessage
-        try:
-            date_format = '%Y-%m-%d %H:%M:%S'
-            tasa = TasaCambio(
-                fech_taca   = datetime.strptime( self.request.data.get("date"),date_format),
-                valo_taca   = self.request.data.get("value"),
-                codi_mone   = Moneda.getInstanceCurrency(self.request.data.get("currency")),
-                obse_taca   = self.request.data.get("observations"),
-                created = datetime.now()
-            )
-            tasa.save()
-            return message.SaveMessage('Tasa de Cambio guardada Exitosamente')
-        except Exception as e:
-            return message.ErrorMessage("Error al Intentar Guardar la Tasa de Cambio: "+str(e))
+
+        serializer = self.serializer_class.validateData(data=request.data)
+        if serializer:
+            try:
+                date_format = '%Y-%m-%d %H:%M'
+                tasa = TasaCambio(
+                    codi_mone   = Moneda.getInstanceCurrency(self.request.data.get("currency")),
+                    fech_taca   = datetime.strptime( self.request.data.get("date"),date_format),
+                    valo_taca   = self.request.data.get("value"),
+                    obse_taca   = self.request.data.get("observations"),
+                    tipo_taca   = self.request.data.get("type"),
+                    codi_mone_to = Moneda.getInstanceCurrency(self.request.data.get("currencyTo")),
+                    created = datetime.now()
+                )
+                tasa.save()
+                return message.SaveMessage('Tasa de Cambio guardada Exitosamente')
+            except Exception as e:
+                return message.ErrorMessage("Error al Intentar Guardar la Tasa de Cambio: "+str(e))
+        
 
 class TasaCambioRetrieveView(generics.RetrieveAPIView):
     serializer_class = TasaCambioSerializer
@@ -92,38 +98,42 @@ class TasaCambioUpdateView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         message = BaseMessage
-        try:
-            instance = self.get_object()
-        except Exception as e:
-            return message.NotFoundMessage("Id de Tasa de Cambio no Registrada")
-        else:
+        serializer = self.serializer_class.validateData(data=request.data)
+        if serializer:
             try:
-                date_format = '%Y-%m-%d %H:%M:%S'
-                # State Deleted
-                state_deleted = None
-                if instance.deleted:
-                    state_deleted = True
-                
-                Deleted = request.data['erased']
-                if Deleted:                    
-                    isdeleted = datetime.now()
-                else:    
-                    isdeleted = None
-                
-                _currency = Moneda.getInstanceCurrency(self.request.data.get("currency"))
-                
-                instance.fech_taca = datetime.strptime( self.request.data.get("date"),date_format)
-                instance.valo_taca = self.request.data.get("value")
-                instance.codi_mone = _currency
-                instance.obse_taca = self.request.data.get("observations")
-                instance.deleted = isdeleted
-                instance.updated = datetime.now()
-                instance.save()
-                
-                return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})
-                
+                instance = self.get_object()
             except Exception as e:
-                return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
+                return message.NotFoundMessage("Id de Tasa de Cambio no Registrada")
+            else:
+                try:
+                    date_format = '%Y-%m-%d %H:%M:%S'
+                    # State Deleted
+                    state_deleted = None
+                    if instance.deleted:
+                        state_deleted = True
+                    
+                    Deleted = request.data['erased']
+                    if Deleted:                    
+                        isdeleted = datetime.now()
+                    else:    
+                        isdeleted = None
+                    
+                    _currency = Moneda.getInstanceCurrency(self.request.data.get("currency"))
+                    _currencyTo = Moneda.getInstanceCurrency(self.request.data.get("currencyTo"))
+                    
+                    instance.fech_taca = datetime.strptime( self.request.data.get("date"),date_format)
+                    instance.valo_taca = self.request.data.get("value")
+                    instance.codi_mone = _currency
+                    instance.obse_taca = self.request.data.get("observations")
+                    instance.codi_mone_to = _currencyTo
+                    instance.deleted = isdeleted
+                    instance.updated = datetime.now()
+                    instance.save()
+                    
+                    return message.UpdateMessage({"id":instance.id,"Exchange Rate":instance.valo_taca})
+                    
+                except Exception as e:
+                    return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class TasaCambioDestroyView(generics.DestroyAPIView):
     serializer_class = TasaCambioSerializer

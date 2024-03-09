@@ -42,12 +42,21 @@ class PedidoListView(generics.ListAPIView):
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     search_fields = [
-        'id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi'
-        ,'obse_pedi','orig_pedi'
-        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena'
-        ,'codi_clie__codi_natu__seap_pena'
+        'id','codi_clie__codi_ante'
+        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena','codi_clie__codi_natu__seap_pena'
+        ,'codi_clie__codi_juri__riff_peju','codi_clie__codi_juri__raso_peju','codi_clie__codi_juri__dofi_peju','codi_clie__ptor_clie'
+        ,'codi_clie__codi_natu__cedu_pena','codi_clie__codi_natu__razo_natu','codi_clie__codi_natu__codi_ciud__nomb_ciud'
+        ,'codi_clie__codi_natu__codi_sect__nomb_sect','codi_clie__codi_juri__codi_ciud__nomb_ciud','codi_clie__codi_juri__codi_sect__nomb_sect'
+        ,'fech_pedi','feim_pedi','mont_pedi'
         ]
-    ordering_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
+    ordering_fields = [
+        'id','codi_clie__codi_ante'
+        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena','codi_clie__codi_natu__seap_pena'
+        ,'codi_clie__codi_juri__riff_peju','codi_clie__codi_juri__raso_peju','codi_clie__codi_juri__dofi_peju','codi_clie__ptor_clie'
+        ,'codi_clie__codi_natu__cedu_pena','codi_clie__codi_natu__razo_natu','codi_clie__codi_natu__codi_ciud__nomb_ciud'
+        ,'codi_clie__codi_natu__codi_sect__nomb_sect','codi_clie__codi_juri__codi_ciud__nomb_ciud','codi_clie__codi_juri__codi_sect__nomb_sect'
+        ,'fech_pedi','feim_pedi','mont_pedi'
+        ]
     ordering = ['-id']
 
     def get_queryset(self):

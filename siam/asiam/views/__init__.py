@@ -46,3 +46,5 @@ from .dateView import DateRetrieveView
 from .fileUploadView import FileUploadAPIView, FileUploadSiaeView, FileUploadSubFamily, FileUploadFamily
 from .pedidoMensajeView import PedidoMensajeListView, PedidoMensajeCreateView, PedidoMensajeDestroyView, PedidoMensajeRetrieveView, PedidoMensajeUpdateView, PedidoMensajeComboView
 from .cobradorView import CobradorListView, CobradorCreateView, CobradorDestroyView, CobradorRetrieveView, CobradorUpdateView, CobradorComboView
+from .monedaDenominacionView import MonedaDenominacionListView, MonedaDenominacionCreateView, MonedaDenominacionRetrieveView, MonedaDenominacionUpdateView, MonedaDenominacionDestroyView, MonedaDenominacionComboView
+from .pedidoPagoView import PedidoPagoListView, PedidoPagoCreateView, PedidoPagoRetrieveView, PedidoPagoUpdateView, PedidoPagoDestroyView, PedidoPagoComboView

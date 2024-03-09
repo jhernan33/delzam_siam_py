@@ -70,14 +70,14 @@ class MonedaComboSerializer(serializers.ModelSerializer):
     logo_mone = JSONSerializerField()
     class Meta:
         model = Moneda
-        field = ['id','description','']
-        exclude = ['created','updated','esta_ttus','deleted','codi_pais','simb_mone','codi_mone','desc_mone']
+        field = ['id','description']
+        exclude = ['created','updated','esta_ttus','deleted','codi_pais','simb_mone','codi_mone','desc_mone','orde_mone']
 
     def to_representation(self, instance):
         data = super(MonedaComboSerializer, self).to_representation(instance=instance)
         
         # Upper Description
-        data["description"] = str(instance.desc_mone).upper()
+        data["description"] = str(instance.codi_mone).upper()
         data['logo'] = instance.logo_mone
         return data
     

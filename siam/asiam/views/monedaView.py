@@ -173,5 +173,5 @@ class MonedaComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Moneda.get_queryset().order_by('desc_mone')
+        queryset = Moneda.get_queryset().order_by('orde_mone')
         return queryset

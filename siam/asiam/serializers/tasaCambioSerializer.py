@@ -10,20 +10,44 @@ class TasaCambioBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = TasaCambio
         field = ('id','valo_taca')
-        exclude = ['created','updated','esta_ttus','codi_mone','fech_taca','valo_taca','obse_taca']
+        exclude = ['created','updated','esta_ttus','codi_mone','fech_taca','valo_taca','obse_taca','tipo_taca','codi_mone_to','codi_mone_to']
 
 class TasaCambioSerializer(serializers.ModelSerializer):
     codi_mone = MonedaSerializer()
+    codi_mone_to = MonedaSerializer()
+
+    observations = serializers.CharField(max_length=254)
+    type = serializers.CharField(max_length=20)
+    
     class Meta:
         model = TasaCambio
-        field = ('id','codi_mone')
-        exclude =['created','updated','esta_ttus','deleted','fech_taca','valo_taca','obse_taca']
+        field = ('id','codi_mone','codi_mone_to')
+        exclude =['created','updated','esta_ttus','deleted','fech_taca','valo_taca','obse_taca','tipo_taca']
+    
 
+
+    def validateData(data):
+        """
+        Check currency From
+        """
+        if Moneda.checkCurrency( data['currency'] ) == False:
+            raise serializers.ValidationError({'message':"Moneda no permitida"})
+
+        if Moneda.checkCurrency( data['currencyTo'] ) == False:
+            raise serializers.ValidationError({'message':"Moneda no permitida"})
+        
+        return True
+
+    
+
+
+    
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['date'] = instance.fech_taca
         representation['value'] = instance.valo_taca
         representation['observations'] = str(instance.obse_taca).strip()
+        representation['type'] = str(instance.tipo_taca).strip().lower()
         return representation
     
     """
@@ -66,7 +90,7 @@ class TasaCambioComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = TasaCambio
         field = ['id','description']
-        exclude = ['created','updated','esta_ttus','deleted','fech_taca','valo_taca','obse_taca','codi_mone']
+        exclude = ['created','updated','esta_ttus','deleted','fech_taca','valo_taca','obse_taca','codi_mone','tipo_taca','codi_mone_to']
 
     def to_representation(self, instance):
         data = super(TasaCambioComboSerializer, self).to_representation(instance=instance)

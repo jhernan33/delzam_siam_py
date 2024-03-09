@@ -24,48 +24,38 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 import django_filters
 
-from asiam.models import Pedido, PedidoDetalle, Cliente, Moneda, PedidoTipo, PedidoEstatus, Articulo, PedidoSeguimiento, PedidoMensaje
-from asiam.serializers import PedidoSerializer, PedidoComboSerializer, MonedaSerializer,PedidoHistoricoSerializer, PedidoTipoSerializer, PedidoReportSerializer, PedidoFilterSerializer
+from asiam.models import PedidoPago, PedidoPagoDetalle, Cliente, Moneda, Articulo, Pedido
+from asiam.serializers import PedidoPagoSerializer, PedidoPagoComboSerializer, MonedaSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
-from asiam.filters import PedidoFilter
 from .serviceImageView import ServiceImageView
 
 from weasyprint import HTML
 from django.http.request import QueryDict
 from django.contrib.gis.geos import GEOSGeometry, Point
 
-class PedidoListView(generics.ListAPIView):
-    serializer_class = PedidoSerializer
+class PedidoPagoListView(generics.ListAPIView):
+    serializer_class = PedidoPagoSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Pedido.get_queryset()
+    queryset = PedidoPago.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
     search_fields = [
-        'id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi'
-        ,'obse_pedi','orig_pedi'
-        ,'codi_clie__codi_natu__prno_pena','codi_clie__codi_natu__seno_pena','codi_clie__codi_natu__prap_pena'
-        ,'codi_clie__codi_natu__seap_pena'
+        'id','codi_pedi','codi_esta','mont_pago','fech_pago','topa_pago'
         ]
-    ordering_fields = ['id','codi_clie','fech_pedi','feim_pedi','fede_pedi','feve_pedi','mont_pedi','desc_pedi','tota_pedi','obse_pedi','orig_pedi']
+    ordering_fields = ['id','codi_pedi','codi_esta','mont_pago','fech_pago','topa_pago']
     ordering = ['-id']
 
     def get_queryset(self):
         # Filter Except orders history
-        queryset = Pedido.objects.all()
+        queryset = PedidoPago.objects.all()
 
-        history = self.request.query_params.get('history')
-        if history =='true':
-            queryset = queryset.filter(codi_espe=7)
-        else:
-            queryset = queryset.exclude(codi_espe=7)
-        
-        # Filter Code Type # Note
-        order = self.request.query_params.get('order')
-        if order =='true':
-            queryset = queryset.filter(codi_tipe=3)
-        else:
-            queryset = queryset.exclude(codi_tipe=3)
+        # # Filter Pedido
+        # order = self.request.query_params.get('order')
+        # if order =='true':
+        #     queryset = queryset.filter(codi_tipe=3)
+        # else:
+        #     queryset = queryset.exclude(codi_tipe=3)
 
         show = self.request.query_params.get('show')
         if show =='true':
@@ -81,32 +71,33 @@ class PedidoListView(generics.ListAPIView):
 
         return queryset.filter(deleted__isnull=True)
 
-class PedidoCreateView(generics.CreateAPIView):
+class PedidoPagoCreateView(generics.CreateAPIView):
     permission_classes =  [IsAuthenticated]
-    serializer_class = PedidoSerializer
+    serializer_class = PedidoPagoSerializer
     
     def create(self, request, *args, **kwargs):
         message = BaseMessage
         try:
-            invoice_number = None
-            currency_id = None
-            json_foto_pedi = None
-            discount = 0
-            _amount = 0
+            orderId = None
+            stateId = None
+            amount = None
+            observations = None
+            payDate = None
+            totalPayment = None
 
             # Get User
             user_id = Token.objects.get(key= request.auth.key).user
             
-            # Validate Customer and Invoice Number
-            if 'invoice_number' in request.data:
-                invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
-                result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],invoice_number)
-                if result_invoice == True:
+            # Validate Order Id
+            if 'order' in request.data:
+                orderId = self.request.data.get("order")
+                resultOrder = Pedido.checkOrder(orderId)
+                if resultOrder == True:
                     return message.ShowMessage("Número de factura ya registrada al Cliente")
             
             
             # Validate Customer Id
-            result_customer = PedidoSerializer.validate_customer(request.data['customer'])
+            result_customer = PedidoPagoSerializer.validate_customer(request.data['customer'])
             if result_customer == False:
                 return message.NotFoundMessage("Codigo de Cliente no Registrado")
                 
@@ -119,11 +110,11 @@ class PedidoCreateView(generics.CreateAPIView):
             
             # Check Details Orders
             if request.data['details'] is None:
-                return message.NotFoundMessage("Items del Pedido es requerido")
+                return message.NotFoundMessage("Items del PedidoPago es requerido")
             else:
-                result_details = PedidoDetalle.checkDetails(self.request.data.get("details"))
+                result_details = PedidoPagoDetalle.checkDetails(self.request.data.get("details"))
                 if result_details == False:
-                    return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
+                    return message.NotFoundMessage("Items del PedidoPago son Incorrecto, verifique e Intente de Nuevo")
             
             enviroment = os.path.realpath(settings.WEBSERVER_ORDER)
             ServiceImage = ServiceImageView()
@@ -140,7 +131,7 @@ class PedidoCreateView(generics.CreateAPIView):
                     discount = 0
 
             with transaction.atomic():
-                order = Pedido(
+                order = PedidoPago(
                     codi_clie   = Cliente.get_queryset().get(id = self.request.data.get("customer")) 
                     ,fech_pedi  = Cliente.gettingTodaysDate() if self.request.data.get("date_created") is None else self.request.data.get("date_created")
                     #,mont_pedi  = self.request.data.get("amount")
@@ -149,8 +140,8 @@ class PedidoCreateView(generics.CreateAPIView):
                     ,obse_pedi  = self.request.data.get("observations")
                     ,orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
                     ,codi_mone  = Moneda.get_queryset().get(id = 1) if currency_id is None else Moneda.get_queryset().get(id = currency_id)
-                    ,codi_espe  = PedidoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
-                    ,codi_tipe  = PedidoTipo.get_queryset().get(id = 1)  if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    ,codi_espe  = PedidoPagoEstatus.get_queryset().get(id = 1)  if self.request.data.get("order_state") is None else PedidoPagoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    ,codi_tipe  = PedidoPagoTipo.get_queryset().get(id = 1)  if self.request.data.get("order_type") is None else PedidoPagoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     ,mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage") 
                     ,foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
                     ,nufa_pedi  = None if invoice_number is None else invoice_number
@@ -166,8 +157,8 @@ class PedidoCreateView(generics.CreateAPIView):
                         detail_discount = float(detail['discount'])
                         detail_price = float(detail['price'])
                         # Guardar el Detalle
-                        pedidoDetalle = PedidoDetalle(
-                            codi_pedi = Pedido.get_queryset().get(id = order.id),
+                        PedidoPagoDetalle = PedidoPagoDetalle(
+                            codi_pedi = PedidoPago.get_queryset().get(id = order.id),
                             codi_arti = Articulo.get_queryset().get(id = detail['article']),
                             cant_pede = detail_quantity,
                             prec_pede = detail_price,
@@ -175,11 +166,11 @@ class PedidoCreateView(generics.CreateAPIView):
                             moto_pede = (detail_quantity * detail_price) - detail_discount,
                             created = datetime.now(),
                         )
-                        pedidoDetalle.save()
+                        PedidoPagoDetalle.save()
                         _amount = _amount + ((detail_quantity * detail_price) - detail_discount)
 
                 # Update total in Order
-                    Pedido.objects.filter(id = order.id).update(
+                    PedidoPago.objects.filter(id = order.id).update(
                         mont_pedi = _amount
                         , desc_pedi = discount
                         , tota_pedi = _amount - (_amount * (discount / 100))
@@ -187,28 +178,28 @@ class PedidoCreateView(generics.CreateAPIView):
                     )
 
                 # Register Tracking
-                orderTracking = PedidoSeguimiento(
-                    codi_pedi = Pedido.get_queryset().get(id = order.id),
-                    codi_esta = PedidoEstatus.get_queryset().get(id = 1),
+                orderTracking = PedidoPagoSeguimiento(
+                    codi_pedi = PedidoPago.get_queryset().get(id = order.id),
+                    codi_esta = PedidoPagoEstatus.get_queryset().get(id = 1),
                     codi_user = user_id,
                     fech_segu = datetime.now(),
                     created   = datetime.now(),
-                    obse_segu = 'Creando el Pedido',
+                    obse_segu = 'Creando el PedidoPago',
                 )
                 orderTracking.save()
-            return message.SaveMessage({'message':'Pedido guardado exitosamente','id':order.id})
+            return message.SaveMessage({'message':'PedidoPago guardado exitosamente','id':order.id})
         except Exception as e:
-            return message.ErrorMessage("Error al Intentar Guardar el Pedido: "+str(e))
+            return message.ErrorMessage("Error al Intentar Guardar el PedidoPago: "+str(e))
             
-class PedidoRetrieveView(generics.RetrieveAPIView):
+class PedidoPagoRetrieveView(generics.RetrieveAPIView):
     permission_classes =  [IsAuthenticated]
-    serializer_class = PedidoSerializer
-    queryset = Pedido.get_queryset()
+    serializer_class = PedidoPagoSerializer
+    queryset = PedidoPago.get_queryset()
     lookup_field = 'id'
 
     def get_queryset(self):
         show = self.request.query_params.get('show')
-        queryset = Pedido.objects.all()
+        queryset = PedidoPago.objects.all()
         
         if show =='true':
             return queryset.filter(deleted__isnull=False)
@@ -220,15 +211,15 @@ class PedidoRetrieveView(generics.RetrieveAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Pedido no Registrado")
+            return message.NotFoundMessage("Id de Pedido Pago no Registrado")
         else:
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-class PedidoUpdateView(generics.UpdateAPIView):
-    serializer_class = PedidoSerializer
+class PedidoPagoUpdateView(generics.UpdateAPIView):
+    serializer_class = PedidoPagoSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Pedido.objects.all()
+    queryset = PedidoPago.objects.all()
     lookup_field = 'id'
 
     def update(self, request, *args, **kwargs):
@@ -236,7 +227,7 @@ class PedidoUpdateView(generics.UpdateAPIView):
         try:
             instance = self.get_object()
         except Exception as e:
-            return message.NotFoundMessage("Id de Pedido no Registrado")
+            return message.NotFoundMessage("Id de PedidoPago no Registrado")
         else:
             try:
                 invoice_number = None
@@ -251,12 +242,12 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 # Validate Customer and Invoice Number
                 if 'invoice_number' in request.data:
                     invoice_number = str(self.request.data.get("invoice_number")).upper().strip()
-                    result_invoice = PedidoSerializer.validate_customer_invoice_number(request.data['customer'],invoice_number)
+                    result_invoice = PedidoPagoSerializer.validate_customer_invoice_number(request.data['customer'],invoice_number)
                     if result_invoice == True:
                         return message.ShowMessage("Número de factura ya registrada al Cliente")
                 
                 # Validate Customer Id
-                result_customer = PedidoSerializer.validate_customer(request.data['customer'])
+                result_customer = PedidoPagoSerializer.validate_customer(request.data['customer'])
                 if result_customer == False:
                     return message.NotFoundMessage("Codigo de Cliente no Registrado")
                     
@@ -269,11 +260,11 @@ class PedidoUpdateView(generics.UpdateAPIView):
                 
                 # Check Details Orders
                 if request.data['details'] is None:
-                    return message.NotFoundMessage("Items del Pedido es requerido")
+                    return message.NotFoundMessage("Items del PedidoPago es requerido")
                 else:
-                    result_details = PedidoDetalle.checkDetails(self.request.data.get("details"))
+                    result_details = PedidoPagoDetalle.checkDetails(self.request.data.get("details"))
                     if result_details == False:
-                        return message.NotFoundMessage("Items del Pedido son Incorrecto, verifique e Intente de Nuevo")
+                        return message.NotFoundMessage("Items del PedidoPago son Incorrecto, verifique e Intente de Nuevo")
                 
                 # Velidate Discount
                 if 'discount' in request.data:
@@ -310,8 +301,8 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     instance.obse_pedi  = self.request.data.get("observations")
                     instance.orig_pedi  = 'WebSite' if self.request.data.get("source") is None else self.request.data.get("source")
                     instance.codi_mone  = Moneda.get_queryset().get(id = 1) if currency_id is None else Moneda.get_queryset().get(id = currency_id)
-                    instance.codi_espe  = PedidoEstatus.get_queryset().get(id = 4)  if self.request.data.get("order_state") is None else PedidoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
-                    instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
+                    instance.codi_espe  = PedidoPagoEstatus.get_queryset().get(id = 4)  if self.request.data.get("order_state") is None else PedidoPagoEstatus.get_queryset().get(id = self.request.data.get("order_state")) 
+                    instance.codi_tipe  = 1 if self.request.data.get("order_type") is None else PedidoPagoTipo.get_queryset().get(id = self.request.data.get("order_type")) 
                     instance.mopo_pedi  = 20 if self.request.data.get("porcentage") is None else self.request.data.get("porcentage") 
                     instance.foto_pedi  = None if json_foto_pedi is None else json_foto_pedi
                     instance.nufa_pedi  = None if invoice_number is None else invoice_number
@@ -324,14 +315,14 @@ class PedidoUpdateView(generics.UpdateAPIView):
                     if isinstance(self.request.data.get("details"),list):
                         _total = 0
                         # Delete Items Order Detail
-                        PedidoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
+                        PedidoPagoDetalle.get_queryset().filter(codi_pedi = instance.id).delete()
                         for detail in self.request.data.get("details"):
                             detail_quantity = int(detail['quantity'])
                             detail_discount = float(detail['discount'])
                             detail_price = float(detail['price'])
                             # Save Order Detail
-                            pedidoDetalle = PedidoDetalle(
-                                codi_pedi = Pedido.get_queryset().get(id = instance.id),
+                            PedidoPagoDetalle = PedidoPagoDetalle(
+                                codi_pedi = PedidoPago.get_queryset().get(id = instance.id),
                                 codi_arti = Articulo.get_queryset().get(id = detail['article']),
                                 cant_pede = detail_quantity,
                                 prec_pede = detail_price,
@@ -340,31 +331,31 @@ class PedidoUpdateView(generics.UpdateAPIView):
                                 created = datetime.now(),
                                 updated = datetime.now(),
                             )
-                            pedidoDetalle.save()
+                            PedidoPagoDetalle.save()
                             _amount = _amount + ((detail_quantity * detail_price) - detail_discount)
                             _discount = _discount + detail_discount
                         # Update total in Order
-                        Pedido.objects.filter(id = instance.id).update(
+                        PedidoPago.objects.filter(id = instance.id).update(
                             mont_pedi = _amount
                             , desc_pedi = _discount
                             , tota_pedi = _amount - (_amount * (_discount / 100))
                             , updated = datetime.now()
                         )
                     # Register Tracking
-                    orderTracking = PedidoSeguimiento(
-                        codi_pedi = Pedido.get_queryset().get(id = instance.id),
-                        codi_esta = PedidoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
+                    orderTracking = PedidoPagoSeguimiento(
+                        codi_pedi = PedidoPago.get_queryset().get(id = instance.id),
+                        codi_esta = PedidoPagoEstatus.get_queryset().get(id = self.request.data.get("order_status")),
                         codi_user = user_id,
                         fech_segu = datetime.now(),
                         created   = datetime.now(),
-                        obse_segu = 'Actualizando el Pedido',
+                        obse_segu = 'Actualizando el PedidoPago',
                     )
                     orderTracking.save()
-                    return message.UpdateMessage("Pedido actualizado exitosamente")
+                    return message.UpdateMessage("PedidoPago actualizado exitosamente")
             except Exception as e:
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
-class PedidoDestroyView(generics.DestroyAPIView):
+class PedidoPagoDestroyView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
     lookup_field = 'id' 
 
@@ -373,8 +364,8 @@ class PedidoDestroyView(generics.DestroyAPIView):
         try:
             with transaction.atomic():
                 # Instance Object
-                orderState = PedidoEstatus.get_queryset().get(id = 3)
-                orderId =  Pedido.get_queryset().get(pk=kwargs['id'])
+                orderState = PedidoPagoEstatus.get_queryset().get(id = 3)
+                orderId =  PedidoPago.get_queryset().get(pk=kwargs['id'])
                 order = orderId
                 order.deleted = datetime.now()
                 # Id Status Erased
@@ -385,10 +376,10 @@ class PedidoDestroyView(generics.DestroyAPIView):
                 updated_data = {
                     "deleted" : datetime.now()
                 }
-                result_order_detail = PedidoDetalle.get_queryset().filter(codi_pedi = orderId).update(**updated_data)
+                result_order_detail = PedidoPagoDetalle.get_queryset().filter(codi_pedi = orderId).update(**updated_data)
 
                 # Register Tracking
-                orderTracking = PedidoSeguimiento(
+                orderTracking = PedidoPagoSeguimiento(
                     codi_pedi = orderId,
                     codi_esta = orderState,
                     codi_user = User.objects.get(id = request.user.id),
@@ -398,58 +389,18 @@ class PedidoDestroyView(generics.DestroyAPIView):
                 )
                 orderTracking.save()
 
-                return message.DeleteMessage('Pedido Anulado '+str(kwargs['id']))
+                return message.DeleteMessage('PedidoPago Anulado '+str(kwargs['id']))
         except ObjectDoesNotExist:
-            return message.NotFoundMessage("Id de Pedido no Registrado")
+            return message.NotFoundMessage("Id de PedidoPago no Registrado")
             
-class PedidoComboView(generics.ListAPIView):
+class PedidoPagoComboView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = PedidoComboSerializer
+    serializer_class = PedidoPagoComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
-        queryset = Pedido.get_queryset()
+        queryset = PedidoPago.get_queryset()
         list1 = list(queryset)
         return queryset
-
-    if request.headers.get('Authorization') is not None:
-        show = request.GET.get('show',None)
-        _id = request.GET.get('id',None)
-        if _id is not None:
-            message = ''
-            customer_all = None
-            queryset = Pedido.getOrderFilterById(_id,show)
-            customer_all = queryset.get('customer_all')
-            customer_address = queryset.get('customer_address')
-            customer_phone = queryset.get('customer_phone')
-            invoice_number = queryset.get('invoice_number')
-            total_amount = queryset.get('total_amount')
-            result_message = PedidoMensaje.filterByCodiTipe(queryset.get('type_order_id'))
-            if result_message.count()> 0 :
-                for k in result_message:
-                    message = k
-
-        # result = queryset
-        _date = datetime.now().date()
-        # Create Context 
-        context = {
-                "data":queryset
-                , "invoice_number": invoice_number
-                , "customer":customer_all
-                , 'customer_address':customer_address
-                , 'customer_phone': customer_phone
-                , "total":total_amount
-                , "fecha":_date
-                , "message": message
-                }
-        html = render_to_string("invoice.html", context)
-        response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = "inline; report.pdf"
-
-        # font_config = FontConfiguration()
-        HTML(string=html).write_pdf(response)
-
-        return response
-    else:
         message = BaseMessage
         return message.UnauthorizedMessage("para ver el Reporte")

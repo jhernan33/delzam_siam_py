@@ -46,3 +46,5 @@ from .profileUserSerializer import ProfileUserBasicSerializer, ProfileUserSerial
 from .fileUploadSerializer import FileUploadSerializer
 from .pedidoMensajeSerializer import PedidoMensajeBasicSerializer, PedidoMensajeComboSerializer, PedidoMensajeSerializer
 from .cobradorSerializer import CobradorBasicSerializer, CobradorComboSerializer, CobradorSerializer
+from .monedaDenominacionSerializer import MonedaDenominacionBasicSerializer, MonedaDenominacionComboSerializer, MonedaDenominacionSerializer
+from .pedidoPagoSerializer import PedidoPagoBasicSerializer, PedidoPagoComboSerializer, PedidoPagoSerializer
