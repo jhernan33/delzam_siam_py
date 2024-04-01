@@ -37,7 +37,6 @@ class NaturalSerializer(serializers.ModelSerializer):
     codi_ciud = CiudadSerializer()
     codi_sect = SectorSerializer()
 
-
     class Meta:
         model = Natural
         field = ['id','naci_pena','cedu_pena','prno_pena','seno_pena','prap_pena','seap_pena','sexo_pena','fena_pena'
@@ -57,6 +56,7 @@ class NaturalSerializer(serializers.ModelSerializer):
         data['nombre_completo'] = 'NO POSEE' if instance.id == 1 else data['prno_pena'].upper().strip()+' '+data['seno_pena'].upper().strip() if data['prno_pena'].upper().strip() else data['prno_pena'].upper().strip()
         data['apellido_completo'] = 'NO POSEE' if instance.id == 1 else data['prap_pena'].upper().strip()+' '+data['seap_pena'].upper().strip() if data['prap_pena'].upper().strip() else data['prap_pena'].upper().strip()
         data['natural'] = 'NO POSEE' if instance.id == 1 else data['nombre_completo'].upper().strip()+' '+data['apellido_completo'].upper().strip()
+        data['status'] = Natural.statusNatural(instance.id)
         
         """ Search Conctac by instance Id"""
         queryset = Contacto.objects.filter(codi_natu = instance.id)

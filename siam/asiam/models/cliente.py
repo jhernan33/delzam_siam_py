@@ -173,3 +173,9 @@ class Cliente(Base):
             if queryset.count() > 0:
                 queryset_Customer = queryset
         return queryset_Customer
+    
+
+    """ Is Customer """
+    def isCustomer(Id):
+        resultQuerySetCustomer = Cliente.get_queryset().filter(codi_natu = Id)
+        return False if resultQuerySetCustomer.count() <= 0 else True

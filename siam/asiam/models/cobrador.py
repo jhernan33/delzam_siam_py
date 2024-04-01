@@ -33,3 +33,8 @@ class Cobrador(Base):
                 return True
             else:
                 return False
+    
+    """ Is DebtCollector """
+    def isDebtCollector(Id):
+        resultQuerySetDebtCollector = Cobrador.get_queryset().filter(codi_natu = Id)
+        return False if resultQuerySetDebtCollector.count() <= 0 else True

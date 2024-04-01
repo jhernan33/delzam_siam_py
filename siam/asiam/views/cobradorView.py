@@ -75,7 +75,7 @@ class CobradorCreateView(generics.CreateAPIView):
 class CobradorRetrieveView(generics.RetrieveAPIView):
     serializer_class = CobradorSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Cobrador.get_queryset()
+    queryset = Cobrador.objects.all()
     lookup_field = 'id'
 
     def get_queryset(self):

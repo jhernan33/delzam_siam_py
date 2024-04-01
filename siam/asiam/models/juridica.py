@@ -37,3 +37,17 @@ class Juridica(Base):
     
     def get_queryset():
         return Juridica.objects.all().filter(deleted__isnull=True)
+
+    ''' Check Status Juridica '''
+    def statusLegal(Id):
+        from asiam.models import Vendedor, Cobrador, Cliente, Proveedor
+        dictionaryLegal = {}
+        # is Supplier
+        dictionaryLegal.update( { 'supplier': True if Proveedor.isSupplier(Id) else False })
+        # 'is Seller'
+        dictionaryLegal.update( { 'seller' : True if Vendedor.isSeller(Id) else False } )
+        # is DebtCollector
+        dictionaryLegal.update( { 'debtCollector' : True if Cobrador.isDebtCollector(Id) else False } )
+        # is Customer
+        dictionaryLegal.update( { 'customer': True if Cliente.isCustomer(Id) else False } )
+        return dictionaryLegal

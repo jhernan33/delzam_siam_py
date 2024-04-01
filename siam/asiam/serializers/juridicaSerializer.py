@@ -73,6 +73,7 @@ class JuridicaSerializer(serializers.ModelSerializer):
         queryset = Contacto.objects.filter(codi_juri = instance.id)
         result_contact = ContactSimpleSerializer(queryset, many=True).data
         data['contacts'] = {"data":result_contact}
+        data['status'] = Juridica.statusLegal(instance.id)
 
         return data
     
