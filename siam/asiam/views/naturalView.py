@@ -14,7 +14,7 @@ from django.http import HttpResponse
 from django.db.models import Exists, OuterRef
 from django.db import transaction
 
-from asiam.models import Natural, Vendedor, Contacto, Cliente
+from asiam.models import Natural, Vendedor, Contacto, Cliente, Cobrador
 from asiam.serializers import NaturalSerializer, NaturalBasicSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
@@ -126,7 +126,6 @@ class NaturalRetrieveView(generics.RetrieveAPIView):
             serialize = self.get_serializer(instance)
             return message.ShowMessage(self.serializer_class(instance).data)
 
-
 class NaturalUpdateView(generics.UpdateAPIView):
     serializer_class = NaturalSerializer
     permission_classes = ()
@@ -234,10 +233,17 @@ class NaturalComboView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Natural.objects.all()
         show = self.request.query_params.get('show',None)
+        debtCollector = self.request.query_params.get('collector',None)
         seller = self.request.query_params.get('seller',None)
         customer = self.request.query_params.get('customer',None) 
         _selectCustomer = self.request.query_params.get('id',None)
 
+        # Parameter Debt Collector
+        if debtCollector == 'true':
+            return Natural.objects.filter(
+                ~Exists(Cobrador.objects.filter(codi_natu =OuterRef('pk')))
+                ).order_by('-id')
+        
         # Parameter Seller
         if seller == 'true':
             return Natural.objects.filter(

@@ -30,3 +30,8 @@ class Proveedor(Base):
 
     def get_queryset():
         return Proveedor.objects.all().filter(deleted__isnull=True)
+    
+    """ Is Supplier """
+    def isSupplier(Id):
+        resultQuerySetSupplier = Proveedor.get_queryset().filter(codi_natu = Id)
+        return False if resultQuerySetSupplier.count() <= 0 else True

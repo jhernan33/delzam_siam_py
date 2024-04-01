@@ -72,3 +72,17 @@ class Natural(Base):
     """ Get Instance Natural """
     def getInstanceNatural(Id):
         return Natural.objects.get(id = Id)
+    
+    ''' Check Status Natural '''
+    def statusNatural(Id):
+        from asiam.models import Vendedor, Cobrador, Cliente, Proveedor
+        dictionaryNatural = {}
+        # 'is Seller'
+        dictionaryNatural.update( { 'seller' : True if Vendedor.isSeller(Id) else False } )
+        # is DebtCollector
+        dictionaryNatural.update( { 'debtCollector' : True if Cobrador.isDebtCollector(Id) else False } )
+        # is Customer
+        dictionaryNatural.update( { 'customer': True if Cliente.isCustomer(Id) else False } )
+        # is Supplier
+        dictionaryNatural.update( { 'supplier': True if Proveedor.isSupplier(Id) else False })
+        return dictionaryNatural

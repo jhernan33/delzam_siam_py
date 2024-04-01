@@ -41,7 +41,6 @@ class ContactSimpleSerializer(serializers.ModelSerializer):
         representation['desc_cate'] = result_category_contact[0].desc_ctco 
         return representation
 
-
 class VendedorBasicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vendedor

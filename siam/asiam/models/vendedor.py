@@ -32,3 +32,8 @@ class Vendedor(Base):
                 return True
             else:
                 return False
+    
+    """ Is Seller """
+    def isSeller(Id):
+        resultQuerySetSeller = Vendedor.get_queryset().filter(codi_natu = Id)
+        return False if resultQuerySetSeller.count() <= 0 else True
