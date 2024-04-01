@@ -16,8 +16,8 @@ class TasaCambioSerializer(serializers.ModelSerializer):
     codi_mone = MonedaSerializer()
     codi_mone_to = MonedaSerializer()
 
-    observations = serializers.CharField(max_length=254)
-    type = serializers.CharField(max_length=20)
+    # obse_taca = serializers.CharField(max_length=254)
+    # type = serializers.CharField(max_length=20)
     
     class Meta:
         model = TasaCambio
