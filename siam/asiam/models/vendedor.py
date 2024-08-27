@@ -37,3 +37,25 @@ class Vendedor(Base):
     def isSeller(Id):
         resultQuerySetSeller = Vendedor.get_queryset().filter(codi_natu = Id)
         return False if resultQuerySetSeller.count() <= 0 else True
+    
+    def getSeller(_sellerId):
+        if isinstance(_sellerId,str):
+            # Create List
+            _sellerList = []
+            ocu_pri = 0
+            # Check Count Ocurrences
+            indexes = [i for i, c in enumerate(_sellerId) if c ==',']
+            if len(indexes) >0:
+                # Iterate Indexes
+                for x in indexes:
+                    if ocu_pri == 0:
+                        _sellerList.append(int(_sellerId[ocu_pri:x]))
+                        ocu_pri = x
+                    elif ocu_pri > 0:
+                        _sellerList.append(int(_sellerId[ocu_pri+1:x]))
+                        ocu_pri = x
+                _sellerList.append(int(_sellerId[ocu_pri+1:len(_sellerId)]))
+            elif len(indexes) ==0:
+                _sellerList.append(int(_sellerId[0:len(_sellerId)]))
+            
+            return _sellerList

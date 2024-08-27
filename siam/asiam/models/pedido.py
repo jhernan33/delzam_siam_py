@@ -7,7 +7,7 @@ class Pedido(Base):
     codi_clie = models.ForeignKey(
         'Cliente',
         on_delete=models.CASCADE,
-        related_name='cliente.codi_clie+'
+        related_name='order_customer_code'
     )
     fech_pedi = models.DateField('Fecha de creacion del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)
     feim_pedi = models.DateField('Fecha de Impresion del Pedido',auto_now=False, auto_now_add=False,blank=True, null=True)

@@ -17,7 +17,7 @@ class Cliente(Base):
     codi_natu = models.ForeignKey(
         'Natural',
         on_delete=models.CASCADE,
-        related_name='natural.codi_natu+'
+        related_name='customer_natural_code'
     )
     codi_juri = models.ForeignKey(
         'Juridica',
@@ -32,7 +32,7 @@ class Cliente(Base):
     ptor_clie = models.TextField('Punto de Referencia del Cliente',null=True, blank=True)
     
     class Meta:
-        ordering = ['codi_natu']
+        ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
         db_table = u'"empr\".\"cliente"'
 
@@ -179,3 +179,13 @@ class Cliente(Base):
     def isCustomer(Id):
         resultQuerySetCustomer = Cliente.get_queryset().filter(codi_natu = Id)
         return False if resultQuerySetCustomer.count() <= 0 else True
+
+    @property
+    def zone_customer(self):
+        from asiam.models import Ruta
+        zone = self.ruta_detalle_vendedor_cliente.codi_ruta
+        # print(zone,self.ruta_detalle_vendedor_cliente)
+        return zone
+        # queryset = Ruta.get_queryset().select_related("codi_zona").values('codi_zona__desc_zona')
+        # print(queryset[0]['codi_zona__desc_zona'])
+        # return str(queryset[0]['codi_zona__desc_zona'])

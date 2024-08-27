@@ -1,4 +1,3 @@
-import imp
 from .base import Base
 from django.db import models
 from asiam.models import Vendedor, Natural

@@ -40,6 +40,10 @@ class Natural(Base):
 
     def rifc_pena (self):
         return '%s %s %s' % (self.naci_pena, self.cedu_pena, self.riff_pena) 
+    
+    @property
+    def fullName(self):
+        return '%s %s %s %s' % (self.prno_pena, self.seno_pena, self.prap_pena, self.seap_pena)
 
 
     class Meta:

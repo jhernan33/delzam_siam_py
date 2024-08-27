@@ -86,3 +86,28 @@ class Ruta(Base):
     """ Get Instance Route """
     def getInstanceRoute(Id:int):
         return Ruta.objects.get(id = Id)
+    
+    def getAllRoute():
+        _result = Ruta.get_queryset().values("id")
+        return _result
+    
+    def createListRoute(_route):
+        # Create List
+        _routeList = []
+        ocu_pri = 0
+        # Check Count Ocurrences
+        indexes = [i for i, c in enumerate(_route) if c ==',']
+        if len(indexes) >0:
+            # Iterate Indexes
+            for x in indexes:
+                if ocu_pri == 0:
+                    _routeList.append(int(_route[ocu_pri:x]))
+                    ocu_pri = x
+                elif ocu_pri > 0:
+                    _routeList.append(int(_route[ocu_pri+1:x]))
+                    ocu_pri = x
+            _routeList.append(int(_route[ocu_pri+1:len(_route)]))
+        elif len(indexes) ==0:
+            _routeList.append(int(_route[0:len(_route)]))
+        
+        return _routeList
