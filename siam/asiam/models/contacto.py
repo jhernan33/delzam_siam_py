@@ -28,7 +28,8 @@ class Contacto(Base):
     codi_natu = models.ForeignKey(
         'Natural',
         on_delete=models.CASCADE,
-        related_name='contacto_natural_codi_natu'
+        # related_name='contacto_natural_codi_natu'
+        related_name='contact_natural_code'
         ,null=True, blank=True
     )
     codi_juri = models.ForeignKey(

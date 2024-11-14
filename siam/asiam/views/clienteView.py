@@ -19,17 +19,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
 
-
-from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona
-from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer, ClienteBuscarSerializer
+from django.db.models import F
+from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona, Pedido
+from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer, ClienteBuscarSerializer, HistoryCustomerSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
+from django.db.models import Prefetch, OuterRef
 
 from weasyprint import HTML
 from django.http.request import QueryDict
 from django.contrib.gis.geos import GEOSGeometry, Point
-
 
 class ClienteListView(generics.ListAPIView):
     serializer_class = ClienteSerializer
@@ -63,6 +63,7 @@ class ClienteCreateView(generics.CreateAPIView):
     serializer_class = ClienteSerializer
     
     def create(self, request, *args, **kwargs):
+        DEFAULTPOINT = "POINT(1,1)"
         message = BaseMessage
         try:
             # Validate Id Natural
@@ -101,7 +102,7 @@ class ClienteCreateView(generics.CreateAPIView):
                         ,prau_clie                          = self.request.data.get("prau_clie")
                         ,foto_clie                          = None if json_foto_clie is None else json_foto_clie
                         ,obse_clie                          = self.request.data.get("obse_clie")
-                        ,location_clie                      = self.request.data.get("location_clie")
+                        ,location_clie                      = DEFAULTPOINT if self.request.data.get("location_clie") is None else self.request.data.get("location_clie")
                         ,ptor_clie                          = self.request.data.get("ptor_clie")
                         ,created                            = datetime.now()
                     )
@@ -434,7 +435,6 @@ class ClienteBuscarView(generics.ListAPIView):
 
         return queryset.filter(deleted__isnull=True)
 
-
 """
     Search Filter Zone in Array
 """
@@ -485,19 +485,164 @@ def ClienteExportFile(request):
     # Instance Object
     objectReportView = ClienteReportView()
     result = objectReportView.setRequestCustom(request)
-    
+
     _date = datetime.now().date()
     # Get All Zonas
     _zonas = objectReportView.getZones(request)
-
+  
     # Create Context 
     context = {"data":result, "total":result.count, "Fecha":_date, "zonas":_zonas}
     html = render_to_string("customReport.html", context)
 
     response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = "inline; report.pdf"
-
-    # # font_config = FontConfiguration()
+    response["Content-Disposition"] = "inline; filename=report.pdf"
+    
+    # font_config = FontConfiguration()
     HTML(string=html).write_pdf(response)
+    
+    return response
 
+'''
+    Report History Customer
+'''
+class HistoryCustomer(generics.ListAPIView):
+    serializer_class = HistoryCustomerSerializer
+    permission_classes = ()
+    # queryset = Cliente.objects.all()
+    # pagination_class = SmallResultsSetPagination
+
+    def get_queryset(self):
+        queryset = None
+
+        queryset = self.filterCustomer(self)
+
+        return queryset
+    
+    def filterCustomer(self,request):
+        # Obtén los parámetros de búsqueda de la solicitud
+        zone = self.request.query_params.get('zone')
+        route = self.request.query_params.get('route')
+        seller = self.request.query_params.get('seller')
+        
+        # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
+        if zone and seller:
+            routes = Ruta.getRouteFilterZone(zone)
+            seller_obj = Vendedor.getSeller(seller)
+            
+            # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario            
+            return searchHistoryCustomer(route = routes, seller=seller_obj) 
+            #return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
+
+        # Si están definidos tanto `route` como `seller`, se hace una búsqueda específica
+        if route and seller:
+            route_queryset = searchHistoryCustomer(route = route, seller=seller_obj)
+            
+            # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
+            return route_queryset
+
+        # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
+        if zone:
+            routes = Ruta.getRouteFilterZone(zone)
+            return searchHistoryCustomer(route = routes)
+
+        # Si solo `route` está definido, crea una lista de rutas y busca
+        if route:
+            route_list = Ruta.createListRoute(route)
+            if route_list:
+                return searchHistoryCustomer(route = route_list)
+
+        # Si solo `seller` está definido, busca por vendedor
+        if seller:
+            seller_obj = Vendedor.getSeller(seller)
+            result = searchHistoryCustomer(seller=seller_obj)
+            return result
+
+        # Si no se definió ningún filtro, devuelve todas las rutas
+        all_routes = Ruta.getAllRoute()
+        return searchHistoryCustomer(all_routes, "route")
+    
+
+def searchHistoryCustomer(**kwargs):
+    queryset = None
+    route = None
+    seller = None 
+    days = None
+
+    for key, value in kwargs.items():
+        if key == "route":
+            route = value
+        elif key == "seller":
+            seller = value
+        elif key == "days":
+            days = value
+
+    if route and seller: 
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = route).filter(codi_vend__in = seller)
+
+    if route and not seller:
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = route)
+
+    if seller and not route:
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_vend__in = seller)
+    
+    queryset = (Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail)
+                .select_related("ruta_detalle_vendedor_cliente")
+                .select_related("ruta_detalle_vendedor_cliente__codi_ruta")
+                .select_related("ruta_detalle_vendedor_cliente__codi_ruta__codi_zona")
+                .select_related("ruta_detalle_vendedor_cliente__codi_vend__codi_natu")
+                .select_related("codi_natu")
+                .select_related("codi_natu__codi_sect")
+                .select_related("codi_natu__codi_ciud")
+                .select_related("codi_juri")
+                .select_related("codi_juri__codi_sect")
+                .select_related("codi_juri__codi_ciud")
+                .prefetch_related("order_customer_code").annotate(
+                    Visit = Pedido.objects.filter(
+                        codi_clie = OuterRef('pk')).values(
+                            "feim_pedi"
+                            ).order_by("-feim_pedi")[:1],
+                )
+                .prefetch_related("contacto_cliente_codi_clie__codi_natu").annotate(
+                    Contact = Contacto.objects.filter(
+                        codi_natu = OuterRef('codi_natu')).values(
+                            "desc_cont"
+                            ).order_by("-desc_cont")[:1],   
+                )
+                .prefetch_related("contacto_cliente_codi_clie__codi_juri").annotate(
+                    Contact = Contacto.objects.filter(
+                        codi_juri = OuterRef('codi_juri')).values(
+                            "desc_cont"
+                            ).order_by("-desc_cont")[:1],   
+                )
+                .order_by('codi_ante').distinct("codi_ante")
+                )
+    return queryset
+
+'''
+Export Report History Customer
+'''
+def exportHistoryCustomer(request):
+
+    objectHistoryCustomer = HistoryCustomer()
+    queryset = objectHistoryCustomer.filterCustomer(request)
+    total = queryset.count()
+    queryset = HistoryCustomerSerializer(queryset, many = True).data
+    
+    _date = datetime.now().date()
+    
+    # Create Context 
+    context = {"data":queryset, "Fecha":_date, "total": total }
+    
+    return exportPdf(context)
+
+
+def exportPdf(context):
+    html = render_to_string("historyCustomerReport.html", context)
+
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = "inline; filename=report.pdf"
+    
+    # font_config = FontConfiguration()
+    HTML(string=html).write_pdf(response)
+    
     return response

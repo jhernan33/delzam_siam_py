@@ -228,14 +228,16 @@ class VendedorComboView(generics.ListAPIView):
         if route:
             # String to Array
             _array_route = route.split(',')
-
+            if(len(_array_route)>0):
+                queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('id','codi_vend').exclude(codi_vend__in = Vendedor.objects.filter(deleted__isnull=False))
+                return queryset
             # Queryset Old
             # queryset = Vendedor.get_queryset().filter(id__in = RutaDetalleVendedor.get_queryset().filter(codi_ruta = _array_route).values('codi_vend'))
             
             # querysetdue = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('codi_vend')
             # queryset = queryset.filter(id__in = querysetdue)
-            queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('id','codi_vend')
-            return queryset
+            # queryset = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = _array_route).values('id','codi_vend')
+            # return queryset
 
         # Parameter Customer
         if customer:

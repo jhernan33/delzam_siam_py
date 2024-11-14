@@ -197,3 +197,129 @@ class ClienteBuscarSerializer(serializers.ModelSerializer):
         # Customer all
         representation['customer_all'] = Cliente.searchTypeCustomerId(instance.id)
         return representation
+
+class HistoryCustomerSerializer(serializers.ModelSerializer):
+    # date = serializers.Datefield()
+    # lastVisitDate = serializers.DateField(format="%d/%m/%Y", input_formats=['%d/%m/%Y', 'iso-8601'])
+    # lastVisitDate = serializers.DateField(format="%d/%m/%Y")
+    codeCustomer  = serializers.SerializerMethodField("get_code_customer")
+    customerName  = serializers.SerializerMethodField("get_customer_name")
+    zone   = serializers.SerializerMethodField("get_zone")
+    route  = serializers.SerializerMethodField("get_route")
+    seller = serializers.SerializerMethodField("get_seller")
+    lastVisitDate = serializers.SerializerMethodField("get_last_Visit_Date")
+    status = serializers.SerializerMethodField("get_Status")
+    address = serializers.SerializerMethodField("get_address")
+    contact = serializers.SerializerMethodField("get_contact")
+
+    class Meta:
+        model = Cliente
+        field = (
+            
+            'zone'
+            ,'route'
+            ,'seller'
+            ,'lastVisitDate'
+            ,'location_clie'
+            )
+        exclude = [
+            'id','created','updated','deleted','esta_ttus','fein_clie'
+            ,'cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie'
+            ,'obse_clie','ptor_clie','posi_clie','codi_ante'
+            ,'ruta_detalle_vendedor_cliente','codi_natu','codi_juri'
+            ]
+        # fields = '__all__'
+    def get_customer_name(self,obj):
+        fullName = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            fullName = (
+                    obj.codi_ante
+                    + " / "
+                    + obj.codi_natu.riff_pena
+                    + " / "
+                    + " " +obj.codi_natu.prno_pena
+                    + " "+obj.codi_natu.seno_pena
+                    + " "+obj.codi_natu.prap_pena
+                    + " "+obj.codi_natu.seap_pena 
+                    +" (N)" if obj.codi_natu.id != 1 else 
+                    obj.codi_ante
+                    + " / "
+                    + str(obj.codi_juri.riff_peju)+" "+str(obj.codi_juri.raso_peju).strip().upper()+" (J)"
+                    
+            )
+        return fullName
+    
+    def get_seller(self,obj):
+        seller = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            seller =  (
+                obj.ruta_detalle_vendedor_cliente.codi_vend.codi_natu.prno_pena
+                + " "+obj.ruta_detalle_vendedor_cliente.codi_vend.codi_natu.seno_pena
+                + " "+obj.ruta_detalle_vendedor_cliente.codi_vend.codi_natu.prap_pena
+                + " "+obj.ruta_detalle_vendedor_cliente.codi_vend.codi_natu.seap_pena
+                )
+        return seller
+    
+    def get_zone(self,obj):
+        zone = None 
+        if obj is not None and isinstance(obj, bytes)== False:
+            zone =obj.ruta_detalle_vendedor_cliente.codi_ruta.codi_zona.desc_zona
+        return zone
+    
+    def get_route(self,obj):
+        route = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            route = obj.ruta_detalle_vendedor_cliente.codi_ruta.nomb_ruta
+        return route
+    
+    def get_code_customer(self,obj):
+        code = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            code = obj.codi_ante
+        return code
+
+    def get_last_Visit_Date(self,obj):
+        resultVisit = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            resultVisit = obj.Visit
+            from datetime import datetime
+            if resultVisit is not None:
+                resultVisit = resultVisit.strftime("%d-%m-%Y")
+        return resultVisit if resultVisit is not None else str('').strip()
+
+    def get_Status(self,obj):
+        days = None
+        days = self.context.get('request').query_params.get('days',None)
+        if days is not None:
+            if obj is not None and isinstance(obj, bytes)== False:
+                resultVisit = obj.Visit
+                from datetime import datetime,timedelta
+                if resultVisit is not None:
+                    days = int(days)
+                    dateNew = resultVisit + timedelta(days=days)
+                    if(dateNew < datetime.today().date()):
+                        return 'Disponible'
+                    else:
+                        return 'Ultima compra fue hace '+str(abs(datetime.today().date() - dateNew ).days)+' Días'
+    
+        return "Disponible"
+    
+    def get_address(self,obj):
+        fullAddress = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            fullAddress = (
+                str(obj.codi_natu.codi_sect.nomb_sect)
+                    + " "+str(obj.codi_natu.codi_ciud.nomb_ciud)
+                    + " "+str(obj.codi_natu.dire_pena)
+                    if obj.codi_natu.id != 1 else 
+                    str(obj.codi_juri.codi_sect.nomb_sect)
+                    +" "+str(obj.codi_juri.codi_ciud.nomb_ciud)+str(obj.codi_juri.dofi_peju)
+                    
+            )
+        return fullAddress
+    
+    def get_contact(self,obj):
+        fullContact = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            fullContact = obj.Contact
+        return fullContact

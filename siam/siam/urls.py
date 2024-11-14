@@ -14,15 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django import views
-from django.urls import path
+# from django.urls import path
 from django.conf.urls import include
 from rest_framework.authtoken import views
-from django.conf.urls import include
+
+from django.urls import include, path
+from debug_toolbar.toolbar import debug_toolbar_urls
+# import debug_toolbar
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('api/' , include('asiam.urls')),
-    path('api_generate_token/', views.obtain_auth_token)
+    path('api_generate_token/', views.obtain_auth_token),
+    # path('__debug__/', include(debug_toolbar.urls)),
     # path('siam/o/',include('oauth2_provider.urls', namespace='oauth2_provider')),
 
-]
+] + debug_toolbar_urls()
