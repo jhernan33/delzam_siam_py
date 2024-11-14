@@ -19,7 +19,7 @@ from django.conf.urls import include
 from rest_framework.authtoken import views
 
 from django.urls import include, path
-from debug_toolbar.toolbar import debug_toolbar_urls
+# from debug_toolbar.toolbar import debug_toolbar_urls
 # import debug_toolbar
 
 urlpatterns = [
@@ -29,4 +29,4 @@ urlpatterns = [
     # path('__debug__/', include(debug_toolbar.urls)),
     # path('siam/o/',include('oauth2_provider.urls', namespace='oauth2_provider')),
 
-] + debug_toolbar_urls()
+] # + debug_toolbar_urls()
