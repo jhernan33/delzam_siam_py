@@ -70,7 +70,6 @@ INSTALLED_APPS = [
     'django_seed',
     'django_filters',
     "debug_toolbar",
-    
 ]
 
 REST_FRAMEWORK = {

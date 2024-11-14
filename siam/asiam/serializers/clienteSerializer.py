@@ -208,6 +208,9 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
     route  = serializers.SerializerMethodField("get_route")
     seller = serializers.SerializerMethodField("get_seller")
     lastVisitDate = serializers.SerializerMethodField("get_last_Visit_Date")
+    status = serializers.SerializerMethodField("get_Status")
+    address = serializers.SerializerMethodField("get_address")
+    contact = serializers.SerializerMethodField("get_contact")
 
     class Meta:
         model = Cliente
@@ -217,11 +220,12 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
             ,'route'
             ,'seller'
             ,'lastVisitDate'
+            ,'location_clie'
             )
         exclude = [
             'id','created','updated','deleted','esta_ttus','fein_clie'
             ,'cred_clie','mocr_clie','plcr_clie','prde_clie','prau_clie','foto_clie'
-            ,'obse_clie','ptor_clie','posi_clie','location_clie','codi_ante'
+            ,'obse_clie','ptor_clie','posi_clie','codi_ante'
             ,'ruta_detalle_vendedor_cliente','codi_natu','codi_juri'
             ]
         # fields = '__all__'
@@ -229,12 +233,18 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
         fullName = None
         if obj is not None and isinstance(obj, bytes)== False:
             fullName = (
-                obj.codi_natu.prno_pena
+                    obj.codi_ante
+                    + " / "
+                    + obj.codi_natu.riff_pena
+                    + " / "
+                    + " " +obj.codi_natu.prno_pena
                     + " "+obj.codi_natu.seno_pena
                     + " "+obj.codi_natu.prap_pena
                     + " "+obj.codi_natu.seap_pena 
                     +" (N)" if obj.codi_natu.id != 1 else 
-                    str(obj.codi_juri.riff_peju)+" "+str(obj.codi_juri.raso_peju).strip().upper()+" (J)"
+                    obj.codi_ante
+                    + " / "
+                    + str(obj.codi_juri.riff_peju)+" "+str(obj.codi_juri.raso_peju).strip().upper()+" (J)"
                     
             )
         return fullName
@@ -277,19 +287,39 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
                 resultVisit = resultVisit.strftime("%d-%m-%Y")
         return resultVisit if resultVisit is not None else str('').strip()
 
-        # resultVisit = Cliente.objects.prefetch_related('order_customer_code').all().filter(id = obj.id)
-        # # print("Visit=====>",resultVisit.values('id'),resultVisit.values('order_customer_code__feim_pedi').order_by('-order_customer_code__feim_pedi')[:1])
-        # # resultVisit = Pedido.objects.filter(codi_clie = obj).values('feim_pedi,','codi_clie').order_by('feim_pedi')[:1]
-        # # print(resultVisit.values('order_customer_code__feim_pedi')[0]['order_customer_code__feim_pedi'])
-        # data = resultVisit.values('order_customer_code__feim_pedi').order_by('-order_customer_code__feim_pedi')[:1][0]['order_customer_code__feim_pedi']
-
-        # from datetime import datetime
-        # if data is not None:
-        #     data = data.strftime("%d-%m-%Y")
-        # return data
-
-        # for k in resultVisit:
-        #     print(k.order_customer_code)
-        # return resultVisit.order_customer_code.values('feim_pedi')[0]["feim_pedi"]
+    def get_Status(self,obj):
+        days = None
+        days = self.context.get('request').query_params.get('days',None)
+        if days is not None:
+            if obj is not None and isinstance(obj, bytes)== False:
+                resultVisit = obj.Visit
+                from datetime import datetime,timedelta
+                if resultVisit is not None:
+                    days = int(days)
+                    dateNew = resultVisit + timedelta(days=days)
+                    if(dateNew < datetime.today().date()):
+                        return 'Disponible'
+                    else:
+                        return 'Ultima compra fue hace '+str(abs(datetime.today().date() - dateNew ).days)+' Días'
     
-        return resultVisit
+        return "Disponible"
+    
+    def get_address(self,obj):
+        fullAddress = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            fullAddress = (
+                str(obj.codi_natu.codi_sect.nomb_sect)
+                    + " "+str(obj.codi_natu.codi_ciud.nomb_ciud)
+                    + " "+str(obj.codi_natu.dire_pena)
+                    if obj.codi_natu.id != 1 else 
+                    str(obj.codi_juri.codi_sect.nomb_sect)
+                    +" "+str(obj.codi_juri.codi_ciud.nomb_ciud)+str(obj.codi_juri.dofi_peju)
+                    
+            )
+        return fullAddress
+    
+    def get_contact(self,obj):
+        fullContact = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            fullContact = obj.Contact
+        return fullContact

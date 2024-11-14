@@ -519,80 +519,104 @@ class HistoryCustomer(generics.ListAPIView):
         return queryset
     
     def filterCustomer(self,request):
-        queryset = None
-
-        if not hasattr(request, 'GET'):
-            zone = self.request.query_params.get('zone',None)
-            _route = self.request.query_params.get('route',None)
-            _seller = self.request.query_params.get('seller',None)
-        else:
-            zone = request.GET.get('zone',None)
-            _route = request.GET.get('route',None)
-            _seller = request.GET.get('seller',None)
+        # Obtén los parámetros de búsqueda de la solicitud
+        zone = self.request.query_params.get('zone')
+        route = self.request.query_params.get('route')
+        seller = self.request.query_params.get('seller')
         
-        if zone is not None:
-            _rutas = Ruta.getRouteFilterZone(zone)
-            queryset = searchHistoryCustomer(_rutas,"route")
+        # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
+        if zone and seller:
+            routes = Ruta.getRouteFilterZone(zone)
+            seller_obj = Vendedor.getSeller(seller)
             
-        # Check Parameter Route
-        if type(_route) == str and len(_route)>0:
-            _routeList = Ruta.createListRoute(_route)
+            # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario            
+            return searchHistoryCustomer(route = routes, seller=seller_obj) 
+            #return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
 
-            if _routeList is not None:
-                queryset = searchHistoryCustomer(_routeList,"route")
+        # Si están definidos tanto `route` como `seller`, se hace una búsqueda específica
+        if route and seller:
+            route_queryset = searchHistoryCustomer(route = route, seller=seller_obj)
+            
+            # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
+            return route_queryset
 
-        # Check Parameter Seller
-        if _seller is not None:
-            _seller = Vendedor.getSeller(_seller)
-            queryset = searchHistoryCustomer(_seller,"seller")
+        # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
+        if zone:
+            routes = Ruta.getRouteFilterZone(zone)
+            return searchHistoryCustomer(route = routes)
 
-        if queryset is None:
-            _route = Ruta.getAllRoute()
-            queryset = searchHistoryCustomer(_route,"route")
-        
-        return queryset
+        # Si solo `route` está definido, crea una lista de rutas y busca
+        if route:
+            route_list = Ruta.createListRoute(route)
+            if route_list:
+                return searchHistoryCustomer(route = route_list)
+
+        # Si solo `seller` está definido, busca por vendedor
+        if seller:
+            seller_obj = Vendedor.getSeller(seller)
+            result = searchHistoryCustomer(seller=seller_obj)
+            return result
+
+        # Si no se definió ningún filtro, devuelve todas las rutas
+        all_routes = Ruta.getAllRoute()
+        return searchHistoryCustomer(all_routes, "route")
     
 
-def searchHistoryCustomer(arg,valueFilter):
+def searchHistoryCustomer(**kwargs):
     queryset = None
+    route = None
+    seller = None 
+    days = None
 
-    if valueFilter =="route":
-        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = arg)
-                    
-        queryset = (Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail)
-                    .select_related("ruta_detalle_vendedor_cliente")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_ruta")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_ruta__codi_zona")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_vend__codi_natu")
-                    .select_related("codi_natu")
-                    .select_related("codi_juri")
-                    .prefetch_related("order_customer_code").annotate(
-                        Visit = Pedido.objects.filter(
-                            codi_clie = OuterRef('pk')).values(
-                                "feim_pedi"
-                                ).order_by("-feim_pedi")[:1],
-                    )
-                    .order_by('codi_ante').distinct("codi_ante")
-                    )
-        return queryset
+    for key, value in kwargs.items():
+        if key == "route":
+            route = value
+        elif key == "seller":
+            seller = value
+        elif key == "days":
+            days = value
+
+    if route and seller: 
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = route).filter(codi_vend__in = seller)
+
+    if route and not seller:
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = route)
+
+    if seller and not route:
+        _detail = RutaDetalleVendedor.get_queryset().filter(codi_vend__in = seller)
     
-    queryset = (Cliente.objects.filter(ruta_detalle_vendedor_cliente__codi_vend__in = arg)
-                    .select_related("ruta_detalle_vendedor_cliente")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_ruta")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_ruta__codi_zona")
-                    .select_related("ruta_detalle_vendedor_cliente__codi_vend__codi_natu")
-                    .select_related("codi_natu")
-                    .select_related("codi_juri")
-                    .prefetch_related("order_customer_code").annotate(
-                        Visit = Pedido.objects.filter(
-                            codi_clie = OuterRef('pk')).values(
-                                "feim_pedi"
-                                ).order_by("-feim_pedi")[:1],
-                    )
-                    .order_by('codi_ante').distinct("codi_ante")
-                    )
+    queryset = (Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail)
+                .select_related("ruta_detalle_vendedor_cliente")
+                .select_related("ruta_detalle_vendedor_cliente__codi_ruta")
+                .select_related("ruta_detalle_vendedor_cliente__codi_ruta__codi_zona")
+                .select_related("ruta_detalle_vendedor_cliente__codi_vend__codi_natu")
+                .select_related("codi_natu")
+                .select_related("codi_natu__codi_sect")
+                .select_related("codi_natu__codi_ciud")
+                .select_related("codi_juri")
+                .select_related("codi_juri__codi_sect")
+                .select_related("codi_juri__codi_ciud")
+                .prefetch_related("order_customer_code").annotate(
+                    Visit = Pedido.objects.filter(
+                        codi_clie = OuterRef('pk')).values(
+                            "feim_pedi"
+                            ).order_by("-feim_pedi")[:1],
+                )
+                .prefetch_related("contacto_cliente_codi_clie__codi_natu").annotate(
+                    Contact = Contacto.objects.filter(
+                        codi_natu = OuterRef('codi_natu')).values(
+                            "desc_cont"
+                            ).order_by("-desc_cont")[:1],   
+                )
+                .prefetch_related("contacto_cliente_codi_clie__codi_juri").annotate(
+                    Contact = Contacto.objects.filter(
+                        codi_juri = OuterRef('codi_juri')).values(
+                            "desc_cont"
+                            ).order_by("-desc_cont")[:1],   
+                )
+                .order_by('codi_ante').distinct("codi_ante")
+                )
     return queryset
-
 
 '''
 Export Report History Customer

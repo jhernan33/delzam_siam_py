@@ -30,7 +30,7 @@ class Cliente(Base):
     location_clie = models.PointField(srid=4326, null=True, blank=True)
     ruta_detalle_vendedor_cliente = models.ForeignKey(RutaDetalleVendedor, on_delete=models.CASCADE, null= True)
     ptor_clie = models.TextField('Punto de Referencia del Cliente',null=True, blank=True)
-    
+
     class Meta:
         ordering = ['-id']
         indexes  = [models.Index(fields=['id',])] 
