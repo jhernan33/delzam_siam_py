@@ -62,12 +62,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-<<<<<<< HEAD
 
-
-=======
 siam/.env
->>>>>>> Dev
+
 # Developers
 *.sw*
 # manage.py
