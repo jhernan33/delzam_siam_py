@@ -21,7 +21,7 @@ from rest_framework import status
 
 from django.db.models import F
 from asiam.models import Cliente, Vendedor, Natural, Juridica, RutaDetalleVendedor, Ruta, Contacto, Zona, Pedido
-from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer, ClienteBuscarSerializer, HistoryCustomerSerializer
+from asiam.serializers import ClienteSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteBasicSerializer, ClienteComboSerializer, ClienteBuscarSerializer, HistoryCustomerSerializer, HistoryCustomerReportSerializer
 from asiam.paginations import SmallResultsSetPagination
 from asiam.views.baseMensajeView import BaseMessage
 from .serviceImageView import ServiceImageView
@@ -520,10 +520,12 @@ class HistoryCustomer(generics.ListAPIView):
     
     def filterCustomer(self,request):
         # Obtén los parámetros de búsqueda de la solicitud
-        zone = self.request.query_params.get('zone')
-        route = self.request.query_params.get('route')
-        seller = self.request.query_params.get('seller')
-        
+        if self is not None:
+            zone = self.request.query_params.get('zone')
+            route = self.request.query_params.get('route')
+            seller = self.request.query_params.get('seller')
+            
+
         # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
         if zone and seller:
             routes = Ruta.getRouteFilterZone(zone)
@@ -561,6 +563,13 @@ class HistoryCustomer(generics.ListAPIView):
         all_routes = Ruta.getAllRoute()
         return searchHistoryCustomer(all_routes, "route")
     
+    def setRequestHistoryCustomer(self,request):
+        _zone = request.GET.get("zone",None)
+        _route = request.GET.get("route",None)
+        _seller = request.GET.get("seller",None)
+
+        resultQuery = HistoryCustomer.filterCustomer(zone=_zone,route=_route,seller=_seller)
+        return resultQuery
 
 def searchHistoryCustomer(**kwargs):
     queryset = None
@@ -585,7 +594,7 @@ def searchHistoryCustomer(**kwargs):
     if seller and not route:
         _detail = RutaDetalleVendedor.get_queryset().filter(codi_vend__in = seller)
     
-    queryset = (Cliente.objects.filter(ruta_detalle_vendedor_cliente__in = _detail)
+    queryset = (Cliente.get_queryset().filter(ruta_detalle_vendedor_cliente__in = _detail)
                 .select_related("ruta_detalle_vendedor_cliente")
                 .select_related("ruta_detalle_vendedor_cliente__codi_ruta")
                 .select_related("ruta_detalle_vendedor_cliente__codi_ruta__codi_zona")
@@ -597,19 +606,19 @@ def searchHistoryCustomer(**kwargs):
                 .select_related("codi_juri__codi_sect")
                 .select_related("codi_juri__codi_ciud")
                 .prefetch_related("order_customer_code").annotate(
-                    Visit = Pedido.objects.filter(
+                    Visit = Pedido.get_queryset().filter(
                         codi_clie = OuterRef('pk')).values(
                             "feim_pedi"
                             ).order_by("-feim_pedi")[:1],
                 )
                 .prefetch_related("contacto_cliente_codi_clie__codi_natu").annotate(
-                    Contact = Contacto.objects.filter(
+                    Contact = Contacto.get_queryset().filter(
                         codi_natu = OuterRef('codi_natu')).values(
                             "desc_cont"
                             ).order_by("-desc_cont")[:1],   
                 )
                 .prefetch_related("contacto_cliente_codi_clie__codi_juri").annotate(
-                    Contact = Contacto.objects.filter(
+                    Contact = Contacto.get_queryset().filter(
                         codi_juri = OuterRef('codi_juri')).values(
                             "desc_cont"
                             ).order_by("-desc_cont")[:1],   
@@ -622,17 +631,20 @@ def searchHistoryCustomer(**kwargs):
 Export Report History Customer
 '''
 def exportHistoryCustomer(request):
-
-    objectHistoryCustomer = HistoryCustomer()
-    queryset = objectHistoryCustomer.filterCustomer(request)
+    zone = None
+    route = None
+    seller = None
+    zone = request.GET.get('zone')
+    route = request.GET.get('route')
+    seller = request.GET.get('seller')
+    days = request.GET.get('days')
+    
+    queryset = filterHistoryCustomer(zone,route,seller,days)
     total = queryset.count()
-    queryset = HistoryCustomerSerializer(queryset, many = True).data
-    
+    queryset = HistoryCustomerReportSerializer(queryset, many = True).data
     _date = datetime.now().date()
-    
     # Create Context 
     context = {"data":queryset, "Fecha":_date, "total": total }
-    
     return exportPdf(context)
 
 
@@ -646,3 +658,41 @@ def exportPdf(context):
     HTML(string=html).write_pdf(response)
     
     return response
+
+def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
+    # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
+    if zone and seller:
+        routes = Ruta.getRouteFilterZone(zone)
+        seller_obj = Vendedor.getSeller(seller)
+        
+        # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario            
+        return searchHistoryCustomer(route = routes, seller=seller_obj) 
+        #return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
+
+    # Si están definidos tanto `route` como `seller`, se hace una búsqueda específica
+    if route and seller:
+        route_queryset = searchHistoryCustomer(route = route, seller=seller_obj)
+        
+        # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
+        return route_queryset
+
+    # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
+    if zone:
+        routes = Ruta.getRouteFilterZone(zone)
+        return searchHistoryCustomer(route = routes)
+
+    # Si solo `route` está definido, crea una lista de rutas y busca
+    if route:
+        route_list = Ruta.createListRoute(route)
+        if route_list:
+            return searchHistoryCustomer(route = route_list)
+
+    # Si solo `seller` está definido, busca por vendedor
+    if seller:
+        seller_obj = Vendedor.getSeller(seller)
+        result = searchHistoryCustomer(seller=seller_obj)
+        return result
+
+    # Si no se definió ningún filtro, devuelve todas las rutas
+    all_routes = Ruta.getAllRoute()
+    return searchHistoryCustomer(all_routes, "route")

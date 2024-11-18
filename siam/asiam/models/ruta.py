@@ -31,6 +31,7 @@ class Ruta(Base):
     Buscar las rutas por Zona
     """
     def getRouteFilterZone(_zoneId):
+        _zoneId+"," if _zoneId.find(',') == -1 else _zoneId
         if isinstance(_zoneId,str):
             # Create List
             _zoneList = []
@@ -50,7 +51,6 @@ class Ruta(Base):
             elif len(indexes) ==0:
                 _zoneList.append(int(_zoneId[0:len(_zoneId)]))
             
-            #return _zoneList
             _result = Ruta.get_queryset().filter(codi_zona__in = _zoneList).values("id")
             return _result
     

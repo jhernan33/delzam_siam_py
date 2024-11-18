@@ -19,7 +19,7 @@ from .rutaSerializer import RutaSerializer, RutaBasicSerializer, RutaClienteSeri
 from .unidadMedidaSerializer import UnidadMedidaSerializer
 from .ivaSerializer import IvaSerializer
 from .unidadTributariaSerializer import UnidadTributariaSerializer
-from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteComboSerializer, ClienteBuscarSerializer, HistoryCustomerSerializer
+from .clienteSerializer import ClienteSerializer, ClienteBasicSerializer, ClienteRutaSerializer, ClienteReportSerializer, ClienteReportExportSerializer, ClienteComboSerializer, ClienteBuscarSerializer, HistoryCustomerSerializer, HistoryCustomerReportSerializer
 from .userSerializer import SignupSerializer, UserLoginSerializer
 from .grupoSerializer import GrupoSerializer
 from .rutaDetalleVendedorSerializer import RutaDetalleVendedorSerializer,RutaDetalleVendedorSerializerBasics
