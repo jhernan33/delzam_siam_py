@@ -1,7 +1,7 @@
 {% extends "base-pdf.html" %}
 {% block content %}
 <div>
-    <span class="izquierda"><h3>Reporte de Clientes</h3></span>
+    <span class="izquierda"><h3>Reporte Visita de Clientes</h3></span>
     {% comment %} <span class="titleCentro"><h3> Zona(s):</h3></span><span class="titleCentro"><h6>{{zonas}}</h6></span> {% endcomment %}
     <span class="derecha"><h5 >Fecha Emisión: {{ Fecha|date:"d/m/Y"}}</h5></span>
 </div>
@@ -11,22 +11,26 @@
 <table class="table">
     <thead>
         <tr>
-            <th>CODIGO</th>
             <th>CLIENTE</th>
+            <th>CONTACTO</th>
+            <th>COORDENADAS</th>
             <th>VENDEDOR</th>
-            <th>ZONA</th>
+            <th>DIRECCION</th>
             <th>ULTIMA VISITA</th>
+            <th>ESTATUS</th>
         </tr>
     </thead>
     <br/><br/>
 
         {% for key in data|dictsort:"codeCustomer"%}
             <tr>
-                <td style="width:1%">{{ key.codeCustomer }}</td>
                 <td style="width:30%">{{ key.customerName }}</td>
-                <td style="width:30%">{{ key.seller }}</td>
-                <td style="width:20%">{{ key.zone }}</td>
-                <td style="width:10%">{{ key.lastVisitDate}}</td>
+                <td style="width:3%">{{ key.contact }}</td>
+                <td style="width:3%">{{ key.coordinates }}</td>
+                <td style="width:15%">{{ key.seller }}</td>
+                <td style="width:30%">{{ key.address }}</td>
+                <td style="width:5%">{{ key.lastVisitDate }}</td>
+                <td style="width:5%">{{ key.status }}</td>
             </tr>
         {% endfor %}
     <tfoot>
