@@ -582,9 +582,9 @@ def searchHistoryCustomer(**kwargs):
             route = value
         elif key == "seller":
             seller = value
-        elif key == "days":
+        elif key == "Days":
             days = value
-
+    
     if route and seller: 
         _detail = RutaDetalleVendedor.get_queryset().filter(codi_ruta__in = route).filter(codi_vend__in = seller)
 
@@ -612,16 +612,16 @@ def searchHistoryCustomer(**kwargs):
                             ).order_by("-feim_pedi")[:1],
                 )
                 .prefetch_related("contacto_cliente_codi_clie__codi_natu").annotate(
-                    Contact = Contacto.get_queryset().filter(
+                    Contact_Natural = Contacto.get_queryset().filter(
                         codi_natu = OuterRef('codi_natu')).values(
                             "desc_cont"
-                            ).order_by("-desc_cont")[:1],   
+                            ).order_by("desc_cont")[:1],   
                 )
                 .prefetch_related("contacto_cliente_codi_clie__codi_juri").annotate(
-                    Contact = Contacto.get_queryset().filter(
+                    Contact_Legal = Contacto.get_queryset().filter(
                         codi_juri = OuterRef('codi_juri')).values(
                             "desc_cont"
-                            ).order_by("-desc_cont")[:1],   
+                            ).order_by("desc_cont")[:1],   
                 )
                 .order_by('codi_ante').distinct("codi_ante")
                 )
@@ -640,6 +640,9 @@ def exportHistoryCustomer(request):
     days = request.GET.get('days')
     
     queryset = filterHistoryCustomer(zone,route,seller,days)
+    for k in queryset:
+        k.Days = days
+    
     total = queryset.count()
     queryset = HistoryCustomerReportSerializer(queryset, many = True).data
     _date = datetime.now().date()
@@ -660,18 +663,19 @@ def exportPdf(context):
     return response
 
 def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
+    
     # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
     if zone and seller:
         routes = Ruta.getRouteFilterZone(zone)
         seller_obj = Vendedor.getSeller(seller)
         
         # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario            
-        return searchHistoryCustomer(route = routes, seller=seller_obj) 
+        return searchHistoryCustomer(route = routes, seller=seller_obj, Days = days) 
         #return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
 
     # Si están definidos tanto `route` como `seller`, se hace una búsqueda específica
     if route and seller:
-        route_queryset = searchHistoryCustomer(route = route, seller=seller_obj)
+        route_queryset = searchHistoryCustomer(route = route, seller=seller_obj, Days = days)
         
         # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
         return route_queryset
@@ -679,20 +683,20 @@ def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
     # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
     if zone:
         routes = Ruta.getRouteFilterZone(zone)
-        return searchHistoryCustomer(route = routes)
+        return searchHistoryCustomer(route = routes, Days = days)
 
     # Si solo `route` está definido, crea una lista de rutas y busca
     if route:
         route_list = Ruta.createListRoute(route)
         if route_list:
-            return searchHistoryCustomer(route = route_list)
+            return searchHistoryCustomer(route = route_list, Days = days)
 
     # Si solo `seller` está definido, busca por vendedor
     if seller:
         seller_obj = Vendedor.getSeller(seller)
-        result = searchHistoryCustomer(seller=seller_obj)
+        result = searchHistoryCustomer(seller=seller_obj, Days = days)
         return result
 
     # Si no se definió ningún filtro, devuelve todas las rutas
     all_routes = Ruta.getAllRoute()
-    return searchHistoryCustomer(all_routes, "route")
+    return searchHistoryCustomer(all_routes, "route", Days = days)
