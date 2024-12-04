@@ -293,12 +293,11 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
                 from datetime import datetime,timedelta
                 if resultVisit is not None:
                     days = int(days)
-                    dateNew = resultVisit + timedelta(days=days)
-                    if(dateNew < datetime.today().date()):
-                        return 'Disponible'
+                    diferenceDays = datetime.today().date() - resultVisit
+                    if diferenceDays.days <= days:
+                        return 'Ultima compra fue hace '+str(diferenceDays.days)+' Días'
                     else:
-                        return 'Ultima compra fue hace '+str(abs(datetime.today().date() - dateNew ).days)+' Días'
-    
+                        return 'Disponible'
         return "Disponible"
     
     def get_address(self,obj):
@@ -311,14 +310,13 @@ class HistoryCustomerSerializer(serializers.ModelSerializer):
                     if obj.codi_natu.id != 1 else 
                     str(obj.codi_juri.codi_sect.nomb_sect)
                     +" "+str(obj.codi_juri.codi_ciud.nomb_ciud)+str(obj.codi_juri.dofi_peju)
-                    
             )
         return fullAddress
     
     def get_contact(self,obj):
         fullContact = None
         if obj is not None and isinstance(obj, bytes)== False:
-            fullContact = obj.Contact
+            fullContact = obj.Contact_Natural if obj.codi_natu.id != 1 else  obj.Contact_Legal
         return fullContact
 
 
@@ -332,6 +330,7 @@ class HistoryCustomerReportSerializer(serializers.ModelSerializer):
     status = serializers.SerializerMethodField("get_Status")
     address = serializers.SerializerMethodField("get_address")
     contact = serializers.SerializerMethodField("get_contact")
+    coordinates = serializers.SerializerMethodField("get_coordinates")
 
     class Meta:
         model = Cliente
@@ -341,7 +340,8 @@ class HistoryCustomerReportSerializer(serializers.ModelSerializer):
             ,'route'
             ,'seller'
             ,'lastVisitDate'
-            ,'location_clie'
+            # ,'location_clie'
+            ,'coordinates'
             )
         exclude = [
             'id','created','updated','deleted','esta_ttus','fein_clie'
@@ -349,7 +349,14 @@ class HistoryCustomerReportSerializer(serializers.ModelSerializer):
             ,'obse_clie','ptor_clie','posi_clie','codi_ante'
             ,'ruta_detalle_vendedor_cliente','codi_natu','codi_juri'
             ]
-        # fields = '__all__'
+        
+    def get_coordinates(self,obj):
+        _coordinates = None
+        if obj is not None and isinstance(obj, bytes)== False:
+            _coordinates = obj.location_clie
+            _coordinates = " ".join(str(_coordinates.x).split())+" "+" , ".join(str(_coordinates.y).split())
+        return _coordinates
+    
     def get_customer_name(self,obj):
         fullName = None
         if obj is not None and isinstance(obj, bytes)== False:
@@ -409,21 +416,18 @@ class HistoryCustomerReportSerializer(serializers.ModelSerializer):
         return resultVisit if resultVisit is not None else str('').strip()
 
     def get_Status(self,obj):
-        days = None
-        # print("Params====>",self.context.values())
-        # days = self.context.get('request').GET.get('days',None)
-        # if days is not None:
-        #     if obj is not None and isinstance(obj, bytes)== False:
-        #         resultVisit = obj.Visit
-        #         from datetime import datetime,timedelta
-        #         if resultVisit is not None:
-        #             days = int(days)
-        #             dateNew = resultVisit + timedelta(days=days)
-        #             if(dateNew < datetime.today().date()):
-        #                 return 'Disponible'
-        #             else:
-        #                 return 'Ultima compra fue hace '+str(abs(datetime.today().date() - dateNew ).days)+' Días'
-    
+        days = obj.Days
+        if days is not None:
+            if obj is not None and isinstance(obj, bytes)== False:
+                resultVisit = obj.Visit
+                from datetime import datetime,timedelta
+                if resultVisit is not None:
+                    days = int(days)
+                    diferenceDays = datetime.today().date() - resultVisit
+                    if diferenceDays.days <= days:
+                        return 'Ultima compra fue hace '+str(diferenceDays.days)+' Días'
+                    else:
+                        return 'Disponible'
         return "Disponible"
     
     def get_address(self,obj):
@@ -443,5 +447,5 @@ class HistoryCustomerReportSerializer(serializers.ModelSerializer):
     def get_contact(self,obj):
         fullContact = None
         if obj is not None and isinstance(obj, bytes)== False:
-            fullContact = obj.Contact
+            fullContact = obj.Contact_Natural if obj.codi_natu.id != 1 else  obj.Contact_Legal
         return fullContact
