@@ -40,5 +40,5 @@ volumes:
 
 networks:
   default:
-    name: delzam
+    name: server
     external: true
