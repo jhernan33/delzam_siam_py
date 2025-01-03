@@ -12,7 +12,7 @@ services:
       - .:/code
          
   nginx:
-    image: nginx:1.13
+    image: nginx:alpine
     ports:
       - 8082:80
     volumes:
