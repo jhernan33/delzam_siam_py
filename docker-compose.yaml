@@ -1,13 +1,12 @@
-version: "3"
-
-services:  
-  apidjango:
+services:
+  apidz:
     build: .
-    container_name: capidz
     command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
+    container_name: apidz
     env_file:
       - .env
     #command: python manage.py migrate
+    restart: unless-stopped
     volumes:
       - static:/code/static
       - .:/code
@@ -23,6 +22,7 @@ services:
       - apidjango
 
       - ./code:/src
+      - image-data:/var/www/public/images
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apidz.rule=Host(`delzam.local`) && PathPrefix(`/apidz`)"
@@ -36,8 +36,9 @@ services:
 volumes:
   .:
   static:
+  image-data: # Volume for images
 
 networks:
   default:
-    external:
-      name: delzam
+    name: delzam
+    external: true

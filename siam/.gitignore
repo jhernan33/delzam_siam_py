@@ -84,3 +84,5 @@ cert.cert
 cert.key
 
 certificates/
+cert.crt
+cert.key
