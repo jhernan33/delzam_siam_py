@@ -1,7 +1,7 @@
 services:
   apidz:
     build: .
-    command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
+    # command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
     container_name: apidz
     env_file:
       - .env
@@ -30,8 +30,8 @@ services:
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.apidz.tls=true"
       - "traefik.http.routers.apidz.tls.certresolver=resolver"
-    expose:
-      - 8000
+    # expose:
+    #   - 8000
 
 volumes:
   .:
