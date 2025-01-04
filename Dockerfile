@@ -1,5 +1,5 @@
 # Base image with GDAL and PostGIS support
-FROM osgeo/gdal:alpine-small-latest as base
+FROM osgeo/gdal:alpine-small-3.3.0 as base
 
 LABEL maintainer="Hernan jhernan33gmail.com"
 
