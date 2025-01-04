@@ -1,12 +1,10 @@
 # Base image with GDAL and PostGIS support
-FROM osgeo/gdal:alpine-small-3.3.0 as base
-
-LABEL maintainer="Hernan jhernan33gmail.com"
+FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
 RUN apk add --no-cache \
     python3 py3-pip py3-wheel py3-setuptools \
-    postgresql-dev \
+    postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \
     geos geos-dev \
     libjpeg-turbo-dev libpng-dev libwebp-dev \
