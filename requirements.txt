@@ -7,7 +7,7 @@ certifi==2022.9.24
 cffi==1.15.1
 charset-normalizer==2.1.1
 click==8.1.8
-cryptography==38.0.3
+cryptography==44.0.0
 cssselect2==0.7.0
 dbf==0.99.9
 defer==1.0.4
