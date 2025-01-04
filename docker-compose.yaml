@@ -1,42 +1,28 @@
 services:
   apidz:
-    build: .
-    # command: "gunicorn --chdir=siam siam.wsgi:application --bind 0.0.0.0:8000"
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: apidz
     env_file:
       - .env
-    #command: python manage.py migrate
     restart: unless-stopped
     volumes:
-      - static:/code/static
-      - .:/code
-         
-  nginx:
-    image: nginx:alpine
-    ports:
-      - 8082:80
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static:/code/static
-    depends_on:
-      - apidjango
-
-      - ./code:/src
-      - image-data:/var/www/public/images
+      - .:/app # Application code Host
+      - static_data:/app/static # Static files
+      - media_data:/app/media # Media files
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apidz.rule=Host(`delzam.local`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.rule=Host(`157.173.200.148`) && PathPrefix(`/apidz`)"
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
+      - "traefik.http.routers.django.entrypoints=websecure"
       - "traefik.http.routers.apidz.tls=true"
       - "traefik.http.routers.apidz.tls.certresolver=resolver"
-    # expose:
-    #   - 8000
-
+      
 volumes:
-  .:
-  static:
-  image-data: # Volume for images
+  static_data:
+  media_data:
 
 networks:
   default:
