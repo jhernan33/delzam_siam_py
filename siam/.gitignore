@@ -88,3 +88,5 @@ cert.crt
 cert.key
 
 env/
+.env
+siam/.env
