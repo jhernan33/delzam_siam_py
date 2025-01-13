@@ -1,9 +1,11 @@
 # Base image with GDAL and PostGIS support
 FROM python:3.10-alpine as base
 
+USER root
+
 # Install Python and system dependencies
 RUN apk update && apk add --no-cache \
-    python3 py3-pip py3-wheel py3-setuptools \
+    python3 py3-pip py3-wheel py3-setuptools pango\
     postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \
     geos geos-dev \
@@ -11,7 +13,7 @@ RUN apk update && apk add --no-cache \
     libxslt-dev \
     libffi-dev \
     cairo pango py3-cffi py3-pillow \
-    zlib zlib-dev pango
+    zlib zlib-dev
 
 # Create working directory
 WORKDIR /code
