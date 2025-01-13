@@ -11,7 +11,7 @@ RUN apk add --no-cache \
     libxslt-dev \
     libffi-dev \
     cairo pango py3-cffi py3-pillow \
-    zlib zlib-dev
+    zlib zlib-dev pango
 
 # Create working directory
 WORKDIR /code
