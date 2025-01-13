@@ -24,11 +24,11 @@ RUN pip install --upgrade pip \
 # Add application code
 COPY . /code/
 
-# Crear directorio de logs antes de cambiar al usuario 'django'
-RUN mkdir -p /code/logs && chown -R django:django /code/logs
-
 # Set up Django user
 RUN adduser --disabled-password --no-create-home django
+
+# Crear directorio de logs antes de cambiar al usuario 'django'
+WORKDIR /code/logs && chown -R django:django /code/logs 
 
 # Set permissions and switch user
 RUN chown -R django:django /code
