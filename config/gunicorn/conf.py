@@ -4,6 +4,8 @@
 # accesslog = '-'
 # workers = 2
 
+# config/gunicorn/conf.py
+
 # Número de workers
 workers = 3
 # Nivel de logs
