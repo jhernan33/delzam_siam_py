@@ -23,6 +23,7 @@ RUN pip install --upgrade pip \
 
 # Add application code
 COPY . /code/
+COPY config/gunicorn /code/config/gunicorn
 
 # Set up Django user
 RUN adduser --disabled-password --no-create-home django
