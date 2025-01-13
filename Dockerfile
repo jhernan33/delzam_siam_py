@@ -39,4 +39,4 @@ USER django
 EXPOSE 8082
 
 # Run Gunicorn server
-# CMD ["gunicorn", "-c", "code/config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
+CMD ["gunicorn", "-c", "code/config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
