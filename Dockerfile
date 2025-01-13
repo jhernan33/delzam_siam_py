@@ -23,7 +23,11 @@ RUN pip install --upgrade pip \
 
 # Add application code
 COPY . /code/
-COPY config/gunicorn /code/config/gunicorn
+
+# Crear la carpeta donde estará el archivo de configuración
+RUN mkdir -p /code/config/gunicorn
+
+COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
 
 # Set up Django user
 RUN adduser --disabled-password --no-create-home django
