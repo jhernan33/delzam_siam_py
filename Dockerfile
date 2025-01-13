@@ -2,7 +2,7 @@
 FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
     python3 py3-pip py3-wheel py3-setuptools \
     postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \

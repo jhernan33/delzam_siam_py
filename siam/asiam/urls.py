@@ -366,9 +366,9 @@ urlpatterns = [
     # Reports
     path('report/client/route/',                views.ClienteReportView.as_view(),      name='Report Client for Route'),
     path('report/export',                       views.export_pdf,                       name="export-pdf"),
-    path('apidz/report/history/customer/',            views.HistoryCustomer.as_view(),      name='report_history_customer'),
+    path('report/history/customer/',            views.HistoryCustomer.as_view(),      name='report_history_customer'),
     path('report/export/customer',              views.ClienteExportFile,          name='Report Pdf Customer'),
-    path('apidz/report/export/histoyCustomer/',       views.exportHistoryCustomer,      name='report export history customer'),
+    path('report/export/histoyCustomer/',       views.exportHistoryCustomer,      name='report export history customer'),
     # Report Order
     path('report/order/',                       views.PedidoReport,      name='Report_order'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
