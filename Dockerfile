@@ -1,5 +1,5 @@
 # Base image with GDAL and PostGIS support
-FROM python:3.12.1-alpine as base
+FROM python:3.11-alpine as base
 
 # Install Python and system dependencies
 RUN apk add --no-cache \
@@ -11,7 +11,7 @@ RUN apk add --no-cache \
     libxslt-dev \
     libffi-dev \
     cairo py3-cffi py3-pillow \
-    zlib zlib-dev
+    zlib zlib-dev glibc-dev
 # RUN apk add --no-cache ttf-dejavu
 # RUN apk add gcompat
 
