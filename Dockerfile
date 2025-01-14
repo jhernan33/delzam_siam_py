@@ -1,5 +1,5 @@
 # Base image with GDAL and PostGIS support
-FROM python:3.11-alpine as base
+FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
 RUN apk add --no-cache \
@@ -10,10 +10,8 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev libpng-dev libwebp-dev \
     libxslt-dev \
     libffi-dev \
-    cairo py3-cffi py3-pillow \
-    zlib zlib-dev glibc-dev
-# RUN apk add --no-cache ttf-dejavu
-# RUN apk add gcompat
+    cairo pango py3-cffi py3-pillow \
+    zlib zlib-dev
 
 # Create working directory
 WORKDIR /code
