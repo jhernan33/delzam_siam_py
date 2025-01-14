@@ -3,7 +3,7 @@ FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
 RUN apk add --no-cache \
-    python3 py3-pip py3-wheel py3-setuptools pango\
+    python3 py3-pip py3-wheel py3-setuptools \
     postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \
     geos geos-dev \
@@ -25,15 +25,15 @@ RUN pip install --upgrade pip \
 COPY . /code/
 
 # Crear la carpeta donde estará el archivo de configuración
-RUN mkdir -p /code/config/gunicorn
+# RUN mkdir -p /code/config/gunicorn
 
-COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
+# COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
 
 # Set up Django user
 RUN adduser --disabled-password --no-create-home django
 
 # Crear directorio de logs antes de cambiar al usuario 'django'
-WORKDIR /code/logs && chown -R django:django /code/logs 
+# WORKDIR /code/logs && chown -R django:django /code/logs 
 
 # Set permissions and switch user
 RUN chown -R django:django /code
