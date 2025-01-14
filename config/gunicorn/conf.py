@@ -2,7 +2,7 @@ name = 'siam'
 loglevel = 'info'
 errorlog = '-'
 accesslog = '-'
-workers = 3
+workers = 2
 
 # config/gunicorn/conf.py
 
