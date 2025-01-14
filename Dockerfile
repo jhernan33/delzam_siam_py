@@ -13,6 +13,8 @@ RUN apk add --no-cache \
     cairo pango py3-cffi py3-pillow \
     zlib zlib-dev
 
+RUN apk update && apk add py3.10-pip font-liberation
+
 # Create working directory
 WORKDIR /code
 
