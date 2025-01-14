@@ -14,6 +14,7 @@ RUN apk add --no-cache \
     zlib zlib-dev
 
 RUN apk add --no-cache ttf-dejavu
+
 # Create working directory
 WORKDIR /code
 
