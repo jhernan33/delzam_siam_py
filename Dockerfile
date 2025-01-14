@@ -2,7 +2,7 @@
 FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
-RUN apk update && apk add --no-cache \
+RUN apk add --no-cache \
     python3 py3-pip py3-wheel py3-setuptools pango\
     postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \
@@ -43,4 +43,4 @@ USER django
 EXPOSE 8082
 
 # Run Gunicorn server
-# CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
+CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
