@@ -3,12 +3,6 @@ FROM python:3.10-alpine as base
 
 # Install Python and system dependencies
 RUN apk add --no-cache \
-    gdk-pixbuf \
-    gtk+3 \
-    glib \
-    libgstreamer \
-    libgstreamer-editing-services \
-    ttf-dejavu \
     python3 py3-pip py3-wheel py3-setuptools \
     postgresql-dev gdal gdal-dev \
     musl-dev gcc libc-dev linux-headers \
@@ -19,6 +13,13 @@ RUN apk add --no-cache \
     cairo py3-cffi py3-pillow \
     zlib zlib-dev
 
+RUN apk add --no-cache \
+    gdk-pixbuf \
+    gtk+3 \
+    glib \
+    libgstreamer \
+    libgstreamer-editing-services \
+    ttf-dejavu
 # RUN apk add --no-cache ttf-dejavu
 # RUN apk add gcompat
 
