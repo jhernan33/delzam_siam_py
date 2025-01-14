@@ -10,9 +10,10 @@ RUN apk add --no-cache \
     libjpeg-turbo-dev libpng-dev libwebp-dev \
     libxslt-dev \
     libffi-dev \
-    cairo pango py3-cffi py3-pillow \
+    cairo py3-cffi py3-pillow \
     zlib zlib-dev
 
+RUN apk add --no-cache ttf-dejavu
 # Create working directory
 WORKDIR /code
 
