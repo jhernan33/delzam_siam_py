@@ -13,8 +13,8 @@ RUN apk add --no-cache \
     cairo py3-cffi py3-pillow \
     zlib zlib-dev
 
-RUN apk add --no-cache ttf-dejavu
-RUN apk add gcompat
+# RUN apk add --no-cache ttf-dejavu
+# RUN apk add gcompat
 
 # Create working directory
 WORKDIR /code
