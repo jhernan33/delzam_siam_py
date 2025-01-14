@@ -8,9 +8,9 @@ services:
       - .env
     restart: unless-stopped
     volumes:
-      - .:/app # Application code Host
-      - static_data:/app/static # Static files
-      - media_data:/app/media # Media files
+      - .:/code # Application code Host
+      - static_data:/code/static # Static files
+      - media_data:/code/media # Media files
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.apidz.rule=Host(`157.173.200.148`) && PathPrefix(`/apidz`)"
