@@ -25,9 +25,9 @@ RUN pip install --upgrade pip \
 COPY . /code/
 
 # Crear la carpeta donde estará el archivo de configuración
-# RUN mkdir -p /code/config/gunicorn
+RUN mkdir -p /code/config/gunicorn
 
-# COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
+COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
 
 # Set up Django user
 RUN adduser --disabled-password --no-create-home django
@@ -43,4 +43,4 @@ USER django
 EXPOSE 8082
 
 # Run Gunicorn server
-CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
+# CMD ["gunicorn", "-c", "config/gunicorn/conf.py", "--bind", ":8082", "--chdir", "siam", "siam.wsgi:application"]
