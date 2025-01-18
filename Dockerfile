@@ -11,8 +11,7 @@ RUN apk add --no-cache \
     libxslt-dev \
     libffi-dev \
     cairo pango py3-cffi py3-pillow \
-    zlib zlib-dev \
-    weasyprint weasyprint-dev
+    zlib zlib-dev
 
 RUN apk add py3-pip so:libgobject-2.0.so.0 so:libpango-1.0.so.0 so:libharfbuzz.so.0 so:libharfbuzz-subset.so.0 so:libfontconfig.so.1 so:libpangoft2-1.0.so.0
 RUN apk add gcc musl-dev python3-dev zlib-dev jpeg-dev openjpeg-dev libwebp-dev g++ libffi-dev
