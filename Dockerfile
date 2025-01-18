@@ -1,45 +1,29 @@
 # Base image with GDAL and PostGIS support
-FROM python:3.10-alpine as base
+FROM osgeo/gdal:ubuntu-small-3.6.2 as base
 
 # Install Python and system dependencies
-RUN apk add --no-cache \
-    python3 py3-pip py3-wheel py3-setuptools \
-    postgresql-dev gdal gdal-dev \
-    musl-dev gcc libc-dev linux-headers \
-    geos geos-dev \
-    libjpeg-turbo-dev libpng-dev libwebp-dev \
-    libxslt-dev \
-    libffi-dev \
-    cairo pango py3-cffi py3-pillow \
-    zlib zlib-dev
-
-# Actualizar el sistema
-RUN apk update
-
-# Instalar pango
-RUN apk add --no-cache pango
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip python3-wheel python3-setuptools \
+    libgdal-dev libpq-dev \
+    libjpeg-dev libpng-dev libwebp-dev \
+    libxslt1-dev libffi-dev \
+    libcairo2-dev libpango1.0-dev \
+    zlib1g-dev gcc g++ make && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Create working directory
 WORKDIR /code
 
 # Copy and install Python dependencies
 COPY requirements.txt /code/
-RUN pip install --upgrade pip \
-    && pip install --no-cache-dir -r /code/requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir -r /code/requirements.txt
 
 # Add application code
 COPY . /code/
 
-# Crear la carpeta donde estará el archivo de configuración
-# RUN mkdir -p /code/config/gunicorn
-
-# COPY config/gunicorn/conf.py /code/config/gunicorn/conf.py
-
 # Set up Django user
-RUN adduser --disabled-password --no-create-home django
-
-# Crear directorio de logs antes de cambiar al usuario 'django'
-# WORKDIR /code/logs && chown -R django:django /code/logs 
+RUN useradd -m django
 
 # Set permissions and switch user
 RUN chown -R django:django /code
