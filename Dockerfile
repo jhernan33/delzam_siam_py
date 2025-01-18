@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libjpeg-dev libpng-dev libwebp-dev \
     libxslt1-dev libffi-dev \
     libcairo2-dev libpango1.0-dev \
-    zlib1g-dev gcc g++ make && \
+    zlib1g-dev gcc g++ make \
     build-essential && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -20,7 +20,7 @@ WORKDIR /code
 
 # Copy and install Python dependencies
 COPY requirements.txt /code/
-RUN pip3 install --upgrade pip && \
+RUN pip3 install --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir -r /code/requirements.txt
 
 # Add application code
