@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libxslt1-dev libffi-dev \
     libcairo2-dev libpango1.0-dev \
     zlib1g-dev gcc g++ make \
-    build-essential && \
+    build-essential \
     python3-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
