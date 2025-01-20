@@ -10,10 +10,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2-dev libpango1.0-dev \
     zlib1g-dev gcc g++ make \
     build-essential && \
+    python3-dev && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Ensure psycopg2 binary works properly
-ENV PIP_NO_BINARY=psycopg2
+ENV PIP_NO_BINARY=:none:
+ENV PIP_DEFAULT_TIMEOUT=100
 
 # Create working directory
 WORKDIR /code
