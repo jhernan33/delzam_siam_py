@@ -5,7 +5,7 @@
         "fields": {
             "desc_esta": "Pendiente",
             "orde_esta": 1,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -14,7 +14,7 @@
         "fields": {
             "desc_esta": "Pagado",
             "orde_esta": 2,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -23,7 +23,7 @@
         "fields": {
             "desc_esta": "Anulado",
             "orde_esta": 3,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -32,7 +32,7 @@
         "fields": {
             "desc_esta": "Pedido Actualizado",
             "orde_esta": 4,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -41,7 +41,7 @@
         "fields": {
             "desc_esta": "Cargando a Camion",
             "orde_esta": 5,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -50,7 +50,7 @@
         "fields": {
             "desc_esta": "En Ruta",
             "orde_esta": 6,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
         }
     },
     {
@@ -59,7 +59,16 @@
         "fields": {
             "desc_esta": "Historico",
             "orde_esta": 7,
-            "created": "2023-09-19 10:20:39.841629"
+            "created": "2025-01-24 10:20:39.841629"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "asiam.pedidoestatus",
+        "fields": {
+            "desc_esta": "Activa",
+            "orde_esta": 8,
+            "created": "2025-01-24 10:20:39.841629"
         }
     }
 ]

@@ -29,7 +29,7 @@ from django.http.request import QueryDict
 
 class PedidoEstatusListView(generics.ListAPIView):
     serializer_class = PedidoEstatusSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = PedidoEstatus.get_queryset()
     pagination_class = SmallResultsSetPagination
     filter_backends =[DjangoFilterBackend,SearchFilter,OrderingFilter]
@@ -54,7 +54,7 @@ class PedidoEstatusListView(generics.ListAPIView):
         return queryset.filter(deleted__isnull=True)
 
 class PedidoEstatusCreateView(generics.CreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = PedidoEstatusSerializer
     
     def create(self, request, *args, **kwargs):
@@ -79,7 +79,7 @@ class PedidoEstatusCreateView(generics.CreateAPIView):
             
 class PedidoEstatusRetrieveView(generics.RetrieveAPIView):
     serializer_class = PedidoEstatusSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = PedidoEstatus.get_queryset()
     lookup_field = 'id'
 
@@ -103,7 +103,7 @@ class PedidoEstatusRetrieveView(generics.RetrieveAPIView):
 
 class PedidoEstatusUpdateView(generics.UpdateAPIView):
     serializer_class = PedidoEstatusSerializer
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     queryset = PedidoEstatus.objects.all()
     lookup_field = 'id'
 
@@ -143,7 +143,7 @@ class PedidoEstatusUpdateView(generics.UpdateAPIView):
                 return message.ErrorMessage("Error al Intentar Actualizar:"+str(e))
 
 class PedidoEstatusDestroyView(generics.DestroyAPIView):
-    permission_classes = ()
+    permission_classes = [IsAuthenticated]
     lookup_field = 'id' 
 
     def delete(self, request, *args, **kwargs):
@@ -158,11 +158,17 @@ class PedidoEstatusDestroyView(generics.DestroyAPIView):
             return message.NotFoundMessage("Id Estatus de Pedido no Registrado")
             
 class PedidoEstatusComboView(generics.ListAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     serializer_class = PedidoEstatusComboSerializer
     lookup_field = 'id'
 
     def get_queryset(self):
+        history = self.request.query_params.get('history')
+        if history =='true':
+            _orderStatus = 7,8
+            # Convert Str to Tuple
+            _result = tuple(map(int, _orderStatus.split(',')))
+            return queryset.filter(deleted__isnull=False).filter(in__in = _result)
         queryset = PedidoEstatus.get_queryset().order_by('orde_esta')
         return queryset
 
