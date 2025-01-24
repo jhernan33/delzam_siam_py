@@ -680,12 +680,12 @@ def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
         return route_queryset
 
     # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
-    if zone:
+    if zone and route is None:
         routes = Ruta.getRouteFilterZone(zone)
         return searchHistoryCustomer(route = routes, Days = days)
 
     # Si solo `route` está definido, crea una lista de rutas y busca
-    if route:
+    if route and zone:
         route_list = Ruta.createListRoute(route)
         if route_list:
             return searchHistoryCustomer(route = route_list, Days = days)
