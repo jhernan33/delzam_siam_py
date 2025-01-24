@@ -524,7 +524,6 @@ class HistoryCustomer(generics.ListAPIView):
             zone = self.request.query_params.get('zone')
             route = self.request.query_params.get('route')
             seller = self.request.query_params.get('seller')
-            
 
         # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
         if zone and seller:
@@ -543,12 +542,12 @@ class HistoryCustomer(generics.ListAPIView):
             return route_queryset
 
         # Si solo `zone` está definido, filtra por zona y busca en base a las rutas resultantes
-        if zone:
+        if zone and route is None:
             routes = Ruta.getRouteFilterZone(zone)
             return searchHistoryCustomer(route = routes)
 
         # Si solo `route` está definido, crea una lista de rutas y busca
-        if route:
+        if route and zone:
             route_list = Ruta.createListRoute(route)
             if route_list:
                 return searchHistoryCustomer(route = route_list)
