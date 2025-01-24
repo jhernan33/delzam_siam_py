@@ -13,7 +13,7 @@ services:
       - media_data:/app/media # Media files
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.apidz.rule=Host(`157.173.200.148`) && PathPrefix(`/apidz`)"
+      - "traefik.http.routers.apidz.rule=Host(`devapis.cloud`) && PathPrefix(`/apidz`)"
       - "traefik.http.routers.apidz.middlewares=apidz-stripprefix"
       - "traefik.http.middlewares.apidz-stripprefix.stripprefix.prefixes=/apidz"
       - "traefik.http.routers.django.entrypoints=websecure"
