@@ -48,3 +48,4 @@ from .pedidoMensajeSerializer import PedidoMensajeBasicSerializer, PedidoMensaje
 from .cobradorSerializer import CobradorBasicSerializer, CobradorComboSerializer, CobradorSerializer
 from .monedaDenominacionSerializer import MonedaDenominacionBasicSerializer, MonedaDenominacionComboSerializer, MonedaDenominacionSerializer
 from .pedidoPagoSerializer import PedidoPagoBasicSerializer, PedidoPagoComboSerializer, PedidoPagoSerializer
+from .historicalOrderSerializer import HistoricalOrderSerializer

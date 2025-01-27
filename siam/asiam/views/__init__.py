@@ -48,3 +48,5 @@ from .pedidoMensajeView import PedidoMensajeListView, PedidoMensajeCreateView, P
 from .cobradorView import CobradorListView, CobradorCreateView, CobradorDestroyView, CobradorRetrieveView, CobradorUpdateView, CobradorComboView
 from .monedaDenominacionView import MonedaDenominacionListView, MonedaDenominacionCreateView, MonedaDenominacionRetrieveView, MonedaDenominacionUpdateView, MonedaDenominacionDestroyView, MonedaDenominacionComboView
 from .pedidoPagoView import PedidoPagoListView, PedidoPagoCreateView, PedidoPagoRetrieveView, PedidoPagoUpdateView, PedidoPagoDestroyView, PedidoPagoComboView
+# Historical Orders
+from .historicalOrderView import HistoricalOrderSearchView
