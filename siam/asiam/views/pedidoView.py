@@ -64,10 +64,11 @@ class PedidoListView(generics.ListAPIView):
         queryset = Pedido.objects.all()
 
         history = self.request.query_params.get('history')
+        _orderStatusHistory = (7,8)
         if history =='true':
-            queryset = queryset.filter(codi_espe=7)
+            queryset = queryset.filter(codi_espe__in = _orderStatusHistory )
         else:
-            queryset = queryset.exclude(codi_espe=7)
+            queryset = queryset.exclude(codi_espe__in = _orderStatusHistory )
         
         # Filter Code Type # Note
         order = self.request.query_params.get('order')
