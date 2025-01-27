@@ -290,10 +290,13 @@ urlpatterns = [
     path('pedido/update/<int:id>',                       views.PedidoUpdateView.as_view(),   name='pedido_update'),
     path('pedido/delete/<int:id>',                       views.PedidoDestroyView.as_view(),  name='pedido_delete'),
     path('pedido/combo/',                                views.PedidoComboView.as_view(),    name='pedido_combo'),
+    # Historical Orders
     path('pedido/historico/',                            views.PedidoHistorico.as_view(),   name='pedido_historico'),
     path('pedido/historico/update/<int:id>',             views.PedidoHistoricoUpdateView.as_view(),   name='pedido_historico_update'),
     path('pedido/state/update/<int:id>',                 views.PedidoUpdateStatusView.as_view(),   name='pedido_update_status'),
     path('pedido/historico/search/',                     views.PedidoSearchView.as_view(),   name='pedido_search'),
+    # search invoice number
+    path('order/search/invoice/',                       views.HistoricalOrderSearchView.as_view(),   name='pedido_search_invoice'),
 
     # Order Message
     path('pedidomensaje/',                              views.PedidoMensajeListView.as_view(),     name='pedidoMensaje'),
