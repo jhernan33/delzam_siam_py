@@ -163,12 +163,11 @@ class PedidoEstatusComboView(generics.ListAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
+        queryset = PedidoEstatus.get_queryset().order_by('orde_esta')
         history = self.request.query_params.get('history')
         if history =='true':
-            _orderStatus = (7,8)
+            _result = (7,8)
             # Convert Str to Tuple
-            _result = tuple(map(int, _orderStatus.split(',')))
-            return queryset.filter(deleted__isnull=False).filter(in__in = _result)
-        queryset = PedidoEstatus.get_queryset().order_by('orde_esta')
+            return queryset.filter(id__in = _result)
+        
         return queryset
-
