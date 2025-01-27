@@ -38,7 +38,7 @@ class ZonaComboSerializer(serializers.ModelSerializer):
     class Meta:
         model = Zona
         field = ['id','description']
-        exclude = exclude = ['created','updated','deleted','esta_ttus','desc_zona']
+        exclude = ['created','updated','deleted','esta_ttus','desc_zona']
 
     def to_representation(self, instance):
         data = super(ZonaComboSerializer, self).to_representation(instance=instance)
