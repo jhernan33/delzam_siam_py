@@ -706,8 +706,8 @@ def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
 @permission_classes([IsAuthenticated])
 def ClienteStatus(request):
     queryset = [
-        {'id': 1, 'status': 'disponible'},
-        {'id': 2, 'status': 'ocupado'},
-        {'id': 3, 'status': 'ambos'},
+        {'id': 1, 'description': 'Disponible'},
+        {'id': 2, 'description': 'Ocupado'},
+        {'id': 3, 'description': 'Ambos'},
     ]
     return JsonResponse(queryset, safe=False)
