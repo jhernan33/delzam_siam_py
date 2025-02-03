@@ -1,6 +1,7 @@
 from datetime import datetime
 from os import environ
 import os
+from rest_framework.decorators import api_view, permission_classes
 from django.conf import settings
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
@@ -118,7 +119,7 @@ class ClienteCreateView(generics.CreateAPIView):
                 return message.NotFoundMessage('Registro Juridico no Registrado')    
         except Cliente.DoesNotExist:
             return message.NotFoundMessage("Id de Cliente no Registrado")
-            
+
 class ClienteRetrieveView(generics.RetrieveAPIView):
     serializer_class = ClienteSerializer
     permission_classes = ()
@@ -249,7 +250,7 @@ class ClienteDestroyView(generics.DestroyAPIView):
                 return message.DeleteMessage('Cliente '+str(cliente.id))
         except ObjectDoesNotExist:
             return message.NotFoundMessage("Id de Cliente no Registrado")
-            
+
 class ClienteComboView(generics.ListAPIView):
     permission_classes = []
     serializer_class = ClienteComboSerializer
@@ -662,20 +663,20 @@ def exportPdf(context):
     return response
 
 def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
-    
+
     # Si estan definidos ambos `zone` y `seller`, se hace una búsqueda específica
     if zone and seller:
         routes = Ruta.getRouteFilterZone(zone)
         seller_obj = Vendedor.getSeller(seller)
-        
-        # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario            
+
+        # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
         return searchHistoryCustomer(route = routes, seller=seller_obj, Days = days) 
-        #return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
+        # return searchHistoryCustomer(routes, "route") | searchHistoryCustomer(seller_obj, "seller")
 
     # Si están definidos tanto `route` como `seller`, se hace una búsqueda específica
     if route and seller:
         route_queryset = searchHistoryCustomer(route = route, seller=seller_obj, Days = days)
-        
+
         # Devuelve los resultados combinados, puedes cambiar el tipo de unión si es necesario
         return route_queryset
 
@@ -699,3 +700,14 @@ def filterHistoryCustomer(zone = None, route=None, seller=None, days=None):
     # Si no se definió ningún filtro, devuelve todas las rutas
     all_routes = Ruta.getAllRoute()
     return searchHistoryCustomer(all_routes, "route", Days = days)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def ClienteStatus(request):
+    queryset = [
+        {'id': 1, 'status': 'disponible'},
+        {'id': 2, 'status': 'ocupado'},
+        {'id': 3, 'status': 'ambos'},
+    ]
+    return JsonResponse(queryset, safe=False)

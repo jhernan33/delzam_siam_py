@@ -197,6 +197,7 @@ urlpatterns = [
     path('cliente/delete/<int:id>',                 views.ClienteDestroyView.as_view(),  name='cliente_delete'),
     path('cliente/combo/',                          views.ClienteComboView.as_view(),    name='cliente_combo'),
     path('cliente/buscar/',                         views.ClienteBuscarView.as_view(),   name='cliente_find'),
+    path('cliente/status/',                         views.ClienteStatus,   name='cliente_status'), # status disponible, ocupado, ambos
 
     # Presentacion
     path('presentacion/',                            views.PresentacionListView.as_view(),     name='presentacion'),
